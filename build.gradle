@@ -1,0 +1,86 @@
+plugins {
+    id "idea"
+    id "java"
+    id "maven"
+    id "com.google.protobuf" version "0.8.8"
+    id "maven-publish"
+    id 'nu.studer.credentials' version '1.0.7'
+}
+
+group 'com.craxiom'
+version '0.0.1-SNAPSHOT'
+
+// Configure the wrapper and ALL distro so IJ has additional context
+wrapper {
+    gradleVersion = '4.4'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    grpcVersion = '1.21.0'
+    javaliteVersion = '3.0.0'
+    protobufVersion = '3.7.1'
+    protocVersion = protobufVersion
+}
+
+dependencies {
+    implementation "io.grpc:grpc-protobuf-lite:$grpcVersion"
+    implementation "io.grpc:grpc-stub:$grpcVersion"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protocVersion"
+    }
+
+    plugins {
+        grpc_java { artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion" }
+        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:$javaliteVersion" }
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                remove java
+            }
+            task.plugins {
+                grpc_java {
+                    option "lite"
+                    outputSubDir = "java"
+                }
+                javalite {
+                    outputSubDir = "java"
+                }
+            }
+        }
+    }
+}
+
+clean {
+    delete protobuf.generatedFilesBaseDir
+}
+
+// Used to find executables for generating C++ and Java gRPC
+/*def getPluginPath(name) {
+    def path = "which grpc_${name}_plugin".execute()
+    path.waitFor()
+    path = path.in.text.trim()
+    if (!path) {
+        logger.warn "Failed to locate GRPC plugin for ${name}"
+    } else {
+        logger.info "Found GRPC plugin for ${name} at ${path}"
+    }
+    return path
+}*/
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+}

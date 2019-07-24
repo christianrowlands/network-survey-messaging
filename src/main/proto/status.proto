@@ -1,0 +1,42 @@
+/**
+ * Defines the status messages that are sent from the Network Survey Android App to the remote server.
+ */
+syntax = "proto3";
+option java_package = "com.craxiom.networksurvey.messaging";
+
+service Status {
+    rpc StatusUpdate (stream DeviceStatus) returns (StatusUpdateReply) {}
+}
+
+// A status message from the Network Survey Android App.
+//
+// device_uuid:               The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
+// device_name:               A human readable identifier for the Android phone.  This value does not need to be consistent or unique.  E.g. "Bob's Phone".
+// device_time:               The timestamp of when this message was created in milliseconds since unix epoch time.
+// latitude:                  The latitude of where the android device is currently located.
+// longitude:                 The longitude of where the android device is currently located.
+// altitude:                  The altitude of the android device.
+// battery_level_percent:     The battery level percentage.
+// error:                     If this object is present, then a error has occured in the Network Survey App.
+message DeviceStatus {
+
+    string device_uuid = 1;
+    string device_name = 2;
+    uint64 device_time = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    int32 battery_level_percent = 7;
+
+    Error error = 10;
+}
+
+// Used to report an error with the Network Survey App
+message Error {
+    string error_message = 1;
+}
+
+// An empty reply
+message StatusUpdateReply {
+
+}

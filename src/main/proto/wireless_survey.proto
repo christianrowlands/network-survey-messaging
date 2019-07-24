@@ -1,0 +1,48 @@
+/**
+ * Defines the survey messages that are sent from the Network Survey Android App to the remote server.
+ */
+ syntax = "proto3";
+ option java_package = "com.craxiom.networksurvey.messaging";
+
+service WirlessSurvey {
+    rpc StreamLteSurvey (stream LteSurveyRecord) returns (LteSurveyResponse) {}
+}
+
+// An LTE Survey Record.
+//
+// device_uuid:               The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
+// device_name:               A human readable identifier for the Android phone.  This value does not need to be consistent or unique.  E.g. "Bob's Phone".
+// device_time:               The timestamp of when this message was created in milliseconds since unix epoch time.
+// latitude:                  The latitude of where the android device is currently located.
+// longitude:                 The longitude of where the android device is currently located.
+// altitude:                  The altitude of the android device.
+// mission_id:                A unique name for this particular run of the Survey.  The timestamp of when the survey was started is typically included.
+// record_number:             Starts at 1 and each subsequent record should have its number incremented by 1.
+// record_number:             Starts at 1 and each subsequent scan should have its number incremented by 1.
+message LteSurveyRecord {
+
+    string device_uuid = 1;
+    string device_name = 2;
+    uint64 device_time = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string mission_id = 7;
+    int32 record_number = 8;
+    int32 group_number = 9;
+
+    int32 mcc = 16;
+    int32 mnc = 17;
+    int32 tac = 18;
+    int32 ci = 19;
+    int32 earfcn = 20;
+    int32 pci = 21;
+    int32 rsrp = 22;
+    int32 rsrq = 23;
+    int32 ta = 24;
+}
+
+// An empty reply
+message LteSurveyResponse {
+
+}

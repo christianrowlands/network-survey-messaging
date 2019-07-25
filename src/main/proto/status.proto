@@ -2,6 +2,8 @@
  * Defines the status messages that are sent from the Network Survey Android App to the remote server.
  */
 syntax = "proto3";
+
+option java_multiple_files = true;
 option java_package = "com.craxiom.networksurvey.messaging";
 
 service Status {
@@ -10,7 +12,7 @@ service Status {
 
 // A status message from the Network Survey Android App.
 //
-// device_uuid:               The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
+// device_serial_number:      The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
 // device_name:               A human readable identifier for the Android phone.  This value does not need to be consistent or unique.  E.g. "Bob's Phone".
 // device_time:               The timestamp of when this message was created in milliseconds since unix epoch time.
 // latitude:                  The latitude of where the android device is currently located.
@@ -20,7 +22,7 @@ service Status {
 // error:                     If this object is present, then a error has occured in the Network Survey App.
 message DeviceStatus {
 
-    string device_uuid = 1;
+    string device_serial_number = 1;
     string device_name = 2;
     uint64 device_time = 3;
     double latitude = 4;

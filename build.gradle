@@ -18,6 +18,7 @@ wrapper {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 ext {
@@ -30,6 +31,8 @@ ext {
 dependencies {
     implementation "io.grpc:grpc-protobuf-lite:$grpcVersion"
     implementation "io.grpc:grpc-stub:$grpcVersion"
+
+    protobuf "com.google.protobuf:protobuf-java:$protobufVersion"
 }
 
 protobuf {

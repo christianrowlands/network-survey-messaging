@@ -43,6 +43,7 @@ message LteRecord {
     google.protobuf.Int32Value rsrp = 22;
     google.protobuf.Int32Value rsrq = 23;
     google.protobuf.Int32Value ta = 24;
+    google.protobuf.BoolValue servingCell = 25;
 }
 
 // An empty reply

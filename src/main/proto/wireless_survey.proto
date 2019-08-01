@@ -8,7 +8,7 @@
  option java_multiple_files = true;
  option java_package = "com.craxiom.networksurvey.messaging";
 
-service WirlessSurvey {
+service WirelessSurvey {
     rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {}
 }
 

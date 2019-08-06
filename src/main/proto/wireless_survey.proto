@@ -44,6 +44,17 @@ message LteRecord {
     google.protobuf.Int32Value rsrq = 23;
     google.protobuf.Int32Value ta = 24;
     google.protobuf.BoolValue servingCell = 25;
+    LteBandwidth lteBandwidth= 26;
+}
+
+// Operation status. Add as needed.
+enum LteBandwidth {
+    MHZ_1_4 = 0;
+    MHZ_3 = 1;
+    MHZ_5 = 2;
+    MHZ_10 = 3;
+    MHZ_15 = 4;
+    MHZ_20 = 5;
 }
 
 // An empty reply

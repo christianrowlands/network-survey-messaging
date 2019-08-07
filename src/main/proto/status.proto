@@ -7,7 +7,21 @@ option java_multiple_files = true;
 option java_package = "com.craxiom.networksurvey.messaging";
 
 service NetworkSurveyStatus {
+    rpc StartConnection (ConnectionRequest) returns (ConnectionReply) {}
+
     rpc StatusUpdate (stream DeviceStatus) returns (StatusUpdateReply) {}
+}
+
+// A connection request that should be sent out by the client to initiate the connection to the server.
+message ConnectionRequest {
+    // Could probably add the device serial number and other information in here
+}
+
+// The response from the server for the connection request.
+//
+// connection_accept:  True if the connection is accepted, false otherwise.
+message ConnectionReply {
+    bool connection_accept = 1;
 }
 
 // A status message from the Network Survey Android App.

@@ -12,6 +12,86 @@ service WirelessSurvey {
     rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {}
 }
 
+// A GSM Survey Record.
+//
+// device_serial_number:      The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
+// device_name:               A human readable identifier for the Android phone.  This value does not need to be consistent or unique.  E.g. "Bob's Phone".
+// device_time:               The timestamp of when this message was created in milliseconds since unix epoch time.
+// latitude:                  The latitude of where the android device is currently located.
+// longitude:                 The longitude of where the android device is currently located.
+// altitude:                  The altitude of the android device.
+// mission_id:                A unique name for this particular run of the Survey.  The timestamp of when the survey was started is typically included.
+// record_number:             Starts at 1 and each subsequent record should have its number incremented by 1.
+// record_number:             Starts at 1 and each subsequent scan should have its number incremented by 1.
+message GsmRecord {
+
+    string device_serial_number = 1;
+    uint64 device_time = 2;
+    double latitude = 3;
+    double longitude = 4;
+    float altitude = 5;
+    string mission_id = 6;
+    int32 record_number = 7;
+    int32 group_number = 8;
+
+    google.protobuf.Int32Value mcc = 16;
+    google.protobuf.Int32Value mnc = 17;
+    google.protobuf.Int32Value lac = 18;
+    google.protobuf.Int32Value ci = 19;
+    google.protobuf.Int32Value arfcn = 20;
+    google.protobuf.Int32Value bsic = 21;
+    google.protobuf.FloatValue signalStrength = 22;
+    google.protobuf.Int32Value ta = 24;
+    google.protobuf.BoolValue servingCell = 25;
+    string provider = 27;
+}
+
+message CdmaRecord {
+
+    string device_serial_number = 1;
+    uint64 device_time = 2;
+    double latitude = 3;
+    double longitude = 4;
+    float altitude = 5;
+    string mission_id = 6;
+    int32 record_number = 7;
+    int32 group_number = 8;
+
+    google.protobuf.Int32Value sid = 16;
+    google.protobuf.Int32Value nid = 17;
+    google.protobuf.Int32Value zone = 18;
+    google.protobuf.Int32Value bsid = 19;
+    google.protobuf.Int32Value channel = 20;
+    google.protobuf.Int32Value pnOffset = 21;
+    google.protobuf.FloatValue signalStrength = 22;
+    google.protobuf.FloatValue ecio = 23;
+    google.protobuf.BoolValue servingCell = 25;
+    string provider = 27;
+}
+
+message UmtsRecord {
+
+    string device_serial_number = 1;
+    uint64 device_time = 2;
+    double latitude = 3;
+    double longitude = 4;
+    float altitude = 5;
+    string mission_id = 6;
+    int32 record_number = 7;
+    int32 group_number = 8;
+
+    google.protobuf.Int32Value mcc = 16;
+    google.protobuf.Int32Value mnc = 17;
+    google.protobuf.Int32Value lac = 18;
+    google.protobuf.Int32Value ci = 19;
+    google.protobuf.Int32Value uarfcn = 20;
+    google.protobuf.Int32Value psc = 21;
+    google.protobuf.FloatValue rscp = 22;
+    google.protobuf.FloatValue signalStrength = 23;
+    google.protobuf.BoolValue servingCell = 25;
+    string provider = 27;
+}
+
 // An LTE Survey Record.
 //
 // device_serial_number:      The unique identifier for the Android Phone.  This should be consistent and should never change.  A good value is the IMEI of the device.
@@ -40,8 +120,8 @@ message LteRecord {
     google.protobuf.Int32Value ci = 19;
     google.protobuf.Int32Value earfcn = 20;
     google.protobuf.Int32Value pci = 21;
-    google.protobuf.Int32Value rsrp = 22;
-    google.protobuf.Int32Value rsrq = 23;
+    google.protobuf.FloatValue rsrp = 22;
+    google.protobuf.FloatValue rsrq = 23;
     google.protobuf.Int32Value ta = 24;
     google.protobuf.BoolValue servingCell = 25;
     LteBandwidth lteBandwidth = 26;
@@ -50,12 +130,13 @@ message LteRecord {
 
 // Operation status. Add as needed.
 enum LteBandwidth {
-    MHZ_1_4 = 0;
-    MHZ_3 = 1;
-    MHZ_5 = 2;
-    MHZ_10 = 3;
-    MHZ_15 = 4;
-    MHZ_20 = 5;
+    UNKNOWN = 0;
+    MHZ_1_4 = 1;
+    MHZ_3 = 2;
+    MHZ_5 = 3;
+    MHZ_10 = 4;
+    MHZ_15 = 5;
+    MHZ_20 = 6;
 }
 
 // An empty reply

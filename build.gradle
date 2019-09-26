@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'com.craxiom'
-version '0.0.1-SNAPSHOT'
+version '0.0.1'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {

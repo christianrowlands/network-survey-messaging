@@ -28,6 +28,19 @@ The gRPC website has tutorials for utilizing gRPC + protobuf for [Android](https
 [Java](https://grpc.io/docs/quickstart/java/).
 
 
+Getting Started
+-----------------------------------
+#####Add Network Survey Messaging to your project
+
+Network Survey Messaging is available via [mavenCentral](https://search.maven.org/search?q=network-survey-messaging)
+
+```groovy
+dependencies {
+    implementation 'com.craxiom:network-survey-messaging:0.0.1'
+}
+```
+
+
 Build and development instructions
 -----------------------------------
 ###Building the project

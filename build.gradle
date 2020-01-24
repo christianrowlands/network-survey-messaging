@@ -1,18 +1,27 @@
+// Build script for the Craxiom Network Survey Messaging library
+//
+// The user must have run the following commands to be able to publish a version to Sonatype Maven Central:
+//   gradle addCredentials --key sonatypeUsername --value <username>
+//   gradle addCredentials --key sonatypePassword --value <password>
+//   gradle addCredentials --key sonatypeKeyPassword --value <password>
+
 plugins {
-    id "idea"
-    id "java"
-    id "maven"
-    id "com.google.protobuf" version "0.8.8"
-    id "maven-publish"
+    id 'idea'
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'signing'
+    id 'com.google.protobuf' version '0.8.8'
     id 'nu.studer.credentials' version '1.0.7'
 }
 
 group 'com.craxiom'
+archivesBaseName = "network-survey-messaging"
 version '0.0.2-SNAPSHOT'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
-    gradleVersion = '4.4'
+    gradleVersion = '5.4.1'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -26,6 +35,9 @@ ext {
     javaliteVersion = '3.0.0'
     protobufVersion = '3.7.1'
     protocVersion = protobufVersion
+
+    sonatypeUsername = findCredentialValue('Username')
+    sonatypePassword = findCredentialValue('Password')
 }
 
 dependencies {
@@ -68,6 +80,24 @@ clean {
     delete protobuf.generatedFilesBaseDir
 }
 
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar, sourceJar
+}
+
+signing {
+    sign configurations.archives
+}
+
 // Used to find executables for generating C++ and Java gRPC
 /*def getPluginPath(name) {
     def path = "which grpc_${name}_plugin".execute()
@@ -81,10 +111,69 @@ clean {
     return path
 }*/
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+// Configure publishing to the Sonatype Maven Central repo
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'Network Survey Messaging'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Protobuf and gRPC stubs for sending Wireless Protocol Survey messages.'
+                url 'https://github.com/christianrowlands/network-survey-messaging'
+
+                scm {
+                    url 'https://github.com/christianrowlands/network-survey-messaging'
+                    connection 'scm:git:git://github.com/christianrowlands/network-survey-messaging.git'
+                    developerConnection 'scm:git:ssh://git@github.com:christianrowlands/network-survey-messaging.git'
+                }
+
+                issueManagement {
+                    system 'GitHub'
+                    url 'https://github.com/christianrowlands/network-survey-messaging/issues'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'https://github.com/christianrowlands/network-survey-messaging/blob/master/LICENSE'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'christianrowlands'
+                        name 'Christian Rowlands'
+                        email 'christian.rowlands@gmail.com'
+                    }
+                }
+            }
         }
     }
+}
+
+/**
+ * Try to locate a credential value (user name or password) in the environment,
+ * or falling back to the credentials store.
+ *
+ * This supports building locally on a developers machine and on a Jenkins server with credentials bound
+ * into the environment.
+ *
+ * @param value The suffix to use for the credential lookup key.  It will be appended to "sonatype".
+ * @return The credential value if located.
+ */
+private String findCredentialValue(String value) {
+    def cred = System.getenv("${name.toUpperCase()}_NEXUS_${value.toUpperCase()}")
+    return cred ? cred : project.credentials."sonatype$value"
 }

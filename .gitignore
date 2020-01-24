@@ -5,6 +5,11 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
+# All of .idea
+.idea
+.project
+.settings
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
@@ -157,3 +162,6 @@ gradle-app.setting
 # Ignore the gRPC cpp plugin if placed here since it has to be generated for each platform
 /grpc_cpp_plugin.exe
 /grpc_cpp_plugin
+
+# Ignore the gradle.properties file since it contains the local publishing key information
+gradle.properties

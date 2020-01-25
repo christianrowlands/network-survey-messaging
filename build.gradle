@@ -43,7 +43,6 @@ ext {
 }
 
 dependencies {
-    //implementation "io.grpc:grpc-okhttp:$grpcVersion"
     implementation "io.grpc:grpc-protobuf-lite:$grpcVersion"
     implementation "io.grpc:grpc-stub:$grpcVersion"
 
@@ -96,25 +95,10 @@ artifacts {
     archives javadocJar, sourceJar
 }
 
-// Used to find executables for generating C++ and Java gRPC
-/*def getPluginPath(name) {
-    def path = "which grpc_${name}_plugin".execute()
-    path.waitFor()
-    path = path.in.text.trim()
-    if (!path) {
-        logger.warn "Failed to locate GRPC plugin for ${name}"
-    } else {
-        logger.info "Found GRPC plugin for ${name} at ${path}"
-    }
-    return path
-}*/
-
 // Configure publishing to the Sonatype Maven Central repo
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            customizePom(pom)
-
             from components.java
 
             artifact(sourceJar) {
@@ -123,12 +107,43 @@ publishing {
             artifact(javadocJar) {
                 classifier = 'javadoc'
             }
+
+            pom {
+                name = 'Network Survey Messaging'
+                description = 'Protobuf and gRPC stubs for sending Wireless Protocol Survey messages\''
+                url = 'https://github.com/christianrowlands/network-survey-messaging'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://github.com/christianrowlands/network-survey-messaging/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'christianrowlands'
+                        name = 'Christian Rowlands'
+                        email = 'christian.rowlands@gmail.com'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/christianrowlands/network-survey-messaging'
+                    connection = 'scm:git:git://github.com/christianrowlands/network-survey-messaging.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:christianrowlands/network-survey-messaging.git'
+                }
+                issueManagement {
+                    system = 'GitHub'
+                    url = 'https://github.com/christianrowlands/network-survey-messaging/issues'
+                }
+            }
         }
     }
 
     repositories {
         maven {
-            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
                 username sonatypeUsername
                 password sonatypePassword
@@ -139,54 +154,6 @@ publishing {
 
 signing {
     sign publishing.publications
-}
-
-// Setup the POM file with all the metadata
-def customizePom(pom) {
-    pom.withXml {
-        def root = asNode()
-
-        // eliminate test-scoped dependencies (no need in maven central POMs)
-        root.dependencies.removeAll { dep ->
-            dep.scope == "test"
-        }
-
-        // add all items necessary for maven central publication
-        root.children().last() + {
-            resolveStrategy = DELEGATE_FIRST
-
-            description 'Protobuf and gRPC stubs for sending Wireless Protocol Survey messages'
-            name 'Network Survey Messaging'
-            url 'https://github.com/christianrowlands/network-survey-messaging'
-
-            issueManagement {
-                system 'GitHub'
-                url 'https://github.com/christianrowlands/network-survey-messaging/issues'
-            }
-
-            licenses {
-                license {
-                    name 'Apache License 2.0'
-                    url 'https://github.com/christianrowlands/network-survey-messaging/blob/master/LICENSE'
-                    distribution 'repo'
-                }
-            }
-
-            scm {
-                url 'https://github.com/christianrowlands/network-survey-messaging'
-                connection 'scm:git:git://github.com/christianrowlands/network-survey-messaging.git'
-                developerConnection 'scm:git:ssh://git@github.com:christianrowlands/network-survey-messaging.git'
-            }
-
-            developers {
-                developer {
-                    id 'christianrowlands'
-                    name 'Christian Rowlands'
-                    email 'christian.rowlands@gmail.com'
-                }
-            }
-        }
-    }
 }
 
 /**

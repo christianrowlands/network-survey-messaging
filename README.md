@@ -28,12 +28,22 @@ The gRPC website has tutorials for utilizing gRPC + protobuf for [Android](https
 [Java](https://grpc.io/docs/quickstart/java/).
 
 
+Getting Started
+-----------------------------------
+#### Add Network Survey Messaging to your project
+
+Network Survey Messaging is available via [mavenCentral](https://search.maven.org/search?q=network-survey-messaging)
+
+```groovy
+dependencies {
+    implementation 'com.craxiom:network-survey-messaging:0.0.1'
+}
+```
+
+
 Build and development instructions
 -----------------------------------
-###Building the project
- 
-
-###Building the project
+#### Building the project
  - Clone the repository
  - Execute `gradlew build` in the root directory to produce the Java library with the protobuf messages.
  - Execute `gradlew install` in the root directory to install the Java library to the local Maven cache.

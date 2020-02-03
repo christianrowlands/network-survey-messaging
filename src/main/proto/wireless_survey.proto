@@ -9,7 +9,10 @@
  option java_package = "com.craxiom.networksurvey.messaging";
 
 service WirelessSurvey {
-    rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {}
+    rpc StreamGsmSurvey (stream GsmRecord) returns (SurveyResponse) {}
+    rpc StreamCdmaSurvey (stream CdmaRecord) returns (SurveyResponse) {}
+    rpc StreamUmtsSurvey (stream UmtsRecord) returns (SurveyResponse) {}
+    rpc StreamLteSurvey (stream LteRecord) returns (SurveyResponse) {}
 }
 
 // A GSM Survey Record.
@@ -140,6 +143,6 @@ enum LteBandwidth {
 }
 
 // An empty reply
-message LteSurveyResponse {
+message SurveyResponse {
 
 }

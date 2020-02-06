@@ -9,10 +9,10 @@
  option java_package = "com.craxiom.networksurvey.messaging";
 
 service WirelessSurvey {
-    rpc StreamGsmSurvey (stream GsmRecord) returns (SurveyResponse) {}
-    rpc StreamCdmaSurvey (stream CdmaRecord) returns (SurveyResponse) {}
-    rpc StreamUmtsSurvey (stream UmtsRecord) returns (SurveyResponse) {}
-    rpc StreamLteSurvey (stream LteRecord) returns (SurveyResponse) {}
+    rpc StreamGsmSurvey (stream GsmRecord) returns (GsmSurveyResponse) {}
+    rpc StreamCdmaSurvey (stream CdmaRecord) returns (CdmaSurveyResponse) {}
+    rpc StreamUmtsSurvey (stream UmtsRecord) returns (UmtsSurveyResponse) {}
+    rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {}
 }
 
 // A GSM Survey Record.
@@ -142,7 +142,19 @@ enum LteBandwidth {
     MHZ_20 = 6;
 }
 
-// An empty reply
-message SurveyResponse {
+message GsmSurveyResponse {
 
 }
+
+message CdmaSurveyResponse {
+
+}
+
+message UmtsSurveyResponse {
+
+}
+
+message LteSurveyResponse {
+
+}
+

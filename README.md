@@ -51,7 +51,10 @@ Build and development instructions
 
 Change log
 -----------------------------------
-0.0.1 : Initial release of message definitions
+##### [0.0.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.1) - 2019-09-27
+ * Initial release of message definitions
+##### [0.0.9](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.2) - 2020-01-06
+ * Added support for streaming GSM, CDMA, and UMTS cellular survey records.
 
 
 Contact

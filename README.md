@@ -36,7 +36,7 @@ Network Survey Messaging is available via [mavenCentral](https://search.maven.or
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.0.2'
+    implementation 'com.craxiom:network-survey-messaging:0.1.0'
 }
 ```
 
@@ -46,7 +46,7 @@ Build and development instructions
 #### Building the project
  - Clone the repository
  - Execute `gradlew build` in the root directory to produce the Java library with the protobuf messages.
- - Execute `gradlew install` in the root directory to install the Java library to the local Maven cache.
+ - Execute `gradlew publishToMavenLocal` in the root directory to publish the artifacts to the local Maven cache.
 
 
 Change log

@@ -18,11 +18,11 @@ plugins {
 }
 
 group 'com.craxiom'
-version '0.0.3-SNAPSHOT'
+version '0.1.0'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
-    gradleVersion = '5.4.1'
+    gradleVersion = '5.6'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -32,9 +32,8 @@ repositories {
 }
 
 ext {
-    grpcVersion = '1.21.0'
-    javaliteVersion = '3.0.0'
-    protobufVersion = '3.7.1'
+    grpcVersion = '1.28.1'
+    protobufVersion = '3.11.4'
     protocVersion = protobufVersion
 
     sonatypeUsername = findCredentialValue('Username')
@@ -43,10 +42,10 @@ ext {
 }
 
 dependencies {
-    implementation "io.grpc:grpc-protobuf-lite:$grpcVersion"
+    implementation "io.grpc:grpc-protobuf:$grpcVersion"
     implementation "io.grpc:grpc-stub:$grpcVersion"
 
-    protobuf "com.google.protobuf:protobuf-java:$protobufVersion"
+    implementation "com.google.protobuf:protobuf-java:$protobufVersion"
 }
 
 protobuf {
@@ -56,20 +55,12 @@ protobuf {
 
     plugins {
         grpc_java { artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion" }
-        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:$javaliteVersion" }
     }
 
     generateProtoTasks {
         all().each { task ->
-            task.builtins {
-                remove java
-            }
             task.plugins {
                 grpc_java {
-                    option "lite"
-                    outputSubDir = "java"
-                }
-                javalite {
                     outputSubDir = "java"
                 }
             }

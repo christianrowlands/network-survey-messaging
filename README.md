@@ -51,10 +51,14 @@ Build and development instructions
 
 Change log
 -----------------------------------
+##### [0.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.0) - 2020-04-23
+ * Switched to the full java version instead of the java lite protobuf implementation
+
+##### [0.0.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.2) - 2020-01-06
+ * Added support for streaming GSM, CDMA, and UMTS cellular survey records
+ 
 ##### [0.0.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.1) - 2019-09-27
  * Initial release of message definitions
-##### [0.0.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.2) - 2020-01-06
- * Added support for streaming GSM, CDMA, and UMTS cellular survey records.
 
 
 Contact

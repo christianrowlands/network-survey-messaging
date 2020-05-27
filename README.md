@@ -36,7 +36,7 @@ Network Survey Messaging is available via [mavenCentral](https://search.maven.or
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.1.0'
+    implementation 'com.craxiom:network-survey-messaging:0.1.1'
 }
 ```
 
@@ -51,6 +51,9 @@ Build and development instructions
 
 Change log
 -----------------------------------
+##### [0.1.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.1) - 2020-05-23
+ * Added a protobuf message for 802.11 beacon frames
+
 ##### [0.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.0) - 2020-04-23
  * Switched to the full java version instead of the java lite protobuf implementation
 

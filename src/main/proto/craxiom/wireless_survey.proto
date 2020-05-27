@@ -1,18 +1,24 @@
 /**
  * Defines the survey messages that are sent from the Network Survey Android App to the remote server.
  */
- syntax = "proto3";
+syntax = "proto3";
 
- import "google/protobuf/wrappers.proto";
+import "google/protobuf/wrappers.proto";
 
- option java_multiple_files = true;
- option java_package = "com.craxiom.networksurvey.messaging";
+option java_multiple_files = true;
+option java_package = "com.craxiom.networksurvey.messaging";
 
 service WirelessSurvey {
-    rpc StreamGsmSurvey (stream GsmRecord) returns (GsmSurveyResponse) {}
-    rpc StreamCdmaSurvey (stream CdmaRecord) returns (CdmaSurveyResponse) {}
-    rpc StreamUmtsSurvey (stream UmtsRecord) returns (UmtsSurveyResponse) {}
-    rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {}
+    rpc StreamGsmSurvey (stream GsmRecord) returns (GsmSurveyResponse) {
+    }
+    rpc StreamCdmaSurvey (stream CdmaRecord) returns (CdmaSurveyResponse) {
+    }
+    rpc StreamUmtsSurvey (stream UmtsRecord) returns (UmtsSurveyResponse) {
+    }
+    rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {
+    }
+    rpc StreamWifiBeaconSurvey (stream WifiBeaconRecord) returns (WifiBeaconSurveyResponse) {
+    }
 }
 
 // A GSM Survey Record.
@@ -131,7 +137,41 @@ message LteRecord {
     string provider = 27;
 }
 
-// Operation status. Add as needed.
+/*
+ * Represents an 802.11 Beacon Frame.
+ */
+message WifiBeaconRecord {
+
+    string device_serial_number = 1;
+    uint64 device_time = 2;
+    double latitude = 3;
+    double longitude = 4;
+    float altitude = 5;
+    string mission_id = 6;
+    int32 record_number = 7;
+
+    string sourceAddress = 10;
+    string destinationAddress = 11;
+    string bssid = 12;
+
+    google.protobuf.Int32Value beaconInterval = 13;
+    string serviceSetType = 14;
+    string ssid = 15;
+    string supportedRates = 16;
+    string extendedSupportedRates = 17;
+    repeated CipherSuite cipherSuites = 18;
+    repeated AkmSuite akmSuites = 19;
+    EncryptionType encryptionType = 20;
+    google.protobuf.BoolValue wps = 21;
+
+    google.protobuf.Int32Value channel = 22;
+    google.protobuf.Int32Value frequency = 23;
+    google.protobuf.FloatValue signalStrength = 24;
+    google.protobuf.FloatValue snr = 25;
+    NodeType nodeType = 26;
+    Standard standard = 27;
+}
+
 enum LteBandwidth {
     UNKNOWN = 0;
     MHZ_1_4 = 1;
@@ -140,6 +180,133 @@ enum LteBandwidth {
     MHZ_10 = 4;
     MHZ_15 = 5;
     MHZ_20 = 6;
+}
+
+/*
+ * This enum defines the "Cipher_Suites" field of the 802.11 messages.
+ *
+ * Note that a single Beacon, Probe Response, Association Request, or Reassociation Request Frame can contain
+ * multiple Cipher Suites, and multiple AKM suites.  It is necessary to list all of the supported suites so that a
+ * proper security assessment can be performed on the Access Point.
+ *
+ * Following are how the enum values map to IEEE Std 802.11-2012
+ * 00-0F-AC:1 - WEP_40
+ * 00-0F-AC:2 - TKIP
+ * 00-0F-AC:4 - CCMP
+ * 00-0F-AC:5 - WEP_104
+ *
+ * New from IEE Std 802.11-2016
+ * 00-0F-AC:8 - GCMP-128
+ * 00-0F-AC:9 - GCMP-256
+ * 00-0F-AC:10 - CCMP-256
+ * 00-0F-AC:11 - BIP-GMAC-128
+ * 00-0F-AC:12 - BIP-GMAC-256
+ * 00-0F-AC:13 - BIP-CMAC-256
+ *
+ * And OPEN is no Cipher.
+ */
+enum CipherSuite {
+    CIPHER_UNKNOWN = 0;
+    CIPHER_WEP_40 = 1;
+    CIPHER_TKIP = 2;
+    CIPHER_CCMP = 3;
+    CIPHER_WEP_104 = 4;
+
+    CIPHER_GCMP_128 = 5;
+    CIPHER_GCMP_256 = 6;
+    CIPHER_CCMP_256 = 7;
+    CIPHER_BIP_GMAC_128 = 8;
+    CIPHER_BIP_GMAC_256 = 9;
+    CIPHER_BIP_CMAC_256 = 10;
+
+    CIPHER_OPEN = 13;
+    CIPHER_WEP = 14; // For the times where it is unknown if WEP_40 or WEP_104 is being employed.
+}
+
+/*
+ * This enum defines the "AKM_Suites" field of the 802.11 messages.
+ *
+ * Note that a single Beacon, Probe Response, Association Request, or Reassociation Request Frame can contain
+ * multiple Cipher Suites, and multiple AKM suites.  It is necessary to list all of the supported suites so that a
+ * proper security assessment can be performed on the Access Point.
+ *
+ * Following are how the enum values map to IEEE Std 802.11-2012
+ * 00-0F-AC:1 - IEEE_8021X
+ * 00-0F-AC:2 - PSK
+ * 00-0F-AC:3 - FT_IEEE_8021X
+ * 00-0F-AC:4 - FT_PSK
+ * 00-0F-AC:5 - IEEE_8021X_SHA256
+ * 00-0F-AC:6 - PSK_SHA256
+ * 00-0F-AC:7 - TDLS
+ * 00-0F-AC:8 - SAE
+ * 00-0F-AC:9 - FT_SAE
+ * <p>
+ * And OPEN is no AKM.
+ */
+enum AkmSuite {
+    AKM_UNKNOWN = 0;
+
+    // EAP AKM Methods
+    AKM_IEEE_8021X = 1;
+    AKM_FT_IEEE_8021X = 3;
+    AKM_IEEE_8021X_SHA256 = 5;
+
+    // PSK AKM Methods
+    AKM_PSK = 2;
+    AKM_FT_PSK = 4;
+    AKM_PSK_SHA256 = 6;
+    AKM_SAE = 8;
+    AKM_FT_SAE = 9;
+
+    // TDLS
+    AKM_TDLS = 7;
+
+    AKM_OPEN = 13;
+}
+
+/**
+ * This enum defines the "Encryption_Type" field of the 802.11 messages.
+ *
+ * Note that the Encryption_Type field should be kept in sync with the Cipher_Suites field.  The two fields are closely related.
+ * The Encryption_Type field stores the WiFi Alliance coined terms for the various cipher suites.
+ *
+ * Following are how the Encryption_Type values
+ * map to the Cipher_Suites values.
+ * OPEN     - OPEN
+ * WEP      - WEP_40 and/or WEP_104
+ * WPA      - TKIP
+ * WPA_WPA2 - TKIP and CCMP
+ * WPA2     - CCMP
+ *
+ * @since RaptorX 1.49
+ */
+enum EncryptionType {
+    ENC_UNKNOWN = 0;
+    ENC_OPEN = 1;
+    ENC_WEP = 2;
+    ENC_WPA = 3;
+    ENC_WPA_WPA2 = 4;
+    ENC_WPA2 = 5;
+    ENC_WPA3 = 6;
+}
+
+enum NodeType {
+    NODE_UNKNOWN = 0;
+    NODE_AP = 1;
+    NODE_NON_AP_STA = 2;
+    NODE_STA = 3;
+}
+
+enum Standard {
+    STD_UNKNOWN = 0;
+    IEEE80211 = 1;
+    IEEE80211A = 2;
+    IEEE80211B = 3;
+    IEEE80211G = 4;
+    IEEE80211BG = 5;
+    IEEE80211N = 6;
+    IEEE80211AC = 7;
+    IEEE80211AX = 8;
 }
 
 message GsmSurveyResponse {
@@ -158,3 +325,6 @@ message LteSurveyResponse {
 
 }
 
+message WifiBeaconSurveyResponse {
+
+}

@@ -1,5 +1,5 @@
 /**
- * Defines the survey messages that are sent from the Network Survey Android App to the remote server.
+ * Defines the survey messages that are sent from the Network Survey Android App to a remote server.
  */
 syntax = "proto3";
 
@@ -155,7 +155,7 @@ message WifiBeaconRecord {
     string bssid = 12;
 
     google.protobuf.Int32Value beaconInterval = 13;
-    string serviceSetType = 14;
+    ServiceSetType serviceSetType = 14;
     string ssid = 15;
     string supportedRates = 16;
     string extendedSupportedRates = 17;
@@ -264,6 +264,15 @@ enum AkmSuite {
     AKM_OPEN = 13;
 }
 
+enum ServiceSetType {
+    SS_UNKNOWN = 0;
+    BSS = 1;
+    ESS = 2;
+    BSS_ESS = 3;
+    IBSS = 4;
+    MBSS = 5;
+}
+
 /**
  * This enum defines the "Encryption_Type" field of the 802.11 messages.
  *
@@ -277,8 +286,6 @@ enum AkmSuite {
  * WPA      - TKIP
  * WPA_WPA2 - TKIP and CCMP
  * WPA2     - CCMP
- *
- * @since RaptorX 1.49
  */
 enum EncryptionType {
     ENC_UNKNOWN = 0;

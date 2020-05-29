@@ -22,7 +22,7 @@ version '0.1.2'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
-    gradleVersion = '5.6'
+    gradleVersion = '6.3'
     distributionType = Wrapper.DistributionType.ALL
 }
 

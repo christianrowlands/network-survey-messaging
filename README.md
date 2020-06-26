@@ -36,7 +36,7 @@ Network Survey Messaging is available via [mavenCentral](https://search.maven.or
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.1.2'
+    implementation 'com.craxiom:network-survey-messaging:0.1.3'
 }
 ```
 

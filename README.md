@@ -51,20 +51,23 @@ Build and development instructions
 
 Change log
 -----------------------------------
+##### [0.1.3](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.3) - 2020-06-26
+ * Added the device_name field to all the wireless proto messages.
+ 
 ##### [0.1.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.2) - 2020-05-29
  * Swapped out the 802.11 service set type from a String to an enum.
 
 ##### [0.1.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.1) - 2020-05-23
- * Added a protobuf message for 802.11 beacon frames
+ * Added a protobuf message for 802.11 beacon frames.
 
 ##### [0.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.0) - 2020-04-23
- * Switched to the full java version instead of the java lite protobuf implementation
+ * Switched to the full java version instead of the java lite protobuf implementation.
 
 ##### [0.0.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.2) - 2020-01-06
- * Added support for streaming GSM, CDMA, and UMTS cellular survey records
+ * Added support for streaming GSM, CDMA, and UMTS cellular survey records.
  
 ##### [0.0.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/release-0.0.1) - 2019-09-27
- * Initial release of message definitions
+ * Initial release of message definitions.
 
 
 Contact

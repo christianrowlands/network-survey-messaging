@@ -43,6 +43,9 @@ deserialize the binary messages, the actual messages were sent in JSON instead. 
 construct a protobuf object and use the Protobuf `JsonFormat.Printer` to convert a protobuf object to JSON. Therefore,
 proto definitions matching the JSON messages are provided as a convenient way to generate the JSON message strings.
 
+In other words, the protobuf files and gRPC SDKs are provided as convenience libraries only and are not an official part
+of the Network Survey Messaging API. The API is instead only the JSON message schema and channel/topic names for the messages.
+
 As a result, if a gRPC setup is of interest to a user of these messages, then the generated library can be employed to
 send the protobuf messages over gRPC.  The build produces a Java library with all of the messages for use by the client 
 and server software respectively.
@@ -81,6 +84,11 @@ Additional AsyncAPI generators can be found here:  https://github.com/asyncapi/g
 #### Building the HTML content from the AsyncAPI file
  - Execute `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o build/network-survey-messaging-html`
  - The HTML content will be located in the directory specified after the `-o` option.
+ 
+To publish a new version of the Network Survey Messaging API HTML page, use the following command
+ - `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o docs`
+
+This will overwrite the current HTML content from the docs directory with the last API definition from the yaml file.
  
 #### Building the protobuf Java library
  - Execute `gradlew build` in the root directory to produce the Java library with the protobuf messages.

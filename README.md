@@ -62,7 +62,7 @@ The gRPC website has tutorials for utilizing gRPC + protobuf for [Android](https
 ## Getting Started
 #### Add Network Survey Messaging to your project
 
-Network Survey Messaging is available via [mavenCentral](https://search.maven.org/search?q=network-survey-messaging)
+The Network Survey Messaging protobuf library is available via [mavenCentral](https://search.maven.org/search?q=network-survey-messaging)
 
 ```groovy
 dependencies {

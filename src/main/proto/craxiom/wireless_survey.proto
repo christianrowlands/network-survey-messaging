@@ -34,15 +34,15 @@ service WirelessSurvey {
 // record_number:             Starts at 1 and each subsequent scan should have its number incremented by 1.
 message GsmRecord {
 
-    string device_serial_number = 1;
-    uint64 device_time = 2;
+    string deviceSerialNumber = 1;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
-    string mission_id = 6;
-    int32 record_number = 7;
-    int32 group_number = 8;
-    string device_name = 9;
+    string missionId = 6;
+    int32 recordNumber = 7;
+    int32 groupNumber = 8;
+    string deviceName = 9;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
@@ -58,15 +58,15 @@ message GsmRecord {
 
 message CdmaRecord {
 
-    string device_serial_number = 1;
-    uint64 device_time = 2;
+    string deviceSerialNumber = 1;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
-    string mission_id = 6;
+    string missionId = 6;
     int32 record_number = 7;
-    int32 group_number = 8;
-    string device_name = 9;
+    int32 groupNumber = 8;
+    string deviceName = 9;
 
     google.protobuf.Int32Value sid = 16;
     google.protobuf.Int32Value nid = 17;
@@ -82,15 +82,15 @@ message CdmaRecord {
 
 message UmtsRecord {
 
-    string device_serial_number = 1;
-    uint64 device_time = 2;
+    string deviceSerialNumber = 1;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
-    string mission_id = 6;
-    int32 record_number = 7;
-    int32 group_number = 8;
-    string device_name = 9;
+    string missionId = 6;
+    int32 recordNumber = 7;
+    int32 groupNumber = 8;
+    string deviceName = 9;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
@@ -117,15 +117,15 @@ message UmtsRecord {
 // record_number:             Starts at 1 and each subsequent scan should have its number incremented by 1.
 message LteRecord {
 
-    string device_serial_number = 1;
-    uint64 device_time = 2;
+    string deviceSerialNumber = 1;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
-    string mission_id = 6;
-    int32 record_number = 7;
-    int32 group_number = 8;
-    string device_name = 9;
+    string missionId = 6;
+    int32 recordNumber = 7;
+    int32 groupNumber = 8;
+    string deviceName = 9;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
@@ -146,14 +146,14 @@ message LteRecord {
  */
 message WifiBeaconRecord {
 
-    string device_serial_number = 1;
-    uint64 device_time = 2;
+    string deviceSerialNumber = 1;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
-    string mission_id = 6;
-    int32 record_number = 7;
-    string device_name = 8;
+    string missionId = 6;
+    int32 recordNumber = 7;
+    string deviceName = 8;
 
     string sourceAddress = 10;
     string destinationAddress = 11;

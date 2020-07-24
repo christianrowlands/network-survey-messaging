@@ -21,7 +21,7 @@ message ConnectionRequest {
 //
 // connection_accept:  True if the connection is accepted, false otherwise.
 message ConnectionReply {
-    bool connection_accept = 1;
+    bool connectionAccept = 1;
 }
 
 // A status message from the Network Survey Android App.
@@ -36,20 +36,20 @@ message ConnectionReply {
 // error:                     If this object is present, then a error has occured in the Network Survey App.
 message DeviceStatus {
 
-    string device_serial_number = 1;
-    string device_name = 2;
-    uint64 device_time = 3;
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    uint64 deviceTime = 3;
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;
-    int32 battery_level_percent = 7;
+    int32 batteryLevelPercent = 7;
 
     Error error = 10;
 }
 
 // Used to report an error with the Network Survey App
 message Error {
-    string error_message = 1;
+    string errorMessage = 1;
 }
 
 // An empty reply

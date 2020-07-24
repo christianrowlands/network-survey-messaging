@@ -1,0 +1,692 @@
+asyncapi: '2.0.0'
+info:
+  title: Network Survey Messaging API
+  version: '0.2.0'
+  description: |
+    The Network Survey Messaging API defines a set of messages that can be used to describe
+    wireless survey related events. The messages range from cellular surveys such as GSM, CDMA, 
+    UMTS, and LTE, to simple RF energy detection events.
+    
+    While the most common use of these messages would be to send to an MQTT broker, this API specification 
+    simply defines the message schema. The transport or storage technology employed is purposefully left 
+    open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc. 
+    In addition, these messages can be written to disk by writing the JSON strings directly to a file to 
+    support unstructured data storage, or in a more structured approach such as a PostgreSQL or SQLite database.
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+
+servers:
+  mosquitto:
+    url: mqtt://test.mosquitto.org
+    protocol: mqtt
+    
+defaultContentType: application/json
+
+channels:
+  gsm_message:
+    description: The gsm_message topic/channel is where GSM survey records can be published. For MQTT, set the MQTT topic as "gsm_message" and then publish a JSON message representing a GSM survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/gsm_message'
+
+  cdma_message:
+    description: The lte_message topic/channel is where CDMA survey records can be published. For MQTT, set the MQTT topic as "cdma_message" and then publish a JSON message representing a CDMA survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/cdma_message'
+
+  umts_message:
+    description: The lte_message topic/channel is where UMTS survey records can be published. For MQTT, set the MQTT topic as "umts_message" and then publish a JSON message representing a UMTS survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/umts_message'
+
+  lte_message:
+    description: The lte_message topic/channel is where LTE survey records can be published. For MQTT, set the MQTT topic as "lte_message" and then publish a JSON message representing an LTE survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/lte_message'
+  
+  energy_detection_message:
+    description: The energy_detection_message topic/channel is where RF energy detection records can be published. For MQTT, set the MQTT topic as "energy_detection_message" and then publish a JSON message in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/energy_detection_message'
+
+  signal_detection_message:
+    description: The signal_detection_message topic/channel is where signal detection records can be published. For MQTT, set the MQTT topic as "signal_detection_message" and then publish a JSON message in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/signal_detection_message'
+
+components:
+  messages:
+    gsm_message:
+      name: gsm_message
+      title: GSM Message
+      summary: Represents information recorded about a GSM tower at a particular time and geographic location.
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/gsmMessagePayload'
+
+    cdma_message:
+      name: cdma_message
+      title: CDMA Message
+      summary: Represents information recorded about a CDMA tower at a particular time and geographic location.
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/cdmaMessagePayload'
+
+    umts_message:
+      name: umts_message
+      title: UMTS Message
+      summary: Represents information recorded about a UMTS NodeB at a particular time and geographic location.
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/umtsMessagePayload'
+  
+    lte_message:
+      name: lte_message
+      title: LTE Message
+      summary: Represents information recorded about an LTE eNodeB at a particular time and geographic location.
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/lteMessagePayload'
+
+    energy_detection_message:
+      name: energy_detection_message
+      title: Energy Detection Message
+      summary: Represents a General Purpose Radio (GPR) Energy Detection event. This survey record represents a general RF/PTT energy detection (i.e. RF energy was detected above a pre-defined threshold).
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/energyDetectionMessagePayload'
+
+    signal_detection_message:
+      name: signal_detection_message
+      title: Signal Detection Message
+      summary: Represents a General Purpose Radio (GPR) Signal Detection event. This survey record represents RF detections where the modulation and/or signal type could be determined. If both the modulation and signal type are unknown, then use the `energy_detection_message` instead.
+      contentType: application/json
+      payload: 
+        $ref: '#/components/schemas/signalDetectionMessagePayload'
+
+  schemas:
+    gsmMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+                    
+        mcc:
+          $ref: '#/components/schemas/mcc'
+        mnc:
+          $ref: '#/components/schemas/mnc'
+        lac:
+          $ref: '#/components/schemas/lac'
+        ci:
+          $ref: '#/components/schemas/ci'
+        arfcn:
+          $ref: '#/components/schemas/arfcn'
+        bsic:
+          $ref: '#/components/schemas/bsic'
+        signalStrength:
+          $ref: '#/components/schemas/signalStrength'
+        ta:
+          $ref: '#/components/schemas/ta'
+        servingCell:
+          $ref: '#/components/schemas/servingCell'
+        provider:
+          $ref: '#/components/schemas/provider'
+  
+    cdmaMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+
+        sid:
+          $ref: '#/components/schemas/sid'
+        nid:
+          $ref: '#/components/schemas/nid'
+        zone:
+          $ref: '#/components/schemas/zone'
+        bsid:
+          $ref: '#/components/schemas/bsid'
+        channel:
+          $ref: '#/components/schemas/channel'
+        pnOffset:
+          $ref: '#/components/schemas/pnOffset'
+        signalStrength:
+          $ref: '#/components/schemas/signalStrength'
+        ecio:
+          $ref: '#/components/schemas/ecio'
+        servingCell:
+          $ref: '#/components/schemas/servingCell'
+        provider:
+          $ref: '#/components/schemas/provider'
+
+    umtsMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+          
+        mcc:
+          $ref: '#/components/schemas/mcc'
+        mnc:
+          $ref: '#/components/schemas/mnc'
+        lac:
+          $ref: '#/components/schemas/lac'
+        cid:
+          $ref: '#/components/schemas/cid'
+        uarfcn:
+          $ref: '#/components/schemas/uarfcn'
+        psc:
+          $ref: '#/components/schemas/psc'
+        rscp:
+          $ref: '#/components/schemas/rscp'
+        signalStrength:
+          $ref: '#/components/schemas/signalStrength'
+        servingCell:
+          $ref: '#/components/schemas/servingCell'
+        provider:
+          $ref: '#/components/schemas/provider'
+
+    lteMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+          
+        mcc:
+          $ref: '#/components/schemas/mcc'
+        mnc:
+          $ref: '#/components/schemas/mnc'
+        tac:
+          $ref: '#/components/schemas/tac'
+        eci:
+          $ref: '#/components/schemas/eci'
+        earfcn:
+          $ref: '#/components/schemas/earfcn'
+        pci:
+          $ref: '#/components/schemas/pci'
+        rsrp:
+          $ref: '#/components/schemas/rsrp'
+        rsrq:
+          $ref: '#/components/schemas/rsrq'
+        ta: # Defining it directly in LTE so it does not conflict with the GSM TA
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 1282
+          description: LTE Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-1282.
+          example: 27
+        signalStrength:
+          $ref: '#/components/schemas/signalStrength'
+        servingCell:
+          $ref: '#/components/schemas/servingCell'
+        lteBandwidth:
+          $ref: '#/components/schemas/lteBandwidth'
+        provider:
+          $ref: '#/components/schemas/provider'
+
+    energyDetectionMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+          
+        frequencyHz:
+          $ref: '#/components/schemas/frequencyHz'
+        bandwidthHz:
+          $ref: '#/components/schemas/bandwidthHz'
+        snr:
+          $ref: '#/components/schemas/snr'
+        timeUp:
+          $ref: '#/components/schemas/timeUp'
+        durationSec:
+          $ref: '#/components/schemas/durationSec'
+
+    signalDetectionMessagePayload:
+      type: object
+      properties:
+        deviceSerialNumber:
+          $ref: '#/components/schemas/deviceSerialNumber'
+        deviceName:
+          $ref: '#/components/schemas/deviceName'
+        deviceTime:
+          $ref: '#/components/schemas/deviceTime'
+        latitude:
+          $ref: '#/components/schemas/latitude'
+        longitude:
+          $ref: '#/components/schemas/longitude'
+        altitude:
+          $ref: '#/components/schemas/altitude'
+        missionId:
+          $ref: '#/components/schemas/missionId'
+        recordNumber:
+          $ref: '#/components/schemas/recordNumber'
+        groupNumber:
+          $ref: '#/components/schemas/groupNumber'
+          
+        frequencyHz:
+          $ref: '#/components/schemas/frequencyHz'
+        bandwidthHz:
+          $ref: '#/components/schemas/bandwidthHz'
+        snr:
+          $ref: '#/components/schemas/snr'
+        timeUp:
+          $ref: '#/components/schemas/timeUp'
+        durationSec:
+          $ref: '#/components/schemas/durationSec'
+        modulation:
+          $ref: '#/components/schemas/modulation'
+        signalName:
+          $ref: '#/components/schemas/signalName'
+
+
+    # Common fields that are used in almost every message
+    deviceSerialNumber:
+      type: string
+      description: The unique identifier for the device that captured this record. This should be consistent and should never change.
+      example: "1234"
+      
+    deviceName:
+      type: string
+      description: A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.
+      example: "Craxiom's Pixel"
+    
+    deviceTime:
+      type: integer
+      format: int64
+      minimum: 0
+      description: The timestamp of when this message was created in milliseconds since unix epoch time.
+      example: 1594924246895
+    
+    #location:
+    #  $ref: './point.json#'
+    #  description: The location representing where this survey record was recorded. This location follows the GeoJSON format for a Point https://geojson.org/ , https://geojson.org/schema/Point.json. Specifically, the coordinates are in the format [longitude, latitude, altitude], with altitude (meters) being optional.
+    #  id: https://geojson.org/schema/Point.json
+    #  example: {"type": "Point","coordinates": [ -0.486594, 51.470334, 13.3]}
+
+    latitude:
+      type: number
+      format: double
+      description: The latitude representing where this survey record was recorded.
+      example: 51.470334
+    
+    longitude:
+      type: number
+      format: double
+      description: The longitude representing where this survey record was recorded.
+      example: -0.486594
+    
+    altitude:
+      type: number
+      format: float
+      description: The altitude in meters representing where this survey record was recorded.
+      example: 13.3
+    
+    missionId:
+      type: string
+      description: A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.
+
+    recordNumber:
+      type: integer
+      format: int32
+      minimum: 1
+      description: Starts at 1 and each subsequent record should have its number incremented by 1.
+    
+    groupNumber:
+      type: integer
+      format: int32
+      minimum: 1
+      description: Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.
+    
+    
+    # Common cellular fields
+    provider: 
+      type: string
+      description: The company providing the cellular service.
+      example: "AT&T"
+
+    mcc:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Mobile Country Code, 3 digits.
+      example: 310
+  
+    mnc:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
+      example: 410
+
+    signalStrength:
+      type: number
+      format: float
+      minimum: -200
+      maximum: 200
+      description: The signal strength of the recorded signal in dBm.
+      example: -73
+
+    servingCell:
+      type: boolean
+      description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
+
+
+    # GSM specific fields
+    lac:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Location Area Code, location code inside a PLMN, valid range 0-65535.
+      example: 174
+
+    ci:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Cell Identity of the measured cell, valid range 0-65535.
+      example: 47241
+   
+    arfcn:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Absolute Radio Frequency Channel Number, valid values defined in 3GPP TS 45.005 Release 10 Section 2.
+      example: 557
+
+    bsic:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 63
+      description: Base Station Identity Code, consists of NCC and BCC, valid range 0-63 (in octal). For example, a BSIC of 38 maps to an NCC of 4 and BCC of 6.
+      example: 25
+
+    ta:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 63
+      description: Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower.
+      example: 4
+
+
+    # CDMA specific field
+    sid:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 32767
+      description: System Identification Number, 15 bit number that represents the service provider(s) a base station provides service to.
+      example: 139
+  
+    nid:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Network Identification Number, 16 bit number that represents the network within a SID.
+      example: 4
+
+    zone:
+      type: integer
+      format: int32
+      minimum: 0
+      description: A collection of one or more base stations treated as a unit when determining whether a mobile station should perform zone-based registration.
+      example: 232
+  
+    bsid:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Base Station Identifier.  Exclusively identifies a base station under a SID/NID.
+      example: 12731
+
+    channel:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Channel number that corresponds to a frequency.
+      example: 384
+
+    pnOffset:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 511
+      description: Pseudo Random Noise, 0-511, used to differentiate sectors on base stations.
+      example: 136
+
+    ecio:
+      type: number
+      format: float
+      description: Measure of the quality / cleanliness of the signal from the tower to the modem (signal to noise). Energy per chip to Interference power ratio measured in dB.
+      example: -11.4
+
+
+    # UMTS specific fields
+    cid:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 268435455
+      description: The Cell Identity of the measured cell, 28 bits, the RNC-ID is the first 12 bits, and the C-ID is the last 16 bits, valid range 0-268435455. Defined in 3GPP TS 25.331.
+      example: 61381
+
+    uarfcn:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 13096
+      description: UTRA Absolute Radio Frequency Channel Number (Downlink), valid range 0-13096, defined in 3GPP TS 25.101 and 3GPP TS 25.102.
+      example: 9800
+
+    psc:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 511
+      description: Primary Scrambling Code, valid range 0-511.
+      example: 141
+
+    rscp:
+      type: number
+      format: float
+      description: Reference Signal Code Power in dBm.
+      example: -73
+
+
+    # LTE specific fields
+    tac:
+      type: integer
+      minimum: 0
+      maximum: 65535
+      description: Tracking Area Code, location code inside a PLMN, valid range 0-65535.
+      example: 52803
+
+    eci:
+      type: integer
+      minimum: 0
+      maximum: 268435455
+      description: ECI, the Cell Identity of the measured cell, 28 bits. The Macro eNB ID is the first 20 bits of the Cell Identity and the last 8 bits represent the sector. Valid range 0-268435455.
+      example: 52824577
+
+    earfcn:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Downlink E-UTRA Absolute Radio Frequency Channel Number, valid range 0-65535, defined in 3GPP TS 36.101 Section 5.7.3.
+      example: 5230
+
+    pci:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 503
+      description: Physical Cell Identity, valid range 0-503.
+      example: 234
+
+    rsrp:
+      type: number
+      format: float
+      minimum: -140
+      maximum: -44
+      description: Reference Signal Received Power in dBm, valid range -44 to -140, corresponding to RSRP_97 to RSRP_00 respectively.
+      example: -107
+
+    rsrq:
+      type: number
+      format: float
+      minimum: -19.5
+      maximum: -3
+      description: Reference Signal Received Quality in dB, valid range -3 to -19.5, corresponding to RSRQ_34 to RSRP_00 respectively.
+      example: -11.0
+
+    lteBandwidth:
+      type: string
+      description: "The LTE downlink bandwidth in MHz (one of 1.4, 3, 5, 10, 15, 20)."
+      enum:
+      - Unknown
+      - "1.4"
+      - "3"
+      - "5"
+      - "10"
+      - "15"
+      - "20"
+
+
+    # RF generic fields (used in both energy detection and signal detection)
+    frequencyHz:
+      type: integer
+      format: int64
+      minimum: 1
+      description: The frequency, in Hz, that the radio signal was received on.
+      example: 162000000
+
+    bandwidthHz:
+      type: integer
+      format: int32
+      minimum: 1
+      description: The bandwidth, in Hz, of the received signal.
+      example: 12500
+
+    snr:
+      type: number
+      format: float
+      minimum: 1
+      description: The Signal to Noise Ratio of the received signal to the noise power measured in dB. A ratio higher than 1:1 (greater than 0 dB) indicates more signal than noise.
+      example: 19.2
+
+    timeUp:
+      type: integer
+      format: int64
+      minimum: 1
+      description: The date & time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
+      example: 1594924242895
+
+    durationSec:
+      type: number
+      format: float
+      exclusiveMinimum: 0 
+      description: The duration of time, in seconds, that the signal was detected as active.
+      example: 4.2
+
+    # Signal Detection specific fields
+    modulation:
+      type: string
+      description: The modulation type found on the received signal. It is appropriate to leave this blank if the modulation of the signal is unknown, but either the `modulation` or `signalName` field should be filled out. If neither of them are known then the `energyDetection` message should be used instead.
+      example: 4FSK
+
+    signalName:
+      type: string
+      description: The modulation type found on the received signal. It is appropriate to leave this blank if the modulation of the signal is unknown, but either the `modulation` or `signalName` field should be filled out. If neither of them are known then the `energyDetection` message should be used instead.
+      example: DMR

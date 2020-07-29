@@ -12,6 +12,13 @@ info:
     open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc. 
     In addition, these messages can be written to disk by writing the JSON strings directly to a file to 
     support unstructured data storage, or in a more structured approach such as a PostgreSQL or SQLite database.
+
+    Officially, the message schema support for the Network Survey Messaging API are the JSON defined messags from this
+    document. However, protobuf definitions of these messages have been created as a convinence for a couple of reasons.
+    First, it can make generating the JSON compliant messages easier and also converting the JSON messages to language
+    specific objects. Secondly, it can allow for sending the messages in protocol buffer format instead of JSON if a
+    compressed binary format is needed. It also has the side effect of supporting sending these messages over gRPC if
+    Remote Procedure Call support is of interest. Check out the [Network Survey Messaging Github README](https://github.com/christianrowlands/network-survey-messaging) for more details.
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'

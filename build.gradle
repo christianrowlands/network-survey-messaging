@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.craxiom'
-version '0.1.4-SNAPSHOT'
+version '0.2.0-SNAPSHOT'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
@@ -46,6 +46,14 @@ dependencies {
     implementation "io.grpc:grpc-stub:$grpcVersion"
 
     implementation "com.google.protobuf:protobuf-java:$protobufVersion"
+
+    testImplementation "com.google.protobuf:protobuf-java-util:3.11.4"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 protobuf {

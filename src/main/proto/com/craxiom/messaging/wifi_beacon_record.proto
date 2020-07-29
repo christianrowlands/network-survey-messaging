@@ -1,0 +1,58 @@
+/**
+ * A protobuf definition of the 802.11 Beacon message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true 802.11
+ * Beacon message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/wifi/serviceset/service_set.proto";
+import "com/craxiom/messaging/wifi/ciphersuite/cipher_suite.proto";
+import "com/craxiom/messaging/wifi/akmsuite/akm_suite.proto";
+import "com/craxiom/messaging/wifi/encryptiontype/encryption_type.proto";
+import "com/craxiom/messaging/wifi/nodetype/node_type.proto";
+import "com/craxiom/messaging/wifi/standard/standard.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message WifiBeaconRecord {
+    string version = 1;
+    string messageName = 2;
+    WifiBeaconRecordData data = 3;
+}
+
+message WifiBeaconRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    uint64 deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+
+    string sourceAddress = 10;
+    string destinationAddress = 11;
+    string bssid = 12;
+
+    google.protobuf.Int32Value beaconInterval = 13;
+    com.craxiom.messaging.wifi.serviceset.ServiceSetType serviceSetType = 14;
+    string ssid = 15;
+    string supportedRates = 16;
+    string extendedSupportedRates = 17;
+    repeated com.craxiom.messaging.wifi.ciphersuite.CipherSuite cipherSuites = 18;
+    repeated com.craxiom.messaging.wifi.akmsuite.AkmSuite akmSuites = 19;
+    com.craxiom.messaging.wifi.encryptiontype.EncryptionType encryptionType = 20;
+    google.protobuf.BoolValue wps = 21;
+
+    google.protobuf.Int32Value channel = 22;
+    google.protobuf.Int32Value frequencyMhz = 23;
+    google.protobuf.FloatValue signalStrength = 24;
+    google.protobuf.FloatValue snr = 25;
+    com.craxiom.messaging.wifi.nodetype.NodeType nodeType = 26;
+    com.craxiom.messaging.wifi.standard.Standard standard = 27;
+}

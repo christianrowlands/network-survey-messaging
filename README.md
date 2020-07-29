@@ -28,7 +28,7 @@ by any system wanting to share wireless protocol data, or send wireless signal e
 ## Some Details
 The messages in this API are defined using [AsyncAPI](https://www.asyncapi.com/). All the messages are in JSON format. 
 In addition to the messages this API defines, it also defines the topics the messages can be sent on. For the most part,
-the topic simply follows the message name, but the idea is that these messages can be sent over transports such as MQTT
+the topic is close to the message name, but the idea is that these messages can be sent over transports such as MQTT
 or Kafka. If they are, then the topic name in MQTT, Kafka, or any other system should follow the "channel" defined in
 this API. For example, the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey) 
 has a feature that sends out the GSM, CDMA, UMTS, LTE, and 802.11 JSON messages defined in this API. In doing so, it 
@@ -53,6 +53,9 @@ and server software respectively.
 More information about protobuf is available [here](https://developers.google.com/protocol-buffers/).
 More information about gRPC is available [here](https://grpc.io/).
 
+Of note, the protobuf definitions were changed between version 0.1.3 and 0.2.0. The old definitions have been left for
+backwards compatibility, but the new ones in the `com.craxiom.messaging` package should be leveraged instead.
+
 
 ## Sample usage
 The gRPC website has tutorials for utilizing gRPC + protobuf for [Android](https://grpc.io/docs/quickstart/android/) and
@@ -66,7 +69,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.1.3'
+    implementation 'com.craxiom:network-survey-messaging:0.2.0'
 }
 ```
 
@@ -96,6 +99,12 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.0) - TBD
+ * BREAKING CHANGES were made to the JSON output of the protobuf messages.
+ * Redesigned this messaging API to define the messages in JSON using AsyncAPI.
+ * Redefined the proto files to following the new JSON message schema.
+ * Deprecated the original proto definitions.
+
 ##### [0.1.3](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.3) - 2020-06-26
  * Added the device_name field to all the wireless proto messages.
  

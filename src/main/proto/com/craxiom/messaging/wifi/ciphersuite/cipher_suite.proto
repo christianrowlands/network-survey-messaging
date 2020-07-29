@@ -1,0 +1,57 @@
+/**
+ * Defines the Cipher Suite values used in the 802.11 Survey message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.wifi.ciphersuite;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.wifi";
+
+/*
+ * This enum defines the Cipher Suites field of the 802.11 messages.
+ *
+ * Note that a single Beacon, Probe Response, Association Request, or Reassociation Request Frame can contain
+ * multiple Cipher Suites, and multiple AKM suites.  It is necessary to list all of the supported suites so that a
+ * proper security assessment can be performed on the Access Point.
+ *
+ * Following are how the enum values map to IEEE Std 802.11-2012
+ * 00-0F-AC:1 - WEP_40
+ * 00-0F-AC:2 - TKIP
+ * 00-0F-AC:4 - CCMP
+ * 00-0F-AC:5 - WEP_104
+ *
+ * New from IEE Std 802.11-2016
+ * 00-0F-AC:8 - GCMP-128
+ * 00-0F-AC:9 - GCMP-256
+ * 00-0F-AC:10 - CCMP-256
+ * 00-0F-AC:11 - BIP-GMAC-128
+ * 00-0F-AC:12 - BIP-GMAC-256
+ * 00-0F-AC:13 - BIP-CMAC-256
+ *
+ * And OPEN is no Cipher.
+ */
+enum CipherSuite {
+    UNKNOWN = 0;
+    WEP_40 = 1;
+    TKIP = 2;
+    CCMP = 3;
+    WEP_104 = 4;
+
+    GCMP_128 = 5;
+    GCMP_256 = 6;
+    CCMP_256 = 7;
+    BIP_GMAC_128 = 8;
+    BIP_GMAC_256 = 9;
+    BIP_CMAC_256 = 10;
+
+    OPEN = 13;
+    WEP = 14; // For the times where it is unknown if WEP_40 or WEP_104 is being employed.
+}

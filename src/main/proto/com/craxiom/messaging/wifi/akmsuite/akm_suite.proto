@@ -1,0 +1,57 @@
+/**
+ * Defines the AKM Suite values used in the 802.11 Survey message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.wifi.akmsuite;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.wifi";
+
+/*
+ * This enum defines the AKM Suites field of the 802.11 messages.
+ *
+ * Note that a single Beacon, Probe Response, Association Request, or Reassociation Request Frame can contain
+ * multiple Cipher Suites, and multiple AKM suites.  It is necessary to list all of the supported suites so that a
+ * proper security assessment can be performed on the Access Point.
+ *
+ * Following are how the enum values map to IEEE Std 802.11-2012
+ * 00-0F-AC:1 - IEEE_8021X
+ * 00-0F-AC:2 - PSK
+ * 00-0F-AC:3 - FT_IEEE_8021X
+ * 00-0F-AC:4 - FT_PSK
+ * 00-0F-AC:5 - IEEE_8021X_SHA256
+ * 00-0F-AC:6 - PSK_SHA256
+ * 00-0F-AC:7 - TDLS
+ * 00-0F-AC:8 - SAE
+ * 00-0F-AC:9 - FT_SAE
+ * <p>
+ * And OPEN is no AKM.
+ */
+enum AkmSuite {
+    UNKNOWN = 0;
+
+    // EAP AKM Methods
+    IEEE_8021X = 1;
+    FT_IEEE_8021X = 3;
+    IEEE_8021X_SHA256 = 5;
+
+    // PSK AKM Methods
+    PSK = 2;
+    FT_PSK = 4;
+    PSK_SHA256 = 6;
+    SAE = 8;
+    FT_SAE = 9;
+
+    // TDLS
+    TDLS = 7;
+
+    OPEN = 13;
+}

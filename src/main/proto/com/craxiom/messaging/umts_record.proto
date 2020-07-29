@@ -1,0 +1,43 @@
+/**
+ * A protobuf definition of the UMTS survey record defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true UMTS
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message UmtsRecord {
+    string version = 1;
+    string messageName = 2;
+    UmtsRecordData data = 3;
+}
+
+message UmtsRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    uint64 deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 groupNumber = 9;
+
+    google.protobuf.Int32Value mcc = 16;
+    google.protobuf.Int32Value mnc = 17;
+    google.protobuf.Int32Value lac = 18;
+    google.protobuf.Int32Value cid = 19;
+    google.protobuf.Int32Value uarfcn = 20;
+    google.protobuf.Int32Value psc = 21;
+    google.protobuf.FloatValue rscp = 22;
+    google.protobuf.FloatValue signalStrength = 23;
+    google.protobuf.BoolValue servingCell = 25;
+    string provider = 27;
+}

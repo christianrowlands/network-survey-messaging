@@ -6,12 +6,19 @@ info:
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA, 
     UMTS, and LTE, to simple RF energy detection events.
-    
+
     While the most common use of these messages would be to send to an MQTT broker, this API specification 
     simply defines the message schema. The transport or storage technology employed is purposefully left 
     open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc. 
     In addition, these messages can be written to disk by writing the JSON strings directly to a file to 
     support unstructured data storage, or in a more structured approach such as a PostgreSQL or SQLite database.
+
+    Officially, the message schema support for the Network Survey Messaging API are the JSON defined messags from this
+    document. However, protobuf definitions of these messages have been created as a convinence for a couple of reasons.
+    First, it can make generating the JSON compliant messages easier and also converting the JSON messages to language
+    specific objects. Secondly, it can allow for sending the messages in protocol buffer format instead of JSON if a
+    compressed binary format is needed. It also has the side effect of supporting sending these messages over gRPC if
+    Remote Procedure Call support is of interest. Check out the [Network Survey Messaging Github README](https://github.com/christianrowlands/network-survey-messaging) for more details.
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -20,7 +27,7 @@ servers:
   mosquitto:
     url: mqtt://test.mosquitto.org
     protocol: mqtt
-    
+
 defaultContentType: application/json
 
 channels:
@@ -28,361 +35,625 @@ channels:
     description: The gsm_message topic/channel is where GSM survey records can be published. For MQTT, set the MQTT topic as "gsm_message" and then publish a JSON message representing a GSM survey record in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/gsm_message'
+        $ref: '#/components/messages/gsmRecord'
 
   cdma_message:
-    description: The lte_message topic/channel is where CDMA survey records can be published. For MQTT, set the MQTT topic as "cdma_message" and then publish a JSON message representing a CDMA survey record in the format defined below.
+    description: The cdma_message topic/channel is where CDMA survey records can be published. For MQTT, set the MQTT topic as "cdma_message" and then publish a JSON message representing a CDMA survey record in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/cdma_message'
+        $ref: '#/components/messages/cdmaRecord'
 
   umts_message:
-    description: The lte_message topic/channel is where UMTS survey records can be published. For MQTT, set the MQTT topic as "umts_message" and then publish a JSON message representing a UMTS survey record in the format defined below.
+    description: The umts_message topic/channel is where UMTS survey records can be published. For MQTT, set the MQTT topic as "umts_message" and then publish a JSON message representing a UMTS survey record in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/umts_message'
+        $ref: '#/components/messages/umtsRecord'
 
   lte_message:
     description: The lte_message topic/channel is where LTE survey records can be published. For MQTT, set the MQTT topic as "lte_message" and then publish a JSON message representing an LTE survey record in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/lte_message'
-  
+        $ref: '#/components/messages/lteRecord'
+
+  wifi_beacon_message:
+    description: The wifi_beacon_message topic/channel is where 802.11 beacon survey records can be published. For MQTT, set the MQTT topic as "wifi_beacon_message" and then publish a JSON message representing an 802.11 Access Point survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/wifiBeaconRecord'
+
   energy_detection_message:
     description: The energy_detection_message topic/channel is where RF energy detection records can be published. For MQTT, set the MQTT topic as "energy_detection_message" and then publish a JSON message in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/energy_detection_message'
+        $ref: '#/components/messages/energyDetection'
 
   signal_detection_message:
     description: The signal_detection_message topic/channel is where signal detection records can be published. For MQTT, set the MQTT topic as "signal_detection_message" and then publish a JSON message in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/signal_detection_message'
+        $ref: '#/components/messages/signalDetection'
 
 components:
   messages:
-    gsm_message:
-      name: gsm_message
-      title: GSM Message
+    gsmRecord:
+      name: GsmRecord
+      title: GSM Record
       summary: Represents information recorded about a GSM tower at a particular time and geographic location.
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/gsmMessagePayload'
+      payload:
+        $ref: '#/components/schemas/gsmRecordPayload'
 
-    cdma_message:
-      name: cdma_message
-      title: CDMA Message
+    cdmaRecord:
+      name: CdmaRecord
+      title: CDMA Record
       summary: Represents information recorded about a CDMA tower at a particular time and geographic location.
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/cdmaMessagePayload'
+      payload:
+        $ref: '#/components/schemas/cdmaRecordPayload'
 
-    umts_message:
-      name: umts_message
-      title: UMTS Message
+    umtsRecord:
+      name: UmtsRecord
+      title: UMTS Record
       summary: Represents information recorded about a UMTS NodeB at a particular time and geographic location.
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/umtsMessagePayload'
-  
-    lte_message:
-      name: lte_message
-      title: LTE Message
+      payload:
+        $ref: '#/components/schemas/umtsRecordPayload'
+
+    lteRecord:
+      name: LteRecord
+      title: LTE Record
       summary: Represents information recorded about an LTE eNodeB at a particular time and geographic location.
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/lteMessagePayload'
+      payload:
+        $ref: '#/components/schemas/lteRecordPayload'
 
-    energy_detection_message:
-      name: energy_detection_message
-      title: Energy Detection Message
+    wifiBeaconRecord:
+      name: WifiBeaconRecord
+      title: Wi-Fi Beacon Record
+      summary: Represents information recorded about an 802.11 Access Point at a particular time and geographic location. 802.11 Beacon frames are sent by Access Points to advertise their existence and to provide all the necessary connection information. This message represents a capture of a signal 802.11 Beacon message.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiBeaconRecordPayload'
+
+    energyDetection:
+      name: EnergyDetection
+      title: Energy Detection
       summary: Represents a General Purpose Radio (GPR) Energy Detection event. This survey record represents a general RF/PTT energy detection (i.e. RF energy was detected above a pre-defined threshold).
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/energyDetectionMessagePayload'
+      payload:
+        $ref: '#/components/schemas/energyDetectionPayload'
 
-    signal_detection_message:
-      name: signal_detection_message
-      title: Signal Detection Message
+    signalDetection:
+      name: SignalDetection
+      title: Signal Detection
       summary: Represents a General Purpose Radio (GPR) Signal Detection event. This survey record represents RF detections where the modulation and/or signal type could be determined. If both the modulation and signal type are unknown, then use the `energy_detection_message` instead.
       contentType: application/json
-      payload: 
-        $ref: '#/components/schemas/signalDetectionMessagePayload'
+      payload:
+        $ref: '#/components/schemas/signalDetectionPayload'
 
   schemas:
-    gsmMessagePayload:
+    gsmRecordPayload:
       type: object
+      required:
+        - version
+        - messageName
+        - data
       properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
-                    
-        mcc:
-          $ref: '#/components/schemas/mcc'
-        mnc:
-          $ref: '#/components/schemas/mnc'
-        lac:
-          $ref: '#/components/schemas/lac'
-        ci:
-          $ref: '#/components/schemas/ci'
-        arfcn:
-          $ref: '#/components/schemas/arfcn'
-        bsic:
-          $ref: '#/components/schemas/bsic'
-        signalStrength:
-          $ref: '#/components/schemas/signalStrength'
-        ta:
-          $ref: '#/components/schemas/ta'
-        servingCell:
-          $ref: '#/components/schemas/servingCell'
-        provider:
-          $ref: '#/components/schemas/provider'
-  
-    cdmaMessagePayload:
-      type: object
-      properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "GsmRecord"
 
-        sid:
-          $ref: '#/components/schemas/sid'
-        nid:
-          $ref: '#/components/schemas/nid'
-        zone:
-          $ref: '#/components/schemas/zone'
-        bsid:
-          $ref: '#/components/schemas/bsid'
-        channel:
-          $ref: '#/components/schemas/channel'
-        pnOffset:
-          $ref: '#/components/schemas/pnOffset'
-        signalStrength:
-          $ref: '#/components/schemas/signalStrength'
-        ecio:
-          $ref: '#/components/schemas/ecio'
-        servingCell:
-          $ref: '#/components/schemas/servingCell'
-        provider:
-          $ref: '#/components/schemas/provider'
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - arfcn
+            - bsic
+            - signalStrength
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
 
-    umtsMessagePayload:
-      type: object
-      properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
-          
-        mcc:
-          $ref: '#/components/schemas/mcc'
-        mnc:
-          $ref: '#/components/schemas/mnc'
-        lac:
-          $ref: '#/components/schemas/lac'
-        cid:
-          $ref: '#/components/schemas/cid'
-        uarfcn:
-          $ref: '#/components/schemas/uarfcn'
-        psc:
-          $ref: '#/components/schemas/psc'
-        rscp:
-          $ref: '#/components/schemas/rscp'
-        signalStrength:
-          $ref: '#/components/schemas/signalStrength'
-        servingCell:
-          $ref: '#/components/schemas/servingCell'
-        provider:
-          $ref: '#/components/schemas/provider'
+            mcc:
+              $ref: '#/components/schemas/mcc'
+              example: 310
+            mnc:
+              $ref: '#/components/schemas/mnc'
+              example: 410
+            lac:
+              $ref: '#/components/schemas/lac'
+            ci:
+              $ref: '#/components/schemas/ci'
+            arfcn:
+              $ref: '#/components/schemas/arfcn'
+            bsic:
+              $ref: '#/components/schemas/bsic'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            ta:
+              $ref: '#/components/schemas/ta'
+            servingCell:
+              $ref: '#/components/schemas/servingCell'
+            provider:
+              $ref: '#/components/schemas/provider'
+              example: "ATT"
 
-    lteMessagePayload:
+    cdmaRecordPayload:
       type: object
+      required:
+        - version
+        - messageName
+        - data
       properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
-          
-        mcc:
-          $ref: '#/components/schemas/mcc'
-        mnc:
-          $ref: '#/components/schemas/mnc'
-        tac:
-          $ref: '#/components/schemas/tac'
-        eci:
-          $ref: '#/components/schemas/eci'
-        earfcn:
-          $ref: '#/components/schemas/earfcn'
-        pci:
-          $ref: '#/components/schemas/pci'
-        rsrp:
-          $ref: '#/components/schemas/rsrp'
-        rsrq:
-          $ref: '#/components/schemas/rsrq'
-        ta: # Defining it directly in LTE so it does not conflict with the GSM TA
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 1282
-          description: LTE Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-1282.
-          example: 27
-        signalStrength:
-          $ref: '#/components/schemas/signalStrength'
-        servingCell:
-          $ref: '#/components/schemas/servingCell'
-        lteBandwidth:
-          $ref: '#/components/schemas/lteBandwidth'
-        provider:
-          $ref: '#/components/schemas/provider'
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "CdmaRecord"
 
-    energyDetectionMessagePayload:
-      type: object
-      properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
-          
-        frequencyHz:
-          $ref: '#/components/schemas/frequencyHz'
-        bandwidthHz:
-          $ref: '#/components/schemas/bandwidthHz'
-        snr:
-          $ref: '#/components/schemas/snr'
-        timeUp:
-          $ref: '#/components/schemas/timeUp'
-        durationSec:
-          $ref: '#/components/schemas/durationSec'
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - channel
+            - pnOffset
+            - ecio
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
 
-    signalDetectionMessagePayload:
+            sid:
+              $ref: '#/components/schemas/sid'
+            nid:
+              $ref: '#/components/schemas/nid'
+            zone:
+              $ref: '#/components/schemas/zone'
+            bsid:
+              $ref: '#/components/schemas/bsid'
+            channel:
+              $ref: '#/components/schemas/channel'
+            pnOffset:
+              $ref: '#/components/schemas/pnOffset'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            ecio:
+              $ref: '#/components/schemas/ecio'
+            servingCell:
+              $ref: '#/components/schemas/servingCell'
+            provider:
+              $ref: '#/components/schemas/provider'
+
+    umtsRecordPayload:
       type: object
+      required:
+        - version
+        - messageName
+        - data
       properties:
-        deviceSerialNumber:
-          $ref: '#/components/schemas/deviceSerialNumber'
-        deviceName:
-          $ref: '#/components/schemas/deviceName'
-        deviceTime:
-          $ref: '#/components/schemas/deviceTime'
-        latitude:
-          $ref: '#/components/schemas/latitude'
-        longitude:
-          $ref: '#/components/schemas/longitude'
-        altitude:
-          $ref: '#/components/schemas/altitude'
-        missionId:
-          $ref: '#/components/schemas/missionId'
-        recordNumber:
-          $ref: '#/components/schemas/recordNumber'
-        groupNumber:
-          $ref: '#/components/schemas/groupNumber'
-          
-        frequencyHz:
-          $ref: '#/components/schemas/frequencyHz'
-        bandwidthHz:
-          $ref: '#/components/schemas/bandwidthHz'
-        snr:
-          $ref: '#/components/schemas/snr'
-        timeUp:
-          $ref: '#/components/schemas/timeUp'
-        durationSec:
-          $ref: '#/components/schemas/durationSec'
-        modulation:
-          $ref: '#/components/schemas/modulation'
-        signalName:
-          $ref: '#/components/schemas/signalName'
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "UmtsRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - uarfcn
+            - psc
+            - rscp
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            mcc:
+              $ref: '#/components/schemas/mcc'
+              example: 310
+            mnc:
+              $ref: '#/components/schemas/mnc'
+              example: 260
+            lac:
+              $ref: '#/components/schemas/lac'
+            cid:
+              $ref: '#/components/schemas/cid'
+            uarfcn:
+              $ref: '#/components/schemas/uarfcn'
+            psc:
+              $ref: '#/components/schemas/psc'
+            rscp:
+              $ref: '#/components/schemas/rscp'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            servingCell:
+              $ref: '#/components/schemas/servingCell'
+            provider:
+              $ref: '#/components/schemas/provider'
+              example: "T-Mobile"
+
+    lteRecordPayload:
+      type: object
+      required:
+        - version
+        - messageName
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "LteRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - earfcn
+            - pci
+            - rsrp
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            mcc:
+              $ref: '#/components/schemas/mcc'
+            mnc:
+              $ref: '#/components/schemas/mnc'
+            tac:
+              $ref: '#/components/schemas/tac'
+            eci:
+              $ref: '#/components/schemas/eci'
+            earfcn:
+              $ref: '#/components/schemas/earfcn'
+            pci:
+              $ref: '#/components/schemas/pci'
+            rsrp:
+              $ref: '#/components/schemas/rsrp'
+            rsrq:
+              $ref: '#/components/schemas/rsrq'
+            ta: # Defining it directly in LTE so it does not conflict with the GSM TA
+              type: integer
+              format: int32
+              minimum: 0
+              maximum: 1282
+              description: LTE Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-1282.
+              example: 27
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            servingCell:
+              $ref: '#/components/schemas/servingCell'
+            lteBandwidth:
+              $ref: '#/components/schemas/lteBandwidth'
+            provider:
+              $ref: '#/components/schemas/provider'
+
+    wifiBeaconRecordPayload:
+      type: object
+      required:
+        - version
+        - messageName
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "WifiBeaconRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - bssid
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+
+            sourceAddress:
+              $ref: '#/components/schemas/sourceAddress'
+            destinationAddress:
+              $ref: '#/components/schemas/destinationAddress'
+            bssid:
+              $ref: '#/components/schemas/bssid'
+
+            beaconInterval:
+              $ref: '#/components/schemas/beaconInterval'
+            serviceSetType:
+              $ref: '#/components/schemas/serviceSetType'
+            ssid:
+              $ref: '#/components/schemas/ssid'
+            supportedRates:
+              $ref: '#/components/schemas/supportedRates'
+            extendedSupportedRates:
+              $ref: '#/components/schemas/extendedSupportedRates'
+            cipherSuites:
+              $ref: '#/components/schemas/cipherSuites'
+            akmSuites:
+              $ref: '#/components/schemas/akmSuites'
+            encryptionType:
+              $ref: '#/components/schemas/encryptionType'
+            wps:
+              $ref: '#/components/schemas/wps'
+
+            channel: # Defining it directly so it does not conflict with the channel field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The channel on which this 802.11 frame was recorded.
+              example: 2
+            frequencyMhz: # Defining it directly so it does not conflict with the frequency field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The frequency in MHz on which this 802.11 frame was recorded.
+              example: 2417
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            snr:
+              $ref: '#/components/schemas/snr'
+            nodeType:
+              $ref: '#/components/schemas/nodeType'
+            standard:
+              $ref: '#/components/schemas/standard'
+
+    energyDetectionPayload:
+      type: object
+      required:
+        - version
+        - messageName
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "EnergyDetection"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - frequencyHz
+            - signalStrength
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            frequencyHz:
+              $ref: '#/components/schemas/frequencyHz'
+
+            bandwidthHz:
+              $ref: '#/components/schemas/bandwidthHz'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            snr:
+              $ref: '#/components/schemas/snr'
+            timeUp:
+              $ref: '#/components/schemas/timeUp'
+            durationSec:
+              $ref: '#/components/schemas/durationSec'
+
+    signalDetectionPayload:
+      type: object
+      required:
+        - version
+        - messageName
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageName:
+          $ref: '#/components/schemas/messageName'
+          example: "SignalDetection"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - frequencyHz
+            - signalStrength
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            frequencyHz:
+              $ref: '#/components/schemas/frequencyHz'
+            bandwidthHz:
+              $ref: '#/components/schemas/bandwidthHz'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            snr:
+              $ref: '#/components/schemas/snr'
+            timeUp:
+              $ref: '#/components/schemas/timeUp'
+            durationSec:
+              $ref: '#/components/schemas/durationSec'
+            modulation:
+              $ref: '#/components/schemas/modulation'
+            signalName:
+              $ref: '#/components/schemas/signalName'
 
 
     # Common fields that are used in almost every message
+    version:
+      type: string
+      description: The version number of the Network Survey Messaging API that this message is based off of.
+      example: "0.2.0"
+
+    messageName:
+      type: string
+      description: The name of this message.
+
     deviceSerialNumber:
       type: string
       description: The unique identifier for the device that captured this record. This should be consistent and should never change.
       example: "1234"
-      
+
     deviceName:
       type: string
       description: A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.
-      example: "Craxiom's Pixel"
-    
+      example: "Craxiom Pixel"
+
     deviceTime:
       type: integer
       format: int64
       minimum: 0
-      description: The timestamp of when this message was created in milliseconds since unix epoch time.
+      description: The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
       example: 1594924246895
-    
+
     #location:
     #  $ref: './point.json#'
     #  description: The location representing where this survey record was recorded. This location follows the GeoJSON format for a Point https://geojson.org/ , https://geojson.org/schema/Point.json. Specifically, the coordinates are in the format [longitude, latitude, altitude], with altitude (meters) being optional.
@@ -394,63 +665,64 @@ components:
       format: double
       description: The latitude representing where this survey record was recorded.
       example: 51.470334
-    
+
     longitude:
       type: number
       format: double
       description: The longitude representing where this survey record was recorded.
       example: -0.486594
-    
+
     altitude:
       type: number
       format: float
       description: The altitude in meters representing where this survey record was recorded.
       example: 13.3
-    
+
     missionId:
       type: string
       description: A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.
+      example: "Survey1 20200724-154325"
 
     recordNumber:
       type: integer
       format: int32
       minimum: 1
       description: Starts at 1 and each subsequent record should have its number incremented by 1.
-    
+
     groupNumber:
       type: integer
       format: int32
       minimum: 1
       description: Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.
-    
-    
-    # Common cellular fields
-    provider: 
-      type: string
-      description: The company providing the cellular service.
-      example: "AT&T"
-
-    mcc:
-      type: integer
-      format: int32
-      minimum: 0
-      description: Mobile Country Code, 3 digits.
-      example: 310
-  
-    mnc:
-      type: integer
-      format: int32
-      minimum: 0
-      description: Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
-      example: 410
 
     signalStrength:
       type: number
       format: float
       minimum: -200
       maximum: 200
-      description: The signal strength of the recorded signal in dBm.
+      description: The signal strength of the received signal in dBm.
       example: -73
+
+
+    # Common cellular fields
+    provider:
+      type: string
+      description: The company providing the cellular service.
+      example: "Verizon"
+
+    mcc:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Mobile Country Code, 3 digits.
+      example: 311
+
+    mnc:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
+      example: 480
 
     servingCell:
       type: boolean
@@ -473,7 +745,7 @@ components:
       maximum: 65535
       description: Cell Identity of the measured cell, valid range 0-65535.
       example: 47241
-   
+
     arfcn:
       type: integer
       format: int32
@@ -506,7 +778,7 @@ components:
       maximum: 32767
       description: System Identification Number, 15 bit number that represents the service provider(s) a base station provides service to.
       example: 139
-  
+
     nid:
       type: integer
       format: int32
@@ -521,7 +793,7 @@ components:
       minimum: 0
       description: A collection of one or more base stations treated as a unit when determining whether a mobile station should perform zone-based registration.
       example: 232
-  
+
     bsid:
       type: integer
       format: int32
@@ -634,14 +906,148 @@ components:
     lteBandwidth:
       type: string
       description: "The LTE downlink bandwidth in MHz (one of 1.4, 3, 5, 10, 15, 20)."
+      example: "MHZ_10"
       enum:
-      - Unknown
-      - "1.4"
-      - "3"
-      - "5"
-      - "10"
-      - "15"
-      - "20"
+        - "UNKNOWN"
+        - "MHZ_1_4"
+        - "MHZ_3"
+        - "MHZ_5"
+        - "MHZ_10"
+        - "MHZ_15"
+        - "MHZ_20"
+
+
+    # Wi-Fi specific fields
+    sourceAddress:
+      type: string
+      description: Source MAC Address, the original source of the frame.
+      example: "68:7F:74:B0:14:98"
+
+    destinationAddress:
+      type: string
+      description: Destination MAC Address, the final destination of the frame.
+      example: "68:7F:74:B0:14:22"
+
+    bssid:
+      type: string
+      description: Basic Service Set Identifier, the MAC Address of the Access Point.
+      example: "68:7F:74:B0:14:98"
+
+    beaconInterval:
+      type: integer
+      format: int32
+      minimum: 0
+      description: Beacon Interval, in milliseconds. The rate at which beacon frames are sent from an Access Point advertising the existence of the AP.
+      example: 100
+
+    serviceSetType:
+      type: string
+      description: The Service Set Type that this node belongs to.
+      example: "BSS"
+      enum:
+        - "UNKNOWN"
+        - "BSS"
+        - "ESS"
+        - "BSS_ESS"
+        - "IBSS"
+        - "MBSS"
+
+    ssid:
+      type: string
+      description: The Service Set Identifier (aka the Wi-Fi network name), UTF-8 Encoded.
+      example: "My Wi-Fi Network"
+
+    supportedRates:
+      type: string
+      description: A list of data rates supported by this device separated by semicolons.
+      example: "1; 2; 5.5; 11; 18; 24; 36; 54"
+
+    extendedSupportedRates:
+      type: string
+      description: An extended list of data rates supported by this device separated by semicolons.
+      example: "6; 9; 12; 48"
+
+    cipherSuites:
+      type: array
+      description: A list of the supported cipher suites. See IEEE Std 802.11-2012 Section 8.4.2.27.2 for more details on the 802.11 Cipher Suites.
+      example: ["TKIP", "CCMP"]
+      items:
+        type: string
+        enum:
+          - "UNKNOWN"
+          - "WEP_40"
+          - "TKIP"
+          - "CCMP"
+          - "WEP_104"
+          - "GCMP_128"
+          - "GCMP_256"
+          - "CCMP_256"
+          - "BIP_GMAC_128"
+          - "BIP_GMAC_256"
+          - "BIP_CMAC_256"
+          - "OPEN"
+          - "WEP" # For the times where it is unknown if WEP_40 or WEP_104 is being employed.
+
+    akmSuites:
+      type: array
+      description: A list of the supported Authentication and Key Management (AKM) suites. See IEEE Std 802.11-2012 Section 8.4.2.27.3 for more details on the 802.11 AKM Suites.
+      example: ["OPEN"]
+      items:
+        type: string
+        enum:
+          - "UNKNOWN"
+          - "IEEE_8021X"
+          - "FT_IEEE_8021X"
+          - "IEEE_8021X_SHA256"
+          - "PSK"
+          - "FT_PSK"
+          - "PSK_SHA256"
+          - "SAE"
+          - "FT_SAE"
+          - "TDLS"
+          - "OPEN"
+
+    encryptionType:
+      type: string
+      description: The encryption type used by the Access Point. This field should be kept in sync with the cipherSuites field as it is directly related.
+      example: "WPA_WPA2"
+      enum:
+        - "UNKNOWN"
+        - "OPEN"
+        - "WEP"
+        - "WPA"
+        - "WPA_WPA2"
+        - "WPA2"
+        - "WPA3"
+
+    wps:
+      type: boolean
+      description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
+
+    nodeType:
+      type: string
+      description: The type of station that sent this frame.
+      example: "AP"
+      enum:
+        - "UNKNOWN"
+        - "AP"
+        - "NON_AP_STA"
+        - "STA"
+
+    standard:
+      type: string
+      description: The 802.11 standard being employed by the device.
+      example: "IEEE80211N"
+      enum:
+        - "UNKNOWN"
+        - "IEEE80211"
+        - "IEEE80211A"
+        - "IEEE80211B"
+        - "IEEE80211G"
+        - "IEEE80211BG"
+        - "IEEE80211N"
+        - "IEEE80211AC"
+        - "IEEE80211AX"
 
 
     # RF generic fields (used in both energy detection and signal detection)
@@ -662,7 +1068,6 @@ components:
     snr:
       type: number
       format: float
-      minimum: 1
       description: The Signal to Noise Ratio of the received signal to the noise power measured in dB. A ratio higher than 1:1 (greater than 0 dB) indicates more signal than noise.
       example: 19.2
 
@@ -676,7 +1081,7 @@ components:
     durationSec:
       type: number
       format: float
-      exclusiveMinimum: 0 
+      exclusiveMinimum: 0
       description: The duration of time, in seconds, that the signal was detected as active.
       example: 4.2
 

@@ -1,0 +1,25 @@
+/**
+ * Defines the Service Set values used in the 802.11 Survey message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.wifi.serviceset;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.wifi";
+
+enum ServiceSetType {
+    UNKNOWN = 0;
+    BSS = 1;
+    ESS = 2;
+    BSS_ESS = 3;
+    IBSS = 4;
+    MBSS = 5;
+}

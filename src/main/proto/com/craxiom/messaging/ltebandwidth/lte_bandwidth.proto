@@ -1,0 +1,26 @@
+/**
+ * Defines the LTE Bandwidth values used in the LTE Survey message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.ltebandwidth;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+enum LteBandwidth {
+    UNKNOWN = 0;
+    MHZ_1_4 = 1;
+    MHZ_3 = 2;
+    MHZ_5 = 3;
+    MHZ_10 = 4;
+    MHZ_15 = 5;
+    MHZ_20 = 6;
+}

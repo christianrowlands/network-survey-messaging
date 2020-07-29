@@ -1,0 +1,41 @@
+/**
+ * A protobuf definition of the Signal Detection message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Signal
+ * Detection message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message SignalDetection {
+    string version = 1;
+    string messageName = 2;
+    SignalDetectionData data = 3;
+}
+
+message SignalDetectionData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    uint64 deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 groupNumber = 9;
+
+    uint64 frequencyHz = 12;
+    google.protobuf.Int32Value bandwidthHz = 13;
+    float signalStrength = 14;
+    google.protobuf.FloatValue snr = 15;
+    google.protobuf.Int64Value timeUp = 16;
+    google.protobuf.FloatValue durationSec = 17;
+    string modulation = 18;
+    string signalName = 19;
+}

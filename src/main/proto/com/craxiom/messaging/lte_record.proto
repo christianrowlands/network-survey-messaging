@@ -16,7 +16,7 @@ option java_package = "com.craxiom.messaging";
 
 message LteRecord {
     string version = 1;
-    string messageName = 2;
+    string messageType = 2;
     LteRecordData data = 3;
 }
 

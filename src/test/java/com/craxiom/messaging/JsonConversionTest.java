@@ -36,11 +36,11 @@ public class JsonConversionTest
     @Test
     public void testGsmToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
 
         final GsmRecord.Builder recordBuilder = GsmRecord.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("GsmRecord");
+        recordBuilder.setMessageType("GsmRecord");
 
         final GsmRecordData.Builder dataBuilder = GsmRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
@@ -80,7 +80,7 @@ public class JsonConversionTest
     @Test
     public void testGsmFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey2 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey2 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
 
         final GsmRecord.Builder builder = GsmRecord.newBuilder();
         try
@@ -94,7 +94,7 @@ public class JsonConversionTest
         final GsmRecord convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("GsmRecord", convertedRecord.getMessageName());
+        assertEquals("GsmRecord", convertedRecord.getMessageType());
 
         final GsmRecordData data = convertedRecord.getData();
         assertEquals("1234", data.getDeviceSerialNumber());
@@ -121,11 +121,11 @@ public class JsonConversionTest
     @Test
     public void testCdmaToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":1,\"groupNumber\":1,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":1,\"groupNumber\":1,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\"}}";
 
         final CdmaRecord.Builder recordBuilder = CdmaRecord.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("CdmaRecord");
+        recordBuilder.setMessageType("CdmaRecord");
 
         final CdmaRecordData.Builder dataBuilder = CdmaRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
@@ -165,7 +165,7 @@ public class JsonConversionTest
     @Test
     public void testCdmaFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":509,\"groupNumber\":155,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":509,\"groupNumber\":155,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\"}}";
 
         final CdmaRecord.Builder builder = CdmaRecord.newBuilder();
         try
@@ -179,7 +179,7 @@ public class JsonConversionTest
         final CdmaRecord convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("CdmaRecord", convertedRecord.getMessageName());
+        assertEquals("CdmaRecord", convertedRecord.getMessageType());
 
         final CdmaRecordData data = convertedRecord.getData();
         assertEquals("1234", data.getDeviceSerialNumber());
@@ -206,11 +206,11 @@ public class JsonConversionTest
     @Test
     public void testUmtsToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
 
         final UmtsRecord.Builder recordBuilder = UmtsRecord.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("UmtsRecord");
+        recordBuilder.setMessageType("UmtsRecord");
 
         final UmtsRecordData.Builder dataBuilder = UmtsRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
@@ -250,7 +250,7 @@ public class JsonConversionTest
     @Test
     public void testUmtsFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
 
         final UmtsRecord.Builder builder = UmtsRecord.newBuilder();
         try
@@ -264,7 +264,7 @@ public class JsonConversionTest
         final UmtsRecord convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("UmtsRecord", convertedRecord.getMessageName());
+        assertEquals("UmtsRecord", convertedRecord.getMessageType());
 
         final UmtsRecordData data = convertedRecord.getData();
         assertEquals("1234", data.getDeviceSerialNumber());
@@ -291,11 +291,11 @@ public class JsonConversionTest
     @Test
     public void testLteToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
 
         final LteRecord.Builder recordBuilder = LteRecord.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("LteRecord");
+        recordBuilder.setMessageType("LteRecord");
 
         final LteRecordData.Builder dataBuilder = LteRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
@@ -337,7 +337,7 @@ public class JsonConversionTest
     @Test
     public void testLteFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
 
         final LteRecord.Builder builder = LteRecord.newBuilder();
         try
@@ -351,7 +351,7 @@ public class JsonConversionTest
         final LteRecord convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("LteRecord", convertedRecord.getMessageName());
+        assertEquals("LteRecord", convertedRecord.getMessageType());
 
         final LteRecordData data = convertedRecord.getData();
         assertEquals("1234", data.getDeviceSerialNumber());
@@ -380,11 +380,11 @@ public class JsonConversionTest
     @Test
     public void testWifiBeaconToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\"}}";
 
         final WifiBeaconRecord.Builder recordBuilder = WifiBeaconRecord.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("WifiBeaconRecord");
+        recordBuilder.setMessageType("WifiBeaconRecord");
 
         final WifiBeaconRecordData.Builder dataBuilder = WifiBeaconRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
@@ -431,7 +431,7 @@ public class JsonConversionTest
     @Test
     public void testWifiBeaconFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\"}}";
 
         final WifiBeaconRecord.Builder builder = WifiBeaconRecord.newBuilder();
         try
@@ -445,7 +445,7 @@ public class JsonConversionTest
         final WifiBeaconRecord convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("WifiBeaconRecord", convertedRecord.getMessageName());
+        assertEquals("WifiBeaconRecord", convertedRecord.getMessageType());
 
         final WifiBeaconRecordData data = convertedRecord.getData();
         assertEquals("1234", data.getDeviceSerialNumber());
@@ -479,11 +479,11 @@ public class JsonConversionTest
     @Test
     public void testEnergyDetectionToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
 
         final EnergyDetection.Builder recordBuilder = EnergyDetection.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("EnergyDetection");
+        recordBuilder.setMessageType("EnergyDetection");
 
         final EnergyDetectionData.Builder dataBuilder = EnergyDetectionData.newBuilder();
         dataBuilder.setDeviceSerialNumber("xyz");
@@ -519,7 +519,7 @@ public class JsonConversionTest
     @Test
     public void testEnergyDetectionFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
 
         final EnergyDetection.Builder builder = EnergyDetection.newBuilder();
         try
@@ -533,7 +533,7 @@ public class JsonConversionTest
         final EnergyDetection convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("EnergyDetection", convertedRecord.getMessageName());
+        assertEquals("EnergyDetection", convertedRecord.getMessageType());
 
         final EnergyDetectionData data = convertedRecord.getData();
         assertEquals("xyz", data.getDeviceSerialNumber());
@@ -556,11 +556,11 @@ public class JsonConversionTest
     @Test
     public void testSignalDetectionToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.1\",\"messageName\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
+        final String expectedJson = "{\"version\":\"0.2.1\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
 
         final SignalDetection.Builder recordBuilder = SignalDetection.newBuilder();
         recordBuilder.setVersion("0.2.1");
-        recordBuilder.setMessageName("SignalDetection");
+        recordBuilder.setMessageType("SignalDetection");
 
         final SignalDetectionData.Builder dataBuilder = SignalDetectionData.newBuilder();
         dataBuilder.setDeviceSerialNumber("xyz");
@@ -598,7 +598,7 @@ public class JsonConversionTest
     @Test
     public void testSignalDetectionFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.1\",\"messageName\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
+        final String inputJson = "{\"version\":\"0.2.1\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1594924246895\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
 
         final SignalDetection.Builder builder = SignalDetection.newBuilder();
         try
@@ -612,7 +612,7 @@ public class JsonConversionTest
         final SignalDetection convertedRecord = builder.build();
 
         assertEquals("0.2.1", convertedRecord.getVersion());
-        assertEquals("SignalDetection", convertedRecord.getMessageName());
+        assertEquals("SignalDetection", convertedRecord.getMessageType());
 
         final SignalDetectionData data = convertedRecord.getData();
         assertEquals("xyz", data.getDeviceSerialNumber());

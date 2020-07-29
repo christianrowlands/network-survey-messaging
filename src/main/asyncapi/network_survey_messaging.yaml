@@ -136,13 +136,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be GsmRecord.
           example: "GsmRecord"
 
         data:
@@ -206,13 +207,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be CdmaRecord.
           example: "CdmaRecord"
 
         data:
@@ -273,13 +275,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be UmtsRecord.
           example: "UmtsRecord"
 
         data:
@@ -343,13 +346,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be LteRecord.
           example: "LteRecord"
 
         data:
@@ -421,13 +425,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WifiBeaconRecord.
           example: "WifiBeaconRecord"
 
         data:
@@ -509,13 +514,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be EnergyDetection.
           example: "EnergyDetection"
 
         data:
@@ -568,13 +574,14 @@ components:
       type: object
       required:
         - version
-        - messageName
+        - messageType
         - data
       properties:
         version:
           $ref: '#/components/schemas/version'
-        messageName:
-          $ref: '#/components/schemas/messageName'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be SignalDetection.
           example: "SignalDetection"
 
         data:
@@ -633,9 +640,9 @@ components:
       description: The version number of the Network Survey Messaging API that this message is based off of.
       example: "0.2.0"
 
-    messageName:
+    messageType:
       type: string
-      description: The name of this message.
+      description: The type of this message. This value must match the message name or the message will not be interpreted correctly.
 
     deviceSerialNumber:
       type: string

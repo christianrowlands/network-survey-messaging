@@ -15,7 +15,7 @@ option java_package = "com.craxiom.messaging";
 
 message SignalDetection {
     string version = 1;
-    string messageName = 2;
+    string messageType = 2;
     SignalDetectionData data = 3;
 }
 

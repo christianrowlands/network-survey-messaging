@@ -15,7 +15,7 @@ option java_package = "com.craxiom.messaging";
 
 message EnergyDetection {
     string version = 1;
-    string messageName = 2;
+    string messageType = 2;
     EnergyDetectionData data = 3;
 }
 

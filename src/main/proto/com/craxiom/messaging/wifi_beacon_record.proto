@@ -21,7 +21,7 @@ option java_package = "com.craxiom.messaging";
 
 message WifiBeaconRecord {
     string version = 1;
-    string messageName = 2;
+    string messageType = 2;
     WifiBeaconRecordData data = 3;
 }
 

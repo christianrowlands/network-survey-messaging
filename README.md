@@ -18,6 +18,9 @@ Network Survey Messaging
 The Network Survey Messaging API defines a set of messages that can be used for sending wireless network survey 
 messages between two applications.
 
+The latest version of the API is published [here](https://messaging.networksurvey.app/).
+
+
 ## Why?
 The original purpose for this API was to facilitate sending LTE survey messages from the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey)
 to a remote server via gRPC. However, it has been expanded not only to support additional protocols such as

@@ -1,0 +1,19 @@
+/**
+ * Defines the handshake sequence for the initial connection to a Network Survey gRPC server.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.grpc;
+
+import "com/craxiom/messaging/device_status.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.grpc";
+
+service DeviceStatus {
+    rpc StatusUpdate (stream com.craxiom.messaging.DeviceStatus) returns (StatusUpdateReply) {}
+}
+
+// An empty reply
+message StatusUpdateReply {
+}

@@ -7,13 +7,19 @@ option java_multiple_files = true;
 option java_package = "com.craxiom.networksurvey.messaging";
 
 service NetworkSurveyStatus {
-    rpc StartConnection (ConnectionRequest) returns (ConnectionReply) {}
+    option deprecated = true;
+    rpc StartConnection (ConnectionRequest) returns (ConnectionReply) {
+        option deprecated = true;
+    }
 
-    rpc StatusUpdate (stream DeviceStatus) returns (StatusUpdateReply) {}
+    rpc StatusUpdate (stream DeviceStatus) returns (StatusUpdateReply) {
+        option deprecated = true;
+    }
 }
 
 // A connection request that should be sent out by the client to initiate the connection to the server.
 message ConnectionRequest {
+    option deprecated = true;
     // Could probably add the device serial number and other information in here
 }
 
@@ -21,6 +27,7 @@ message ConnectionRequest {
 //
 // connection_accept:  True if the connection is accepted, false otherwise.
 message ConnectionReply {
+    option deprecated = true;
     bool connectionAccept = 1;
 }
 
@@ -35,7 +42,7 @@ message ConnectionReply {
 // battery_level_percent:     The battery level percentage.
 // error:                     If this object is present, then a error has occured in the Network Survey App.
 message DeviceStatus {
-
+    option deprecated = true;
     string deviceSerialNumber = 1;
     string deviceName = 2;
     uint64 deviceTime = 3;
@@ -49,10 +56,11 @@ message DeviceStatus {
 
 // Used to report an error with the Network Survey App
 message Error {
+    option deprecated = true;
     string errorMessage = 1;
 }
 
 // An empty reply
 message StatusUpdateReply {
-
+    option deprecated = true;
 }

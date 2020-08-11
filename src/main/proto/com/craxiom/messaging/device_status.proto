@@ -1,0 +1,38 @@
+/**
+ * A protobuf definition of the Device Status message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Device
+ * Status message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message DeviceStatus {
+    string version = 1;
+    string messageType = 2;
+    DeviceStatusData data = 3;
+}
+
+message DeviceStatusData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    uint64 deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+
+    google.protobuf.Int32Value batteryLevelPercent = 7;
+    Error error = 10;
+}
+
+// Used to report an error with the device
+message Error {
+    string errorMessage = 1;
+}
+

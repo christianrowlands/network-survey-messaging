@@ -8,7 +8,7 @@
  */
 syntax = "proto3";
 
-package com.craxiom.messaging;
+package com.craxiom.messaging.grpc;
 
 import "com/craxiom/messaging/gsm_record.proto";
 import "com/craxiom/messaging/cdma_record.proto";
@@ -19,7 +19,7 @@ import "com/craxiom/messaging/energy_detection.proto";
 import "com/craxiom/messaging/signal_detection.proto";
 
 option java_multiple_files = true;
-option java_package = "com.craxiom.messaging";
+option java_package = "com.craxiom.messaging.grpc";
 
 service WirelessSurvey {
     rpc StreamGsmSurvey (stream GsmRecord) returns (GsmSurveyResponse) {

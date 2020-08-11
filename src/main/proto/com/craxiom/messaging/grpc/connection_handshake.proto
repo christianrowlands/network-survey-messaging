@@ -1,0 +1,26 @@
+/**
+ * Defines the connection handshake sequence for validating a connection to a Network Survey Messaging server.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.grpc";
+
+service ConnectionHandshake {
+    rpc StartConnection (ConnectionRequest) returns (ConnectionReply) {
+    }
+}
+
+// A connection request that should be sent out by the client to initiate the connection to the server.
+message ConnectionRequest {
+    // Could probably add the device serial number and other information in here
+}
+
+// The response from the server for the connection request.
+//
+// connection_accept:  True if the connection is accepted, false otherwise.
+message ConnectionReply {
+    bool connectionAccept = 1;
+}

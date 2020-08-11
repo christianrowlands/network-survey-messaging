@@ -73,6 +73,12 @@ channels:
       message:
         $ref: '#/components/messages/signalDetection'
 
+  device_status_message:
+    description: The device_status_message topic/channel is where device status records can be published. For MQTT, set the MQTT topic as "device_status_message" and then publish a JSON message in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/deviceStatus'
+
 components:
   messages:
     gsmRecord:
@@ -130,6 +136,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/signalDetectionPayload'
+
+    deviceStatus:
+      name: DeviceStatus
+      title: Device Status
+      summary: Represents a status message sent from the device to report its current state or to act as a heartbeat. The interval of this message can vary depending on use case.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/deviceStatusPayload'
 
   schemas:
     gsmRecordPayload:
@@ -633,6 +647,46 @@ components:
             signalName:
               $ref: '#/components/schemas/signalName'
 
+    deviceStatusPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be DeviceStatus.
+          example: "DeviceStatus"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+
+            batteryLevelPercent:
+              $ref: '#/components/schemas/batteryLevelPercent'
+            error:
+              $ref: '#/components/schemas/error'
+
 
     # Common fields that are used in almost every message
     version:
@@ -1102,3 +1156,23 @@ components:
       type: string
       description: The modulation type found on the received signal. It is appropriate to leave this blank if the modulation of the signal is unknown, but either the `modulation` or `signalName` field should be filled out. If neither of them are known then the `energyDetection` message should be used instead.
       example: DMR
+
+    # Device Status specific fields
+    batteryLevelPercent:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 100
+      description: The percentage of battery remaining (if the device has a battery).
+      example: 86
+
+    error:
+      type: object
+      description: If present, represents that the device is in an error state.
+      required:
+        - errorMessage
+      properties:
+        errorMessage:
+          type: string
+          description: A description of the error state that the device is in.
+          example: "The scan stopped unexpectedly"

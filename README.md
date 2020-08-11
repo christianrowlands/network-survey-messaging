@@ -102,11 +102,12 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.0) - TBD
+##### [0.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.0) - 2020-08-11
  * BREAKING CHANGES were made to the JSON output of the protobuf messages.
  * Redesigned this messaging API to define the messages in JSON using AsyncAPI.
  * Redefined the proto files to following the new JSON message schema.
  * Deprecated the original proto definitions.
+ * Added a Signal Detection and an Energy Detection message to this API.
 
 ##### [0.1.3](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.1.3) - 2020-06-26
  * Added the device_name field to all the wireless proto messages.

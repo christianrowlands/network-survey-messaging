@@ -479,7 +479,7 @@ public class JsonConversionTest
     @Test
     public void testEnergyDetectionToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
+        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2}}";
 
         final EnergyDetection.Builder recordBuilder = EnergyDetection.newBuilder();
         recordBuilder.setVersion("0.2.0");
@@ -499,7 +499,7 @@ public class JsonConversionTest
         dataBuilder.setBandwidthHz(Int32Value.newBuilder().setValue(12500).build());
         dataBuilder.setSignalStrength(-73);
         dataBuilder.setSnr(FloatValue.newBuilder().setValue(19.2f).build());
-        dataBuilder.setTimeUp(Int64Value.newBuilder().setValue(1594924242895L).build());
+        dataBuilder.setTimeUp("1996-12-19T16:39:57-08:00");
         dataBuilder.setDurationSec(FloatValue.newBuilder().setValue(4.2f).build());
 
         recordBuilder.setData(dataBuilder);
@@ -519,7 +519,7 @@ public class JsonConversionTest
     @Test
     public void testEnergyDetectionFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2}}";
+        final String inputJson = "{\"version\":\"0.2.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2}}";
 
         final EnergyDetection.Builder builder = EnergyDetection.newBuilder();
         try
@@ -549,14 +549,14 @@ public class JsonConversionTest
         assertEquals(12500, data.getBandwidthHz().getValue());
         assertEquals(-73, data.getSignalStrength());
         assertEquals(19.2, data.getSnr().getValue(), FLOAT_TOLERANCE);
-        assertEquals(1594924242895L, data.getTimeUp().getValue());
+        assertEquals("1996-12-19T16:39:57-08:00", data.getTimeUp());
         assertEquals(4.2, data.getDurationSec().getValue(), FLOAT_TOLERANCE);
     }
 
     @Test
     public void testSignalDetectionToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
+        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
 
         final SignalDetection.Builder recordBuilder = SignalDetection.newBuilder();
         recordBuilder.setVersion("0.2.0");
@@ -576,7 +576,7 @@ public class JsonConversionTest
         dataBuilder.setBandwidthHz(Int32Value.newBuilder().setValue(12500).build());
         dataBuilder.setSignalStrength(-73);
         dataBuilder.setSnr(FloatValue.newBuilder().setValue(19.2f).build());
-        dataBuilder.setTimeUp(Int64Value.newBuilder().setValue(1594924242895L).build());
+        dataBuilder.setTimeUp("1996-12-19T16:39:57-08:00");
         dataBuilder.setDurationSec(FloatValue.newBuilder().setValue(4.2f).build());
         dataBuilder.setModulation("4FSK");
         dataBuilder.setSignalName("DMR");
@@ -598,7 +598,7 @@ public class JsonConversionTest
     @Test
     public void testSignalDetectionFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1594924242895\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
+        final String inputJson = "{\"version\":\"0.2.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\"}}";
 
         final SignalDetection.Builder builder = SignalDetection.newBuilder();
         try
@@ -628,7 +628,7 @@ public class JsonConversionTest
         assertEquals(12500, data.getBandwidthHz().getValue());
         assertEquals(-73, data.getSignalStrength());
         assertEquals(19.2, data.getSnr().getValue(), FLOAT_TOLERANCE);
-        assertEquals(1594924242895L, data.getTimeUp().getValue());
+        assertEquals("1996-12-19T16:39:57-08:00", data.getTimeUp());
         assertEquals(4.2, data.getDurationSec().getValue(), FLOAT_TOLERANCE);
         assertEquals("4FSK", data.getModulation());
         assertEquals("DMR", data.getSignalName());

@@ -1132,11 +1132,10 @@ components:
       example: 19.2
 
     timeUp:
-      type: integer
-      format: int64
-      minimum: 1
-      description: The date & time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
-      example: 1594924242895
+      type: string
+      format: date-time
+      description: The date & time the energy/signal was detected as active. This is formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
+      example: 1996-12-19T16:39:57-08:00
 
     durationSec:
       type: number

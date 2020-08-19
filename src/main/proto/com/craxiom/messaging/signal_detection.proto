@@ -34,7 +34,7 @@ message SignalDetectionData {
     google.protobuf.Int32Value bandwidthHz = 13;
     float signalStrength = 14;
     google.protobuf.FloatValue snr = 15;
-    google.protobuf.Int64Value timeUp = 16;
+    string timeUp = 16;
     google.protobuf.FloatValue durationSec = 17;
     string modulation = 18;
     string signalName = 19;

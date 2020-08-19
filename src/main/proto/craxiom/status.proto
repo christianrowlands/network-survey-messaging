@@ -45,7 +45,7 @@ message DeviceStatus {
     option deprecated = true;
     string deviceSerialNumber = 1;
     string deviceName = 2;
-    string deviceTime = 3;
+    uint64 deviceTime = 3;
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;

@@ -40,7 +40,7 @@ service WirelessSurvey {
 message GsmRecord {
     option deprecated = true;
     string deviceSerialNumber = 1;
-    string deviceTime = 2;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
@@ -64,7 +64,7 @@ message GsmRecord {
 message CdmaRecord {
     option deprecated = true;
     string deviceSerialNumber = 1;
-    string deviceTime = 2;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
@@ -88,7 +88,7 @@ message CdmaRecord {
 message UmtsRecord {
     option deprecated = true;
     string deviceSerialNumber = 1;
-    string deviceTime = 2;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;
@@ -123,7 +123,7 @@ message UmtsRecord {
 message LteRecord {
     option deprecated = true;
     string deviceSerialNumber = 1;
-    string deviceTime = 2;
+    uint64 deviceTime = 2;
     double latitude = 3;
     double longitude = 4;
     float altitude = 5;

@@ -103,7 +103,7 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.2.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.1) - TBD
+##### [0.2.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.1) - 2020-08-19
  * BREAKING CHANGES were made to the JSON output of the protobuf messages.
  * Modified timestamps to use (RFC3339)[https://tools.ietf.org/html/rfc3339#page-6] date-time format.
 

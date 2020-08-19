@@ -22,7 +22,7 @@ message CdmaRecord {
 message CdmaRecordData {
     string deviceSerialNumber = 1;
     string deviceName = 2;
-    uint64 deviceTime = 3;
+    string deviceTime = 3;
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;

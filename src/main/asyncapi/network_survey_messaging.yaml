@@ -4,13 +4,13 @@ info:
   version: '0.2.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
-    wireless survey related events. The messages range from cellular surveys such as GSM, CDMA, 
+    wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
     UMTS, and LTE, to simple RF energy detection events.
 
-    While the most common use of these messages would be to send to an MQTT broker, this API specification 
-    simply defines the message schema. The transport or storage technology employed is purposefully left 
-    open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc. 
-    In addition, these messages can be written to disk by writing the JSON strings directly to a file to 
+    While the most common use of these messages would be to send to an MQTT broker, this API specification
+    simply defines the message schema. The transport or storage technology employed is purposefully left
+    open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc.
+    In addition, these messages can be written to disk by writing the JSON strings directly to a file to
     support unstructured data storage, or in a more structured approach such as a PostgreSQL or SQLite database.
 
     Officially, the message schema support for the Network Survey Messaging API are the JSON defined messags from this
@@ -709,11 +709,10 @@ components:
       example: "Craxiom Pixel"
 
     deviceTime:
-      type: integer
-      format: int64
-      minimum: 0
-      description: The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
-      example: 1594924246895
+      type: string
+      format: date-time
+      description: The timestamp of when this message was created in milliseconds formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
+      example: 1996-12-19T16:39:57-08:00
 
     #location:
     #  $ref: './point.json#'
@@ -1133,11 +1132,10 @@ components:
       example: 19.2
 
     timeUp:
-      type: integer
-      format: int64
-      minimum: 1
-      description: The date & time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
-      example: 1594924242895
+      type: string
+      format: date-time
+      description: The date & time the energy/signal was detected as active. This is formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
+      example: 1996-12-19T16:39:57-08:00
 
     durationSec:
       type: number

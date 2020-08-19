@@ -22,7 +22,7 @@ message SignalDetection {
 message SignalDetectionData {
     string deviceSerialNumber = 1;
     string deviceName = 2;
-    uint64 deviceTime = 3;
+    string deviceTime = 3;
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;
@@ -34,7 +34,7 @@ message SignalDetectionData {
     google.protobuf.Int32Value bandwidthHz = 13;
     float signalStrength = 14;
     google.protobuf.FloatValue snr = 15;
-    google.protobuf.Int64Value timeUp = 16;
+    string timeUp = 16;
     google.protobuf.FloatValue durationSec = 17;
     string modulation = 18;
     string signalName = 19;

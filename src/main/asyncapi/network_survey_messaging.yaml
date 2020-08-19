@@ -692,7 +692,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.2.0"
+      example: "0.2.1"
 
     messageType:
       type: string

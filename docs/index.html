@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   
-  <title>Network Survey Messaging API 0.2.0 documentation</title>
+  <title>Network Survey Messaging API 0.2.1 documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/atom-one-dark.min.css" />
@@ -24,7 +24,7 @@
 <div class="sidebar-panel fixed pin-t pin-l pin-b w-64 bg-grey-lighter font-sans pt-8 pr-4 pb-4 pl-4">
   <div class="sidebar-panel__content">
     
-    <h1 class="text-2xl font-thin">Network Survey Messaging API 0.2.0</h1>
+    <h1 class="text-2xl font-thin">Network Survey Messaging API 0.2.1</h1>
     
     <ul class="text-sm mt-10 list-reset mt-2">
       <li class="mb-3">
@@ -280,7 +280,7 @@
     <div class="content-panel flex-1 leading-loose z-10">
       <div class="center-block p-8">
   <a name="introduction"></a>
-  <h1>Network Survey Messaging API 0.2.0</h1>
+  <h1>Network Survey Messaging API 0.2.1</h1>
   <div class="leading-normal mb-4">
     
     
@@ -752,18 +752,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -778,7 +775,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -1796,12 +1793,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "GsmRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -2233,18 +2230,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -2259,7 +2253,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -3274,12 +3268,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "CdmaRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -3711,18 +3705,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -3737,7 +3728,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -4752,12 +4743,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "UmtsRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -5189,18 +5180,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -5215,7 +5203,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -6420,12 +6408,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "LteRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -6860,18 +6848,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -6886,7 +6871,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -8504,12 +8489,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "WifiBeaconRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -8953,18 +8938,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -8979,7 +8961,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -9575,18 +9557,15 @@ number
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
             
             
             
@@ -9601,7 +9580,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. This is formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -9764,12 +9743,12 @@ number
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "EnergyDetection",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -9780,7 +9759,7 @@ number
     "bandwidthHz": 12500,
     "signalStrength": -73,
     "snr": 19.2,
-    "timeUp": 1594924242895,
+    "timeUp": "1996-12-20T00:39:57.000Z",
     "durationSec": 4.2
   }
 }</code></pre>
@@ -10197,18 +10176,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -10223,7 +10199,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -10819,18 +10795,15 @@ number
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
             
             
             
@@ -10845,7 +10818,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. This is formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -11110,12 +11083,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "SignalDetection",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -11126,7 +11099,7 @@ string
     "bandwidthHz": 12500,
     "signalStrength": -73,
     "snr": 19.2,
-    "timeUp": 1594924242895,
+    "timeUp": "1996-12-20T00:39:57.000Z",
     "durationSec": 4.2,
     "modulation": "4FSK",
     "signalName": "DMR"
@@ -11545,18 +11518,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -11571,7 +11541,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -12031,12 +12001,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.2.0",
+  "version": "0.2.1",
   "messageType": "DeviceStatus",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": 1594924246895,
+    "deviceTime": "1996-12-20T00:39:57.000Z",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -12443,18 +12413,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -12469,7 +12436,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -13818,18 +13785,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -13844,7 +13808,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -15190,18 +15154,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -15216,7 +15177,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -16562,18 +16523,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -16588,7 +16546,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -18124,18 +18082,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -18150,7 +18105,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -20099,18 +20054,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -20125,7 +20077,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -20721,18 +20673,15 @@ number
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
             
             
             
@@ -20747,7 +20696,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. This is formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -21241,18 +21190,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -21267,7 +21213,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -21863,18 +21809,15 @@ number
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
             
             
             
@@ -21889,7 +21832,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. The time in UNIX Epoch milliseconds time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The date &amp; time the energy/signal was detected as active. This is formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         
@@ -22485,18 +22428,15 @@ string
       <div>
         <div class="capitalize text-sm text-teal font-bold">
           
-integer
+string
           
           
           
           <div class="inline-block">
             
               <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;">int64</span>
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
             
-            
-              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
-                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
             
             
             
@@ -22511,7 +22451,7 @@ integer
         </div>
 
         
-          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds since unix epoch time. In other words, the number of milliseconds that have passed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.</p>
+          <div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
 </div>
         
         

@@ -1,0 +1,47 @@
+/**
+ * A protobuf definition of the GNSS survey record defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true GNSS
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/gnss/constellation.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message GnssRecord {
+    string version = 1;
+    string messageType = 2;
+    GnssRecordData data = 3;
+}
+
+message GnssRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 groupNumber = 9;
+
+    com.craxiom.messaging.gnss.Constellation constellation = 12;
+    google.protobuf.Int32Value spaceVehicleId = 13;
+    double carrierFrequencyHz = 14;
+    double clockOffset = 15;
+    google.protobuf.BoolValue usedInSolution = 16;
+    double undulationM = 17;
+    double latitudeStdDeviationM = 18;
+    double longitudeStdDeviationM = 19;
+    double altitudeStdDeviationM = 20;
+    double agcDb = 21;
+    double carrierToNoiseDensityDbHz = 22;
+    double hdop = 23;
+    double vdop = 24;
+}

@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.2.1'
+  version: '0.2.2'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -60,6 +60,12 @@ channels:
     publish:
       message:
         $ref: '#/components/messages/wifiBeaconRecord'
+
+  gnss_message:
+    description: The gnss_message topic/channel is where GNSS positioning records can be published. For MQTT, set the MQTT topic as "gnss_message" and then publish a JSON message in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/gnssRecord'
 
   energy_detection_message:
     description: The energy_detection_message topic/channel is where RF energy detection records can be published. For MQTT, set the MQTT topic as "energy_detection_message" and then publish a JSON message in the format defined below.
@@ -120,6 +126,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiBeaconRecordPayload'
+
+    gnssRecord:
+      name: GnssRecord
+      title: GNSS Record
+      summary: Represents information recorded about a Global Navigation Sattelite System at a particular time and geographic location.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/gnssRecordPayload'
 
     energyDetection:
       name: EnergyDetection
@@ -523,6 +537,79 @@ components:
               $ref: '#/components/schemas/nodeType'
             standard:
               $ref: '#/components/schemas/standard'
+
+    gnssRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be GnssRecord.
+          example: "GnssRecord"
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - latitude
+            - longitude
+            - altitude
+            - missionId
+            - recordNumber
+            - groupNumber
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            constellation:
+              $ref: '#/components/schemas/constellation'
+            spaceVehicleId:
+              $ref: '#/components/schemas/spaceVehicleId'
+            carrierFrequencyHz:
+              $ref: '#/components/schemas/carrierFrequencyHz'
+            clockOffset:
+              $ref: '#/components/schemas/clockOffset'
+            usedInSolution:
+              $ref: '#/components/schemas/usedInSolution'
+            undulationM:
+              $ref: '#/components/schemas/undulationM'
+            latitudeStdDeviationM:
+              $ref: '#/components/schemas/latitudeStdDeviationM'
+            longitudeStdDeviationM:
+              $ref: '#/components/schemas/longitudeStdDeviationM'
+            altitudeStdDeviationM:
+              $ref: '#/components/schemas/altitudeStdDeviationM'
+            agcDb:
+              $ref: '#/components/schemas/agcDb'
+            carrierToNoiseDensityDbHz:
+              $ref: '#/components/schemas/carrierToNoiseDensityDbHz'
+            hdop:
+              $ref: '#/components/schemas/hdop'
+            vdop:
+              $ref: '#/components/schemas/vdop'
 
     energyDetectionPayload:
       type: object
@@ -1109,6 +1196,89 @@ components:
         - "IEEE80211AC"
         - "IEEE80211AX"
 
+    # GNSS specific fields
+    constellation:
+      type: string
+      description: The satellite constellation associated with the record.
+      example: "GALILEO"
+      enum:
+        - "GPS"
+        - "GLONASS"
+        - "GALILEO"
+        - "BEIDOU"
+        - "SBAS"
+        - "QZSS"
+        - "MULTIPLE"
+
+    spaceVehicleId:
+      type: integer
+      format: int32
+      description: The identifier for the space vehicle (SV).
+      example: 2345
+
+    carrierFrequencyHz:
+      type: number
+      format: double
+      description: The carrier frequency utilized by the SV, in Hz.
+      example: 120000000
+
+    clockOffset:
+      type: number
+      format: double
+      decription: The clock offset calculated by the receiver based on the space-vehicle time contained in a received navigation message, i.e. the time it took for a given navigation message to be sent from a space vehicle to the receiver's antenna, as calculated by the receiver itself.
+      example: 0.001
+
+    usedInSolution:
+      type: boolean
+      description: Indicates whether this particular satellite data was used as part of the solution. A value of true indicates that the record was used in the solution, a value of false indiicates that the record was not used in the solution.
+
+    undulationM:
+      type: number
+      format: double
+      description: The height in meters of the geoid at a given point, relative to a given reference ellipsoid, i.e. the difference in height between the 'real' surface (ignoring topographical features) and a 'modeled' surface given by a reference ellipsoid such as the one defined by WGS84. Valid range, -150.0 to 150.0.
+      example: 125.1
+
+    latitudeStdDeviationM:
+      type: number
+      format: double
+      description: The standard deviation of the latitude measurement in meters, where a higher value indicates a less precise postion lock. For example, a 5m deviaton indicates that, with 68% confidence, the latitude is within 5m of the reported position; with 95% confidence, the latitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP). Valid range, -200.0 to 200.0.
+      example: 5.2
+
+    longitudeStdDeviationM:
+      type: number
+      format: double
+      description: The standard deviation of the longitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the longitude is within 5m of the reported position; with 95% confidence, the longitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP). Valid range, -200.0 to 200.0.
+      example: 4.1
+
+    altitudeStdDeviationM:
+      type: number
+      format: double
+      description: The standatd deviation of the altitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the altitude is within 5m of the reported position; with 95% confidence, the altitude is within 10m of the reported position, etc. This releates to the Vertical Dilution of Poistion (VDOP), and tends to be higher than the Lat/Lon standard deviations due to GNSS satellites being above GNSS receivers. Valid range, -200.0 to 200.0.
+      example: -122.1
+
+    agcDb:
+      type: number
+      format: double
+      description: Automatic Gain Control, measured in dB. Valid range, -50.0 to 50.0
+      example: -25.2
+
+    carrierToNoiseDensityDbHz:
+      type: number
+      format: double
+      description: Carrier to noise density ratio, measured in dB-Hz. Valid range, -100.0 to 100.0.
+      example: 1.1
+
+    hdop:
+      type: number
+      format: double
+      description: Horizontal Dilution of Precision. Valid range, 0.0 to 50.0.
+      example: 1.2
+
+    vdop:
+      type: number
+      format: double
+      description: Vertical Dilution of Precision. Valid range, 0.0 to 50.0.
+      example: 1.3
 
     # RF generic fields (used in both energy detection and signal detection)
     frequencyHz:

@@ -586,20 +586,20 @@ components:
               $ref: '#/components/schemas/constellation'
             spaceVehicleId:
               $ref: '#/components/schemas/spaceVehicleId'
-            carrierFrequencyHz:
-              $ref: '#/components/schemas/carrierFrequencyHz'
+            carrierFreqHz:
+              $ref: '#/components/schemas/carrierFreqHz'
             clockOffset:
               $ref: '#/components/schemas/clockOffset'
             usedInSolution:
               $ref: '#/components/schemas/usedInSolution'
             undulationM:
               $ref: '#/components/schemas/undulationM'
-            latitudeStdDeviationM:
-              $ref: '#/components/schemas/latitudeStdDeviationM'
-            longitudeStdDeviationM:
-              $ref: '#/components/schemas/longitudeStdDeviationM'
-            altitudeStdDeviationM:
-              $ref: '#/components/schemas/altitudeStdDeviationM'
+            latitudeStdDevM:
+              $ref: '#/components/schemas/latitudeStdDevM'
+            longitudeStdDevM:
+              $ref: '#/components/schemas/longitudeStdDevM'
+            altitudeStdDevM:
+              $ref: '#/components/schemas/altitudeStdDevM'
             agcDb:
               $ref: '#/components/schemas/agcDb'
             cn0DbHz:

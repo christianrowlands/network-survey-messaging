@@ -10,17 +10,18 @@
  */
 syntax = "proto3";
 
-package com.craxiom.messaging.gnss;
+package com.craxiom.messaging.gnss.constellation;
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.gnss";
 
 enum Constellation {
-    GPS = 0;
-    GLONASS = 1;
-    GALILEO = 2;
-    BEIDOU = 3;
-    SBAS = 4;
-    QZSS = 5;
-    MULTIPLE = 6;
+    UNKNOWN = 0;
+    GPS = 1;
+    GLONASS = 2;
+    GALILEO = 3;
+    BEIDOU = 4;
+    SBAS = 5;
+    QZSS = 6;
+    MULTIPLE = 7;
 }

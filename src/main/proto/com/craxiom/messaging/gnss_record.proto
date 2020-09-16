@@ -31,17 +31,17 @@ message GnssRecordData {
     int32 recordNumber = 8;
     int32 groupNumber = 9;
 
-    com.craxiom.messaging.gnss.Constellation constellation = 12;
+    com.craxiom.messaging.gnss.constellation.Constellation constellation = 12;
     google.protobuf.Int32Value spaceVehicleId = 13;
-    double carrierFrequencyHz = 14;
+    double carrierFreqHz = 14;
     double clockOffset = 15;
     google.protobuf.BoolValue usedInSolution = 16;
     double undulationM = 17;
-    double latitudeStdDeviationM = 18;
-    double longitudeStdDeviationM = 19;
-    double altitudeStdDeviationM = 20;
+    double latitudeStdDevM = 18;
+    double longitudeStdDevM = 19;
+    double altitudeStdDevM = 20;
     double agcDb = 21;
-    double carrierToNoiseDensityDbHz = 22;
+    double cn0DbHz = 22;
     double hdop = 23;
     double vdop = 24;
 }

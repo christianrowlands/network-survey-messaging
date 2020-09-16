@@ -130,7 +130,7 @@ components:
     gnssRecord:
       name: GnssRecord
       title: GNSS Record
-      summary: Represents information recorded about a Global Navigation Sattelite System at a particular time and geographic location.
+      summary: Represents information recorded about a Global Navigation Sattelite System (GNSS) at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gnssRecordPayload'
@@ -551,6 +551,7 @@ components:
           $ref: '#/components/schemas/messageType'
           description: The type of message, must be GnssRecord.
           example: "GnssRecord"
+
         data:
           type: object
           description: The payload of this message that contains all the message data.
@@ -558,9 +559,6 @@ components:
             - deviceSerialNumber
             - deviceName
             - deviceTime
-            - latitude
-            - longitude
-            - altitude
             - missionId
             - recordNumber
             - groupNumber
@@ -604,8 +602,8 @@ components:
               $ref: '#/components/schemas/altitudeStdDeviationM'
             agcDb:
               $ref: '#/components/schemas/agcDb'
-            carrierToNoiseDensityDbHz:
-              $ref: '#/components/schemas/carrierToNoiseDensityDbHz'
+            cn0DbHz:
+              $ref: '#/components/schemas/cn0DbHz'
             hdop:
               $ref: '#/components/schemas/hdop'
             vdop:
@@ -779,7 +777,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.2.1"
+      example: "0.2.2"
 
     messageType:
       type: string
@@ -1196,6 +1194,7 @@ components:
         - "IEEE80211AC"
         - "IEEE80211AX"
 
+
     # GNSS specific fields
     constellation:
       type: string
@@ -1216,9 +1215,10 @@ components:
       description: The identifier for the space vehicle (SV).
       example: 2345
 
-    carrierFrequencyHz:
-      type: number
-      format: double
+    carrierFreqHz:
+      type: integer
+      format: int64
+      minumum: 1
       description: The carrier frequency utilized by the SV, in Hz.
       example: 120000000
 
@@ -1234,51 +1234,68 @@ components:
 
     undulationM:
       type: number
-      format: double
+      format: float
+      minimum: -150.0
+      maximum: 150.0
       description: The height in meters of the geoid at a given point, relative to a given reference ellipsoid, i.e. the difference in height between the 'real' surface (ignoring topographical features) and a 'modeled' surface given by a reference ellipsoid such as the one defined by WGS84. Valid range, -150.0 to 150.0.
       example: 125.1
 
-    latitudeStdDeviationM:
+    latitudeStdDevM:
       type: number
-      format: double
+      format: float
+      minimum: -200.0
+      maximum: 200.0
       description: The standard deviation of the latitude measurement in meters, where a higher value indicates a less precise postion lock. For example, a 5m deviaton indicates that, with 68% confidence, the latitude is within 5m of the reported position; with 95% confidence, the latitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP). Valid range, -200.0 to 200.0.
       example: 5.2
 
-    longitudeStdDeviationM:
+    longitudeStdDevM:
       type: number
-      format: double
+      format: float
+      minimum: -200.0
+      maximum: 200.0
       description: The standard deviation of the longitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the longitude is within 5m of the reported position; with 95% confidence, the longitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP). Valid range, -200.0 to 200.0.
       example: 4.1
 
-    altitudeStdDeviationM:
+    altitudeStdDevM:
       type: number
-      format: double
+      format: float
+      minimum: -200.0
+      maximum: 200.0
       description: The standatd deviation of the altitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the altitude is within 5m of the reported position; with 95% confidence, the altitude is within 10m of the reported position, etc. This releates to the Vertical Dilution of Poistion (VDOP), and tends to be higher than the Lat/Lon standard deviations due to GNSS satellites being above GNSS receivers. Valid range, -200.0 to 200.0.
       example: -122.1
 
     agcDb:
       type: number
-      format: double
+      format: float
+      minimum: -50.0
+      maximum: 50.0
       description: Automatic Gain Control, measured in dB. Valid range, -50.0 to 50.0
       example: -25.2
 
-    carrierToNoiseDensityDbHz:
+    cn0DbHz:
       type: number
-      format: double
+      format: float
+      minimum: -100.0
+      maximum: 100.0
       description: Carrier to noise density ratio, measured in dB-Hz. Valid range, -100.0 to 100.0.
       example: 1.1
 
     hdop:
       type: number
-      format: double
+      format: float
+      minimum: 0.0
+      maximum: 50.0
       description: Horizontal Dilution of Precision. Valid range, 0.0 to 50.0.
       example: 1.2
 
     vdop:
       type: number
-      format: double
+      format: float
+      minimum: 0.0
+      maximum: 50.0
       description: Vertical Dilution of Precision. Valid range, 0.0 to 50.0.
       example: 1.3
+
 
     # RF generic fields (used in both energy detection and signal detection)
     frequencyHz:

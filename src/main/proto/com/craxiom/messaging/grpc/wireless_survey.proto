@@ -15,6 +15,7 @@ import "com/craxiom/messaging/cdma_record.proto";
 import "com/craxiom/messaging/umts_record.proto";
 import "com/craxiom/messaging/lte_record.proto";
 import "com/craxiom/messaging/wifi_beacon_record.proto";
+import "com/craxiom/messaging/gnss_record.proto";
 import "com/craxiom/messaging/energy_detection.proto";
 import "com/craxiom/messaging/signal_detection.proto";
 
@@ -31,6 +32,8 @@ service WirelessSurvey {
     rpc StreamLteSurvey (stream LteRecord) returns (LteSurveyResponse) {
     }
     rpc StreamWifiBeaconSurvey (stream WifiBeaconRecord) returns (WifiBeaconSurveyResponse) {
+    }
+    rpc StreamGnssSurvey (stream GnssRecord) returns (GnssSurveyResponse) {
     }
     rpc StreamEnergyDetections (stream EnergyDetection) returns (WifiBeaconSurveyResponse) {
     }
@@ -55,6 +58,10 @@ message LteSurveyResponse {
 }
 
 message WifiBeaconSurveyResponse {
+
+}
+
+message GnssSurveyResponse {
 
 }
 

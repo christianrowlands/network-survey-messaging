@@ -1,0 +1,27 @@
+/**
+ * Defines the Constellation values used in the GNSS Survey message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.gnss.constellation;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.gnss";
+
+enum Constellation {
+    UNKNOWN = 0;
+    GPS = 1;
+    GLONASS = 2;
+    GALILEO = 3;
+    BEIDOU = 4;
+    SBAS = 5;
+    QZSS = 6;
+    MULTIPLE = 7;
+}

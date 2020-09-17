@@ -72,7 +72,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.2.1'
+    implementation 'com.craxiom:network-survey-messaging:0.2.2'
 }
 ```
 
@@ -103,6 +103,9 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.2.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.2) - 2020-09-17
+ * Added a GNSS Survey message to the API
+ 
 ##### [0.2.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.1) - 2020-08-19
  * BREAKING CHANGES were made to the JSON output of the protobuf messages.
  * Modified timestamps to use (RFC3339)[https://tools.ietf.org/html/rfc3339#page-6] date-time format.

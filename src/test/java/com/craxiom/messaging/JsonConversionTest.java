@@ -1,5 +1,6 @@
 package com.craxiom.messaging;
 
+import com.craxiom.messaging.gnss.Constellation;
 import com.craxiom.messaging.wifi.AkmSuite;
 import com.craxiom.messaging.wifi.CipherSuite;
 import com.craxiom.messaging.wifi.EncryptionType;
@@ -9,7 +10,6 @@ import com.craxiom.messaging.wifi.Standard;
 import com.google.protobuf.BoolValue;
 import com.google.protobuf.FloatValue;
 import com.google.protobuf.Int32Value;
-import com.google.protobuf.Int64Value;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import org.junit.jupiter.api.Assertions;
@@ -474,6 +474,97 @@ public class JsonConversionTest
         assertEquals(26.7, data.getSnr().getValue(), FLOAT_TOLERANCE);
         assertEquals(NodeType.AP, data.getNodeType());
         assertEquals(Standard.IEEE80211N, data.getStandard());
+    }
+
+    @Test
+    public void testGnssToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":1.2E8,\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
+
+        final GnssRecord.Builder recordBuilder = GnssRecord.newBuilder();
+        recordBuilder.setVersion("0.2.2");
+        recordBuilder.setMessageType("GnssRecord");
+
+        final GnssRecordData.Builder dataBuilder = GnssRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("1234");
+        dataBuilder.setDeviceName("Gnss Pixel");
+        dataBuilder.setDeviceTime("1996-12-19T16:39:57-08:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(13.3f);
+        dataBuilder.setMissionId("Survey1 20200724-154325");
+        dataBuilder.setRecordNumber(1);
+        dataBuilder.setGroupNumber(23);
+        dataBuilder.setConstellation(Constellation.GLONASS);
+        dataBuilder.setSpaceVehicleId(Int32Value.newBuilder().setValue(4567).build());
+        dataBuilder.setCarrierFreqHz(1.2E8);
+        dataBuilder.setClockOffset(0.01d);
+        dataBuilder.setUsedInSolution(BoolValue.newBuilder().setValue(false).build());
+        dataBuilder.setUndulationM(2.1);
+        dataBuilder.setLatitudeStdDevM(3.1);
+        dataBuilder.setLongitudeStdDevM(2.2);
+        dataBuilder.setAltitudeStdDevM(1.3);
+        dataBuilder.setAgcDb(0.4);
+        dataBuilder.setCn0DbHz(0.05);
+        dataBuilder.setHdop(1.1);
+        dataBuilder.setVdop(2.2);
+
+        recordBuilder.setData(dataBuilder);
+
+        final GnssRecord record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testGnssFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":1.2E8,\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
+
+        final GnssRecord.Builder builder = GnssRecord.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final GnssRecord convertedRecord = builder.build();
+
+        assertEquals("0.2.2", convertedRecord.getVersion());
+        assertEquals("GnssRecord", convertedRecord.getMessageType());
+
+        final GnssRecordData data = convertedRecord.getData();
+        assertEquals("1234", data.getDeviceSerialNumber());
+        assertEquals("Gnss Pixel", data.getDeviceName());
+        assertEquals("1996-12-19T16:39:57-08:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(13.3f, data.getAltitude());
+        assertEquals("Survey1 20200724-154325", data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
+        assertEquals(23, data.getGroupNumber());
+        assertEquals(Constellation.GLONASS, data.getConstellation());
+        assertEquals(4567, data.getSpaceVehicleId().getValue());
+        assertEquals(1.2E8, data.getCarrierFreqHz());
+        assertEquals(0.01, data.getClockOffset());
+        assertFalse(data.getUsedInSolution().getValue());
+        assertEquals(2.1, data.getUndulationM());
+        assertEquals(3.1, data.getLatitudeStdDevM());
+        assertEquals(2.2, data.getLongitudeStdDevM());
+        assertEquals(1.3, data.getAltitudeStdDevM());
+        assertEquals(0.4, data.getAgcDb());
+        assertEquals(0.05, data.getCn0DbHz());
+        assertEquals(1.1, data.getHdop());
+        assertEquals(2.2, data.getVdop());
     }
 
     @Test

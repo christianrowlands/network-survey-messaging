@@ -1228,7 +1228,7 @@ components:
     clockOffset:
       type: number
       format: double
-      decription: The clock offset calculated by the receiver based on the space-vehicle time contained in a received navigation message, i.e. the time it took for a given navigation message to be sent from a space vehicle to the receiver's antenna, as calculated by the receiver itself.
+      description: The clock offset calculated by the receiver based on the space-vehicle time contained in a received navigation message, i.e. the time it took for a given navigation message to be sent from a space vehicle to the receiver's antenna, as calculated by the receiver itself.
       example: 0.001
 
     usedInSolution:

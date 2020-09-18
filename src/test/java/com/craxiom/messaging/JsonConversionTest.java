@@ -8,9 +8,12 @@ import com.craxiom.messaging.wifi.NodeType;
 import com.craxiom.messaging.wifi.ServiceSetType;
 import com.craxiom.messaging.wifi.Standard;
 import com.google.protobuf.BoolValue;
+import com.google.protobuf.DoubleValue;
 import com.google.protobuf.FloatValue;
 import com.google.protobuf.Int32Value;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.UInt32Value;
+import com.google.protobuf.UInt64Value;
 import com.google.protobuf.util.JsonFormat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -479,7 +482,7 @@ public class JsonConversionTest
     @Test
     public void testGnssToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":1.2E8,\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
+        final String expectedJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
 
         final GnssRecord.Builder recordBuilder = GnssRecord.newBuilder();
         recordBuilder.setVersion("0.2.2");
@@ -496,18 +499,18 @@ public class JsonConversionTest
         dataBuilder.setRecordNumber(1);
         dataBuilder.setGroupNumber(23);
         dataBuilder.setConstellation(Constellation.GLONASS);
-        dataBuilder.setSpaceVehicleId(Int32Value.newBuilder().setValue(4567).build());
-        dataBuilder.setCarrierFreqHz(1.2E8);
-        dataBuilder.setClockOffset(0.01d);
+        dataBuilder.setSpaceVehicleId(UInt32Value.newBuilder().setValue(4567).build());
+        dataBuilder.setCarrierFreqHz(UInt64Value.newBuilder().setValue(120_000_000).build());
+        dataBuilder.setClockOffset(DoubleValue.newBuilder().setValue(0.01).build());
         dataBuilder.setUsedInSolution(BoolValue.newBuilder().setValue(false).build());
-        dataBuilder.setUndulationM(2.1);
-        dataBuilder.setLatitudeStdDevM(3.1);
-        dataBuilder.setLongitudeStdDevM(2.2);
-        dataBuilder.setAltitudeStdDevM(1.3);
-        dataBuilder.setAgcDb(0.4);
-        dataBuilder.setCn0DbHz(0.05);
-        dataBuilder.setHdop(1.1);
-        dataBuilder.setVdop(2.2);
+        dataBuilder.setUndulationM(FloatValue.newBuilder().setValue(2.1f).build());
+        dataBuilder.setLatitudeStdDevM(FloatValue.newBuilder().setValue(3.1f).build());
+        dataBuilder.setLongitudeStdDevM(FloatValue.newBuilder().setValue(2.2f).build());
+        dataBuilder.setAltitudeStdDevM(FloatValue.newBuilder().setValue(1.3f).build());
+        dataBuilder.setAgcDb(FloatValue.newBuilder().setValue(0.4f).build());
+        dataBuilder.setCn0DbHz(FloatValue.newBuilder().setValue(0.05f).build());
+        dataBuilder.setHdop(FloatValue.newBuilder().setValue(1.1f).build());
+        dataBuilder.setVdop(FloatValue.newBuilder().setValue(2.2f).build());
 
         recordBuilder.setData(dataBuilder);
 
@@ -526,7 +529,7 @@ public class JsonConversionTest
     @Test
     public void testGnssFromJson()
     {
-        final String inputJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":1.2E8,\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
+        final String inputJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
 
         final GnssRecord.Builder builder = GnssRecord.newBuilder();
         try
@@ -554,17 +557,17 @@ public class JsonConversionTest
         assertEquals(23, data.getGroupNumber());
         assertEquals(Constellation.GLONASS, data.getConstellation());
         assertEquals(4567, data.getSpaceVehicleId().getValue());
-        assertEquals(1.2E8, data.getCarrierFreqHz());
-        assertEquals(0.01, data.getClockOffset());
+        assertEquals(120_000_000, data.getCarrierFreqHz().getValue());
+        assertEquals(0.01, data.getClockOffset().getValue());
         assertFalse(data.getUsedInSolution().getValue());
-        assertEquals(2.1, data.getUndulationM());
-        assertEquals(3.1, data.getLatitudeStdDevM());
-        assertEquals(2.2, data.getLongitudeStdDevM());
-        assertEquals(1.3, data.getAltitudeStdDevM());
-        assertEquals(0.4, data.getAgcDb());
-        assertEquals(0.05, data.getCn0DbHz());
-        assertEquals(1.1, data.getHdop());
-        assertEquals(2.2, data.getVdop());
+        assertEquals(2.1, data.getUndulationM().getValue(), FLOAT_TOLERANCE);
+        assertEquals(3.1, data.getLatitudeStdDevM().getValue(), FLOAT_TOLERANCE);
+        assertEquals(2.2, data.getLongitudeStdDevM().getValue(), FLOAT_TOLERANCE);
+        assertEquals(1.3, data.getAltitudeStdDevM().getValue(), FLOAT_TOLERANCE);
+        assertEquals(0.4, data.getAgcDb().getValue(), FLOAT_TOLERANCE);
+        assertEquals(0.05, data.getCn0DbHz().getValue(), FLOAT_TOLERANCE);
+        assertEquals(1.1, data.getHdop().getValue(), FLOAT_TOLERANCE);
+        assertEquals(2.2, data.getVdop().getValue(), FLOAT_TOLERANCE);
     }
 
     @Test

@@ -1201,17 +1201,20 @@ components:
       description: The satellite constellation associated with the record.
       example: "GALILEO"
       enum:
+        - "UNKNOWN"
         - "GPS"
         - "GLONASS"
         - "GALILEO"
         - "BEIDOU"
         - "SBAS"
         - "QZSS"
+        - "IRNSS"
         - "MULTIPLE"
 
     spaceVehicleId:
       type: integer
       format: int32
+      minimum: 0
       description: The identifier for the space vehicle (SV).
       example: 2345
 

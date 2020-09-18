@@ -24,5 +24,4 @@ enum Constellation {
     SBAS = 5;
     QZSS = 6;
     IRNSS = 7;
-    MULTIPLE = 8;
 }

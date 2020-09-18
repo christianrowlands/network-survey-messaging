@@ -130,7 +130,7 @@ components:
     gnssRecord:
       name: GnssRecord
       title: GNSS Record
-      summary: Represents information recorded about a Global Navigation Sattelite System (GNSS) at a particular time and geographic location.
+      summary: Represents information recorded about a Global Navigation Sattelite System (GNSS) at a particular time and geographic location. Each record represents a single navigation message from a single satellite. These individual records are tied together using the group number field.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gnssRecordPayload'
@@ -581,6 +581,7 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+              description: Starts at 1 and each subsequent scan should have its number incremented by 1. Records with the same group number indicate they were all seen in the same "scan" for GNSS space vehicles.
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -820,7 +821,7 @@ components:
     altitude:
       type: number
       format: float
-      description: The altitude in meters representing where this survey record was recorded.
+      description: The altitude in meters above MSL representing where this survey record was recorded.
       example: 13.3
 
     missionId:
@@ -1209,7 +1210,6 @@ components:
         - "SBAS"
         - "QZSS"
         - "IRNSS"
-        - "MULTIPLE"
 
     spaceVehicleId:
       type: integer

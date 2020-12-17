@@ -8,6 +8,7 @@ import com.craxiom.messaging.wifi.NodeType;
 import com.craxiom.messaging.wifi.ServiceSetType;
 import com.craxiom.messaging.wifi.Standard;
 import com.google.protobuf.BoolValue;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.DoubleValue;
 import com.google.protobuf.FloatValue;
 import com.google.protobuf.Int32Value;
@@ -19,8 +20,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -789,5 +792,68 @@ public class JsonConversionTest
         assertEquals(13.3f, data.getAltitude());
         assertEquals(38, data.getBatteryLevelPercent().getValue());
         assertEquals("The scan stopped unexpectedly", data.getError().getErrorMessage());
+    }
+
+    @Test
+    public void testLteRrcToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.3.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 5\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+
+        final LteRrc.Builder recordBuilder = LteRrc.newBuilder();
+        recordBuilder.setVersion("0.3.0");
+        recordBuilder.setMessageType("LteRrc");
+
+        final LteRrcData.Builder dataBuilder = LteRrcData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("Device 5");
+        dataBuilder.setDeviceName("My Phone");
+        dataBuilder.setDeviceTime("2020-12-17T16:21:42.982-05:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(13.3f);
+        dataBuilder.setChannelType(LteRrcChannelType.BCCH_BCH);
+        dataBuilder.setRawMessage(ByteString.copyFrom(new byte[]{(byte) 0x14, (byte) 0x0e, (byte) 0x30, (byte) 0x00, (byte) 0xed, (byte) 0x01, (byte) 0x6b, (byte) 0x03, (byte) 0x00, (byte) 0x00, (byte) 0x59, (byte) 0x39, (byte) 0x05, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x09, (byte) 0x00, (byte) 0x40, (byte) 0x01, (byte) 0x7c, (byte) 0x6b, (byte) 0x5f, (byte) 0x91, (byte) 0x20, (byte) 0x00, (byte) 0x00}));
+
+        recordBuilder.setData(dataBuilder);
+
+        final LteRrc record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testLteRrcFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.3.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+
+        final LteRrc.Builder builder = LteRrc.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final LteRrc convertedRecord = builder.build();
+
+        assertEquals("0.3.0", convertedRecord.getVersion());
+        assertEquals("LteRrc", convertedRecord.getMessageType());
+
+        final LteRrcData data = convertedRecord.getData();
+        assertEquals("Device 1", data.getDeviceSerialNumber());
+        assertEquals("My Phone", data.getDeviceName());
+        assertEquals("2020-12-17T16:21:42.982-05:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(13.3f, data.getAltitude());
+        assertEquals(LteRrcChannelType.BCCH_BCH, data.getChannelType());
+        assertArrayEquals(Base64.getDecoder().decode("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="), data.getRawMessage().toByteArray());
     }
 }

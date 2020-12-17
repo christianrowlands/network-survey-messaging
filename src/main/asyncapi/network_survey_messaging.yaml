@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.2.2'
+  version: '0.3.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -85,6 +85,12 @@ channels:
       message:
         $ref: '#/components/messages/deviceStatus'
 
+  lte_ota_message:
+    description: The lte_ota_message topic/channel is where Over The Air (OTA) LTE messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA LTE message.
+    publish:
+      message:
+        $ref: '#/components/messages/lteRrc'
+
 components:
   messages:
     gsmRecord:
@@ -158,6 +164,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/deviceStatusPayload'
+
+    lteRrc:
+      name: LteRrc
+      title: LTE RRC OTA Message
+      summary: Represents a raw LTE RRC message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/lteRrcPayload'
 
   schemas:
     gsmRecordPayload:
@@ -773,12 +787,83 @@ components:
             error:
               $ref: '#/components/schemas/error'
 
+    lteRrcPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be LteRrc.
+          example: "LteRrc"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - channelType
+            - rawMessage
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+
+            channelType:
+              $ref: '#/components/schemas/channelType'
+              example: "BCCH_BCH"
+              enum:
+                - "UNKNOWN"
+                - "DL_CCCH"
+                - "DL_DCCH"
+                - "UL_CCCH"
+                - "UL_DCCH"
+                - "BCCH_BCH"
+                - "BCCH_DL_SCH"
+                - "PCCH"
+                - "MCCH"
+                - "BCCH_BCH_MBMS"
+                - "BCCH_DL_SCH_BR"
+                - "BCCH_DL_SCH_MBMS"
+                - "SC_MCCH"
+                - "SBCCH_SL_BCH"
+                - "SBCCH_SL_BCH_V2X"
+                - "DL_CCCH_NB"
+                - "DL_DCCH_NB"
+                - "UL_CCCH_NB"
+                - "UL_DCCH_NB"
+                - "BCCH_BCH_NB"
+                - "BCCH_BCH_TDD_NB"
+                - "BCCH_DL_SCH_NB"
+                - "PCCH_NB"
+                - "SC_MCCH_NB"
+            rawMessage:
+              $ref: '#/components/schemas/rawMessage'
+
 
     # Common fields that are used in almost every message
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.2.2"
+      example: "0.3.0"
 
     messageType:
       type: string
@@ -1116,7 +1201,7 @@ components:
     cipherSuites:
       type: array
       description: A list of the supported cipher suites. See IEEE Std 802.11-2012 Section 8.4.2.27.2 for more details on the 802.11 Cipher Suites.
-      example: ["TKIP", "CCMP"]
+      example: [ "TKIP", "CCMP" ]
       items:
         type: string
         enum:
@@ -1137,7 +1222,7 @@ components:
     akmSuites:
       type: array
       description: A list of the supported Authentication and Key Management (AKM) suites. See IEEE Std 802.11-2012 Section 8.4.2.27.3 for more details on the 802.11 AKM Suites.
-      example: ["OPEN"]
+      example: [ "OPEN" ]
       items:
         type: string
         enum:
@@ -1361,3 +1446,15 @@ components:
           type: string
           description: A description of the error state that the device is in.
           example: "The scan stopped unexpectedly"
+
+    # Common fields for Raw Cellular messages
+    rawMessage:
+      type: string
+      format: byte
+      description: The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame.
+      example: "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
+
+    # LTE RRC specific fields
+    channelType:
+      type: string
+      description: The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.

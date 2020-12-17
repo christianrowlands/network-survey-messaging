@@ -103,8 +103,8 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.3.0) - 2020-12-11
- * Added a message schema for holding cellular Over The Air (OTA) messages.
+##### [0.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.3.0) - 2020-12-18
+ * Added a message schema for holding cellular LTE Over The Air (OTA) RRC messages.
 
 ##### [0.2.2](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.2.2) - 2020-09-23
  * Added a GNSS Survey message to the API.

@@ -829,7 +829,7 @@ components:
 
             channelType:
               $ref: '#/components/schemas/channelType'
-              example: "DL_CCCH"
+              example: "BCCH_BCH"
               enum:
                 - "UNKNOWN"
                 - "DL_CCCH"
@@ -1452,7 +1452,7 @@ components:
       type: string
       format: byte
       description: The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame.
-      example: ""
+      example: "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
 
     # LTE RRC specific fields
     channelType:

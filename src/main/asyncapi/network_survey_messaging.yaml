@@ -91,6 +91,12 @@ channels:
       message:
         $ref: '#/components/messages/lteRrc'
 
+  lte_nas_message:
+    description: The lte_nas message topic/channel is where Non-Access Stratum (NAS) LTE messages can be published. For MQTT, set the MQTT topic as "lte_nas_message" and then publish a JSON message representing a NAS LTE message.
+    publish:
+      message:
+        $ref: '#/components/messaages/lteNas'
+
 components:
   messages:
     gsmRecord:
@@ -172,6 +178,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRrcPayload'
+
+    lteNas:
+      name: LteNas
+      title: LTE NAS Message
+      summary: Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/lteNasPayload'
 
   schemas:
     gsmRecordPayload:
@@ -858,6 +872,55 @@ components:
             rawMessage:
               $ref: '#/components/schemas/rawMessage'
 
+    lteNasPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be LteNas.
+          example: "LteNas"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - channelType
+            - rawMessage
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+
+            channelType:
+              $ref: '#/components/schemas/channelType'
+              example: "PLAIN"
+              enum:
+                - "UNKNOWN"
+                - "PLAIN"
+                - "SEC_HEADER"
+            rawMessage:
+              $ref: '#/components/schemas/rawMessage'
 
     # Common fields that are used in almost every message
     version:

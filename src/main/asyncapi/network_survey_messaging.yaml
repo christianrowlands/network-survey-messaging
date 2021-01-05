@@ -95,7 +95,7 @@ channels:
     description: The lte_nas message topic/channel is where Non-Access Stratum (NAS) LTE messages can be published. For MQTT, set the MQTT topic as "lte_nas_message" and then publish a JSON message representing a NAS LTE message.
     publish:
       message:
-        $ref: '#/components/messaages/lteNas'
+        $ref: '#/components/messages/lteNas'
 
 components:
   messages:

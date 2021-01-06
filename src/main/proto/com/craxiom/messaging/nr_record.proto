@@ -1,0 +1,48 @@
+/**
+ * A protobuf definition of the LTE survey record defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true LTE
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message NrRecord {
+    string version = 1;
+    string messageType = 2;
+    NrRecordData data = 3;
+}
+
+message NrRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 groupNumber = 9;
+
+    google.protobuf.Int32Value mcc = 16;
+    google.protobuf.Int32Value mnc = 17;
+    google.protobuf.Int32Value tac = 18;
+    google.protobuf.Int32Value nci = 19;
+    google.protobuf.Int32Value narfcn = 20;
+    google.protobuf.Int32Value pci = 21;
+    google.protobuf.FloatValue ssRsrp = 22;
+    google.protobuf.FloatValue ssRsrq = 23;
+    google.protobuf.FloatValue ssSinr = 24;
+    google.protobuf.FloatValue csiRsrp = 25;
+    google.protobuf.FloatValue csiRsrq = 26;
+    google.protobuf.FloatValue csiSinr = 27;
+    google.protobuf.Int32Value ta = 28;
+    google.protobuf.BoolValue servingCell = 29;
+    string provider = 30;
+}

@@ -33,7 +33,7 @@ message NrRecordData {
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
     google.protobuf.Int32Value tac = 18;
-    google.protobuf.Int32Value nci = 19;
+    google.protobuf.Int64Value nci = 19;
     google.protobuf.Int32Value narfcn = 20;
     google.protobuf.Int32Value pci = 21;
     google.protobuf.FloatValue ssRsrp = 22;

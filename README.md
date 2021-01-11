@@ -72,7 +72,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.3.0'
+    implementation 'com.craxiom:network-survey-messaging:0.4.0'
 }
 ```
 
@@ -103,6 +103,11 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.4.0) - 2021-01-10
+ * Added a message schema for holding cellular LTE Over The Air (OTA) NAS messages.
+ * Added a message schema for 5G New Radio (NR) cellular survey records.
+ * Added a message schema for Bluetooth survey records.
+
 ##### [0.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.3.0) - 2020-12-18
  * Added a message schema for holding cellular LTE Over The Air (OTA) RRC messages.
 

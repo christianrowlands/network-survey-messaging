@@ -1,5 +1,7 @@
 package com.craxiom.messaging;
 
+import com.craxiom.messaging.bluetooth.SupportedTechnologies;
+import com.craxiom.messaging.bluetooth.Technology;
 import com.craxiom.messaging.gnss.Constellation;
 import com.craxiom.messaging.wifi.AkmSuite;
 import com.craxiom.messaging.wifi.CipherSuite;
@@ -297,7 +299,7 @@ public class JsonConversionTest
     @Test
     public void testLteToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
+        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"signalStrength\":-88.5,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\"}}";
 
         final LteRecord.Builder recordBuilder = LteRecord.newBuilder();
         recordBuilder.setVersion("0.2.0");
@@ -325,6 +327,7 @@ public class JsonConversionTest
         dataBuilder.setServingCell(BoolValue.newBuilder().setValue(true).build());
         dataBuilder.setLteBandwidth(LteBandwidth.MHZ_10);
         dataBuilder.setProvider("Verizon");
+        dataBuilder.setSignalStrength(FloatValue.newBuilder().setValue(-88.5f).build());
 
         recordBuilder.setData(dataBuilder);
 
@@ -480,6 +483,85 @@ public class JsonConversionTest
         assertEquals(26.7, data.getSnr().getValue(), FLOAT_TOLERANCE);
         assertEquals(NodeType.AP, data.getNodeType());
         assertEquals(Standard.IEEE80211N, data.getStandard());
+    }
+
+    @Test
+    public void testBluetoothToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.4.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6}}";
+
+        final BluetoothRecord.Builder recordBuilder = BluetoothRecord.newBuilder();
+        recordBuilder.setVersion("0.4.0");
+        recordBuilder.setMessageType("BluetoothRecord");
+
+        final BluetoothRecordData.Builder dataBuilder = BluetoothRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("ee4d453e4c6f73fa");
+        dataBuilder.setDeviceName("BT Pixel");
+        dataBuilder.setDeviceTime("2021-01-14T12:47:04.76-05:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(184.08124f);
+        dataBuilder.setMissionId("NS ee4d453e4c6f73fa 20210114-124535");
+        dataBuilder.setRecordNumber(1);
+        dataBuilder.setSourceAddress("E1:A1:19:A9:68:B0");
+        dataBuilder.setDestinationAddress("56:14:62:0D:98:01");
+        dataBuilder.setSignalStrength(FloatValue.newBuilder().setValue(-78f).build());
+        dataBuilder.setTxPower(FloatValue.newBuilder().setValue(8f).build());
+        dataBuilder.setTechnology(Technology.LE);
+        dataBuilder.setSupportedTechnologies(SupportedTechnologies.DUAL);
+        dataBuilder.setOtaDeviceName("846B2162E22433AFE9");
+        dataBuilder.setChannel(Int32Value.newBuilder().setValue(6).build());
+
+        recordBuilder.setData(dataBuilder);
+
+        final BluetoothRecord record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testBluetoothFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.4.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6}}";
+
+        final BluetoothRecord.Builder builder = BluetoothRecord.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final BluetoothRecord convertedRecord = builder.build();
+
+        assertEquals("0.4.0", convertedRecord.getVersion());
+        assertEquals("BluetoothRecord", convertedRecord.getMessageType());
+
+        final BluetoothRecordData data = convertedRecord.getData();
+        assertEquals("ee4d453e4c6f73fa", data.getDeviceSerialNumber());
+        assertEquals("BT Pixel", data.getDeviceName());
+        assertEquals("2021-01-14T12:47:04.76-05:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(184.08124f, data.getAltitude());
+        assertEquals("NS ee4d453e4c6f73fa 20210114-124535", data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
+        assertEquals("E1:A1:19:A9:68:B0", data.getSourceAddress());
+        assertEquals("56:14:62:0D:98:01", data.getDestinationAddress());
+        assertEquals(-78.0, data.getSignalStrength().getValue());
+        assertEquals(8.0, data.getTxPower().getValue());
+        assertEquals(Technology.LE, data.getTechnology());
+        assertEquals(SupportedTechnologies.DUAL, data.getSupportedTechnologies());
+        assertEquals("846B2162E22433AFE9", data.getOtaDeviceName());
+        assertEquals(6, data.getChannel().getValue());
     }
 
     @Test

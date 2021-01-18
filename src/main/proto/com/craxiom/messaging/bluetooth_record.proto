@@ -1,0 +1,42 @@
+/**
+ * A protobuf definition of the Bluetooth message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Bluetooth
+ * message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/bluetooth/tech/technology.proto";
+import "com/craxiom/messaging/bluetooth/supportedtech/supported_technologies.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message BluetoothRecord {
+    string version = 1;
+    string messageType = 2;
+    BluetoothRecordData data = 3;
+}
+
+message BluetoothRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+
+    string sourceAddress = 10;
+    string destinationAddress = 11;
+    google.protobuf.FloatValue signalStrength = 12;
+    google.protobuf.FloatValue txPower = 13;
+    com.craxiom.messaging.bluetooth.tech.Technology technology = 14;
+    com.craxiom.messaging.bluetooth.supportedtech.SupportedTechnologies supportedTechnologies = 15;
+    string otaDeviceName = 16;
+    google.protobuf.Int32Value channel = 17;
+}

@@ -88,6 +88,11 @@ Then install the html template generator
 
 Additional AsyncAPI generators can be found here:  https://github.com/asyncapi/generator#list-of-official-generator-templates
 
+There is also an option to use a docker container for running the AsyncAPI commands instead of running locally. More information 
+can be found [here](https://www.npmjs.com/package/@asyncapi/generator#cli-usage-with-docker).
+
+An example command: `docker run --rm -it -v ${PWD}/src/main/asyncapi/network_survey_messaging.yaml:/app/network_survey_messaging.yaml -v ${PWD}/docs:/app/output asyncapi/generator /app/network_survey_messaging.yaml @asyncapi/html-template -o /app/output --force-write`
+
 #### Building the HTML content from the AsyncAPI file
  - Execute `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o build/network-survey-messaging-html`
  - The HTML content will be located in the directory specified after the `-o` option.

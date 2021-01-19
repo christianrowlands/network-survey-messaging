@@ -43,4 +43,5 @@ message LteRecordData {
     google.protobuf.BoolValue servingCell = 25;
     com.craxiom.messaging.ltebandwidth.LteBandwidth lteBandwidth = 26;
     string provider = 27;
+    google.protobuf.FloatValue signalStrength = 28;
 }

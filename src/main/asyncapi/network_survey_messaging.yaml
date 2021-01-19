@@ -101,13 +101,9 @@ channels:
     description: The lte_ota_message topic/channel is where Over The Air (OTA) LTE messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA LTE message.
     publish:
       message:
-        $ref: '#/components/messages/lteRrc'
-
-  lte_nas_message:
-    description: The lte_nas message topic/channel is where Non-Access Stratum (NAS) LTE messages can be published. For MQTT, set the MQTT topic as "lte_nas_message" and then publish a JSON message representing a NAS LTE message.
-    publish:
-      message:
-        $ref: '#/components/messages/lteNas'
+        oneOf:
+          - $ref: '#/components/messages/lteRrc'
+          - $ref: '#/components/messages/lteNas'
 
 components:
   messages:

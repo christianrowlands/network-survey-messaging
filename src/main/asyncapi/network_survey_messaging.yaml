@@ -71,7 +71,7 @@ channels:
     description: The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
     publish:
       message:
-        $ref: '#/components/messages/BluetoothRecord'
+        $ref: '#/components/messages/bluetoothRecord'
 
   gnss_message:
     description: The gnss_message topic/channel is where GNSS positioning records can be published. For MQTT, set the MQTT topic as "gnss_message" and then publish a JSON message in the format defined below.

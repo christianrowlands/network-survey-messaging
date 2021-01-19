@@ -171,6 +171,26 @@
           
             <li>
               
+                <a class="js-menu-item flex break-words no-underline text-grey-darkest mt-8 sm:mt-8 md:mt-3" href="#operation-publish-bluetooth_message">
+                  <span class="bg-blue-dark font-bold h-6 no-underline text-white uppercase p-1 mr-2 rounded" style="height: 21px;font-size: 11px;" title="Publish">
+                    Pub
+                  </span>
+                  
+                    <div style="display:inline-block;">
+                      
+<span class="string-chunk" style="padding-top: 2px;">bluetooth_message</span>
+
+                    </div>
+                  
+                </a>
+              
+
+              
+              </a>
+            </li>
+          
+            <li>
+              
                 <a class="js-menu-item flex break-words no-underline text-grey-darkest mt-8 sm:mt-8 md:mt-3" href="#operation-publish-gnss_message">
                   <span class="bg-blue-dark font-bold h-6 no-underline text-white uppercase p-1 mr-2 rounded" style="height: 21px;font-size: 11px;" title="Publish">
                     Pub
@@ -319,6 +339,14 @@
             <div style="display:inline-block;">
               
 <span class="string-chunk" style="padding-top: 2px;">WifiBeaconRecord</span>
+
+            </div>
+          </a>
+        
+          <a class="js-menu-item flex break-words no-underline text-grey-darkest mt-8 sm:mt-8 md:mt-3" href="#message-BluetoothRecord">
+            <div style="display:inline-block;">
+              
+<span class="string-chunk" style="padding-top: 2px;">BluetoothRecord</span>
 
             </div>
           </a>
@@ -11442,7 +11470,7 @@ boolean
 
         
 
-<div class="text-sm markdown"><p>Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.</p>
+<div class="text-sm markdown"><p>Boolean indicating if this record represents a serving cell record, or a neighbor cell record. If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.</p>
 </div>
 
 
@@ -12011,6 +12039,1510 @@ string
     "snr": 19.2,
     "nodeType": "AP",
     "standard": "IEEE80211N"
+  }
+}</code></pre>
+        <h6 class="text-xs font-bold text-grey-darker italic">This example has been generated automatically.</h6>
+        
+      </div>
+    </div>
+  
+
+  
+</form>
+
+
+  
+</div>
+
+
+
+    
+  </div>
+  <div class="responsive-container">
+    
+  </div>
+
+  <div class="responsive-container">
+    
+      
+
+<a name="operation-publish-bluetooth_message"></a>
+<div class="center-block p-8">
+  <div class="operation pt-8 pb-8">
+    <h3 class="font-mono text-base">
+      
+      <span class="font-mono border border-blue text-blue uppercase p-1 rounded" title="Publish">Pub</span>
+      
+      
+      
+<span class="string-chunk" >bluetooth_message</span>
+
+    </h3>
+
+    <div class="mt-4 mb-4 markdown"><p>The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as &quot;bluetooth_message&quot; and then publish a JSON message representing a Bluetooth survey record in the format defined below.</p>
+</div>
+
+    <p class="text-grey text-sm"></p>
+    <div class="mt-4 mb-4 markdown"></div>
+
+
+
+    
+
+
+    
+    <p>Accepts the following message:</p>
+    
+
+<div class="bg-grey-lighter rounded p-4 mt-2">
+  <div class="text-sm text-grey-darker mb-2">
+    
+    
+      Bluetooth Record
+      <span class="border text-orange rounded text-xs ml-3 py-0 px-2">BluetoothRecord</span>
+    
+  </div>
+  <p class="text-grey-dark text-sm">Represents information recorded about a Bluetooth device at a particular time and geographic location. This message represents a capture of a signal Bluetooth frame.</p>
+  
+  
+
+<div class="mt-4">
+  
+</div>
+
+
+
+
+  <div class="mt-4 mb-4 markdown"></div>
+  
+    
+<div>
+  
+
+<div class="bg-grey-lighter  rounded">
+  <div class="is-open">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">Payload</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">bluetoothRecordPayload</span>
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"></div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lightest py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">version</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">version</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The version number of the Network Survey Messaging API that this message is based off of.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">messageType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The type of message, must be BluetoothRecord.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">data</span>
+        
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The payload of this message that contains all the message data.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lighter py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceSerialNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceSerialNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The unique identifier for the device that captured this record. This should be consistent and should never change.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceName</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceTime</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceTime</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">latitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">latitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The latitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">longitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">longitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The longitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">altitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">altitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The altitude in meters above MSL representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">missionId</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">missionId</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">recordNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">recordNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+integer
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">int32</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">sourceAddress</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Source MAC Address, the original source of the frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">destinationAddress</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">destinationAddress</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Destination MAC Address, the final destination of the frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">signalStrength</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">signalStrength</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least -200">>= -200</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 200"><= 200</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The signal strength of the received signal in dBm.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">txPower</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">txPower</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least -200">>= -200</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 200"><= 200</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The power in dBm that the device used to transmit the signal.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">technology</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">technology</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth wireless technology system that is used in this frame. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"BR_EDR"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"LE"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">supportedTechnologies</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">supportedTechnologies</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth wireless technology systems that are supported be the transmitting device. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"BR_EDR"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"LE"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"DUAL"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">otaDeviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">otaDeviceName</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth device name is the user-friendly name that a Bluetooth device exposes to remote devices. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 3, Part C Section 3.2.2 (page 1988) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">channel</span>
+        
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+integer
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">int32</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 78"><= 78</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The channel on which this frame was recorded. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+</div>
+
+  
+  
+</div>
+
+
+    
+
+    
+
+<div class="mt-4">
+  
+</div>
+
+
+
+  </div>
+</div>
+
+<div class="right-block p-8">
+  <h4 class="text-lg text-white mb-4">Examples</h4>
+
+  
+  
+
+<form>
+  <h5 class="examples-uid text-orange mt-4">BluetoothRecord</h5>
+  
+    <div class="payload-examples mb-4 ">
+      <div class="js-prop cursor-pointer  flex property">
+        <span class="px-2 mr-2 text-grey-lightest text-sm border rounded focus:outline-none cursor-pointer">Payload</span>
+        
+          <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+            xmlns="http://www.w3.org/2000/svg" y="0">
+            <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+          </svg>
+        
+      </div>
+      <div class="children payload-examples mt-4">
+        
+        <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
+  "version": "0.4.0",
+  "messageType": "BluetoothRecord",
+  "data": {
+    "deviceSerialNumber": "1234",
+    "deviceName": "Craxiom Pixel",
+    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "latitude": 51.470334,
+    "longitude": -0.486594,
+    "altitude": 13.3,
+    "missionId": "Survey1 20200724-154325",
+    "recordNumber": 1,
+    "sourceAddress": "56:14:62:0D:98:01",
+    "destinationAddress": "68:7F:74:B0:14:22",
+    "signalStrength": -73,
+    "txPower": 8,
+    "technology": "LE",
+    "supportedTechnologies": "DUAL",
+    "otaDeviceName": "Apple Pencil",
+    "channel": 2
   }
 }</code></pre>
         <h6 class="text-xs font-bold text-grey-darker italic">This example has been generated automatically.</h6>
@@ -29511,7 +31043,7 @@ boolean
 
         
 
-<div class="text-sm markdown"><p>Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.</p>
+<div class="text-sm markdown"><p>Boolean indicating if this record represents a serving cell record, or a neighbor cell record. If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.</p>
 </div>
 
 
@@ -30012,13 +31544,1414 @@ string
 
 
       
-      <a name="message-GnssRecord"></a>
+      <a name="message-BluetoothRecord"></a>
       
 
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
     
     <span class="text-grey-darker font-bold mr-2">#7</span>
+    
+    
+      Bluetooth Record
+      <span class="border text-orange rounded text-xs ml-3 py-0 px-2">BluetoothRecord</span>
+    
+  </div>
+  <p class="text-grey-dark text-sm">Represents information recorded about a Bluetooth device at a particular time and geographic location. This message represents a capture of a signal Bluetooth frame.</p>
+  
+  
+
+<div class="mt-4">
+  
+</div>
+
+
+
+
+  <div class="mt-4 mb-4 markdown"></div>
+  
+    
+<div>
+  
+
+<div class="bg-grey-lighter  rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">Payload</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">bluetoothRecordPayload</span>
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"></div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lightest py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">version</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">version</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The version number of the Network Survey Messaging API that this message is based off of.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">messageType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The type of message, must be BluetoothRecord.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">data</span>
+        
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The payload of this message that contains all the message data.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lighter py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceSerialNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceSerialNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The unique identifier for the device that captured this record. This should be consistent and should never change.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceName</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceTime</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceTime</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">latitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">latitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The latitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">longitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">longitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The longitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">altitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">altitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The altitude in meters above MSL representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">missionId</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">missionId</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">recordNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">recordNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+integer
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">int32</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 1">>= 1</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">sourceAddress</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Source MAC Address, the original source of the frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">destinationAddress</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">destinationAddress</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>Destination MAC Address, the final destination of the frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">signalStrength</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">signalStrength</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least -200">>= -200</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 200"><= 200</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The signal strength of the received signal in dBm.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">txPower</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">txPower</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least -200">>= -200</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 200"><= 200</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The power in dBm that the device used to transmit the signal.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">technology</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">technology</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth wireless technology system that is used in this frame. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"BR_EDR"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"LE"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">supportedTechnologies</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">supportedTechnologies</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth wireless technology systems that are supported be the transmitting device. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"BR_EDR"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"LE"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"DUAL"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">otaDeviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">otaDeviceName</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The Bluetooth device name is the user-friendly name that a Bluetooth device exposes to remote devices. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 3, Part C Section 3.2.2 (page 1988) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">channel</span>
+        
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+integer
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">int32</span>
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At least 0">>= 0</span>
+            
+            
+            
+              <span class="bg-purple-dark font-bold no-underline text-white rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;" title="At most 78"><= 78</span>
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The channel on which this frame was recorded. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325) for more details.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+</div>
+
+  
+  
+</div>
+
+
+      
+      <a name="message-GnssRecord"></a>
+      
+
+<div class="bg-grey-lighter rounded p-4 mt-2">
+  <div class="text-sm text-grey-darker mb-2">
+    
+    <span class="text-grey-darker font-bold mr-2">#8</span>
     
     
       GNSS Record
@@ -31844,7 +34777,7 @@ number
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
     
-    <span class="text-grey-darker font-bold mr-2">#8</span>
+    <span class="text-grey-darker font-bold mr-2">#9</span>
     
     
       Energy Detection
@@ -33179,7 +36112,7 @@ number
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
     
-    <span class="text-grey-darker font-bold mr-2">#9</span>
+    <span class="text-grey-darker font-bold mr-2">#10</span>
     
     
       Signal Detection
@@ -34638,7 +37571,7 @@ string
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
     
-    <span class="text-grey-darker font-bold mr-2">#10</span>
+    <span class="text-grey-darker font-bold mr-2">#11</span>
     
     
       Device Status
@@ -35581,7 +38514,7 @@ string
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
     
-    <span class="text-grey-darker font-bold mr-2">#11</span>
+    <span class="text-grey-darker font-bold mr-2">#12</span>
     
     
       LTE RRC OTA Message

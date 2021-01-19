@@ -34,7 +34,7 @@ In addition to the messages this API defines, it also defines the topics the mes
 the topic is close to the message name, but the idea is that these messages can be sent over transports such as MQTT
 or Kafka. If they are, then the topic name in MQTT, Kafka, or any other system should follow the "channel" defined in
 this API. For example, the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey)
-has a feature that sends out the GSM, CDMA, UMTS, LTE, and 802.11 JSON messages defined in this API. In doing so, it
+has a feature that sends out the GSM, CDMA, UMTS, LTE, 802.11, and Bluetooth JSON messages defined in this API. In doing so, it
 publishes them to the MQTT topic that follows the channel name in this API. Therefore, anyone wanting to consume survey
 records from that app simply needs to subscribe the the pre-defined topic/channel name and consume the JSON messages.
 
@@ -108,7 +108,7 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.4.0) - 2021-01-10
+##### [0.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.4.0) - 2021-01-19
  * Added a message schema for holding cellular LTE Over The Air (OTA) NAS messages.
  * Added a message schema for 5G New Radio (NR) cellular survey records.
  * Added a message schema for Bluetooth survey records.

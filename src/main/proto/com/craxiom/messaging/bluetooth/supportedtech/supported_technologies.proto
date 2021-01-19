@@ -1,0 +1,23 @@
+/**
+ * Indicates which technologies the detected Bluetooth device can support.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.bluetooth.supportedtech;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.bluetooth";
+
+enum SupportedTechnologies {
+    UNKNOWN = 0;
+    BR_EDR = 1; // Basic Rate / Enhanced Data Rate (also covers 802.11 AMP). Aka Classic.
+    LE = 2;
+    DUAL = 3; // Dual Mode - BR/EDR/LE
+}

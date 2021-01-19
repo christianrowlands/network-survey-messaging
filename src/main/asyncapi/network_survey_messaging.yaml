@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.3.0'
+  version: '0.4.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -55,11 +55,23 @@ channels:
       message:
         $ref: '#/components/messages/lteRecord'
 
+  nr_message:
+    description: The nr_message topic/channel is where 5G NR survey records can be published. For MQTT, set the MQTT topic as "nr_message" and then publish a JSON message representing a 5G NR survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/nrRecord'
+
   wifi_beacon_message:
     description: The wifi_beacon_message topic/channel is where 802.11 beacon survey records can be published. For MQTT, set the MQTT topic as "wifi_beacon_message" and then publish a JSON message representing an 802.11 Access Point survey record in the format defined below.
     publish:
       message:
         $ref: '#/components/messages/wifiBeaconRecord'
+
+  bluetooth_message:
+    description: The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
+    publish:
+      message:
+        $ref: '#/components/messages/bluetoothRecord'
 
   gnss_message:
     description: The gnss_message topic/channel is where GNSS positioning records can be published. For MQTT, set the MQTT topic as "gnss_message" and then publish a JSON message in the format defined below.
@@ -131,6 +143,14 @@ components:
       payload:
         $ref: '#/components/schemas/lteRecordPayload'
 
+    nrRecord:
+      name: NrRecord
+      title: 5G NR Record
+      summary: Represents information recorded about a 5G NR gNodeB at a particular time and geographic location.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/nrRecordPayload'
+
     wifiBeaconRecord:
       name: WifiBeaconRecord
       title: Wi-Fi Beacon Record
@@ -138,6 +158,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiBeaconRecordPayload'
+
+    bluetoothRecord:
+      name: BluetoothRecord
+      title: Bluetooth Record
+      summary: Represents information recorded about a Bluetooth device at a particular time and geographic location. This message represents a capture of a signal Bluetooth frame.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/bluetoothRecordPayload'
 
     gnssRecord:
       name: GnssRecord
@@ -477,6 +505,93 @@ components:
             provider:
               $ref: '#/components/schemas/provider'
 
+    nrRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be NrRecord.
+          example: "NrRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - groupNumber
+            - narfcn
+            - pci
+            - rsrp
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            groupNumber:
+              $ref: '#/components/schemas/groupNumber'
+
+            mcc:
+              $ref: '#/components/schemas/mcc'
+            mnc:
+              $ref: '#/components/schemas/mnc'
+            tac:
+              $ref: '#/components/schemas/tac'
+              maximum: 16777215
+              description: NR Tracking Area Code, location code inside a PLMN, valid range 0 - 16,777,215 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 643.
+            nci:
+              $ref: '#/components/schemas/nci'
+            narfcn:
+              $ref: '#/components/schemas/narfcn'
+            pci:
+              $ref: '#/components/schemas/pci'
+              maximum: 1007
+              description: NR Physical Cell Identity, valid range 0-1007 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 503.
+            ssRsrp:
+              $ref: '#/components/schemas/ssRsrp'
+            ssRsrq:
+              $ref: '#/components/schemas/ssRsrq'
+            ssSinr:
+              $ref: '#/components/schemas/ssSinr'
+            csiRsrp:
+              $ref: '#/components/schemas/csiRsrp'
+            csiRsrq:
+              $ref: '#/components/schemas/csiRsrq'
+            csiSinr:
+              $ref: '#/components/schemas/csiSinr'
+            ta: # Defining it directly in NR so it does not conflict with the GSM and LTE TA
+              type: integer
+              format: int32
+              minimum: 0
+              maximum: 3846
+              description: NR Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-3846.
+              example: 14
+            servingCell:
+              $ref: '#/components/schemas/servingCell'
+            provider:
+              $ref: '#/components/schemas/provider'
+
     wifiBeaconRecordPayload:
       type: object
       required:
@@ -565,6 +680,71 @@ components:
               $ref: '#/components/schemas/nodeType'
             standard:
               $ref: '#/components/schemas/standard'
+
+    bluetoothRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be BluetoothRecord.
+          example: "BluetoothRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - sourceAddress
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+
+            sourceAddress:
+              $ref: '#/components/schemas/sourceAddress'
+              example: "56:14:62:0D:98:01"
+            destinationAddress:
+              $ref: '#/components/schemas/destinationAddress'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            txPower:
+              $ref: '#/components/schemas/txPower'
+            technology:
+              $ref: '#/components/schemas/technology'
+            supportedTechnologies:
+              $ref: '#/components/schemas/supportedTechnologies'
+            otaDeviceName:
+              $ref: '#/components/schemas/otaDeviceName'
+            channel: # Defining it directly so it does not conflict with the channel field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              maximum: 78
+              description: The channel on which this frame was recorded. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325) for more details.
+              example: 2
 
     gnssRecordPayload:
       type: object
@@ -926,7 +1106,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.3.0"
+      example: "0.4.0"
 
     messageType:
       type: string
@@ -1169,8 +1349,8 @@ components:
       type: integer
       format: int32
       minimum: 0
-      maximum: 65535
-      description: Downlink E-UTRA Absolute Radio Frequency Channel Number, valid range 0-65535, defined in 3GPP TS 36.101 Section 5.7.3.
+      maximum: 262143
+      description: Downlink E-UTRA Absolute Radio Frequency Channel Number, valid range 0-262143, defined in 3GPP TS 36.331 version 14.2.2 Release 14 page 567.
       example: 5230
 
     pci:
@@ -1210,6 +1390,69 @@ components:
         - "MHZ_15"
         - "MHZ_20"
 
+
+    # NR specific fields
+    nci:
+      type: integer
+      format: int64
+      minimum: 0
+      maximum: 68719476735
+      description: NCI, the Cell Identity of the measured cell, 36 bits. The gNB ID is the first 22-32 bits of the NCI and the remaining bits represent the sector. Valid range 0 - 68,719,476,735 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 370.
+      example: 52824577
+
+    narfcn:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 3279165
+      description: Downlink NR Absolute Radio Frequency Channel Number, valid range 0 - 3,279,165, defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 784.
+      example: 5230
+
+    ssRsrp:
+      type: number
+      format: float
+      minimum: -156
+      maximum: -31
+      description: Secondary Synchronization signal Reference Signal Received Power in dBm, valid range -156 to -31, corresponding to RSRP_1 to RSRP_126 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
+      example: -107
+
+    ssRsrq:
+      type: number
+      format: float
+      minimum: -43
+      maximum: 20
+      description: Secondary Synchronization signal Reference Signal Received Quality in dB, valid range -43 to 20, corresponding to SS-RSRQ_1 to SS-RSRQ_127 respectively (increments of 0.5) as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.11.1-1.
+      example: -11.5
+
+    ssSinr:
+      type: number
+      format: float
+      minimum: -23
+      maximum: 40
+      description: Secondary Synchronization signal signal-to-noise and interference ratio in dB. The reporting range of SS-SINR is defined from -23 dB to 40 dB with 0.5 dB resolution, corresponding to SINR_1 to SINR_127 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.16.1-1.
+      example: 14.5
+
+    csiRsrp:
+      type: number
+      format: float
+      minimum: -140
+      maximum: -44
+      description: Channel State Information (CSI) Reference Signal Received Power in dBm, valid range -140 to -44, corresponding to RSRP_17 to RSRP_113 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
+      example: -107
+
+    csiRsrq:
+      type: number
+      format: float
+      description: CSI Reference Signal Received Quality in dB.
+      example: -11.5
+
+    csiSinr:
+      type: number
+      format: float
+      minimum: -23
+      maximum: 40
+      description: CSI signal-to-noise and interference ratio in dB. The reporting range of CSI-SINR is defined from -23 dB to 40 dB with 0.5 dB resolution, corresponding to SINR_1 to SINR_127 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.16.1-1.
+      example: 14.5
 
     # Wi-Fi specific fields
     sourceAddress:
@@ -1316,7 +1559,7 @@ components:
 
     wps:
       type: boolean
-      description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
+      description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record. If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
 
     nodeType:
       type: string
@@ -1342,6 +1585,40 @@ components:
         - "IEEE80211N"
         - "IEEE80211AC"
         - "IEEE80211AX"
+
+
+    # Bluetooth specific fields
+    txPower:
+      type: number
+      format: float
+      minimum: -200
+      maximum: 200
+      description: The power in dBm that the device used to transmit the signal.
+      example: 8
+
+    technology:
+      type: string
+      description: The Bluetooth wireless technology system that is used in this frame. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.
+      example: "LE"
+      enum:
+        - "UNKNOWN"
+        - "BR_EDR"
+        - "LE"
+
+    supportedTechnologies:
+      type: string
+      description: The Bluetooth wireless technology systems that are supported be the transmitting device. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.
+      example: "DUAL"
+      enum:
+        - "UNKNOWN"
+        - "BR_EDR"
+        - "LE"
+        - "DUAL"
+
+    otaDeviceName:
+      type: string
+      description: The Bluetooth device name is the user-friendly name that a Bluetooth device exposes to remote devices. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 3, Part C Section 3.2.2 (page 1988) for more details.
+      example: "Apple Pencil"
 
 
     # GNSS specific fields

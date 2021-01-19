@@ -34,7 +34,7 @@ In addition to the messages this API defines, it also defines the topics the mes
 the topic is close to the message name, but the idea is that these messages can be sent over transports such as MQTT
 or Kafka. If they are, then the topic name in MQTT, Kafka, or any other system should follow the "channel" defined in
 this API. For example, the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey)
-has a feature that sends out the GSM, CDMA, UMTS, LTE, and 802.11 JSON messages defined in this API. In doing so, it
+has a feature that sends out the GSM, CDMA, UMTS, LTE, 802.11, and Bluetooth JSON messages defined in this API. In doing so, it
 publishes them to the MQTT topic that follows the channel name in this API. Therefore, anyone wanting to consume survey
 records from that app simply needs to subscribe the the pre-defined topic/channel name and consume the JSON messages.
 
@@ -72,7 +72,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.3.0'
+    implementation 'com.craxiom:network-survey-messaging:0.4.0'
 }
 ```
 
@@ -87,6 +87,11 @@ Then install the html template generator
  - `npm install -g @asyncapi/html-template`
 
 Additional AsyncAPI generators can be found here:  https://github.com/asyncapi/generator#list-of-official-generator-templates
+
+There is also an option to use a docker container for running the AsyncAPI commands instead of running locally. More information 
+can be found [here](https://www.npmjs.com/package/@asyncapi/generator#cli-usage-with-docker).
+
+An example command: `docker run --rm -it -v ${PWD}/src/main/asyncapi/network_survey_messaging.yaml:/app/network_survey_messaging.yaml -v ${PWD}/docs:/app/output asyncapi/generator /app/network_survey_messaging.yaml @asyncapi/html-template -o /app/output --force-write`
 
 #### Building the HTML content from the AsyncAPI file
  - Execute `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o build/network-survey-messaging-html`
@@ -103,6 +108,10 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.4.0) - 2021-01-19
+ * Added a message schema for 5G New Radio (NR) cellular survey records.
+ * Added a message schema for Bluetooth survey records.
+
 ##### [0.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.3.0) - 2020-12-18
  * Added a message schema for holding cellular LTE Over The Air (OTA) RRC messages.
 

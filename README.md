@@ -108,7 +108,7 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.5.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.5.0) - 2021-02-01
+##### [0.5.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.5.0) - 2021-01-22
 * Added a message schema for holding cellular LTE Over The Air (OTA) NAS messages.
 
 ##### [0.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.4.0) - 2021-01-19

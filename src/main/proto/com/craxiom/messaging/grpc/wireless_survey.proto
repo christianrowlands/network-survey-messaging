@@ -16,6 +16,7 @@ import "com/craxiom/messaging/umts_record.proto";
 import "com/craxiom/messaging/lte_record.proto";
 import "com/craxiom/messaging/nr_record.proto";
 import "com/craxiom/messaging/lte_rrc.proto";
+import "com/craxiom/messaging/lte_nas.proto";
 import "com/craxiom/messaging/wifi_beacon_record.proto";
 import "com/craxiom/messaging/gnss_record.proto";
 import "com/craxiom/messaging/energy_detection.proto";
@@ -44,6 +45,8 @@ service WirelessSurvey {
     rpc StreamSignalDetections (stream SignalDetection) returns (SignalDetectionResponse) {
     }
     rpc StreamLteRrc (stream LteRrc) returns (LteRrcResponse) {
+    }
+    rpc StreamLteNas (stream LteNas) returns (LteNasResponse) {
     }
 }
 
@@ -84,5 +87,9 @@ message SignalDetectionResponse {
 }
 
 message LteRrcResponse {
+
+}
+
+message LteNasResponse {
 
 }

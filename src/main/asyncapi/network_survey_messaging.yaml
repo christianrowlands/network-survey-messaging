@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.4.0'
+  version: '0.5.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -1102,7 +1102,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.4.0"
+      example: "0.5.0"
 
     messageType:
       type: string

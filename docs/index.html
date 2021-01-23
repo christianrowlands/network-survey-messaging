@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   
-  <title>Network Survey Messaging API 0.4.0 documentation</title>
+  <title>Network Survey Messaging API 0.5.0 documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <link href="css/tailwind.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
   <div class="sidebar-panel__content">
     
       <h1 class="text-2xl font-thin">
-        Network Survey Messaging API 0.4.0
+        Network Survey Messaging API 0.5.0
       </h1>
     
     <ul class="text-sm mt-10 list-reset mt-2">
@@ -391,6 +391,14 @@
             </div>
           </a>
         
+          <a class="js-menu-item flex break-words no-underline text-grey-darkest mt-8 sm:mt-8 md:mt-3" href="#message-LteNas">
+            <div style="display:inline-block;">
+              
+<span class="string-chunk" style="padding-top: 2px;">LteNas</span>
+
+            </div>
+          </a>
+        
       </ul>
     
   </div>
@@ -398,7 +406,7 @@
     <div class="content-panel flex-1 leading-loose z-10">
       <div class="center-block p-8">
   <a name="introduction"></a>
-  <h1>Network Survey Messaging API 0.4.0</h1>
+  <h1>Network Survey Messaging API 0.5.0</h1>
   <div class="leading-normal mb-4">
     
     
@@ -2148,7 +2156,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "GsmRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -3866,7 +3874,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "CdmaRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -5578,7 +5586,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "UmtsRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -7517,7 +7525,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "LteRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -9582,7 +9590,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "NrRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -12005,7 +12013,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "WifiBeaconRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -13524,7 +13532,7 @@ integer
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "BluetoothRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -15453,7 +15461,7 @@ number
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "GnssRecord",
   "data": {
     "deviceSerialNumber": "1234",
@@ -16897,7 +16905,7 @@ number
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "EnergyDetection",
   "data": {
     "deviceSerialNumber": "1234",
@@ -18458,7 +18466,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "SignalDetection",
   "data": {
     "deviceSerialNumber": "1234",
@@ -19505,7 +19513,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "DeviceStatus",
   "data": {
     "deviceSerialNumber": "1234",
@@ -19570,11 +19578,14 @@ string
 
 
     
-    <p>Accepts the following message:</p>
+    <p>Accepts <strong>one of</strong> the following messages:</p>
+    
     
 
 <div class="bg-grey-lighter rounded p-4 mt-2">
   <div class="text-sm text-grey-darker mb-2">
+    
+    <span class="text-grey-darker font-bold mr-2">#1</span>
     
     
       LTE RRC OTA Message
@@ -19599,7 +19610,7 @@ string
   
 
 <div class="bg-grey-lighter  rounded">
-  <div class="is-open">
+  <div class="">
     <div class="js-prop cursor-pointer py-2 flex property">
       <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
         <span class="text-sm" style="word-break: break-word;">Payload</span>
@@ -20536,6 +20547,932 @@ string
 
 
     
+    
+
+<div class="bg-grey-lighter rounded p-4 mt-2">
+  <div class="text-sm text-grey-darker mb-2">
+    
+    <span class="text-grey-darker font-bold mr-2">#2</span>
+    
+    
+      LTE NAS Message
+      <span class="border text-orange rounded text-xs ml-3 py-0 px-2">LteNas</span>
+    
+  </div>
+  <p class="text-grey-dark text-sm">Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.</p>
+  
+  
+
+<div class="mt-4">
+  
+</div>
+
+
+
+
+  <div class="mt-4 mb-4 markdown"></div>
+  
+    
+<div>
+  
+
+<div class="bg-grey-lighter  rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">Payload</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">lteNasPayload</span>
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"></div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lightest py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">version</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">version</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The version number of the Network Survey Messaging API that this message is based off of.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">messageType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The type of message, must be LteNas.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">data</span>
+        
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The payload of this message that contains all the message data.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lighter py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceSerialNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceSerialNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The unique identifier for the device that captured this record. This should be consistent and should never change.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceName</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceTime</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceTime</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">latitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">latitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The latitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">longitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">longitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The longitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">altitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">altitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The altitude in meters above MSL representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">missionId</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">missionId</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">channelType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"PLAIN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"SEC_HEADER"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">rawMessage</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">rawMessage</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">byte</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+</div>
+
+  
+  
+</div>
+
+
+    
+    
 
     
 
@@ -20551,6 +21488,7 @@ string
 <div class="right-block p-8">
   <h4 class="text-lg text-white mb-4">Examples</h4>
 
+  
   
   
 
@@ -20570,7 +21508,7 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
-  "version": "0.4.0",
+  "version": "0.5.0",
   "messageType": "LteRrc",
   "data": {
     "deviceSerialNumber": "1234",
@@ -20594,6 +21532,50 @@ string
 </form>
 
 
+  
+  
+
+<form>
+  <h5 class="examples-uid text-orange mt-4">LteNas</h5>
+  
+    <div class="payload-examples mb-4 ">
+      <div class="js-prop cursor-pointer  flex property">
+        <span class="px-2 mr-2 text-grey-lightest text-sm border rounded focus:outline-none cursor-pointer">Payload</span>
+        
+          <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+            xmlns="http://www.w3.org/2000/svg" y="0">
+            <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+          </svg>
+        
+      </div>
+      <div class="children payload-examples mt-4">
+        
+        <pre class="hljs mb-4 border border-grey-darkest rounded"><code>{
+  "version": "0.5.0",
+  "messageType": "LteNas",
+  "data": {
+    "deviceSerialNumber": "1234",
+    "deviceName": "Craxiom Pixel",
+    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "latitude": 51.470334,
+    "longitude": -0.486594,
+    "altitude": 13.3,
+    "missionId": "Survey1 20200724-154325",
+    "channelType": "PLAIN",
+    "rawMessage": "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
+  }
+}</code></pre>
+        <h6 class="text-xs font-bold text-grey-darker italic">This example has been generated automatically.</h6>
+        
+      </div>
+    </div>
+  
+
+  
+</form>
+
+
+  
   
 </div>
 
@@ -39341,6 +40323,932 @@ string
               <span class="border text-orange rounded ml-1 py-0 px-2">"PCCH_NB"</span>
             
               <span class="border text-orange rounded ml-1 py-0 px-2">"SC_MCCH_NB"</span>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">rawMessage</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">rawMessage</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">byte</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+            
+          
+        
+
+        
+        
+
+        
+        
+          
+            <p class="pl-6 mb-2 mt-4 text-xs text-grey-darker">Additional properties are allowed.</p>
+          
+        
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+</div>
+
+
+</div>
+
+  
+  
+</div>
+
+
+      
+      <a name="message-LteNas"></a>
+      
+
+<div class="bg-grey-lighter rounded p-4 mt-2">
+  <div class="text-sm text-grey-darker mb-2">
+    
+    <span class="text-grey-darker font-bold mr-2">#13</span>
+    
+    
+      LTE NAS Message
+      <span class="border text-orange rounded text-xs ml-3 py-0 px-2">LteNas</span>
+    
+  </div>
+  <p class="text-grey-dark text-sm">Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.</p>
+  
+  
+
+<div class="mt-4">
+  
+</div>
+
+
+
+
+  <div class="mt-4 mb-4 markdown"></div>
+  
+    
+<div>
+  
+
+<div class="bg-grey-lighter  rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">Payload</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">lteNasPayload</span>
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"></div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lightest py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">version</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">version</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The version number of the Network Survey Messaging API that this message is based off of.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">messageType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The type of message, must be LteNas.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lightest pl-8 pr-8 rounded">
+  <div class="">
+    <div class="js-prop cursor-pointer py-2 flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">data</span>
+        
+        
+        
+        <svg class="expand" version="1.1" viewBox="0 0 24 24" x="0"
+          xmlns="http://www.w3.org/2000/svg" y="0">
+          <polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon>
+        </svg>
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+object
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The payload of this message that contains all the message data.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+      <div class="children bg-grey-lighter py-4 rounded">
+        
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceSerialNumber</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceSerialNumber</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The unique identifier for the device that captured this record. This should be consistent and should never change.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceName</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceName</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">deviceTime</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">deviceTime</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">date-time</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The timestamp of when this message was created in milliseconds formatted as an <a href="https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14">RFC3339 date-time</a>. For example, <code>'1996-12-19T16:39:57-08:00'</code>.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">latitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">latitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The latitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">longitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">longitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">double</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The longitude representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">altitude</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">altitude</span>
+        
+        
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+number
+          
+          
+          
+          <div class="inline-block">
+            
+              <span class="bg-yellow-dark font-bold no-underline text-black rounded lowercase ml-2"
+                style="height: 20px;font-size: 11px;padding: 3px;">float</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The altitude in meters above MSL representing where this survey record was recorded.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">missionId</span>
+        
+        
+          <span class="border text-orange rounded text-xs ml-3 py-0 px-2">missionId</span>
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+
+
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+
+            
+          
+            
+            
+            
+              
+
+<div class="bg-grey-lighter pl-8 pr-8 rounded">
+  <div class="">
+    <div class=" flex property">
+      <div class="pr-4" style="margin-top:-2px; min-width: 25%;">
+        <span class="text-sm" style="word-break: break-word;">channelType</span>
+        
+        
+        
+        
+          <div class="text-red-dark text-xs">required</div>
+        
+        
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal font-bold">
+          
+string
+          
+          
+          
+          <div class="inline-block">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.</p>
+</div>
+
+
+
+        
+        
+        
+          <div class="text-xs">
+            Enum:
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"UNKNOWN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"PLAIN"</span>
+            
+              <span class="border text-orange rounded ml-1 py-0 px-2">"SEC_HEADER"</span>
             
           </div>
         

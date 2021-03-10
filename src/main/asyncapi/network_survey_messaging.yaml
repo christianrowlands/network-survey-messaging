@@ -1370,7 +1370,7 @@ components:
       format: float
       minimum: -19.5
       maximum: -3
-      description: Reference Signal Received Quality in dB, valid range -3 to -19.5, corresponding to RSRQ_34 to RSRP_00 respectively.
+      description: Reference Signal Received Quality in dB, valid range -3 to -19.5, corresponding to RSRQ_34 to RSRQ_00 respectively.
       example: -11.0
 
     lteBandwidth:

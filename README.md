@@ -79,7 +79,7 @@ dependencies {
 ## Build and development instructions
 #### Prerequisites
 
-To build the the AsyncAPI files you need to have `npm` installed. For macOS, it can be installed via brew
+To build the AsyncAPI files you need to have `npm` installed. For macOS, it can be installed via brew
  - `brew install node`
 
 Then install the html template generator

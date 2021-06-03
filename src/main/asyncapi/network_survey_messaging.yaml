@@ -786,6 +786,8 @@ components:
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
               description: Starts at 1 and each subsequent scan should have its number incremented by 1. Records with the same group number indicate they were all seen in the same "scan" for GNSS space vehicles.
+            deviceModel:
+              $ref: '#/components/schemas/deviceModel'
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -971,6 +973,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            deviceModel:
+              $ref: '#/components/schemas/deviceModel'
 
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
@@ -1172,6 +1176,11 @@ components:
       maximum: 200
       description: The signal strength of the received signal in dBm.
       example: -73
+
+    deviceModel:
+      type: string
+      description: The model number of the device that this message originated from.
+      example: "Pixel 5"
 
 
     # Common cellular fields

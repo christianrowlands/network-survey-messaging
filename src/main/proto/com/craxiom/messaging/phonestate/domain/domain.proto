@@ -1,0 +1,28 @@
+/**
+ * Defines the Domain values used in the Phone State message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.phonestate.domain;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.phonestate";
+
+/*
+ * This enum defines the Domain field of the Phone State message.
+ *
+ * The values from this enum are taken directly from android.telephony.NetworkRegistrationInfo.Domain and should be kept in
+ * sync with those values.
+ */
+enum Domain {
+    UNKNOWN = 0;
+    PS = 1;
+    CS = 2;
+}

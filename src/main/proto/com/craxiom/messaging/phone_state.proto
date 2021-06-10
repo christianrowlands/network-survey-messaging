@@ -1,0 +1,93 @@
+/**
+ * A protobuf definition of the Phone State message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Phone
+ * State message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/phonestate/domain/domain.proto";
+import "com/craxiom/messaging/phonestate/networktype/network_type.proto";
+import "com/craxiom/messaging/phonestate/simstate/sim_state.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message PhoneState {
+    string version = 1;
+    string messageType = 2;
+    PhoneStateData data = 3;
+}
+
+message PhoneStateData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+
+    com.craxiom.messaging.phonestate.simstate.SimState simState = 8;
+    string simOperator = 9;
+    repeated NetworkRegistrationInfo networkRegistrationInfo = 10;
+}
+
+// Used to report the details of a registered network
+message NetworkRegistrationInfo {
+    com.craxiom.messaging.phonestate.domain.Domain domain = 1;
+    com.craxiom.messaging.phonestate.networktype.NetworkType accessNetworkTechnology = 2;
+    google.protobuf.BoolValue roaming = 3;
+    google.protobuf.Int32Value rejectCause = 4;
+    oneof cellIdentity {
+        CellIdentityGsm cellIdentityGsm = 5;
+        CellIdentityCdma cellIdentityCdma = 6;
+        CellIdentityUmts cellIdentityUmts = 7;
+        CellIdentityLte cellIdentityLte = 8;
+        CellIdentityNr cellIdentityNr = 9;
+    }
+}
+
+message CellIdentityGsm {
+    google.protobuf.Int32Value mcc = 1;
+    google.protobuf.Int32Value mnc = 2;
+    google.protobuf.Int32Value lac = 3;
+    google.protobuf.Int32Value ci = 4;
+    google.protobuf.Int32Value arfcn = 5;
+    google.protobuf.Int32Value bsic = 6;
+}
+
+message CellIdentityCdma {
+    google.protobuf.Int32Value sid = 1;
+    google.protobuf.Int32Value nid = 2;
+    google.protobuf.Int32Value bsid = 3;
+}
+
+message CellIdentityUmts {
+    google.protobuf.Int32Value mcc = 1;
+    google.protobuf.Int32Value mnc = 2;
+    google.protobuf.Int32Value lac = 3;
+    google.protobuf.Int32Value cid = 4;
+    google.protobuf.Int32Value uarfcn = 5;
+    google.protobuf.Int32Value psc = 6;
+}
+
+message CellIdentityLte {
+    google.protobuf.Int32Value mcc = 1;
+    google.protobuf.Int32Value mnc = 2;
+    google.protobuf.Int32Value tac = 3;
+    google.protobuf.Int32Value eci = 4;
+    google.protobuf.Int32Value earfcn = 5;
+    google.protobuf.Int32Value pci = 6;
+}
+
+message CellIdentityNr {
+    google.protobuf.Int32Value mcc = 1;
+    google.protobuf.Int32Value mnc = 2;
+    google.protobuf.Int32Value tac = 3;
+    google.protobuf.Int64Value nci = 4;
+    google.protobuf.Int32Value narfcn = 5;
+    google.protobuf.Int32Value pci = 6;
+}

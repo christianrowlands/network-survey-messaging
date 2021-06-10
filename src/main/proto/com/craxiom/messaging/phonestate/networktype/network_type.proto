@@ -1,0 +1,46 @@
+/**
+ * Defines the Access Network Technology values used in the Phone State message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.phonestate.networktype;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.phonestate";
+
+/*
+ * This enum defines the Access Network Technology field of the Phone State message.
+ *
+ * The values from this enum are taken directly from android.telephony.TelephonyManager#NETWORK_TYPES and should be kept
+ * in sync with those values. Even the numbers line up exactly, which makes conversion easier.
+ */
+enum NetworkType {
+    UNKNOWN = 0;
+    GPRS = 1;
+    EDGE = 2;
+    UMTS = 3;
+    CDMA = 4;
+    EVDO_0 = 5;
+    EVDO_A = 6;
+    OnexRTT = 7; // Had to replace the 1 with One
+    HSDPA = 8;
+    HSUPA = 9;
+    HSPA = 10;
+    IDEN = 11;
+    EVDO_B = 12;
+    LTE = 13;
+    EHRPD = 14;
+    HSPAP = 15;
+    GSM = 16;
+    TD_SCDMA = 17;
+    IWLAN = 18;
+    LTE_CA = 19;
+    NR = 20;
+}

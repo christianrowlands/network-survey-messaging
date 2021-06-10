@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.5.0'
+  version: '0.6.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -61,8 +61,8 @@ channels:
       message:
         $ref: '#/components/messages/nrRecord'
 
-  wifi_beacon_message:
-    description: The wifi_beacon_message topic/channel is where 802.11 beacon survey records can be published. For MQTT, set the MQTT topic as "wifi_beacon_message" and then publish a JSON message representing an 802.11 Access Point survey record in the format defined below.
+  80211_beacon_message:
+    description: The 80211_beacon_message topic/channel is where 802.11 beacon survey records can be published. For MQTT, set the MQTT topic as "80211_beacon_message" and then publish a JSON message representing an 802.11 Access Point survey record in the format defined below.
     publish:
       message:
         $ref: '#/components/messages/wifiBeaconRecord'
@@ -92,10 +92,12 @@ channels:
         $ref: '#/components/messages/signalDetection'
 
   device_status_message:
-    description: The device_status_message topic/channel is where device status records can be published. For MQTT, set the MQTT topic as "device_status_message" and then publish a JSON message in the format defined below.
+    description: The device_status_message topic/channel is where device status records can be published. This includes both `DeviceStatus` and `PhoneState` messages. For MQTT, set the MQTT topic as "device_status_message" and then publish a JSON message in one of the formats defined below.
     publish:
       message:
-        $ref: '#/components/messages/deviceStatus'
+        oneOf:
+          - $ref: '#/components/messages/deviceStatus'
+          - $ref: '#/components/messages/phoneState'
 
   lte_ota_message:
     description: The lte_ota_message topic/channel is where Over The Air (OTA) LTE messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA LTE message.
@@ -194,6 +196,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/deviceStatusPayload'
+
+    phoneState:
+      name: PhoneState
+      title: Phone State
+      summary: Represents the current state of the phone to include information about the currrently registered networks. The interval of this message can vary depending on use case, but is typically sent when a change in the phone's state orrurs, such as registering to a new network or being rejected from a netowrk.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/phoneStatePayload'
 
     lteRrc:
       name: LteRrc
@@ -553,17 +563,13 @@ components:
             mnc:
               $ref: '#/components/schemas/mnc'
             tac:
-              $ref: '#/components/schemas/tac'
-              maximum: 16777215
-              description: NR Tracking Area Code, location code inside a PLMN, valid range 0 - 16,777,215 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 643.
+              $ref: '#/components/schemas/nrTac'
             nci:
               $ref: '#/components/schemas/nci'
             narfcn:
               $ref: '#/components/schemas/narfcn'
             pci:
-              $ref: '#/components/schemas/pci'
-              maximum: 1007
-              description: NR Physical Cell Identity, valid range 0-1007 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 503.
+              $ref: '#/components/schemas/nrPci'
             ssRsrp:
               $ref: '#/components/schemas/ssRsrp'
             ssRsrq:
@@ -981,6 +987,50 @@ components:
             error:
               $ref: '#/components/schemas/error'
 
+    phoneStatePayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be PhoneState.
+          example: "PhoneState"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+
+            simState:
+              $ref: '#/components/schemas/simState'
+            simOperator:
+              $ref: '#/components/schemas/simOperator'
+            networkRegistrationInfo:
+              type: array
+              items:
+                $ref: '#/components/schemas/networkRegistrationInfo'
+
     lteRrcPayload:
       type: object
       required:
@@ -1106,7 +1156,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.5.0"
+      example: "0.6.0"
 
     messageType:
       type: string
@@ -1397,6 +1447,13 @@ components:
 
 
     # NR specific fields
+    nrTac:
+      type: integer
+      minimum: 0
+      maximum: 16777215
+      description: NR Tracking Area Code, location code inside a PLMN, valid range 0 - 16,777,215 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 643.
+      example: 52803
+
     nci:
       type: integer
       format: int64
@@ -1412,6 +1469,14 @@ components:
       maximum: 3279165
       description: Downlink NR Absolute Radio Frequency Channel Number, valid range 0 - 3,279,165, defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 784.
       example: 5230
+
+    nrPci:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 1007
+      description: NR Physical Cell Identity, valid range 0-1007 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 503.
+      example: 234
 
     ssRsrp:
       type: number
@@ -1791,6 +1856,193 @@ components:
           type: string
           description: A description of the error state that the device is in.
           example: "The scan stopped unexpectedly"
+
+    # Phone State specific fields
+    simState:
+      type: string
+      description: The current state of the SIM card. The values are taken directly from android.telephony.TelephonyManager#SimState and should be kept in sync with those values. Even the order lines up exactly, which makes conversion easier.
+      example: "READY"
+      enum:
+        - "UNKNOWN"
+        - "ABSENT"
+        - "PIN_REQUIRED"
+        - "PUK_REQUIRED"
+        - "NETWORK_LOCKED"
+        - "READY"
+        - "NOT_READY"
+        - "PERM_DISABLED"
+        - "CARD_IO_ERROR"
+        - "CARD_RESTRICTED"
+        - "LOADED"
+        - "PRESENT"
+
+    simOperator:
+      type: string
+      description: The PLMN portion of the SIM's IMSI. This indicates the provider that issued the SIM card. The format is the MCC and MNC concatenated as one string. Can be 5 or 6 digits in length where the MCC is always 3 digits and the MNC is either 2 or 3.
+      example: "311480"
+
+    networkRegistrationInfo:
+      type: object
+      description: A network that this device is registered to, or tried to register to.
+      properties:
+        domain:
+          type: string
+          description: The type of network, either Packet Switched (PS) or Circuit Switched (CS).
+          example: "PS"
+          enum:
+            - "UNKNOWN"
+            - "PS"
+            - "CS"
+        accessNetworkTechnology:
+          type: string
+          description: The technology type for this network, for example, UMTS or LTE. These values mirror the Android TelephonyManager Network Type constants.
+          example: "LTE"
+          enum:
+            - "UNKNOWN"
+            - "GPRS"
+            - "EDGE"
+            - "UMTS"
+            - "CDMA"
+            - "EVDO_0"
+            - "EVDO_A"
+            - "OnexRTT"
+            - "HSDPA"
+            - "HSUPA"
+            - "HSPA"
+            - "IDEN"
+            - "EVDO_B"
+            - "LTE"
+            - "EHRPD"
+            - "HSPAP"
+            - "GSM"
+            - "TD_SCDMA"
+            - "IWLAN"
+            - "LTE_CA"
+            - "NR"
+        roaming:
+          type: boolean
+          description: Boolean indicating if this device is roaming on this network.
+          example: false
+        rejectCause:
+          type: integer
+          format: int32
+          minimum: 0
+          description: If the UE tried to register with this network and was denied, this vlaue indicates the rejection reason. The values are defined in 3GPP TS 24.008 version 16.7.0 page 536 (Reject cause), and 3GPP TS 24.301 version 16.8.0 page 418 (EMM cause).
+        cellIdentityXXX:
+          description: The properties defining the cell. The properties are different for each technology so the object type will be different depending on the accessNetworkTechnology. The name of this field will be different for each object. For example, it will be `cellIdentityLte` for LTE and `cellIdentityNr` for NR.
+          oneOf:
+            - $ref: '#/components/schemas/cellIdentityGsm'
+            - $ref: '#/components/schemas/cellIdentityCdma'
+            - $ref: '#/components/schemas/cellIdentityUmts'
+            - $ref: '#/components/schemas/cellIdentityLte'
+            - $ref: '#/components/schemas/cellIdentityNr'
+      example:
+        - domain: "CS"
+          accessNetworkTechnology: "LTE"
+          roaming: false
+          rejectCause: 0
+          cellIdentityLte:
+            mcc: 311
+            mnc: 480
+            tac: 52803
+            eci: 52824577
+            earfcn: 5230
+            pci: 234
+        - domain: "PS"
+          accessNetworkTechnology: "LTE"
+          roaming: false
+          rejectCause: 0
+          cellIdentityLte:
+            mcc: 311
+            mnc: 480
+            tac: 52803
+            eci: 52824577
+            earfcn: 5230
+            pci: 234
+
+    cellIdentityGsm:
+      type: object
+      name: cellIdentityGsm
+      description: Contains the information about a particular GSM cell.
+      properties:
+        mcc:
+          $ref: '#/components/schemas/mcc'
+          example: 310
+        mnc:
+          $ref: '#/components/schemas/mnc'
+          example: 410
+        lac:
+          $ref: '#/components/schemas/lac'
+        ci:
+          $ref: '#/components/schemas/ci'
+        arfcn:
+          $ref: '#/components/schemas/arfcn'
+        bsic:
+          $ref: '#/components/schemas/bsic'
+
+    cellIdentityCdma:
+      type: object
+      description: Contains the information about a particular CDMA cell.
+      properties:
+        sid:
+          $ref: '#/components/schemas/sid'
+        nid:
+          $ref: '#/components/schemas/nid'
+        bsid:
+          $ref: '#/components/schemas/bsid'
+
+    cellIdentityUmts:
+      type: object
+      description: Contains the information about a particular UMTS cell.
+      properties:
+        mcc:
+          $ref: '#/components/schemas/mcc'
+          example: 310
+        mnc:
+          $ref: '#/components/schemas/mnc'
+          example: 260
+        lac:
+          $ref: '#/components/schemas/lac'
+        cid:
+          $ref: '#/components/schemas/cid'
+        uarfcn:
+          $ref: '#/components/schemas/uarfcn'
+        psc:
+          $ref: '#/components/schemas/psc'
+
+    cellIdentityLte:
+      type: object
+      description: Contains the information about a particular LTE cell.
+      properties:
+        mcc:
+          $ref: '#/components/schemas/mcc'
+        mnc:
+          $ref: '#/components/schemas/mnc'
+        tac:
+          $ref: '#/components/schemas/tac'
+        eci:
+          $ref: '#/components/schemas/eci'
+        earfcn:
+          $ref: '#/components/schemas/earfcn'
+        pci:
+          $ref: '#/components/schemas/pci'
+
+    cellIdentityNr:
+      type: object
+      description: Contains the information about a particular NR cell.
+      properties:
+        mcc:
+          $ref: '#/components/schemas/mcc'
+        mnc:
+          $ref: '#/components/schemas/mnc'
+        tac:
+          $ref: '#/components/schemas/nrTac'
+        nci:
+          $ref: '#/components/schemas/nci'
+        narfcn:
+          $ref: '#/components/schemas/narfcn'
+        pci:
+          $ref: '#/components/schemas/nrPci'
 
     # Common fields for Raw Cellular messages
     rawMessage:

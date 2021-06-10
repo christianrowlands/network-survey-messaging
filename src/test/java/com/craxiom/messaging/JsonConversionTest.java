@@ -3,6 +3,9 @@ package com.craxiom.messaging;
 import com.craxiom.messaging.bluetooth.SupportedTechnologies;
 import com.craxiom.messaging.bluetooth.Technology;
 import com.craxiom.messaging.gnss.Constellation;
+import com.craxiom.messaging.phonestate.Domain;
+import com.craxiom.messaging.phonestate.NetworkType;
+import com.craxiom.messaging.phonestate.SimState;
 import com.craxiom.messaging.wifi.AkmSuite;
 import com.craxiom.messaging.wifi.CipherSuite;
 import com.craxiom.messaging.wifi.EncryptionType;
@@ -876,6 +879,137 @@ public class JsonConversionTest
         assertEquals(13.3f, data.getAltitude());
         assertEquals(38, data.getBatteryLevelPercent().getValue());
         assertEquals("The scan stopped unexpectedly", data.getError().getErrorMessage());
+    }
+
+    @Test
+    public void testPhoneStateToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.6.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
+                "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
+                "\"networkRegistrationInfo\":" +
+                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}," +
+                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}]}}";
+
+        final PhoneState.Builder recordBuilder = PhoneState.newBuilder();
+        recordBuilder.setVersion("0.6.0");
+        recordBuilder.setMessageType("PhoneState");
+
+        final PhoneStateData.Builder dataBuilder = PhoneStateData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("ee4d453e4c6f73fa");
+        dataBuilder.setDeviceName("pixel3a");
+        dataBuilder.setDeviceTime("2021-06-10T08:57:41.249-04:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(13.3f);
+        dataBuilder.setSimState(SimState.READY);
+        dataBuilder.setSimOperator("311480");
+
+        final NetworkRegistrationInfo.Builder infoBuilder0 = NetworkRegistrationInfo.newBuilder();
+        infoBuilder0.setDomain(Domain.CS);
+        infoBuilder0.setAccessNetworkTechnology(NetworkType.LTE);
+        infoBuilder0.setRoaming(BoolValue.newBuilder().setValue(false).build());
+        infoBuilder0.setRejectCause(Int32Value.newBuilder().setValue(0).build());
+
+        final CellIdentityLte.Builder cellBuilder0 = CellIdentityLte.newBuilder();
+        cellBuilder0.setMcc(Int32Value.newBuilder().setValue(311).build());
+        cellBuilder0.setMnc(Int32Value.newBuilder().setValue(480).build());
+        cellBuilder0.setTac(Int32Value.newBuilder().setValue(40198).build());
+        cellBuilder0.setEci(Int32Value.newBuilder().setValue(116995606).build());
+        cellBuilder0.setEarfcn(Int32Value.newBuilder().setValue(66586).build());
+        cellBuilder0.setPci(Int32Value.newBuilder().setValue(250).build());
+        infoBuilder0.setCellIdentityLte(cellBuilder0);
+
+        dataBuilder.addNetworkRegistrationInfo(infoBuilder0);
+
+        final NetworkRegistrationInfo.Builder infoBuilder1 = NetworkRegistrationInfo.newBuilder();
+        infoBuilder1.setDomain(Domain.PS);
+        infoBuilder1.setAccessNetworkTechnology(NetworkType.LTE);
+        infoBuilder1.setRoaming(BoolValue.newBuilder().setValue(false).build());
+        infoBuilder1.setRejectCause(Int32Value.newBuilder().setValue(0).build());
+
+        final CellIdentityLte.Builder cellBuilder1 = CellIdentityLte.newBuilder();
+        cellBuilder1.setMcc(Int32Value.newBuilder().setValue(311).build());
+        cellBuilder1.setMnc(Int32Value.newBuilder().setValue(480).build());
+        cellBuilder1.setTac(Int32Value.newBuilder().setValue(40198).build());
+        cellBuilder1.setEci(Int32Value.newBuilder().setValue(116995606).build());
+        cellBuilder1.setEarfcn(Int32Value.newBuilder().setValue(66586).build());
+        cellBuilder1.setPci(Int32Value.newBuilder().setValue(250).build());
+        infoBuilder1.setCellIdentityLte(cellBuilder1);
+
+        dataBuilder.addNetworkRegistrationInfo(infoBuilder1);
+
+        recordBuilder.setData(dataBuilder);
+
+        final PhoneState record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testPhoneStateFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.6.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
+                "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
+                "\"networkRegistrationInfo\":" +
+                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}," +
+                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}]}}";
+
+        final PhoneState.Builder builder = PhoneState.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final PhoneState convertedRecord = builder.build();
+
+        assertEquals("0.6.0", convertedRecord.getVersion());
+        assertEquals("PhoneState", convertedRecord.getMessageType());
+
+        final PhoneStateData data = convertedRecord.getData();
+        assertEquals("ee4d453e4c6f73fa", data.getDeviceSerialNumber());
+        assertEquals("pixel3a", data.getDeviceName());
+        assertEquals("2021-06-10T08:57:41.249-04:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(13.3f, data.getAltitude());
+        assertEquals("READY", data.getSimState().toString());
+        assertEquals("311480", data.getSimOperator());
+
+        final NetworkRegistrationInfo info0 = data.getNetworkRegistrationInfo(0);
+        assertEquals("CS", info0.getDomain().toString());
+        assertEquals("LTE", info0.getAccessNetworkTechnology().toString());
+        assertFalse(info0.getRoaming().getValue());
+        assertEquals(0, info0.getRejectCause().getValue());
+        final CellIdentityLte cellIdentityLte0 = info0.getCellIdentityLte();
+        assertEquals(311, cellIdentityLte0.getMcc().getValue());
+        assertEquals(480, cellIdentityLte0.getMnc().getValue());
+        assertEquals(40198, cellIdentityLte0.getTac().getValue());
+        assertEquals(116995606, cellIdentityLte0.getEci().getValue());
+        assertEquals(66586, cellIdentityLte0.getEarfcn().getValue());
+        assertEquals(250, cellIdentityLte0.getPci().getValue());
+
+        final NetworkRegistrationInfo info1 = data.getNetworkRegistrationInfo(1);
+        assertEquals("PS", info1.getDomain().toString());
+        assertEquals("LTE", info1.getAccessNetworkTechnology().toString());
+        assertFalse(info1.getRoaming().getValue());
+        assertEquals(0, info1.getRejectCause().getValue());
+        final CellIdentityLte cellIdentityLte1 = info1.getCellIdentityLte();
+        assertEquals(311, cellIdentityLte1.getMcc().getValue());
+        assertEquals(480, cellIdentityLte1.getMnc().getValue());
+        assertEquals(40198, cellIdentityLte1.getTac().getValue());
+        assertEquals(116995606, cellIdentityLte1.getEci().getValue());
+        assertEquals(66586, cellIdentityLte1.getEarfcn().getValue());
+        assertEquals(250, cellIdentityLte1.getPci().getValue());
     }
 
     @Test

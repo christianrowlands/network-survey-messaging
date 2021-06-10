@@ -567,7 +567,7 @@ public class JsonConversionTest
     @Test
     public void testGnssToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
+        final String expectedJson = "{\"version\":\"0.2.2\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"deviceModel\":\"Pixel 5\",\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2}}";
 
         final GnssRecord.Builder recordBuilder = GnssRecord.newBuilder();
         recordBuilder.setVersion("0.2.2");
@@ -583,6 +583,7 @@ public class JsonConversionTest
         dataBuilder.setMissionId("Survey1 20200724-154325");
         dataBuilder.setRecordNumber(1);
         dataBuilder.setGroupNumber(23);
+        dataBuilder.setDeviceModel("Pixel 5");
         dataBuilder.setConstellation(Constellation.GLONASS);
         dataBuilder.setSpaceVehicleId(UInt32Value.newBuilder().setValue(4567).build());
         dataBuilder.setCarrierFreqHz(UInt64Value.newBuilder().setValue(120_000_000).build());
@@ -816,7 +817,7 @@ public class JsonConversionTest
     @Test
     public void testDeviceStatusToJson()
     {
-        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"}}}";
+        final String expectedJson = "{\"version\":\"0.2.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"}}}";
 
         final DeviceStatus.Builder recordBuilder = DeviceStatus.newBuilder();
         recordBuilder.setVersion("0.2.0");
@@ -829,6 +830,7 @@ public class JsonConversionTest
         dataBuilder.setLatitude(51.470334);
         dataBuilder.setLongitude(-0.486594);
         dataBuilder.setAltitude(13.3f);
+        dataBuilder.setDeviceModel("SM-G981U1");
         dataBuilder.setBatteryLevelPercent(Int32Value.newBuilder().setValue(38).build());
         dataBuilder.setError(Error.newBuilder().setErrorMessage("The scan stopped unexpectedly").build());
 

@@ -24,7 +24,7 @@ The latest version of the API is published [here](https://messaging.networksurve
 ## Why?
 The original purpose for this API was to facilitate sending LTE survey messages from the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey)
 to a remote server via gRPC. However, it has been expanded not only to support additional protocols such as
-GSM, CDMA, UMTS and 802.11, but has also been expanded to allow for its use outside of the original Android application
+GSM, CDMA, UMTS and 802.11, but has also been expanded to allow for its use outside the original Android application
 by any system wanting to share wireless protocol data, or send wireless signal events.
 
 
@@ -108,8 +108,9 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.6.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.6.0) - 2021-06-07
+##### [0.6.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.6.0) - 2021-06-10
 * Added a deviceModel field to the message schemas.
+* Added a PhoneState message that is sent over the device_status_message topic that reports changes to the serving cell.
 
 ##### [0.5.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.5.0) - 2021-01-22
 * Added a message schema for holding cellular LTE Over The Air (OTA) NAS messages.

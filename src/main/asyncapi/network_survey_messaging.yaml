@@ -1021,6 +1021,10 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
 
             simState:
               $ref: '#/components/schemas/simState'

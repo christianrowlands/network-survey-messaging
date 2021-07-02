@@ -1,0 +1,43 @@
+/**
+ * Defines the WCDMA RRC OTA Channel Type values used in the WCDMA RRC message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.wcdmarrcchanneltype;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+enum WcdmaRrcChannelType {
+    UNKNOWN = 0;
+    DL_CCCH = 1;
+    DL_DCCH = 2;
+    UL_CCCH = 3;
+    UL_DCCH = 4;
+    BCCH_BCH = 5;
+    BCCH_DL_SCH = 6;
+    PCCH = 7;
+    MCCH = 8;
+    BCCH_BCH_MBMS = 9;
+    BCCH_DL_SCH_BR = 10;
+    BCCH_DL_SCH_MBMS = 11;
+    SC_MCCH = 12;
+    SBCCH_SL_BCH = 13;
+    SBCCH_SL_BCH_V2X = 14;
+    DL_CCCH_NB = 15;
+    DL_DCCH_NB = 16;
+    UL_CCCH_NB = 17;
+    UL_DCCH_NB = 18;
+    BCCH_BCH_NB = 19;
+    BCCH_BCH_TDD_NB = 20;
+    BCCH_DL_SCH_NB = 21;
+    PCCH_NB = 22;
+    SC_MCCH_NB = 23;
+}

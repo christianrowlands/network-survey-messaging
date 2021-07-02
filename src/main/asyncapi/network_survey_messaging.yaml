@@ -99,11 +99,13 @@ channels:
           - $ref: '#/components/messages/deviceStatus'
           - $ref: '#/components/messages/phoneState'
 
-  lte_ota_message:
-    description: The lte_ota_message topic/channel is where Over The Air (OTA) LTE messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA LTE message.
+  cellular_ota_message:
+    description: The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "cellular_ota_message" and then publish a JSON message representing an OTA Cellular message.
     publish:
       message:
         oneOf:
+          - $ref: '#/components/messages/umtsNas'
+          - $ref: '#/components/messages/wcdmaRrc'
           - $ref: '#/components/messages/lteRrc'
           - $ref: '#/components/messages/lteNas'
 
@@ -220,6 +222,24 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteNasPayload'
+
+    umtsNas:
+      name: UmtsNas
+      title: UMTS NAS Message
+      summary: Represents a raw UMTS NAS message sent Over The Air (OTA) between an UMTS uNodeB and an UMTS UE.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/umtsNasPayload'
+
+
+    wcdmaRrc:
+      name: WcdmaRrc
+      title: WCDMA RRC OTA Message
+      summary: Represents a raw WCDMA RRC message sent Over The Air (OTA) between an UMTS uNodeB and an UMTS UE.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wcdmaRrcPayload'
+
 
   schemas:
     gsmRecordPayload:
@@ -1030,6 +1050,127 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/networkRegistrationInfo'
+
+    wcdmaRrcPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WcdmaRrc.
+          example: "WcdmaRrc"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - channelType
+            - rawMessage
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+
+            channelType:
+              $ref: '#/components/schemas/channelType'
+              example: "BCCH_BCH"
+              enum:
+                - "UNKNOWN"
+                - "DL_CCCH"
+                - "DL_DCCH"
+                - "UL_CCCH"
+                - "UL_DCCH"
+                - "BCCH_BCH"
+                - "BCCH_DL_SCH"
+                - "PCCH"
+                - "MCCH"
+                - "BCCH_BCH_MBMS"
+                - "BCCH_DL_SCH_BR"
+                - "BCCH_DL_SCH_MBMS"
+                - "SC_MCCH"
+                - "SBCCH_SL_BCH"
+                - "SBCCH_SL_BCH_V2X"
+                - "DL_CCCH_NB"
+                - "DL_DCCH_NB"
+                - "UL_CCCH_NB"
+                - "UL_DCCH_NB"
+                - "BCCH_BCH_NB"
+                - "BCCH_BCH_TDD_NB"
+                - "BCCH_DL_SCH_NB"
+                - "PCCH_NB"
+                - "SC_MCCH_NB"
+            rawMessage:
+              $ref: '#/components/schemas/rawMessage'
+
+    umtsNasPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be UmtsNas.
+          example: "UmtsNas"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - channelType
+            - rawMessage
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+
+            channelType:
+              $ref: '#/components/schemas/channelType'
+              example: "PLAIN"
+              enum:
+                - "UNKNOWN"
+                - "PLAIN"
+                - "SEC_HEADER"
+            rawMessage:
+              $ref: '#/components/schemas/rawMessage'
 
     lteRrcPayload:
       type: object

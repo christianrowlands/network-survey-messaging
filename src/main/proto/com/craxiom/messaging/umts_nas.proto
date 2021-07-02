@@ -1,0 +1,33 @@
+/**
+ * A protobuf definition of the LTE NAS message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true LTE
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "com/craxiom/messaging/umtsnaschanneltype/umts_nas_channel_type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message UmtsNas {
+  string version = 1;
+  string messageType = 2;
+  UmtsNasData data = 3;
+}
+
+message UmtsNasData {
+  string deviceSerialNumber = 1;
+  string deviceName = 2;
+  string deviceTime = 3;
+  double latitude = 4;
+  double longitude = 5;
+  float altitude = 6;
+  string missionId = 7;
+
+  com.craxiom.messaging.umtsnaschanneltype.UmtsNasChannelType channelType = 10;
+  bytes rawMessage = 11;
+}

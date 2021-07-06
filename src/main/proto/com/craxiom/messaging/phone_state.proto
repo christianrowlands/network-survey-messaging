@@ -29,10 +29,12 @@ message PhoneStateData {
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
 
-    com.craxiom.messaging.phonestate.simstate.SimState simState = 8;
-    string simOperator = 9;
-    repeated NetworkRegistrationInfo networkRegistrationInfo = 10;
+    com.craxiom.messaging.phonestate.simstate.SimState simState = 9;
+    string simOperator = 10;
+    repeated NetworkRegistrationInfo networkRegistrationInfo = 11;
 }
 
 // Used to report the details of a registered network

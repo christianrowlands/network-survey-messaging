@@ -72,7 +72,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:0.6.0'
+    implementation 'com.craxiom:network-survey-messaging:0.6.1'
 }
 ```
 
@@ -108,6 +108,9 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.6.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.6.1) - 2021-07-06
+* Added the missionID and recordNumber fields to the Phone State message schema.
+
 ##### [0.6.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.6.0) - 2021-06-10
 * Added a deviceModel field to the message schemas.
 * Added a PhoneState message that is sent over the device_status_message topic that reports changes to the serving cell.

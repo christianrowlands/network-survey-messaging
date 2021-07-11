@@ -1,0 +1,34 @@
+/**
+ * A protobuf definition of the WCDMA RRC Signaling message defined in the Network Survey Messaging API.
+
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true WCDMA
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "com/craxiom/messaging/wcdmarrcchanneltype/wcdma_rrc_channel_type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message WcdmaRrc {
+  string version = 1;
+  string messageType = 2;
+  WcdmaRrcData data = 3;
+}
+
+message WcdmaRrcData {
+  string deviceSerialNumber = 1;
+  string deviceName = 2;
+  string deviceTime = 3;
+  double latitude = 4;
+  double longitude = 5;
+  float altitude = 6;
+  string missionId = 7;
+
+  com.craxiom.messaging.wcdmarrcchanneltype.WcdmaRrcChannelType channelType = 10;
+  bytes rawMessage = 11;
+}

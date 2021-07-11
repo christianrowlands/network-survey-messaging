@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.craxiom'
-version '0.7.0-SNAPSHOT'
+version '0.7.0-SN'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
@@ -152,11 +152,11 @@ publishing {
         mavenLocal()
     }
 }
-
+/*
 signing {
     sign publishing.publications
 }
-
+*/
 /**
  * Try to locate a credential value (username or password) in the credentials store.
  *

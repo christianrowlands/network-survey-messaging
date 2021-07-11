@@ -1,5 +1,5 @@
 /**
- * Defines the LTE NAS OTA Channel Type values used in the LTE NAS message.
+ * Defines the UMTS NAS DSDS (Dual Sim) OTA Channel Type values used in the UMTS NAS DSDS message.
  *
  * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
  * schema.

@@ -105,7 +105,6 @@ channels:
       message:
         oneOf:
           - $ref: '#/components/messages/umtsNas'
-          - $ref: '#/components/messages/umtsNasDsds'
           - $ref: '#/components/messages/wcdmaRrc'
           - $ref: '#/components/messages/lteRrc'
           - $ref: '#/components/messages/lteNas'
@@ -139,7 +138,7 @@ components:
     lteRecord:
       name: LteRecord
       title: LTE Record
-      summary: Represents information recorded about an LTE eNodeB at a particular time and geographic location.
+      summary: Represents information recorded about a LTE eNodeB at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRecordPayload'
@@ -211,7 +210,7 @@ components:
     lteRrc:
       name: LteRrc
       title: LTE RRC OTA Message
-      summary: Represents a raw LTE RRC message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
+      summary: Represents a raw LTE RRC message sent Over The Air (OTA) between a LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRrcPayload'
@@ -219,7 +218,7 @@ components:
     lteNas:
       name: LteNas
       title: LTE NAS Message
-      summary: Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
+      summary: Represents a raw LTE NAS message sent Over The Air (OTA) between a LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteNasPayload'
@@ -227,24 +226,15 @@ components:
     umtsNas:
       name: UmtsNas
       title: UMTS NAS Message
-      summary: Represents a raw UMTS NAS message sent Over The Air (OTA) between an UMTS uNodeB and an UMTS UE.
+      summary: Represents a raw UMTS NAS message sent Over The Air (OTA) between a UMTS NodeB and a UMTS UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/umtsNasPayload'
 
-    umtsNasDsds:
-      name: UmtsNasDsds
-      title: UMTS NAS DSDS Message
-      summary: Represents a raw UMTS NAS DSDS message sent Over The Air (OTA) between an UMTS uNodeB and an UMTS UE.
-      contentType: application/json
-      payload:
-       $ref: '#/components/schemas/umtsNasDsdsPayload'
-
-
     wcdmaRrc:
       name: WcdmaRrc
       title: WCDMA RRC OTA Message
-      summary: Represents a raw WCDMA RRC message sent Over The Air (OTA) between an UMTS uNodeB and an UMTS UE.
+      summary: Represents a raw WCDMA RRC message sent Over The Air (OTA) between a UMTS NodeB and a UMTS UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wcdmaRrcPayload'
@@ -1170,58 +1160,6 @@ components:
             rawMessage:
               $ref: '#/components/schemas/rawMessage'
 
-
-    umtsNasDsdsPayload:
-      type: object
-      required:
-        - version
-        - messageType
-        - data
-      properties:
-        version:
-          $ref: '#/components/schemas/version'
-        messageType:
-          $ref: '#/components/schemas/messageType'
-          description: The type of message, must be UmtsNasDsds.
-          example: "UmtsNasDsds"
-
-        data:
-          type: object
-          description: The payload of this message that contains all the message data.
-          required:
-            - deviceSerialNumber
-            - deviceName
-            - deviceTime
-            - missionId
-            - channelType
-            - rawMessage
-          properties:
-            deviceSerialNumber:
-              $ref: '#/components/schemas/deviceSerialNumber'
-            deviceName:
-              $ref: '#/components/schemas/deviceName'
-            deviceTime:
-              $ref: '#/components/schemas/deviceTime'
-            latitude:
-              $ref: '#/components/schemas/latitude'
-            longitude:
-              $ref: '#/components/schemas/longitude'
-            altitude:
-              $ref: '#/components/schemas/altitude'
-            missionId:
-              $ref: '#/components/schemas/missionId'
-
-            channelType:
-              $ref: '#/components/schemas/channelType'
-              example: "PLAIN"
-              enum:
-                - "UNKNOWN"
-                - "PLAIN"
-                - "SEC_HEADER"
-            rawMessage:
-              $ref: '#/components/schemas/rawMessage'
-
-
     umtsNasPayload:
       type: object
       required:
@@ -1244,7 +1182,6 @@ components:
             - deviceName
             - deviceTime
             - missionId
-            - channelType
             - rawMessage
           properties:
             deviceSerialNumber:
@@ -1262,13 +1199,6 @@ components:
             missionId:
               $ref: '#/components/schemas/missionId'
 
-            channelType:
-              $ref: '#/components/schemas/channelType'
-              example: "PLAIN"
-              enum:
-                - "UNKNOWN"
-                - "PLAIN"
-                - "SEC_HEADER"
             rawMessage:
               $ref: '#/components/schemas/rawMessage'
 

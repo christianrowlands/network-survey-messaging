@@ -8,8 +8,6 @@ syntax = "proto3";
 
 package com.craxiom.messaging;
 
-import "com/craxiom/messaging/umtsnaschanneltype/umts_nas_channel_type.proto";
-import "com/craxiom/messaging/umtsnasdsdschanneltype/umts_nas_dsds_channel_type.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
@@ -28,8 +26,6 @@ message UmtsNasData {
   double longitude = 5;
   float altitude = 6;
   string missionId = 7;
-
-  com.craxiom.messaging.umtsnaschanneltype.UmtsNasChannelType channelType = 10;
   bytes rawMessage = 11;
 }
 
@@ -47,7 +43,5 @@ message UmtsNasDsdsData {
   double longitude = 5;
   float altitude = 6;
   string missionId = 7;
-
-  com.craxiom.messaging.umtsnasdsdschanneltype.UmtsNasDsdsChannelType channelType = 10;
   bytes rawMessage = 11;
 }

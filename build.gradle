@@ -152,11 +152,9 @@ publishing {
         mavenLocal()
     }
 }
-/*
 signing {
     sign publishing.publications
 }
-*/
 /**
  * Try to locate a credential value (username or password) in the credentials store.
  *

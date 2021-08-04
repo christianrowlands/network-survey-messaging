@@ -100,7 +100,7 @@ channels:
           - $ref: '#/components/messages/phoneState'
 
   lte_ota_message:
-    description: The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "cellular_ota_message" and then publish a JSON message representing an OTA Cellular message.
+    description: The lte_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA Cellular message.
     publish:
       message:
         oneOf:
@@ -138,7 +138,7 @@ components:
     lteRecord:
       name: LteRecord
       title: LTE Record
-      summary: Represents information recorded about a LTE eNodeB at a particular time and geographic location.
+      summary: Represents information recorded about an LTE eNodeB at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRecordPayload'
@@ -210,7 +210,7 @@ components:
     lteRrc:
       name: LteRrc
       title: LTE RRC OTA Message
-      summary: Represents a raw LTE RRC message sent Over The Air (OTA) between a LTE eNodeB and an LTE UE.
+      summary: Represents a raw LTE RRC message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRrcPayload'
@@ -218,7 +218,7 @@ components:
     lteNas:
       name: LteNas
       title: LTE NAS Message
-      summary: Represents a raw LTE NAS message sent Over The Air (OTA) between a LTE eNodeB and an LTE UE.
+      summary: Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteNasPayload'

@@ -1098,69 +1098,69 @@ components:
               $ref: '#/components/schemas/channelType'
               example: "BCCH_BCH"
               enum:
-                - "UNKNOWN" // 0
-                - "DL_DCCH_Message" // 1
-                - "UL_DCCH_Message" // 2
-                - "DL_CCCH_Message" // 3
-                - "UL_CCCH_Message" // 4
-                - "PCCH_Message" // 5
-                - "DL_SHCCH_Message" // 6
-                - "UL_SHCCH_Message" // 7
-                - "BCCH_FACH_Message" // 8
-                - "BCCH_BCH_Message" // 9
-                - "MCCH_Message" // 10
-                - "MSCH_Message" // 11
-                - "HandoverToUTRANCommand" // 12
-                - "InterRATHandoverInfo" // 13
-                - "SystemInformation_BCH" // 14
-                - "System_Information_Container" // 15
-                - "UE_RadioAccessCapabilityInfo" // 16
-                - "MasterInformationBlock" // 17
-                - "SysInfoType1" // 18
-                - "SysInfoType2" // 19
-                - "SysInfoType3" // 20
-                - "SysInfoType4" // 21
-                - "SysInfoType5" // 22
-                - "SysInfoType5bis" // 23
-                - "SysInfoType6" // 24
-                - "SysInfoType7" // 25
-                - "SysInfoType8" // 26
-                - "SysInfoType9" // 27
-                - "SysInfoType10" // 28
-                - "SysInfoType11" // 29
-                - "SysInfoType11bis" // 30
-                - "SysInfoType12" // 31
-                - "SysInfoType13" // 32
-                - "SysInfoType13_1" // 33
-                - "SysInfoType13_2" // 34
-                - "SysInfoType13_3" // 35
-                - "SysInfoType13_4" // 36
-                - "SysInfoType14" // 37
-                - "SysInfoType15" // 38
-                - "SysInfoType15bis" // 39
-                - "SysInfoType15_1" // 40
-                - "SysInfoType15_1bis" // 41
-                - "SysInfoType15_2" // 42
-                - "SysInfoType15_2bis" // 43
-                - "SysInfoType15_2ter" // 44
-                - "SysInfoType15_3" // 45
-                - "SysInfoType15_3bis" // 46
-                - "SysInfoType15_4" // 47
-                - "SysInfoType15_5" // 48
-                - "SysInfoType15_6" // 49
-                - "SysInfoType15_7" // 50
-                - "SysInfoType15_8" // 51
-                - "SysInfoType16" // 52
-                - "SysInfoType17" // 53
-                - "SysInfoType18" // 54
-                - "SysInfoType19" // 55
-                - "SysInfoType20" // 56
-                - "SysInfoType21" // 57
-                - "SysInfoType22" // 58
-                - "SysInfoTypeSB1" // 59
-                - "SysInfoTypeSB2" // 60
-                - "ToTargetRNC_Container" // 61
-                - "TargetRNC_ToSourceRNC_Container" // 62
+                - "UNKNOWN"
+                - "DL_DCCH_Message"
+                - "UL_DCCH_Message"
+                - "DL_CCCH_Message"
+                - "UL_CCCH_Message"
+                - "PCCH_Message"
+                - "DL_SHCCH_Message"
+                - "UL_SHCCH_Message"
+                - "BCCH_FACH_Message"
+                - "BCCH_BCH_Message"
+                - "MCCH_Message"
+                - "MSCH_Message"
+                - "HandoverToUTRANCommand"
+                - "InterRATHandoverInfo"
+                - "SystemInformation_BCH"
+                - "System_Information_Container"
+                - "UE_RadioAccessCapabilityInfo"
+                - "MasterInformationBlock"
+                - "SysInfoType1"
+                - "SysInfoType2"
+                - "SysInfoType3"
+                - "SysInfoType4"
+                - "SysInfoType5"
+                - "SysInfoType5bis"
+                - "SysInfoType6"
+                - "SysInfoType7"
+                - "SysInfoType8"
+                - "SysInfoType9"
+                - "SysInfoType10"
+                - "SysInfoType11"
+                - "SysInfoType11bis"
+                - "SysInfoType12"
+                - "SysInfoType13"
+                - "SysInfoType13_1"
+                - "SysInfoType13_2"
+                - "SysInfoType13_3"
+                - "SysInfoType13_4"
+                - "SysInfoType14"
+                - "SysInfoType15"
+                - "SysInfoType15bis"
+                - "SysInfoType15_1"
+                - "SysInfoType15_1bis"
+                - "SysInfoType15_2"
+                - "SysInfoType15_2bis"
+                - "SysInfoType15_2ter"
+                - "SysInfoType15_3"
+                - "SysInfoType15_3bis"
+                - "SysInfoType15_4"
+                - "SysInfoType15_5"
+                - "SysInfoType15_6"
+                - "SysInfoType15_7"
+                - "SysInfoType15_8"
+                - "SysInfoType16"
+                - "SysInfoType17"
+                - "SysInfoType18"
+                - "SysInfoType19"
+                - "SysInfoType20"
+                - "SysInfoType21"
+                - "SysInfoType22"
+                - "SysInfoTypeSB1"
+                - "SysInfoTypeSB2"
+                - "ToTargetRNC_Container"
+                - "TargetRNC_ToSourceRNC_Container"
             rawMessage:
               $ref: '#/components/schemas/rawMessage'
 
@@ -1947,7 +1947,7 @@ components:
       format: float
       minimum: -100.0
       maximum: 100.0
-      description: Carrier to noise density ratio, measured in dB-Hz. Valid range, -100.0 to 100.0.
+      description: "The Carrier-to-noise density in dB-Hz, which represents the measured C/N0 for the signal at the antenna inputCarrier to noise density ratio, measured in dB-Hz. Typical range: 10-50 dB-Hz. The range of possible C/N0 values is 0-63 dB-Hz to handle some edge cases."
       example: 1.1
 
     hdop:

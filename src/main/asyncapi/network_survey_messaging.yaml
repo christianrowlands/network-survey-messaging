@@ -287,6 +287,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -358,6 +360,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             sid:
               $ref: '#/components/schemas/sid'
@@ -426,6 +430,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -497,6 +503,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -576,6 +584,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -654,6 +664,8 @@ components:
               $ref: '#/components/schemas/missionId'
             recordNumber:
               $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -743,6 +755,8 @@ components:
               $ref: '#/components/schemas/missionId'
             recordNumber:
               $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -813,6 +827,8 @@ components:
               description: Starts at 1 and each subsequent scan should have its number incremented by 1. Records with the same group number indicate they were all seen in the same "scan" for GNSS space vehicles.
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -886,6 +902,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -946,6 +964,8 @@ components:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
               $ref: '#/components/schemas/groupNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1000,6 +1020,8 @@ components:
               $ref: '#/components/schemas/altitude'
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
@@ -1044,6 +1066,8 @@ components:
               $ref: '#/components/schemas/missionId'
             recordNumber:
               $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             simState:
               $ref: '#/components/schemas/simState'
@@ -1093,6 +1117,8 @@ components:
               $ref: '#/components/schemas/altitude'
             missionId:
               $ref: '#/components/schemas/missionId'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1202,6 +1228,8 @@ components:
               $ref: '#/components/schemas/altitude'
             missionId:
               $ref: '#/components/schemas/missionId'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             rawMessage:
               $ref: '#/components/schemas/rawMessage'
@@ -1245,6 +1273,8 @@ components:
               $ref: '#/components/schemas/altitude'
             missionId:
               $ref: '#/components/schemas/missionId'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1316,6 +1346,8 @@ components:
               $ref: '#/components/schemas/altitude'
             missionId:
               $ref: '#/components/schemas/missionId'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1407,6 +1439,12 @@ components:
       description: The model number of the device that this message originated from.
       example: "Pixel 5"
 
+    accuracy:
+      type: number
+      format: float
+      minimum: 0.0
+      description: The estimated horizontal accuracy, radial, in meters. A value of 0.0 indicates there was no available horizontal accuracy.
+      example: 40.2
 
     # Common cellular fields
     provider:

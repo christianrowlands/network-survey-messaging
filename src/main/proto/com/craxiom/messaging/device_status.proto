@@ -27,6 +27,7 @@ message DeviceStatusData {
     double longitude = 5;
     float altitude = 6;
     string deviceModel = 8;
+    float accuracy = 9;
 
     google.protobuf.Int32Value batteryLevelPercent = 7;
     Error error = 10;

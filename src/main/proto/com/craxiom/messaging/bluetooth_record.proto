@@ -30,6 +30,7 @@ message BluetoothRecordData {
     float altitude = 6;
     string missionId = 7;
     int32 recordNumber = 8;
+    float accuracy = 9;
 
     string sourceAddress = 10;
     string destinationAddress = 11;

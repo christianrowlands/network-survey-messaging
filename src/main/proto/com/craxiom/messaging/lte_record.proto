@@ -30,6 +30,7 @@ message LteRecordData {
     string missionId = 7;
     int32 recordNumber = 8;
     int32 groupNumber = 9;
+    float accuracy = 10;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;

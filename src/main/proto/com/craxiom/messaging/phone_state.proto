@@ -35,6 +35,7 @@ message PhoneStateData {
     com.craxiom.messaging.phonestate.simstate.SimState simState = 9;
     string simOperator = 10;
     repeated NetworkRegistrationInfo networkRegistrationInfo = 11;
+    float accuracy = 12;
 }
 
 // Used to report the details of a registered network

@@ -27,6 +27,7 @@ message LteNasData {
   double longitude = 5;
   float altitude = 6;
   string missionId = 7;
+  float accuracy = 8;
 
   com.craxiom.messaging.ltenaschanneltype.LteNasChannelType channelType = 10;
   bytes rawMessage = 11;

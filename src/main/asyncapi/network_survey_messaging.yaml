@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.6.1'
+  version: '0.7.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -1122,7 +1122,7 @@ components:
 
             channelType:
               $ref: '#/components/schemas/channelType'
-              example: "BCCH_BCH"
+              example: "BCCH_BCH_Message"
               enum:
                 - "UNKNOWN"
                 - "DL_DCCH_Message"
@@ -1363,7 +1363,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.6.1"
+      example: "0.7.0"
 
     messageType:
       type: string
@@ -1383,7 +1383,7 @@ components:
       type: string
       format: date-time
       description: The timestamp of when this message was created in milliseconds formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
-      example: 1996-12-19T16:39:57-08:00
+      example: "1996-12-19T16:39:57-08:00"
 
     #location:
     #  $ref: './point.json#'
@@ -1432,7 +1432,7 @@ components:
       minimum: -200
       maximum: 200
       description: The signal strength of the received signal in dBm.
-      example: -73
+      example: -73.1
 
     deviceModel:
       type: string
@@ -1668,12 +1668,12 @@ components:
       example: 52803
 
     nci:
-      type: integer
+      type: string
       format: int64
       minimum: 0
       maximum: 68719476735
       description: NCI, the Cell Identity of the measured cell, 36 bits. The gNB ID is the first 22-32 bits of the NCI and the remaining bits represent the sector. Valid range 0 - 68,719,476,735 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 370.
-      example: 52824577
+      example: "52824577"
 
     narfcn:
       type: integer
@@ -1697,7 +1697,7 @@ components:
       minimum: -156
       maximum: -31
       description: Secondary Synchronization signal Reference Signal Received Power in dBm, valid range -156 to -31, corresponding to RSRP_1 to RSRP_126 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
-      example: -107
+      example: -107.1
 
     ssRsrq:
       type: number
@@ -1721,7 +1721,7 @@ components:
       minimum: -140
       maximum: -44
       description: Channel State Information (CSI) Reference Signal Received Power in dBm, valid range -140 to -44, corresponding to RSRP_17 to RSRP_113 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
-      example: -107
+      example: -107.1
 
     csiRsrq:
       type: number

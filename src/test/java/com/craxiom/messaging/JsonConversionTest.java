@@ -1015,10 +1015,10 @@ public class JsonConversionTest
     @Test
     public void testLteRrcToJson()
     {
-        final String expectedJson = "{\"version\":\"0.3.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 5\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 5\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
 
         final LteRrc.Builder recordBuilder = LteRrc.newBuilder();
-        recordBuilder.setVersion("0.3.0");
+        recordBuilder.setVersion("0.7.0");
         recordBuilder.setMessageType("LteRrc");
 
         final LteRrcData.Builder dataBuilder = LteRrcData.newBuilder();
@@ -1029,7 +1029,7 @@ public class JsonConversionTest
         dataBuilder.setLongitude(-0.486594);
         dataBuilder.setAltitude(13.3f);
         dataBuilder.setChannelType(LteRrcChannelType.BCCH_BCH);
-        dataBuilder.setRawMessage(ByteString.copyFrom(new byte[]{(byte) 0x14, (byte) 0x0e, (byte) 0x30, (byte) 0x00, (byte) 0xed, (byte) 0x01, (byte) 0x6b, (byte) 0x03, (byte) 0x00, (byte) 0x00, (byte) 0x59, (byte) 0x39, (byte) 0x05, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x09, (byte) 0x00, (byte) 0x40, (byte) 0x01, (byte) 0x7c, (byte) 0x6b, (byte) 0x5f, (byte) 0x91, (byte) 0x20, (byte) 0x00, (byte) 0x00}));
+        dataBuilder.setPcapRecord(ByteString.copyFrom(new byte[]{(byte) 0x14, (byte) 0x0e, (byte) 0x30, (byte) 0x00, (byte) 0xed, (byte) 0x01, (byte) 0x6b, (byte) 0x03, (byte) 0x00, (byte) 0x00, (byte) 0x59, (byte) 0x39, (byte) 0x05, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x09, (byte) 0x00, (byte) 0x40, (byte) 0x01, (byte) 0x7c, (byte) 0x6b, (byte) 0x5f, (byte) 0x91, (byte) 0x20, (byte) 0x00, (byte) 0x00}));
 
         recordBuilder.setData(dataBuilder);
 
@@ -1048,7 +1048,7 @@ public class JsonConversionTest
     @Test
     public void testLteRrcFromJson()
     {
-        final String inputJson = "{\"version\":\"0.3.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
 
         final LteRrc.Builder builder = LteRrc.newBuilder();
         try
@@ -1061,7 +1061,7 @@ public class JsonConversionTest
 
         final LteRrc convertedRecord = builder.build();
 
-        assertEquals("0.3.0", convertedRecord.getVersion());
+        assertEquals("0.7.0", convertedRecord.getVersion());
         assertEquals("LteRrc", convertedRecord.getMessageType());
 
         final LteRrcData data = convertedRecord.getData();
@@ -1072,6 +1072,6 @@ public class JsonConversionTest
         assertEquals(-0.486594, data.getLongitude());
         assertEquals(13.3f, data.getAltitude());
         assertEquals(LteRrcChannelType.BCCH_BCH, data.getChannelType());
-        assertArrayEquals(Base64.getDecoder().decode("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="), data.getRawMessage().toByteArray());
+        assertArrayEquals(Base64.getDecoder().decode("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="), data.getPcapRecord().toByteArray());
     }
 }

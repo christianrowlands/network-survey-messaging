@@ -1440,11 +1440,11 @@ components:
       example: "Pixel 5"
 
     accuracy:
-      type: number
-      format: float
-      minimum: 0.0
-      description: The estimated horizontal accuracy, radial, in meters. A value of 0.0 indicates there was no available horizontal accuracy.
-      example: 40.2
+      type: integer
+      format: int32
+      minimum: 0
+      description: The estimated horizontal accuracy, radial, in meters. A value of 0 indicates there was no available horizontal accuracy.
+      example: 40
 
     # Common cellular fields
     provider:

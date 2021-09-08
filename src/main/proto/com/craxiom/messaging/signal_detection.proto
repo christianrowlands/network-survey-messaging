@@ -29,7 +29,7 @@ message SignalDetectionData {
     string missionId = 7;
     int32 recordNumber = 8;
     int32 groupNumber = 9;
-    float accuracy = 10;
+  int32 accuracy = 10;
 
     uint64 frequencyHz = 12;
     google.protobuf.Int32Value bandwidthHz = 13;

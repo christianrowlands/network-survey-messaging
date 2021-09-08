@@ -27,7 +27,7 @@ message LteRrcData {
     double longitude = 5;
     float altitude = 6;
     string missionId = 7;
-    float accuracy = 8;
+  int32 accuracy = 8;
 
     com.craxiom.messaging.lterrcchanneltype.LteRrcChannelType channelType = 10;
     bytes rawMessage = 11;

@@ -29,7 +29,7 @@ message CdmaRecordData {
     string missionId = 7;
     int32 recordNumber = 8;
     int32 groupNumber = 9;
-    float accuracy = 10;
+  int32 accuracy = 10;
 
     google.protobuf.Int32Value sid = 16;
     google.protobuf.Int32Value nid = 17;

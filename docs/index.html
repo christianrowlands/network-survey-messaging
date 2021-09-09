@@ -9,7 +9,7 @@
     
     
     
-    <span>0.6.1</span>
+    <span>0.7.0</span>
  documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -38,7 +38,7 @@
     
     
     
-    <span>0.6.1</span>
+    <span>0.7.0</span>
 
       </h1>
     
@@ -457,7 +457,7 @@
     
     
     
-    <span>0.6.1</span>
+    <span>0.7.0</span>
 </h1>
   <div class="leading-normal mb-4">
     
@@ -1266,6 +1266,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >mcc</span
         >
             
@@ -1891,25 +1948,26 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "GsmRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "mcc": 310,
     "mnc": 410,
     "lac": 174,
     "ci": 47241,
     "arfcn": 557,
     "bsic": 25,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "ta": 4,
     "servingCell": true,
     "provider": "ATT"
@@ -2664,6 +2722,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >sid</span
         >
          
@@ -3294,25 +3409,26 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "CdmaRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "sid": 139,
     "nid": 4,
     "zone": 232,
     "bsid": 12731,
     "channel": 384,
     "pnOffset": 136,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "ecio": -11.4,
     "servingCell": true,
     "provider": "Verizon"
@@ -4067,6 +4183,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >mcc</span
         >
             
@@ -4685,18 +4858,19 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "UmtsRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "mcc": 310,
     "mnc": 260,
     "lac": 174,
@@ -4704,7 +4878,7 @@ string
     "uarfcn": 9800,
     "psc": 141,
     "rscp": -73,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "servingCell": true,
     "provider": "Verizon"
   }
@@ -5435,6 +5609,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -6290,18 +6521,19 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "LteRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "mcc": 311,
     "mnc": 480,
     "tac": 52803,
@@ -6311,7 +6543,7 @@ string
     "rsrp": -107,
     "rsrq": -11,
     "ta": 27,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "servingCell": true,
     "lteBandwidth": "MHZ_10",
     "provider": "Verizon"
@@ -7066,6 +7298,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >mcc</span
         >
          
@@ -7250,7 +7539,7 @@ integer
       <div>
         <div class="capitalize text-sm text-teal-500 font-bold">
           
-integer   
+string   
           <div class="inline-block">
             
             <span
@@ -8004,28 +8293,29 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "NrRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "mcc": 311,
     "mnc": 480,
     "tac": 52803,
-    "nci": 52824577,
+    "nci": "52824577",
     "narfcn": 5230,
     "pci": 234,
-    "ssRsrp": -107,
+    "ssRsrp": -107.1,
     "ssRsrq": -11.5,
     "ssSinr": 14.5,
-    "csiRsrp": -107,
+    "csiRsrp": -107.1,
     "csiRsrq": -11.5,
     "csiSinr": 14.5,
     "ta": 14,
@@ -8700,6 +8990,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -9980,17 +10327,18 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "WifiBeaconRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
+    "accuracy": 40,
     "sourceAddress": "68:7F:74:B0:14:98",
     "destinationAddress": "68:7F:74:B0:14:22",
     "bssid": "68:7F:74:B0:14:98",
@@ -10010,7 +10358,7 @@ string
     "wps": true,
     "channel": 2,
     "frequencyMhz": 2417,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "snr": 19.2,
     "nodeType": "AP",
     "standard": "IEEE80211N"
@@ -10706,6 +11054,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >sourceAddress</span
         >
            
@@ -11200,20 +11605,21 @@ integer
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "BluetoothRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
+    "accuracy": 40,
     "sourceAddress": "68:7F:74:B0:14:98",
     "destinationAddress": "68:7F:74:B0:14:22",
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "txPower": 8,
     "technology": "LE",
     "supportedTechnologies": "DUAL",
@@ -11987,6 +12393,63 @@ string
         
 
 <div class="text-sm markdown"><p>The model number of the device that this message originated from.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -12834,12 +13297,12 @@ number
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "GnssRecord",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -12847,6 +13310,7 @@ number
     "recordNumber": 1,
     "groupNumber": 1,
     "deviceModel": "Pixel 5",
+    "accuracy": 40,
     "constellation": "GALILEO",
     "spaceVehicleId": 2345,
     "carrierFreqHz": 120000000,
@@ -13611,6 +14075,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >frequencyHz</span
         >
          
@@ -14002,21 +14523,22 @@ number
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "EnergyDetection",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "frequencyHz": 162000000,
     "bandwidthHz": 12500,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "snr": 19.2,
     "timeUp": "1996-12-20T00:39:57.000Z",
     "durationSec": 4.2
@@ -14771,6 +15293,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >frequencyHz</span
         >
          
@@ -15250,21 +15829,22 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "SignalDetection",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
     "groupNumber": 1,
+    "accuracy": 40,
     "frequencyHz": 162000000,
     "bandwidthHz": 12500,
-    "signalStrength": -73,
+    "signalStrength": -73.1,
     "snr": 19.2,
     "timeUp": "1996-12-20T00:39:57.000Z",
     "durationSec": 4.2,
@@ -15881,6 +16461,63 @@ string
         
 
 <div class="text-sm markdown"><p>The model number of the device that this message originated from.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -16710,6 +17347,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -19040,7 +19734,7 @@ integer
       <div>
         <div class="capitalize text-sm text-teal-500 font-bold">
           
-integer   
+string   
           <div class="inline-block">
             
             <span
@@ -19303,16 +19997,17 @@ integer
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "DeviceStatus",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "deviceModel": "Pixel 5",
+    "accuracy": 40,
     "batteryLevelPercent": 86,
     "error": {
       "errorMessage": "The scan stopped unexpectedly"
@@ -19348,17 +20043,18 @@ integer
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "PhoneState",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
     "recordNumber": 1,
+    "accuracy": 40,
     "simState": "READY",
     "simOperator": "311480",
     "networkRegistrationInfo": [
@@ -20800,6 +21496,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >pcapRecord</span
         >
          
@@ -21429,6 +22182,63 @@ string
         
 
 <div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -22402,6 +23212,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >channelType</span
         >
            
@@ -23196,6 +24063,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >channelType</span
         >
            
@@ -23360,12 +24284,12 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "GsmSignaling",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
@@ -23403,16 +24327,17 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "UmtsNas",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
+    "accuracy": 40,
     "pcapRecord": "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
   }
 }</code></pre>
@@ -23445,16 +24370,17 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "WcdmaRrc",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
+    "accuracy": 40,
     "channelType": "BCCH_BCH",
     "pcapRecord": "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
   }
@@ -23488,16 +24414,17 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "LteRrc",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
+    "accuracy": 40,
     "channelType": "BCCH_BCH",
     "pcapRecord": "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
   }
@@ -23531,16 +24458,17 @@ string
       <div class="children payload-examples mt-4">
         
         <pre class="hljs mb-4 border border-gray-800 rounded"><code>{
-  "version": "0.6.1",
+  "version": "0.7.0",
   "messageType": "LteNas",
   "data": {
     "deviceSerialNumber": "1234",
     "deviceName": "Craxiom Pixel",
-    "deviceTime": "1996-12-20T00:39:57.000Z",
+    "deviceTime": "1996-12-19T16:39:57-08:00",
     "latitude": 51.470334,
     "longitude": -0.486594,
     "altitude": 13.3,
     "missionId": "Survey1 20200724-154325",
+    "accuracy": 40,
     "channelType": "PLAIN",
     "pcapRecord": "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
   }
@@ -24256,6 +25184,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -25548,6 +26533,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -26868,6 +27910,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >mcc</span
         >
             
@@ -28130,6 +29229,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -29652,6 +30808,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >mcc</span
         >
          
@@ -29836,7 +31049,7 @@ integer
       <div>
         <div class="capitalize text-sm text-teal-500 font-bold">
           
-integer   
+string   
           <div class="inline-block">
             
             <span
@@ -31175,6 +32388,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -33063,6 +34333,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >sourceAddress</span
         >
            
@@ -34241,6 +35568,63 @@ string
         
 
 <div class="text-sm markdown"><p>The model number of the device that this message originated from.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -35755,6 +37139,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >frequencyHz</span
         >
          
@@ -36813,6 +38254,63 @@ integer
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >frequencyHz</span
         >
          
@@ -37839,6 +39337,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >batteryLevelPercent</span
         >
          
@@ -38646,6 +40201,63 @@ integer
         
 
 <div class="text-sm markdown"><p>Starts at 1 and each subsequent record should have its number incremented by 1.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -40976,7 +42588,7 @@ integer
       <div>
         <div class="capitalize text-sm text-teal-500 font-bold">
           
-integer   
+string   
           <div class="inline-block">
             
             <span
@@ -42557,6 +44169,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >pcapRecord</span
         >
          
@@ -43187,6 +44856,63 @@ string
         
 
 <div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     
@@ -44161,6 +45887,63 @@ string
         <span
           class="text-sm"
           style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
           >channelType</span
         >
            
@@ -44933,6 +46716,63 @@ string
         
 
 <div class="text-sm markdown"><p>A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.</p>
+</div>
+
+    
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+
+      
+
+<div
+  class="bg-gray-200 pl-8 pr-8 rounded"
+>
+  <div class="">
+    <div
+      class=" flex property"
+    >
+      <div class="pr-4" style="margin-top: -2px; min-width: 25%">
+        <span
+          class="text-sm"
+          style="word-break: break-word"
+          >accuracy</span
+        >
+         
+        <span class="border text-orange-600 rounded text-xs ml-3 py-0 px-2"
+          >accuracy</span
+        >
+           
+      </div>
+
+      <div>
+        <div class="capitalize text-sm text-teal-500 font-bold">
+          
+integer   
+          <div class="inline-block">
+            
+            <span
+              class="bg-yellow-600 font-bold no-underline text-black rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              >int32</span
+            >
+             
+            <span
+              class="bg-purple-600 font-bold no-underline text-white rounded lowercase ml-2"
+              style="height: 20px; font-size: 11px; padding: 3px"
+              title="At least 0"
+              >>= 0</span
+            >
+                     
+          </div>
+        </div>
+
+        
+
+<div class="text-sm markdown"><p>The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.</p>
 </div>
 
     

@@ -1136,6 +1136,58 @@ public class JsonConversionTest
         assertEquals(ACCURACY, data.getAccuracy());
     }
 
+
+    @Test
+    public void testGsmSignalingToJson()
+    {
+        final String expectedJson = getGsmSignalingJson();
+
+        final GsmSignaling.Builder recordBuilder = GsmSignaling.newBuilder();
+        recordBuilder.setVersion("0.7.0");
+        recordBuilder.setMessageType("GsmSignaling");
+
+        final GsmSignalingData.Builder dataBuilder = GsmSignalingData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setLatitude(LATITUDE);
+        dataBuilder.setLongitude(LONGITUDE);
+        dataBuilder.setAltitude(ALTITUDE);
+        dataBuilder.setMissionId(MISSION_ID);
+        dataBuilder.setAccuracy(ACCURACY);
+        dataBuilder.setChannelType(GsmSignalingChannelType.BCCH);
+        dataBuilder.setPcapRecord(getSampleByteString());
+
+        recordBuilder.setData(dataBuilder.build());
+
+        GsmSignaling record = recordBuilder.build();
+        assertJsonEquals(expectedJson, record);
+    }
+
+    @Test
+    public void testGsmSignalingFromJson()
+    {
+        final String inputJson = getGsmSignalingJson();
+
+        final GsmSignaling.Builder builder = GsmSignaling.newBuilder();
+        assertJsonMerge(inputJson, builder);
+
+        final GsmSignaling convertedRecord = builder.build();
+        assertEquals("0.7.0", convertedRecord.getVersion());
+        assertEquals("GsmSignaling", convertedRecord.getMessageType());
+
+        final GsmSignalingData data = convertedRecord.getData();
+        assertEquals(DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(DEVICE_NAME, data.getDeviceName());
+        assertEquals(LATITUDE, data.getLatitude());
+        assertEquals(LONGITUDE, data.getLongitude());
+        assertEquals(ALTITUDE, data.getAltitude());
+        assertEquals(MISSION_ID, data.getMissionId());
+        assertEquals(ACCURACY, data.getAccuracy());
+        assertEquals(GsmSignalingChannelType.BCCH, data.getChannelType());
+        assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
+    }
+
     @Test
     public void testUmtsNasToJson()
     {
@@ -1154,7 +1206,7 @@ public class JsonConversionTest
         dataBuilder.setAltitude(ALTITUDE);
         dataBuilder.setMissionId(MISSION_ID);
         dataBuilder.setAccuracy(ACCURACY);
-        dataBuilder.setRawMessage(getSampleByteString());
+        dataBuilder.setPcapRecord(getSampleByteString());
 
         recordBuilder.setData(dataBuilder);
 
@@ -1183,7 +1235,7 @@ public class JsonConversionTest
         assertEquals(ALTITUDE, data.getAltitude());
         assertEquals(MISSION_ID, data.getMissionId());
         assertEquals(ACCURACY, data.getAccuracy());
-        assertArrayEquals(getBase64RawMessage(), data.getRawMessage().toByteArray());
+        assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
     }
 
     @Test
@@ -1204,8 +1256,8 @@ public class JsonConversionTest
         dataBuilder.setAltitude(ALTITUDE);
         dataBuilder.setMissionId(MISSION_ID);
         dataBuilder.setAccuracy(ACCURACY);
-        dataBuilder.setChannelType(WcdmaRrcChannelType.BCCH_BCH_Message);
-        dataBuilder.setRawMessage(getSampleByteString());
+        dataBuilder.setChannelType(WcdmaRrcChannelType.BCCH_BCH);
+        dataBuilder.setPcapRecord(getSampleByteString());
 
         recordBuilder.setData(dataBuilder.build());
 
@@ -1221,7 +1273,7 @@ public class JsonConversionTest
         final WcdmaRrc.Builder builder = WcdmaRrc.newBuilder();
         assertJsonMerge(inputJson, builder);
 
-        final  WcdmaRrc convertedRecord = builder.build();
+        final WcdmaRrc convertedRecord = builder.build();
         assertEquals("0.7.0", convertedRecord.getVersion());
         assertEquals("WcdmaRrc", convertedRecord.getMessageType());
 
@@ -1233,8 +1285,8 @@ public class JsonConversionTest
         assertEquals(ALTITUDE, data.getAltitude());
         assertEquals(MISSION_ID, data.getMissionId());
         assertEquals(ACCURACY, data.getAccuracy());
-        assertEquals(WcdmaRrcChannelType.BCCH_BCH_Message, data.getChannelType());
-        assertArrayEquals(getBase64RawMessage(), data.getRawMessage().toByteArray());
+        assertEquals(WcdmaRrcChannelType.BCCH_BCH, data.getChannelType());
+        assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
     }
 
     @Test
@@ -1323,7 +1375,7 @@ public class JsonConversionTest
         dataBuilder.setMissionId(MISSION_ID);
         dataBuilder.setAccuracy(ACCURACY);
         dataBuilder.setChannelType(LteNasChannelType.PLAIN);
-        dataBuilder.setRawMessage(getSampleByteString());
+        dataBuilder.setPcapRecord(getSampleByteString());
 
         recordBuilder.setData(dataBuilder.build());
 
@@ -1352,15 +1404,15 @@ public class JsonConversionTest
         assertEquals(MISSION_ID, data.getMissionId());
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(LteNasChannelType.PLAIN, data.getChannelType());
-        assertArrayEquals(getBase64RawMessage(), data.getRawMessage().toByteArray());
+        assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
     }
 
     /**
      * Convenience method for asserting that a json string matches the stringified version of a protobuf message AND
      * the protobuf -> string conversion occurs without exception
      *
-     * @param expectedJson  The JSON string whose contents we expect to match the contents of the protobuf message
-     * @param record        The protobuf message that will be stringified.
+     * @param expectedJson The JSON string whose contents we expect to match the contents of the protobuf message
+     * @param record       The protobuf message that will be stringified.
      */
     private void assertJsonEquals(String expectedJson, MessageOrBuilder record)
     {
@@ -1403,6 +1455,11 @@ public class JsonConversionTest
     }
 
     // the following json strings are from network_survey_messaging.yaml
+    private String getGsmSignalingJson()
+    {
+        return "{\"version\":\"0.7.0\",\"messageType\":\"GsmSignaling\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+    }
+
     private String getNrJson()
     {
         return "{\"version\":\"0.7.0\",\"messageType\":\"NrRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"nci\":\"52824577\",\"narfcn\":5230,\"pci\":234,\"ssRsrp\":-107.1,\"ssRsrq\":-11.5,\"ssSinr\":14.5,\"csiRsrp\":-107.1,\"csiRsrq\":-11.5,\"csiSinr\":14.5,\"ta\":14,\"servingCell\":true,\"provider\":\"Verizon\"}}";
@@ -1410,17 +1467,17 @@ public class JsonConversionTest
 
     private String getUmtsNasJson()
     {
-        return "{\"version\":\"0.7.0\",\"messageType\":\"UmtsNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        return "{\"version\":\"0.7.0\",\"messageType\":\"UmtsNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
     }
 
     private String getWcdmaRrcJson()
     {
-        return "{\"version\":\"0.7.0\",\"messageType\":\"WcdmaRrc\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH_BCH_Message\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        return "{\"version\":\"0.7.0\",\"messageType\":\"WcdmaRrc\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
     }
 
     private String getLteNasJson()
     {
-        return "{\"version\":\"0.7.0\",\"messageType\":\"LteNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"PLAIN\",\"rawMessage\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        return "{\"version\":\"0.7.0\",\"messageType\":\"LteNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"PLAIN\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
     }
 
     private Int32Value getInt32(int num)

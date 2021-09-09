@@ -108,6 +108,12 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
+##### [0.7.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.7.0) - 2021-09-09
+* BREAKING CHANGE: Swapped the rawMessage for pcapRecord in the Cellular OTA messages.
+* BREAKING CHANGE: Renamed the `lte_ota_message` topic to `cellular_ota_message` to allow it to be more generic.
+* Added message schemas for GSM, UTMS NAS, and WCDMA RRC OTA messages (coming from Network Survey+).
+* Added the accuracy field to all the messages which can be used to describe the accuracy of the provided location.
+
 ##### [0.6.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.6.1) - 2021-07-06
 * Added the missionID and recordNumber fields to the Phone State message schema.
 

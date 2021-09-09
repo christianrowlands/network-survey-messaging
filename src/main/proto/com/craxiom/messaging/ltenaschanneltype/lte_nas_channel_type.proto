@@ -16,7 +16,7 @@ option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
 
 enum LteNasChannelType {
-  UNKNOWN = 0;
-  PLAIN = 1;
-  SEC_HEADER = 2;
+    UNKNOWN = 0;
+    PLAIN = 1;
+    SEC_HEADER = 2;
 }

@@ -27,6 +27,7 @@ message GsmSignalingData {
     double longitude = 5;
     float altitude = 6;
     string missionId = 7;
+    int32 accuracy = 8;
 
     com.craxiom.messaging.gsmsignalingchanneltype.GsmSignalingChannelType channelType = 10;
     bytes pcapRecord = 11;

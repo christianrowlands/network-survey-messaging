@@ -1517,7 +1517,7 @@ components:
       type: integer
       format: int32
       minimum: 0
-      description: The estimated horizontal accuracy, radial, in meters. A value of 0 indicates there was no available horizontal accuracy.
+      description: The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.
       example: 40
 
     # Common cellular fields

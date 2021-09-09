@@ -1,5 +1,5 @@
 /**
- * A protobuf definition of the LTE RRC message defined in the Network Survey Messaging API.
+ * A protobuf definition of the GSM Signaling message defined in the Network Survey Messaging API.
  *
  * This protobuf definition is provided as a convenience only. See the official API documentation for the true LTE
  * Record message schema.
@@ -8,18 +8,18 @@ syntax = "proto3";
 
 package com.craxiom.messaging;
 
-import "com/craxiom/messaging/lterrcchanneltype/lte_rrc_channel_type.proto";
+import "com/craxiom/messaging/gsmsignalingchanneltype/gsm_signaling_channel_type.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
 
-message LteRrc {
+message GsmSignaling {
     string version = 1;
     string messageType = 2;
-    LteRrcData data = 3;
+    GsmSignalingData data = 3;
 }
 
-message LteRrcData {
+message GsmSignalingData {
     string deviceSerialNumber = 1;
     string deviceName = 2;
     string deviceTime = 3;
@@ -27,8 +27,7 @@ message LteRrcData {
     double longitude = 5;
     float altitude = 6;
     string missionId = 7;
-  int32 accuracy = 8;
 
-    com.craxiom.messaging.lterrcchanneltype.LteRrcChannelType channelType = 10;
+    com.craxiom.messaging.gsmsignalingchanneltype.GsmSignalingChannelType channelType = 10;
     bytes pcapRecord = 11;
 }

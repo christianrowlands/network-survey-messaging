@@ -104,6 +104,7 @@ channels:
     publish:
       message:
         oneOf:
+          - $ref: '#/components/messages/gsmSignaling'
           - $ref: '#/components/messages/umtsNas'
           - $ref: '#/components/messages/wcdmaRrc'
           - $ref: '#/components/messages/lteRrc'
@@ -238,6 +239,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wcdmaRrcPayload'
+
+    gsmSignaling:
+      name: GsmSignaling
+      title: GSM RR Signaling OTA Message
+      summary: Represents a raw GSM RR Signaling message sent Over The Air (OTA) between a GSM BTS and a GSM ME.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/gsmSignalingPayload'
 
 
   schemas:
@@ -1101,7 +1110,7 @@ components:
             - deviceTime
             - missionId
             - channelType
-            - rawMessage
+            - pcapRecord
           properties:
             deviceSerialNumber:
               $ref: '#/components/schemas/deviceSerialNumber'
@@ -1125,17 +1134,17 @@ components:
               example: "BCCH_BCH"
               enum:
                 - "UNKNOWN"
-                - "DL_DCCH_Message"
-                - "UL_DCCH_Message"
-                - "DL_CCCH_Message"
-                - "UL_CCCH_Message"
-                - "PCCH_Message"
-                - "DL_SHCCH_Message"
-                - "UL_SHCCH_Message"
-                - "BCCH_FACH_Message"
-                - "BCCH_BCH_Message"
-                - "MCCH_Message"
-                - "MSCH_Message"
+                - "DL_DCCH"
+                - "UL_DCCH"
+                - "DL_CCCH"
+                - "UL_CCCH"
+                - "PCCH"
+                - "DL_SHCCH"
+                - "UL_SHCCH"
+                - "BCCH_FACH"
+                - "BCCH_BCH"
+                - "MCCH"
+                - "MSCH"
                 - "HandoverToUTRANCommand"
                 - "InterRATHandoverInfo"
                 - "SystemInformation_BCH"
@@ -1187,8 +1196,8 @@ components:
                 - "SysInfoTypeSB2"
                 - "ToTargetRNC_Container"
                 - "TargetRNC_ToSourceRNC_Container"
-            rawMessage:
-              $ref: '#/components/schemas/rawMessage'
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     umtsNasPayload:
       type: object
@@ -1212,7 +1221,7 @@ components:
             - deviceName
             - deviceTime
             - missionId
-            - rawMessage
+            - pcapRecord
           properties:
             deviceSerialNumber:
               $ref: '#/components/schemas/deviceSerialNumber'
@@ -1231,8 +1240,8 @@ components:
             accuracy:
               $ref: '#/components/schemas/accuracy'
 
-            rawMessage:
-              $ref: '#/components/schemas/rawMessage'
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     lteRrcPayload:
       type: object
@@ -1257,7 +1266,7 @@ components:
             - deviceTime
             - missionId
             - channelType
-            - rawMessage
+            - pcapRecord
           properties:
             deviceSerialNumber:
               $ref: '#/components/schemas/deviceSerialNumber'
@@ -1304,8 +1313,8 @@ components:
                 - "BCCH_DL_SCH_NB"
                 - "PCCH_NB"
                 - "SC_MCCH_NB"
-            rawMessage:
-              $ref: '#/components/schemas/rawMessage'
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     lteNasPayload:
       type: object
@@ -1330,7 +1339,7 @@ components:
             - deviceTime
             - missionId
             - channelType
-            - rawMessage
+            - pcapRecord
           properties:
             deviceSerialNumber:
               $ref: '#/components/schemas/deviceSerialNumber'
@@ -1356,8 +1365,73 @@ components:
                 - "UNKNOWN"
                 - "PLAIN"
                 - "SEC_HEADER"
-            rawMessage:
-              $ref: '#/components/schemas/rawMessage'
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
+
+    gsmSignalingPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be GsmSignaling.
+          example: "GsmSignaling"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - channelType
+            - pcapRecord
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+
+            channelType:
+              $ref: '#/components/schemas/channelType'
+              example: "BCCH"
+              enum:
+                - "UNKNOWN"
+                - "BCCH"
+                - "CCCH"
+                - "RACH"
+                - "AGCH"
+                - "PCH"
+                - "SDCCH"
+                - "SDCCH4"
+                - "SDCCH8"
+                - "TCH_F"
+                - "TCH_H"
+                - "PACCH"
+                - "CBCH52"
+                - "PDCH"
+                - "PTCCH"
+                - "CBCH51"
+                - "VOICE_F"
+                - "VOICE_H"
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     # Common fields that are used in almost every message
     version:
@@ -2257,14 +2331,17 @@ components:
         pci:
           $ref: '#/components/schemas/nrPci'
 
-    # Common fields for Raw Cellular messages
-    rawMessage:
+    # Common fields for OTA Cellular messages
+    pcapRecord:
       type: string
       format: byte
-      description: The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame.
+      description: The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA)
+        cellular radio frame with the appropriate PCAP headers as the prefix. In other words, the bytes are the same bytes that would show up in a pcap file
+        for a cellular message. The general structure consists of a PCAP record header, PPI header, layer 3 header, layer 4 header, a GSMTAP header,
+        followed by the cellular OTA message. Using this structure means that Wireshark, tshark or any other tool that can read GSMTAP pcap records
+        can easily parse out the contents of this message. For more details see the [Network Survey+ Android App Source Code](https://github.com/christianrowlands/android-network-survey-rooted).
       example: "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
 
-    # LTE RRC specific fields
     channelType:
       type: string
       description: The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.

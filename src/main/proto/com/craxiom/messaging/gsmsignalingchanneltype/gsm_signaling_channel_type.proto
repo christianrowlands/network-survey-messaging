@@ -1,0 +1,37 @@
+/**
+ * Defines the GSM Signaling OTA Channel Type values used in the GSM Signaling message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.gsmsignalingchanneltype;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+enum GsmSignalingChannelType {
+    UNKNOWN = 0;
+    BCCH = 1;
+    CCCH = 2;
+    RACH = 3;
+    AGCH = 4;
+    PCH = 5;
+    SDCCH = 6;
+    SDCCH4 = 7;
+    SDCCH8 = 8;
+    TCH_F = 9;
+    TCH_H = 10;
+    PACCH = 11;
+    CBCH52 = 12;
+    PDCH = 13;
+    PTCCH = 14;
+    CBCH51 = 15;
+    VOICE_F = 16;
+    VOICE_H = 17;
+}

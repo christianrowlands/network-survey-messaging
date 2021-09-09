@@ -14,21 +14,21 @@ option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
 
 message LteNas {
-  string version = 1;
-  string messageType = 2;
-  LteNasData data = 3;
+    string version = 1;
+    string messageType = 2;
+    LteNasData data = 3;
 }
 
 message LteNasData {
-  string deviceSerialNumber = 1;
-  string deviceName = 2;
-  string deviceTime = 3;
-  double latitude = 4;
-  double longitude = 5;
-  float altitude = 6;
-  string missionId = 7;
-  int32 accuracy = 8;
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 accuracy = 8;
 
-  com.craxiom.messaging.ltenaschanneltype.LteNasChannelType channelType = 10;
-  bytes rawMessage = 11;
+    com.craxiom.messaging.ltenaschanneltype.LteNasChannelType channelType = 10;
+    bytes pcapRecord = 11;
 }

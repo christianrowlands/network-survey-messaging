@@ -100,7 +100,7 @@ channels:
           - $ref: '#/components/messages/phoneState'
 
   cellular_ota_message:
-    description: The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "lte_ota_message" and then publish a JSON message representing an OTA Cellular message.
+    description: The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "cellular_ota_message" and then publish a JSON message representing an OTA Cellular message.
     publish:
       message:
         oneOf:

@@ -108,7 +108,7 @@ This will overwrite the current HTML content from the docs directory with the la
 
 
 ##Change log
-##### [0.8.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.8.0) - 2021-10-27
+##### [0.8.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.8.0) - 2021-10-26
 * Added the `ecno` field to the UMTS Record.
 
 ##### [0.7.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.7.0) - 2021-09-09

@@ -39,6 +39,7 @@ message UmtsRecordData {
     google.protobuf.Int32Value psc = 21;
     google.protobuf.FloatValue rscp = 22;
     google.protobuf.FloatValue signalStrength = 23;
+    google.protobuf.FloatValue ecno = 24;
     google.protobuf.BoolValue servingCell = 25;
     string provider = 27;
 }

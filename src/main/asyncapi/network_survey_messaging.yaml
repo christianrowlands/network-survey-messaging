@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.7.0'
+  version: '0.8.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -458,6 +458,8 @@ components:
               $ref: '#/components/schemas/psc'
             rscp:
               $ref: '#/components/schemas/rscp'
+            ecno:
+              $ref: '#/components/schemas/ecno'
             signalStrength:
               $ref: '#/components/schemas/signalStrength'
             servingCell:
@@ -1437,7 +1439,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.7.0"
+      example: "0.8.0"
 
     messageType:
       type: string
@@ -1670,6 +1672,12 @@ components:
       format: float
       description: Reference Signal Code Power in dBm.
       example: -73
+
+    ecno:
+      type: number
+      format: float
+      description: Received energy per chip divided by the power density in the band in dB. The value is negative as the RSCP is smaller than the total received power. Added in version 0.8.0.
+      example: -11.4
 
 
     # LTE specific fields

@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.8.0'
+  version: '0.9.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -66,6 +66,12 @@ channels:
     publish:
       message:
         $ref: '#/components/messages/wifiBeaconRecord'
+
+  80211_probe_request_message:
+    description: The 80211_probe_request_message topic/channel is where 802.11 proble request survey records can be published. For MQTT, set the MQTT topic as "80211_probe_request_message" and then publish a JSON message representing an 802.11 Probe Request record in the format defined below. Added in 0.9.0
+    publish:
+      message:
+        $ref: '#/components/messages/wifiProbeRequestRecord'
 
   bluetooth_message:
     description: The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
@@ -155,10 +161,18 @@ components:
     wifiBeaconRecord:
       name: WifiBeaconRecord
       title: Wi-Fi Beacon Record
-      summary: Represents information recorded about an 802.11 Access Point at a particular time and geographic location. 802.11 Beacon frames are sent by Access Points to advertise their existence and to provide all the necessary connection information. This message represents a capture of a signal 802.11 Beacon message.
+      summary: Represents information recorded about an 802.11 Access Point at a particular time and geographic location. 802.11 Beacon frames are sent by Access Points to advertise their existence and to provide all the necessary connection information. This message represents a capture of a single 802.11 Beacon message.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiBeaconRecordPayload'
+
+    wifiProbeRequestRecord:
+      name: WifiProbeRequestRecord
+      title: Wi-Fi Probe Request Record
+      summary: Represents information recorded about an 802.11 Probe Request at a particular time and geographic location. 802.11 Probe Request frames are sent by clients looking to discover information about an Access Point with a specific SSID. This message represents a capture of a single 802.11 Probe Request message.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
 
     bluetoothRecord:
       name: BluetoothRecord
@@ -703,6 +717,81 @@ components:
               $ref: '#/components/schemas/encryptionType'
             wps:
               $ref: '#/components/schemas/wps'
+
+            channel: # Defining it directly so it does not conflict with the channel field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The channel on which this 802.11 frame was recorded.
+              example: 2
+            frequencyMhz: # Defining it directly so it does not conflict with the frequency field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The frequency in MHz on which this 802.11 frame was recorded.
+              example: 2417
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            snr:
+              $ref: '#/components/schemas/snr'
+            nodeType:
+              $ref: '#/components/schemas/nodeType'
+            standard:
+              $ref: '#/components/schemas/standard'
+
+    wifiProbeRequestRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WifiProbeRequestRecord.
+          example: "WifiProbeRequestRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - sourceAddress
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+
+            sourceAddress:
+              $ref: '#/components/schemas/sourceAddress'
+            destinationAddress:
+              $ref: '#/components/schemas/destinationAddress'
+            bssid:
+              $ref: '#/components/schemas/bssid'
+
+            ssid:
+              $ref: '#/components/schemas/ssid'
 
             channel: # Defining it directly so it does not conflict with the channel field from other messages
               type: integer
@@ -1439,7 +1528,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.8.0"
+      example: "0.9.0"
 
     messageType:
       type: string
@@ -1460,12 +1549,6 @@ components:
       format: date-time
       description: The timestamp of when this message was created in milliseconds formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
       example: "1996-12-19T16:39:57-08:00"
-
-    #location:
-    #  $ref: './point.json#'
-    #  description: The location representing where this survey record was recorded. This location follows the GeoJSON format for a Point https://geojson.org/ , https://geojson.org/schema/Point.json. Specifically, the coordinates are in the format [longitude, latitude, altitude], with altitude (meters) being optional.
-    #  id: https://geojson.org/schema/Point.json
-    #  example: {"type": "Point","coordinates": [ -0.486594, 51.470334, 13.3]}
 
     latitude:
       type: number

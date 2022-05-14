@@ -31,6 +31,15 @@ message SignalDetectionData {
     int32 groupNumber = 9;
     int32 accuracy = 10;
 
+    // Proposed new common fields to support orientation of sensor and
+    // sensor parameters.  All fields are optional.
+    float rotationX = 50;
+    float rotationY = 51;
+    float rotationZ = 52;
+    bool directionalSensor = 53;
+    bool clipFar = 54;
+    float fieldOfView = 55;
+
     uint64 frequencyHz = 12;
     google.protobuf.Int32Value bandwidthHz = 13;
     float signalStrength = 14;

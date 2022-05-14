@@ -32,6 +32,15 @@ message PhoneStateData {
     string missionId = 7;
     int32 recordNumber = 8;
 
+    // Proposed new common fields to support orientation of sensor and
+    // sensor parameters.  All fields are optional.
+    float rotationX = 50;
+    float rotationY = 51;
+    float rotationZ = 52;
+    bool directionalSensor = 53;
+    bool clipFar = 54;
+    float fieldOfView = 55;
+
     com.craxiom.messaging.phonestate.simstate.SimState simState = 9;
     string simOperator = 10;
     repeated NetworkRegistrationInfo networkRegistrationInfo = 11;

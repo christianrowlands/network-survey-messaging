@@ -298,6 +298,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -371,6 +381,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             sid:
               $ref: '#/components/schemas/sid'
@@ -441,6 +461,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -516,6 +546,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -597,6 +637,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -677,6 +727,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -768,6 +828,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -840,6 +910,16 @@ components:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -915,6 +995,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -977,6 +1067,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1033,6 +1133,16 @@ components:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
@@ -1079,6 +1189,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             simState:
               $ref: '#/components/schemas/simState'
@@ -1130,6 +1250,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1241,6 +1371,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
@@ -1286,6 +1426,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1359,6 +1509,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            rotationX:
+              $ref: '#/components/schemas/rotationX'
+            rotationY:
+              $ref: '#/components/schemas/rotationY'
+            rotationZ:
+              $ref: '#/components/schemas/rotationZ'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            clipFar:
+              $ref: '#/components/schemas/clipFar'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1520,6 +1680,45 @@ components:
       format: int32
       minimum: 0
       description: The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.
+      example: 40
+
+    rotationX:
+      type: number
+      format: float
+      minimum: -90.0
+      maximum: 90.0
+      description: The rotation reading contains 3 angles, measured in degrees that define the orientation of the device in three-dimensional space. These angles are similar to yaw, pitch and roll but are defined using only right hand rotation with axes as defined by the right hand cartesian coordinate system. The three angles are applied to the device in the following order. Right-handed rotation z (-180, 180]. Starting from the y-axis and incrementing in the counter-clockwise direction. Right-handed rotation x [-90, 90]. Starting from the new (once-rotated) y-axis and incrementing towards the z-axis. Right-handed rotation y (-180, 180]. Starting from the new (twice-rotated) z-axis and incrementing towards the x-axis.
+      example: 24
+
+    rotationY:
+      type: number
+      format: float
+      minimum: -180.0
+      maximum: 180.0
+      description: The rotation reading contains 3 angles, measured in degrees that define the orientation of the device in three-dimensional space. These angles are similar to yaw, pitch and roll but are defined using only right hand rotation with axes as defined by the right hand cartesian coordinate system. The three angles are applied to the device in the following order. Right-handed rotation z (-180, 180]. Starting from the y-axis and incrementing in the counter-clockwise direction. Right-handed rotation x [-90, 90]. Starting from the new (once-rotated) y-axis and incrementing towards the z-axis. Right-handed rotation y (-180, 180]. Starting from the new (twice-rotated) z-axis and incrementing towards the x-axis.
+      example: 24
+
+    rotationZ:
+      type: number
+      format: float
+      minimum: -180.0
+      maximum: 180.0
+      description: The rotation reading contains 3 angles, measured in degrees that define the orientation of the device in three-dimensional space. These angles are similar to yaw, pitch and roll but are defined using only right hand rotation with axes as defined by the right hand cartesian coordinate system. The three angles are applied to the device in the following order. Right-handed rotation z (-180, 180]. Starting from the y-axis and incrementing in the counter-clockwise direction. Right-handed rotation x [-90, 90]. Starting from the new (once-rotated) y-axis and incrementing towards the z-axis. Right-handed rotation y (-180, 180]. Starting from the new (twice-rotated) z-axis and incrementing towards the x-axis.
+      example: 24
+
+    fieldOfView:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 360
+      description: The field of view of the sensor in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna).
+      example: 40
+
+    clipFar:
+      type: integer
+      format: float
+      minimum: 0
+      description: The furthest distance in meters that the sensor is capable of detecting a transmitter.
       example: 40
 
     # Common cellular fields

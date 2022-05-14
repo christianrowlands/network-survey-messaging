@@ -1,0 +1,32 @@
+/**
+ * A protobuf definition of the 802.11 Over The Air (OTA) message defined in the Network Survey Messaging API.
+
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true WiFi OTA
+ * Record message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message WifiOtaRecord {
+    string version = 1;
+    string messageType = 2;
+    WifiOtaRecordData data = 3;
+}
+
+message WifiOtaRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 accuracy = 8;
+
+    bytes pcapRecord = 11;
+}

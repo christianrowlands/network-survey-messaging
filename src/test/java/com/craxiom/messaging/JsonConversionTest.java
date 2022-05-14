@@ -598,23 +598,23 @@ public class JsonConversionTest
     @Test
     public void testWifiOtaToJson()
     {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
 
         final WifiOtaRecord.Builder recordBuilder = WifiOtaRecord.newBuilder();
         recordBuilder.setVersion("0.7.0");
         recordBuilder.setMessageType("WifiOtaRecord");
 
         final WifiOtaRecordData.Builder dataBuilder = WifiOtaRecordData.newBuilder();
-        dataBuilder.setDeviceSerialNumber("1234");
-        dataBuilder.setDeviceName("WiFi Pixel");
-        dataBuilder.setDeviceTime("1996-12-19T16:39:57-08:00");
-        dataBuilder.setLatitude(51.470334);
-        dataBuilder.setLongitude(-0.486594);
-        dataBuilder.setAltitude(13.3f);
-        dataBuilder.setMissionId("Survey1 20200724-154325");
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setLatitude(LATITUDE);
+        dataBuilder.setLongitude(LONGITUDE);
+        dataBuilder.setAltitude(ALTITUDE);
+        dataBuilder.setMissionId(MISSION_ID);
         dataBuilder.setRecordNumber(1);
         dataBuilder.setAccuracy(ACCURACY);
-        dataBuilder.setPcapRecord("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==");
+        dataBuilder.setPcapRecord(getSampleByteString());
 
         recordBuilder.setData(dataBuilder);
 
@@ -633,7 +633,7 @@ public class JsonConversionTest
     @Test
     public void testWifiOtaFromJson()
     {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
 
         final WifiOtaRecord.Builder builder = WifiOtaRecord.newBuilder();
         try
@@ -650,16 +650,16 @@ public class JsonConversionTest
         assertEquals("WifiOtaRecord", convertedRecord.getMessageType());
 
         final WifiOtaRecordData data = convertedRecord.getData();
-        assertEquals("1234", data.getDeviceSerialNumber());
-        assertEquals("WiFi Pixel", data.getDeviceName());
-        assertEquals("1996-12-19T16:39:57-08:00", data.getDeviceTime());
-        assertEquals(51.470334, data.getLatitude());
-        assertEquals(-0.486594, data.getLongitude());
-        assertEquals(13.3f, data.getAltitude());
-        assertEquals("Survey1 20200724-154325", data.getMissionId());
+        assertEquals(DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(DEVICE_NAME, data.getDeviceName());
+        assertEquals(DEVICE_TIME, data.getDeviceTime());
+        assertEquals(LATITUDE, data.getLatitude());
+        assertEquals(LONGITUDE, data.getLongitude());
+        assertEquals(ALTITUDE, data.getAltitude());
+        assertEquals(MISSION_ID, data.getMissionId());
         assertEquals(1, data.getRecordNumber());
         assertEquals(ACCURACY, data.getAccuracy());
-        assertEquals("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==", data.getPcapRecord());
+        assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
     }
 
     @Test

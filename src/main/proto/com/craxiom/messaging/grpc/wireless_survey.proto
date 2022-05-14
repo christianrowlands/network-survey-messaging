@@ -21,6 +21,7 @@ import "com/craxiom/messaging/wifi_beacon_record.proto";
 import "com/craxiom/messaging/gnss_record.proto";
 import "com/craxiom/messaging/energy_detection.proto";
 import "com/craxiom/messaging/signal_detection.proto";
+import "com/craxiom/messaging/media_observation_record.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.grpc";
@@ -47,6 +48,8 @@ service WirelessSurvey {
     rpc StreamLteRrc (stream LteRrc) returns (LteRrcResponse) {
     }
     rpc StreamLteNas (stream LteNas) returns (LteNasResponse) {
+    }
+    rpc StreamMediaObservation (stream MediaObservationRecord) returns (MediaObservationResponse) {
     }
 }
 
@@ -91,5 +94,9 @@ message LteRrcResponse {
 }
 
 message LteNasResponse {
+
+}
+
+message MediaObservationResponse {
 
 }

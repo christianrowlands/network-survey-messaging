@@ -53,6 +53,9 @@ public class JsonConversionTest
     private static final String RAW_MESSAGE = "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==";
     private static final int ACCURACY = 40;
     private static final double FLOAT_TOLERANCE = 0.0001;
+    private static final String URL = "https://www.flaxnerf.io/test/KismetDb.tar.gz";
+    private static final String CHECKSUM_ALGORITHM = "SHA-256";
+    private static final String CHECKSUM = "a1d4caf3fba0eb8ac7f5a090a61ac413137f5adc3cd6135a2b3c793470274cc0";
 
     private final JsonFormat.Printer jsonFormatter = JsonFormat.printer().omittingInsignificantWhitespace();
     private final JsonFormat.Parser jsonParser = JsonFormat.parser();
@@ -1408,6 +1411,59 @@ public class JsonConversionTest
         assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
     }
 
+    @Test
+    public void testMediaObservationRecordToJson()
+    {
+        final String expectedJson = getMediaObservationRecordJson();
+
+        final MediaObservationRecord.Builder recordBuilder = MediaObservationRecord.newBuilder();
+        recordBuilder.setVersion("0.7.0");
+        recordBuilder.setMessageType("MediaObservationRecord");
+
+        final MediaObservationRecordData.Builder dataBuilder = MediaObservationRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setLatitude(LATITUDE);
+        dataBuilder.setLongitude(LONGITUDE);
+        dataBuilder.setAltitude(ALTITUDE);
+        dataBuilder.setMissionId(MISSION_ID);
+        dataBuilder.setAccuracy(ACCURACY);
+        dataBuilder.setUrl(URL);
+        dataBuilder.setChecksumAlgorithm(CHECKSUM_ALGORITHM);
+        dataBuilder.setChecksum(CHECKSUM);
+
+        recordBuilder.setData(dataBuilder.build());
+
+        MediaObservationRecord record = recordBuilder.build();
+        assertJsonEquals(expectedJson, record);
+    }
+
+    @Test
+    public void testMediaObservationRecordFromJson()
+    {
+        final String inputJson = getMediaObservationRecordJson();
+
+        final MediaObservationRecord.Builder builder = MediaObservationRecord.newBuilder();
+        assertJsonMerge(inputJson, builder);
+
+        final MediaObservationRecord convertedRecord = builder.build();
+        assertEquals("0.7.0", convertedRecord.getVersion());
+        assertEquals("MediaObservationRecord", convertedRecord.getMessageType());
+
+        final MediaObservationRecordData data = convertedRecord.getData();
+        assertEquals(DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(DEVICE_NAME, data.getDeviceName());
+        assertEquals(LATITUDE, data.getLatitude());
+        assertEquals(LONGITUDE, data.getLongitude());
+        assertEquals(ALTITUDE, data.getAltitude());
+        assertEquals(MISSION_ID, data.getMissionId());
+        assertEquals(ACCURACY, data.getAccuracy());
+        assertEquals(URL, data.getUrl());
+        assertEquals(CHECKSUM_ALGORITHM, data.getChecksumAlgorithm());
+        assertEquals(CHECKSUM, data.getChecksum());
+    }
+
     /**
      * Convenience method for asserting that a json string matches the stringified version of a protobuf message AND
      * the protobuf -> string conversion occurs without exception
@@ -1479,6 +1535,11 @@ public class JsonConversionTest
     private String getLteNasJson()
     {
         return "{\"version\":\"0.7.0\",\"messageType\":\"LteNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"PLAIN\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+    }
+
+    private String getMediaObservationRecordJson()
+    {
+        return "{\"version\":\"0.7.0\",\"messageType\":\"MediaObservationRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"url\":\"https://www.flaxnerf.io/test/KismetDb.tar.gz\",\"checksumAlgorithm\":\"SHA-256\",\"checksum\":\"a1d4caf3fba0eb8ac7f5a090a61ac413137f5adc3cd6135a2b3c793470274cc0\"}}";
     }
 
     private Int32Value getInt32(int num)

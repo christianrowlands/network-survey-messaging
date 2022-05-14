@@ -110,6 +110,12 @@ channels:
           - $ref: '#/components/messages/lteRrc'
           - $ref: '#/components/messages/lteNas'
 
+  media_observation_message:
+    description: The media_observation_message topic/channel is where notification of references (URL) to media files can be published. For MQTT, set the MQTT topic as "media_observation_message" and then publish a JSON message representing a reference to the media.
+    publish:
+      message:
+        $ref: '#/components/messages/mediaObservationRecord'
+
 components:
   messages:
     gsmRecord:
@@ -248,6 +254,13 @@ components:
       payload:
         $ref: '#/components/schemas/gsmSignalingPayload'
 
+    mediaObservationRecord:
+      name: MediaObservationRecord
+      title: Media Observation Record
+      summary: Media observation reports are references in the form of Uniform Resource Locators (URL) to media files.  Media may include audio clips, pictures, videos, PCAP files, WiGle CSV, Kismet databases, etc.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/mediaObservationRecordPayload'
 
   schemas:
     gsmRecordPayload:
@@ -1435,6 +1448,56 @@ components:
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
 
+    mediaObservationRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be MediaObservationRecord.
+          example: "MediaObservationRecord"
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - url
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+
+            url:
+              $ref: '#/components/schemas/url'
+            checksumAlgorithm:
+              $ref: '#/components/schemas/checksumAlgorithm'
+            checksum:
+              $ref: '#/components/schemas/checksum'
+
     # Common fields that are used in almost every message
     version:
       type: string
@@ -2353,3 +2416,20 @@ components:
     channelType:
       type: string
       description: The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
+
+    # Types for the media observations
+    url:
+      type: string
+      format: url
+      description: URL of the media file.
+      example: "https://www.flaxnerf.io/test/KismetDb.tar.gz"
+
+    checksumAlgorithm:
+      type: string
+      description: Hashing algorithm used to calculate the checksum of the media object.
+      example: "SHA-256"
+
+    checksum:
+      type: string
+      description: Hashing algorithm used to calculate the checksum of the media object.
+      example: "e1c065d48e9866e301a8f32b516261402ce919ee45f102474139d04235c77157"

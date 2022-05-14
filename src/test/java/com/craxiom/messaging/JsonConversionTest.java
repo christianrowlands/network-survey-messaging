@@ -596,6 +596,73 @@ public class JsonConversionTest
     }
 
     @Test
+    public void testWifiOtaToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+
+        final WifiOtaRecord.Builder recordBuilder = WifiOtaRecord.newBuilder();
+        recordBuilder.setVersion("0.7.0");
+        recordBuilder.setMessageType("WifiOtaRecord");
+
+        final WifiOtaRecordData.Builder dataBuilder = WifiOtaRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("1234");
+        dataBuilder.setDeviceName("WiFi Pixel");
+        dataBuilder.setDeviceTime("1996-12-19T16:39:57-08:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(13.3f);
+        dataBuilder.setMissionId("Survey1 20200724-154325");
+        dataBuilder.setRecordNumber(1);
+        dataBuilder.setAccuracy(ACCURACY);
+        dataBuilder.setPcapRecord("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==");
+
+        recordBuilder.setData(dataBuilder);
+
+        final WifiOtaRecord record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testWifiOtaFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\"}}";
+
+        final WifiOtaRecord.Builder builder = WifiOtaRecord.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final WifiOtaRecord convertedRecord = builder.build();
+
+        assertEquals("0.7.0", convertedRecord.getVersion());
+        assertEquals("WifiOtaRecord", convertedRecord.getMessageType());
+
+        final WifiOtaRecordData data = convertedRecord.getData();
+        assertEquals("1234", data.getDeviceSerialNumber());
+        assertEquals("WiFi Pixel", data.getDeviceName());
+        assertEquals("1996-12-19T16:39:57-08:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(13.3f, data.getAltitude());
+        assertEquals("Survey1 20200724-154325", data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
+        assertEquals(ACCURACY, data.getAccuracy());
+        assertEquals("FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==", data.getPcapRecord());
+    }
+
+    @Test
     public void testBluetoothToJson()
     {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6}}";

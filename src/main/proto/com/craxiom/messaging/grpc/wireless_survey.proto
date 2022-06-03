@@ -18,6 +18,7 @@ import "com/craxiom/messaging/nr_record.proto";
 import "com/craxiom/messaging/lte_rrc.proto";
 import "com/craxiom/messaging/lte_nas.proto";
 import "com/craxiom/messaging/wifi_beacon_record.proto";
+import "com/craxiom/messaging/wifi_probe_request_record.proto";
 import "com/craxiom/messaging/wifi_ota_record.proto";
 import "com/craxiom/messaging/gnss_record.proto";
 import "com/craxiom/messaging/energy_detection.proto";
@@ -38,6 +39,8 @@ service WirelessSurvey {
     rpc StreamNrSurvey (stream NrRecord) returns (NrSurveyResponse) {
     }
     rpc StreamWifiBeaconSurvey (stream WifiBeaconRecord) returns (WifiBeaconSurveyResponse) {
+    }
+    rpc StreamWifiProbeRequestSurvey (stream WifiProbeRequestRecord) returns (WifiProbeRequestSurveyResponse) {
     }
     rpc StreamWifiOtaSurvey (stream WifiOtaRecord) returns (WifiOtaSurveyResponse) {
     }
@@ -74,6 +77,10 @@ message NrSurveyResponse {
 }
 
 message WifiBeaconSurveyResponse {
+
+}
+
+message WifiProbeRequestSurveyResponse {
 
 }
 

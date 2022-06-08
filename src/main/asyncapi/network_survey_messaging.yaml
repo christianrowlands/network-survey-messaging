@@ -73,6 +73,12 @@ channels:
       message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
 
+  wifi_ota_message:
+    description: The wifi_ota_message topic/channel is where Over The Air (OTA) 802.11 (WiFi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
+    publish:
+      message:
+        $ref: '#/components/messages/wifiOtaRecord'
+
   bluetooth_message:
     description: The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
     publish:
@@ -173,6 +179,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
+
+    wifiOtaRecord:
+      name: WifiOtaRecord
+      title: Wi-Fi Over The Air (OTA) Record
+      summary: Represents information recorded about an 802.11 packet recorded at a particular time and geographic location. This message represents a capture of a 802.11 packet in PCAP format.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiOtaRecordPayload'
 
     bluetoothRecord:
       name: BluetoothRecord
@@ -813,6 +827,52 @@ components:
               $ref: '#/components/schemas/nodeType'
             standard:
               $ref: '#/components/schemas/standard'
+
+    wifiOtaRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WifiOtaRecord.
+          example: "WifiOtaRecord"
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - pcapRecord
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     bluetoothRecordPayload:
       type: object

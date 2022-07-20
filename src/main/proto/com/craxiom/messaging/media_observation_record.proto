@@ -1,0 +1,35 @@
+/**
+ * A protobuf definition of the media observation report.
+
+ *
+ * This protobuf definition is provided as a convenience only. See the
+ * official API documentation for the true media observation record
+ * message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+
+message MediaObservationRecord {
+    string version = 1;
+    string messageType = 2;
+    MediaObservationRecordData data = 3;
+}
+
+message MediaObservationRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 accuracy = 8;
+
+    string url = 10;
+    string checksumAlgorithm = 11;
+    string checksum = 12;
+}

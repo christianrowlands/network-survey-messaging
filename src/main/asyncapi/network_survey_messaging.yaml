@@ -334,8 +334,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -417,8 +417,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sid:
               $ref: '#/components/schemas/sid'
@@ -497,8 +497,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -582,8 +582,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -673,8 +673,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -763,8 +763,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -864,8 +864,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -948,8 +948,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
@@ -1005,8 +1005,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -1087,8 +1087,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -1172,8 +1172,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1244,8 +1244,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1310,8 +1310,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
@@ -1366,8 +1366,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             simState:
               $ref: '#/components/schemas/simState'
@@ -1427,8 +1427,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1548,8 +1548,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
@@ -1603,8 +1603,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1686,8 +1686,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1748,8 +1748,8 @@ components:
               $ref: '#/components/schemas/roll'
             fieldOfView:
               $ref: '#/components/schemas/fieldOfView'
-            clipFar:
-              $ref: '#/components/schemas/clipFar'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1862,7 +1862,7 @@ components:
       format: float
       minimum: -180.0
       maximum: 180.0
-      description: Heading, degrees from true north.
+      description: Heading of the sensor/antenna, in degrees from true north. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
       example: 32.7
 
     pitch:
@@ -1870,7 +1870,7 @@ components:
       format: float
       minimum: -180.0
       maximum: 180.0
-      description: Pitch in degrees.
+      description: Pitch of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
       example: -0.1
 
     roll:
@@ -1878,7 +1878,7 @@ components:
       format: float
       minimum: -180.0
       maximum: 180.0
-      description: Roll in degrees.
+      description: Roll of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
       example: 0.15
 
     fieldOfView:
@@ -1886,15 +1886,15 @@ components:
       format: float
       minimum: 0
       maximum: 360
-      description: The field of view of the sensor in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna).
+      description: The horizontal field of view of the sensor/antenna in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna). One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
       example: 40
 
-    clipFar:
+    receivedSensitivity:
       type: number
       format: float
       minimum: 0
-      description: The furthest detectable distance in meters of the sensor.
-      example: 40
+      description: The minimum signal strength that a receiver can detect, in units of dBm. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldOfView, receivedSensitivity) to form more accurate estimates of the transmitter's position or distance from the sensor.
+      example: -50
 
     # Common cellular fields
     provider:

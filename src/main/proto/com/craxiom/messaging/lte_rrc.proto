@@ -32,7 +32,7 @@ message LteRrcData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float clipFar = 54;
+    float receivedSensitivity = 54;
 
     com.craxiom.messaging.lterrcchanneltype.LteRrcChannelType channelType = 10;
     bytes pcapRecord = 11;

@@ -37,7 +37,7 @@ message PhoneStateData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float clipFar = 54;
+    float receivedSensitivity = 54;
 
     com.craxiom.messaging.phonestate.simstate.SimState simState = 9;
     string simOperator = 10;

@@ -36,14 +36,12 @@ message WifiBeaconRecordData {
     int32 recordNumber = 8;
     int32 accuracy = 9;
 
-    // Proposed new commonfields to support orientation of sensor and
-    // sensor parameters.  All fields are optional.
-    float rotationX = 50;
-    float rotationY = 51;
-    float rotationZ = 52;
-    bool directionalSensor = 53;
-    bool clipFar = 54;
-    float fieldOfView = 55;
+    // Orientation of sensor and sensor parameters. optional.
+    float heading = 50;
+    float pitch = 51;
+    float roll = 52;
+    float fieldOfView = 53;
+    float clipFar = 54;
 
     string sourceAddress = 10;
     string destinationAddress = 11;

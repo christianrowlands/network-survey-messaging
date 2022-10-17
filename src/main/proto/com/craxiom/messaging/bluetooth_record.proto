@@ -31,6 +31,11 @@ message BluetoothRecordData {
     string missionId = 7;
     int32 recordNumber = 8;
     int32 accuracy = 9;
+    float heading = 50;
+    float pitch = 51;
+    float roll = 52;
+    float fieldOfView = 53;
+    float receivedSensitivity = 54;
 
     string sourceAddress = 10;
     string destinationAddress = 11;

@@ -30,6 +30,11 @@ message GsmRecordData {
     int32 recordNumber = 8;
     int32 groupNumber = 9;
     int32 accuracy = 10;
+    float heading = 50;
+    float pitch = 51;
+    float roll = 52;
+    float fieldOfView = 53;
+    float receivedSensitivity = 54;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;

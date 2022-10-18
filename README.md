@@ -50,7 +50,7 @@ In other words, the protobuf files and gRPC SDKs are provided as convenience lib
 of the Network Survey Messaging API. The API is instead only the JSON message schema and channel/topic names for the messages.
 
 As a result, if a gRPC setup is of interest to a user of these messages, then the generated library can be employed to
-send the protobuf messages over gRPC.  The build produces a Java library with all of the messages for use by the client
+send the protobuf messages over gRPC.  The build produces Java and Python libraries with all of the messages for use by the client
 and server software respectively.
 
 More information about protobuf is available [here](https://developers.google.com/protocol-buffers/).
@@ -102,10 +102,13 @@ To publish a new version of the Network Survey Messaging API HTML page, use the 
 
 This will overwrite the current HTML content from the docs directory with the last API definition from the yaml file.
 
-#### Building the protobuf Java library
+#### Building the protobuf Java and Python libraries
  - Execute `gradlew build` in the root directory to produce the Java library with the protobuf messages.
  - Execute `gradlew publishToMavenLocal` in the root directory to publish the artifacts to the local Maven cache.
 
+Generated code is here:
+ - Java: build/generated/source/proto/main/java/com/craxiom/messaging
+ - Python: build/generated/source/proto/main/python/com/craxiom/messaging
 
 ##Change log
 ##### [0.8.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.8.0) - 2021-10-26

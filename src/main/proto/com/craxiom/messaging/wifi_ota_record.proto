@@ -1,25 +1,24 @@
 /**
- * A protobuf definition of the LTE RRC message defined in the Network Survey Messaging API.
+ * A protobuf definition of the 802.11 Over The Air (OTA) message defined in the Network Survey Messaging API.
+
  *
- * This protobuf definition is provided as a convenience only. See the official API documentation for the true LTE
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true WiFi OTA
  * Record message schema.
  */
 syntax = "proto3";
 
 package com.craxiom.messaging;
 
-import "com/craxiom/messaging/lterrcchanneltype/lte_rrc_channel_type.proto";
-
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
 
-message LteRrc {
+message WifiOtaRecord {
     string version = 1;
     string messageType = 2;
-    LteRrcData data = 3;
+    WifiOtaRecordData data = 3;
 }
 
-message LteRrcData {
+message WifiOtaRecordData {
     string deviceSerialNumber = 1;
     string deviceName = 2;
     string deviceTime = 3;
@@ -27,13 +26,15 @@ message LteRrcData {
     double longitude = 5;
     float altitude = 6;
     string missionId = 7;
-    int32 accuracy = 8;
+    int32 recordNumber = 8;
+    int32 accuracy = 9;
+
+    // Orientation of sensor and sensor parameters. optional.
     float heading = 50;
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
     float receivedSensitivity = 54;
 
-    com.craxiom.messaging.lterrcchanneltype.LteRrcChannelType channelType = 10;
-    bytes pcapRecord = 11;
+    bytes pcapRecord = 10;
 }

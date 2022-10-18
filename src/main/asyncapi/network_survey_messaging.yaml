@@ -73,6 +73,12 @@ channels:
       message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
 
+  wifi_ota_message:
+    description: The wifi_ota_message topic/channel is where Over The Air (OTA) 802.11 (WiFi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
+    publish:
+      message:
+        $ref: '#/components/messages/wifiOtaRecord'
+
   bluetooth_message:
     description: The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
     publish:
@@ -173,6 +179,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
+
+    wifiOtaRecord:
+      name: WifiOtaRecord
+      title: Wi-Fi Over The Air (OTA) Record
+      summary: Represents information recorded about an 802.11 packet recorded at a particular time and geographic location. This message represents a capture of a 802.11 packet in PCAP format.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiOtaRecordPayload'
 
     bluetoothRecord:
       name: BluetoothRecord
@@ -312,6 +326,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -385,6 +409,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sid:
               $ref: '#/components/schemas/sid'
@@ -455,6 +489,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -530,6 +574,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -611,6 +665,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             mcc:
               $ref: '#/components/schemas/mcc'
@@ -691,6 +755,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -782,6 +856,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -813,6 +897,62 @@ components:
               $ref: '#/components/schemas/nodeType'
             standard:
               $ref: '#/components/schemas/standard'
+
+    wifiOtaRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WifiOtaRecord.
+          example: "WifiOtaRecord"
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - pcapRecord
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
+
+            pcapRecord:
+              $ref: '#/components/schemas/pcapRecord'
 
     bluetoothRecordPayload:
       type: object
@@ -857,6 +997,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
@@ -929,6 +1079,16 @@ components:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             constellation:
               $ref: '#/components/schemas/constellation'
@@ -1004,6 +1164,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1066,6 +1236,16 @@ components:
               $ref: '#/components/schemas/groupNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
@@ -1122,6 +1302,16 @@ components:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
@@ -1168,6 +1358,16 @@ components:
               $ref: '#/components/schemas/recordNumber'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             simState:
               $ref: '#/components/schemas/simState'
@@ -1219,6 +1419,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1330,6 +1540,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
@@ -1375,6 +1595,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1448,6 +1678,16 @@ components:
               $ref: '#/components/schemas/missionId'
             accuracy:
               $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1498,6 +1738,18 @@ components:
               $ref: '#/components/schemas/altitude'
             missionId:
               $ref: '#/components/schemas/missionId'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receivedSensitivity:
+              $ref: '#/components/schemas/receivedSensitivity'
 
             channelType:
               $ref: '#/components/schemas/channelType'
@@ -1604,6 +1856,45 @@ components:
       minimum: 0
       description: The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.
       example: 40
+
+    heading:
+      type: number
+      format: float
+      minimum: -180.0
+      maximum: 180.0
+      description: Heading of the sensor/antenna, in degrees from true north. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
+      example: 32.7
+
+    pitch:
+      type: number
+      format: float
+      minimum: -180.0
+      maximum: 180.0
+      description: Pitch of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
+      example: -0.1
+
+    roll:
+      type: number
+      format: float
+      minimum: -180.0
+      maximum: 180.0
+      description: Roll of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
+      example: 0.15
+
+    fieldOfView:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 360
+      description: The horizontal field of view of the sensor/antenna in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna). One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldofView, receivedSensitivity) to form more accurate estimates of the transmitter's position.
+      example: 40
+
+    receivedSensitivity:
+      type: number
+      format: float
+      minimum: 0
+      description: The minimum signal strength that a receiver can detect, in units of dBm. One can use sensor orientation (heading, pitch, roll) and sensor characterisics (fieldOfView, receivedSensitivity) to form more accurate estimates of the transmitter's position or distance from the sensor.
+      example: -50
 
     # Common cellular fields
     provider:

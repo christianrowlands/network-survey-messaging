@@ -36,7 +36,7 @@ message GnssRecordData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float receivedSensitivity = 54;
+    float receiverSensitivity = 54;
 
     com.craxiom.messaging.gnss.constellation.Constellation constellation = 12;
     google.protobuf.UInt32Value spaceVehicleId = 13;

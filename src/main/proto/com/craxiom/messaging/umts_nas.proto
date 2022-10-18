@@ -33,7 +33,7 @@ message UmtsNasData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float receivedSensitivity = 54;
+    float receiverSensitivity = 54;
 
     bytes pcapRecord = 11;
 }

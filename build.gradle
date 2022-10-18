@@ -73,18 +73,18 @@ protobuf {
 
     plugins {
         grpc_java { artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion" }
-        grpc_python { path = getPluginPath("python") }
+        //grpc_python { path = getPluginPath("python") }
     }
 
     generateProtoTasks {
         // adapted from https://github.com/google/protobuf-gradle-plugin/issues/52 to generate python code from within gradle
         all()*.builtins {
             java {}
-            python {}
+            //python {}
         }
         all()*.plugins {
             grpc_java { outputSubDir = "java" }
-            grpc_python { outputSubDir = "python" }
+            //grpc_python { outputSubDir = "python" }
         }
     }
 }

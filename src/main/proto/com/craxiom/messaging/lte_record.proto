@@ -35,7 +35,7 @@ message LteRecordData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float receivedSensitivity = 54;
+    float receiverSensitivity = 54;
 
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;

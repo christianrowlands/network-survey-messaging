@@ -36,7 +36,7 @@ message SignalDetectionData {
     float pitch = 51;
     float roll = 52;
     float fieldOfView = 53;
-    float receivedSensitivity = 54;
+    float receiverSensitivity = 54;
 
     uint64 frequencyHz = 12;
     google.protobuf.Int32Value bandwidthHz = 13;

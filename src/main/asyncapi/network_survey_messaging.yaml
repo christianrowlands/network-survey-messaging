@@ -73,6 +73,12 @@ channels:
       message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
 
+  wifi_deauthentication_message:
+    description: The wifi_deauthentication_message topic/channel is where 802.11 (WiFi) Deauthentication Management Frames can be published. For MQTT, set the MQTT topic as "wifi_deauthentication_message". When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
+    publish:
+      message:
+        $ref: '#/components/messages/wifiDeauthenticationRecord'
+
   wifi_ota_message:
     description: The wifi_ota_message topic/channel is where Over The Air (OTA) 802.11 (WiFi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
     publish:
@@ -179,6 +185,14 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
+
+    wifiDeauthenticationRecord:
+      name: WifiDeauthenticationRecord
+      title: Wi-Fi Deauthntication Record
+      summary: Represents an 802.11 deauthentication management frame. When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiDeauthenticationRecordPayload'
 
     wifiOtaRecord:
       name: WifiOtaRecord
@@ -873,6 +887,94 @@ components:
               $ref: '#/components/schemas/destinationAddress'
             bssid:
               $ref: '#/components/schemas/bssid'
+
+            ssid:
+              $ref: '#/components/schemas/ssid'
+
+            channel: # Defining it directly so it does not conflict with the channel field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The channel on which this 802.11 frame was recorded.
+              example: 2
+            frequencyMhz: # Defining it directly so it does not conflict with the frequency field from other messages
+              type: integer
+              format: int32
+              minimum: 0
+              description: The frequency in MHz on which this 802.11 frame was recorded.
+              example: 2417
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+            snr:
+              $ref: '#/components/schemas/snr'
+            nodeType:
+              $ref: '#/components/schemas/nodeType'
+            standard:
+              $ref: '#/components/schemas/standard'
+
+    wifiDeauthenticationRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          $ref: '#/components/schemas/messageType'
+          description: The type of message, must be WifiDeauthenticationRecord.
+          example: "WifiDeauthenticationRecord"
+
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - sourceAddress
+            - reason
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+            heading:
+              $ref: '#/components/schemas/heading'
+            pitch:
+              $ref: '#/components/schemas/pitch'
+            roll:
+              $ref: '#/components/schemas/roll'
+            fieldOfView:
+              $ref: '#/components/schemas/fieldOfView'
+            receiverSensitivity:
+              $ref: '#/components/schemas/receiverSensitivity'
+
+            sourceAddress:
+              $ref: '#/components/schemas/sourceAddress'
+            destinationAddress:
+              $ref: '#/components/schemas/destinationAddress'
+            bssid:
+              $ref: '#/components/schemas/bssid'
+            reason:
+              $ref: '#/components/schemas/reason'
 
             ssid:
               $ref: '#/components/schemas/ssid'
@@ -2324,6 +2426,14 @@ components:
         - "IEEE80211N"
         - "IEEE80211AC"
         - "IEEE80211AX"
+
+    reason:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 65535
+      description: Clients may disassociate prior to powering off.  APs may disassociate clients for various reasons including failure to properly authenticate, for load balancing or timeout reasons, entering a state of maintenance, etc. The 802.11-2016 standard includes a list of disassociation reasons.
+      example: 2
 
 
     # Bluetooth specific fields

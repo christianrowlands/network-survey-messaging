@@ -25,7 +25,7 @@ jobs:
           template: '@asyncapi/html-template@0.28.1'  #In case of template from npm, because of @ it must be in quotes
           filepath: src/main/asyncapi/network_survey_messaging.yaml
           #parameters: baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
-          output: docs
+          output: generated-html
 
       #Using another action that takes generated HTML and pushes it to GH Pages
       - name: Deploy GH page
@@ -33,4 +33,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: docs
+          FOLDER: generated-html

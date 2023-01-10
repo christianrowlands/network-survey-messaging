@@ -1308,10 +1308,10 @@ public class JsonConversionTest
     @Test
     public void testDeviceStatusToJson()
     {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0}}";
+        final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":true,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0}}";
 
         final DeviceStatus.Builder recordBuilder = DeviceStatus.newBuilder();
-        recordBuilder.setVersion("0.7.0");
+        recordBuilder.setVersion("0.9.0");
         recordBuilder.setMessageType("DeviceStatus");
 
         final DeviceStatusData.Builder dataBuilder = DeviceStatusData.newBuilder();
@@ -1329,6 +1329,7 @@ public class JsonConversionTest
         dataBuilder.setFieldOfView(FIELD_OF_VIEW);
         dataBuilder.setBatteryLevelPercent(Int32Value.newBuilder().setValue(38).build());
         dataBuilder.setError(Error.newBuilder().setErrorMessage("The scan stopped unexpectedly").build());
+        dataBuilder.setMdmOverride(BoolValue.newBuilder().setValue(true).build());
 
         recordBuilder.setData(dataBuilder);
 
@@ -1347,7 +1348,7 @@ public class JsonConversionTest
     @Test
     public void testDeviceStatusFromJson()
     {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+        final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":false,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final DeviceStatus.Builder builder = DeviceStatus.newBuilder();
         try
@@ -1360,7 +1361,7 @@ public class JsonConversionTest
 
         final DeviceStatus convertedRecord = builder.build();
 
-        assertEquals("0.7.0", convertedRecord.getVersion());
+        assertEquals("0.9.0", convertedRecord.getVersion());
         assertEquals("DeviceStatus", convertedRecord.getMessageType());
 
         final DeviceStatusData data = convertedRecord.getData();
@@ -1379,6 +1380,7 @@ public class JsonConversionTest
         assertEquals(RECEIVED_SENSITIVITY, data.getReceiverSensitivity());
         assertEquals(38, data.getBatteryLevelPercent().getValue());
         assertEquals("The scan stopped unexpectedly", data.getError().getErrorMessage());
+        assertFalse(data.getMdmOverride().getValue());
     }
 
     @Test

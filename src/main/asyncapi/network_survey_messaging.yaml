@@ -1419,6 +1419,8 @@ components:
               $ref: '#/components/schemas/batteryLevelPercent'
             error:
               $ref: '#/components/schemas/error'
+            mdmOverride:
+              $ref: '#/components/schemas/mdmOverride'
 
     phoneStatePayload:
       type: object
@@ -2635,6 +2637,10 @@ components:
           type: string
           description: A description of the error state that the device is in.
           example: "The scan stopped unexpectedly"
+
+    mdmOverride:
+      type: boolean
+      description: Indicates if the device currently has the Mobile Device Mangement (MDM) Override option turned on. If true, the user has forced the MDM options off, if false, the user has left the MDM control in place. Added in version 0.9.0.
 
     # Phone State specific fields
     simState:

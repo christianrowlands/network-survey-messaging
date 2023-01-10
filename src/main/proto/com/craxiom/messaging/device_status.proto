@@ -36,6 +36,7 @@ message DeviceStatusData {
 
     google.protobuf.Int32Value batteryLevelPercent = 7;
     Error error = 10;
+    google.protobuf.BoolValue mdmOverride = 11;
 }
 
 // Used to report an error with the device

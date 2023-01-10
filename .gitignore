@@ -112,3 +112,6 @@ gradle-app.setting
 
 # Ignore the gradle.properties file since it contains the local publishing key information
 gradle.properties
+
+### emacs ###
+*~

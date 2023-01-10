@@ -755,6 +755,102 @@ public class JsonConversionTest
     }
 
     @Test
+    public void testWifiDeauthenticationToJson()
+    {
+        final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiDeauthenticationRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"ssid\":\"My Wi-Fi Network\",\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"reason\":2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+
+        final WifiDeauthenticationRecord.Builder recordBuilder = WifiDeauthenticationRecord.newBuilder();
+        recordBuilder.setVersion("0.9.0");
+        recordBuilder.setMessageType("WifiDeauthenticationRecord");
+
+        final WifiDeauthenticationRecordData.Builder dataBuilder = WifiDeauthenticationRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber("1234");
+        dataBuilder.setDeviceName("Kismet Device");
+        dataBuilder.setDeviceTime("1996-12-19T16:39:57-08:00");
+        dataBuilder.setLatitude(51.470334);
+        dataBuilder.setLongitude(-0.486594);
+        dataBuilder.setAltitude(13.3f);
+        dataBuilder.setMissionId("Survey1 20200724-154325");
+        dataBuilder.setRecordNumber(1);
+        dataBuilder.setAccuracy(10);
+        dataBuilder.setHeading(HEADING);
+        dataBuilder.setPitch(PITCH);
+        dataBuilder.setRoll(ROLL);
+        dataBuilder.setFieldOfView(FIELD_OF_VIEW);
+        dataBuilder.setReceiverSensitivity(RECEIVED_SENSITIVITY);
+        dataBuilder.setSourceAddress("68:7F:74:B0:14:98");
+        dataBuilder.setDestinationAddress("FF:FF:FF:FF:FF:FF");
+        dataBuilder.setSsid("My Wi-Fi Network");
+        dataBuilder.setReason(2);
+        dataBuilder.setChannel(Int32Value.newBuilder().setValue(2).build());
+        dataBuilder.setFrequencyMhz(Int32Value.newBuilder().setValue(2417).build());
+        dataBuilder.setSignalStrength(FloatValue.newBuilder().setValue(-58.5f).build());
+        dataBuilder.setSnr(FloatValue.newBuilder().setValue(26.7f).build());
+        dataBuilder.setNodeType(NodeType.NON_AP_STA);
+        dataBuilder.setStandard(Standard.IEEE80211N);
+
+        recordBuilder.setData(dataBuilder);
+
+        final WifiDeauthenticationRecord record = recordBuilder.build();
+
+        try
+        {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(expectedJson, recordJson);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testWifiDeauthenticationFromJson()
+    {
+        final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiDeauthenticationRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"bssid\":\"68:7F:74:B0:14:98\",\"ssid\":\"My Wi-Fi Network\",\"reason\":2,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+
+        final WifiDeauthenticationRecord.Builder builder = WifiDeauthenticationRecord.newBuilder();
+        try
+        {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e)
+        {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final WifiDeauthenticationRecord convertedRecord = builder.build();
+
+        assertEquals("0.9.0", convertedRecord.getVersion());
+        assertEquals("WifiDeauthenticationRecord", convertedRecord.getMessageType());
+
+        final WifiDeauthenticationRecordData data = convertedRecord.getData();
+        assertEquals("1234", data.getDeviceSerialNumber());
+        assertEquals("Kismet Device", data.getDeviceName());
+        assertEquals("1996-12-19T16:39:57-08:00", data.getDeviceTime());
+        assertEquals(51.470334, data.getLatitude());
+        assertEquals(-0.486594, data.getLongitude());
+        assertEquals(13.3f, data.getAltitude());
+        assertEquals("Survey1 20200724-154325", data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
+        assertEquals(10, data.getAccuracy());
+        assertEquals(HEADING, data.getHeading());
+        assertEquals(PITCH, data.getPitch());
+        assertEquals(ROLL, data.getRoll());
+        assertEquals(FIELD_OF_VIEW, data.getFieldOfView());
+        assertEquals(RECEIVED_SENSITIVITY, data.getReceiverSensitivity());
+        assertEquals("68:7F:74:B0:14:98", data.getSourceAddress());
+        assertEquals("FF:FF:FF:FF:FF:FF", data.getDestinationAddress());
+        assertEquals("68:7F:74:B0:14:98", data.getBssid());
+        assertEquals("My Wi-Fi Network", data.getSsid());
+        assertEquals(2, data.getReason());
+        assertEquals(2, data.getChannel().getValue());
+        assertEquals(2417, data.getFrequencyMhz().getValue());
+        assertEquals(-58.5, data.getSignalStrength().getValue());
+        assertEquals(26.7, data.getSnr().getValue(), FLOAT_TOLERANCE);
+        assertEquals(NodeType.NON_AP_STA, data.getNodeType());
+        assertEquals(Standard.IEEE80211N, data.getStandard());
+    }
+
+    @Test
     public void testWifiOtaToJson()
     {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";

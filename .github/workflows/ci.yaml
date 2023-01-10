@@ -1,0 +1,30 @@
+name: AsyncAPI documents processing
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      #"standard step" where repo needs to be checked-out first
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      #Using another action for AsyncAPI for validation
+      - name: Validating AsyncAPI document
+        uses: WaleedAshraf/asyncapi-github-action@v0.0.9
+        with:
+          filepath: src/main/asyncapi/network_survey_messaging.yaml
+
+      #In case you do not want to use defaults, you for example want to use different template
+      - name: Generating HTML from my AsyncAPI document
+        uses: docker://asyncapi/github-action-for-generator:2.1.7
+        with:
+          template: '@asyncapi/html-template@0.28.1'  #In case of template from npm, because of @ it must be in quotes
+          filepath: src/main/asyncapi/network_survey_messaging.yaml
+          #parameters: baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
+          output: generated-html

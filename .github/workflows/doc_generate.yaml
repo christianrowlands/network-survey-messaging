@@ -2,7 +2,7 @@ name: AsyncAPI documents processing
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
 
 jobs:
   generate:

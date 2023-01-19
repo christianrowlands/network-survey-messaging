@@ -26,5 +26,4 @@ jobs:
         with:
           template: '@asyncapi/html-template@0.28.1'  #In case of template from npm, because of @ it must be in quotes
           filepath: src/main/asyncapi/network_survey_messaging.yaml
-          #parameters: baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
           output: generated-html

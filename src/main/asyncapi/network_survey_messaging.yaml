@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.10.0-SNAPSHOT'
+  version: '0.10.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -73,14 +73,14 @@ channels:
       message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
 
-  wifi_deauthentication_message:
-    description: The wifi_deauthentication_message topic/channel is where 802.11 (WiFi) Deauthentication Management Frames can be published. For MQTT, set the MQTT topic as "wifi_deauthentication_message". When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
+  80211_deauthentication_message:
+    description: The 80211_deauthentication_message topic/channel is where 802.11 (Wi-Fi) Deauthentication Management Frames can be published. For MQTT, set the MQTT topic as "wifi_deauthentication_message". When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
     publish:
       message:
         $ref: '#/components/messages/wifiDeauthenticationRecord'
 
-  wifi_ota_message:
-    description: The wifi_ota_message topic/channel is where Over The Air (OTA) 802.11 (WiFi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
+  80211_ota_message:
+    description: The 80211_ota_message topic/channel is where Over The Air (OTA) 802.11 (Wi-Fi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
     publish:
       message:
         $ref: '#/components/messages/wifiOtaRecord'
@@ -1884,7 +1884,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.9.0"
+      example: "0.10.0"
 
     messageType:
       type: string

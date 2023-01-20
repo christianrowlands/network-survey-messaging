@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.10.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.10.0) - 2023-01-19
+* BREAKING CHANGE: Renamed the wifi_deauthentication_message topic to 80211_deauthentication_message for consistency with the other topics.
+* BREAKING CHANGE: Renamed the wifi_ota_message topic to 80211_ota_message for consistency with the other topics.
+
 ## [0.9.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.9.0) - 2023-01-10
 * Added a message schema for holding a Wi-Fi Probe Request record.
 * Added a message schema for holding a Wi-Fi Deauthentication record.

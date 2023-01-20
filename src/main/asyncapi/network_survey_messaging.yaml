@@ -188,7 +188,7 @@ components:
 
     wifiDeauthenticationRecord:
       name: WifiDeauthenticationRecord
-      title: Wi-Fi Deauthntication Record
+      title: Wi-Fi Deauthentication Record
       summary: Represents an 802.11 deauthentication management frame. When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
       contentType: application/json
       payload:

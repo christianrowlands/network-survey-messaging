@@ -115,3 +115,5 @@ gradle.properties
 
 ### emacs ###
 *~
+
+.java-version

@@ -35,6 +35,7 @@ message CdmaRecordData {
     float roll = 52;
     float fieldOfView = 53;
     float receiverSensitivity = 54;
+    float speed = 55;
 
     google.protobuf.Int32Value sid = 16;
     google.protobuf.Int32Value nid = 17;

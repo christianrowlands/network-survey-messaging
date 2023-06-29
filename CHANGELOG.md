@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.11.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.11.0) - 2023-06-29
+* Added the speed field to all the message schemas.
+
 ## [0.10.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.10.0) - 2023-01-19
 * BREAKING CHANGE: Renamed the wifi_deauthentication_message topic to 80211_deauthentication_message for consistency with the other topics.
 * BREAKING CHANGE: Renamed the wifi_ota_message topic to 80211_ota_message for consistency with the other topics.

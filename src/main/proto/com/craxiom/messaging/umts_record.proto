@@ -38,6 +38,8 @@ message UmtsRecordData {
     float fieldOfView = 53;
     float receiverSensitivity = 54;
 
+    float speed = 55;
+
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
     google.protobuf.Int32Value lac = 18;

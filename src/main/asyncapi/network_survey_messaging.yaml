@@ -332,6 +332,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -415,6 +417,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -495,6 +499,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -580,6 +586,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -671,6 +679,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -763,6 +773,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -864,6 +876,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -950,6 +964,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1036,6 +1052,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1093,6 +1111,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1170,6 +1190,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1258,6 +1280,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1330,6 +1354,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1400,6 +1426,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
@@ -1456,6 +1484,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             recordNumber:
@@ -1519,6 +1549,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             accuracy:
@@ -1640,6 +1672,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             accuracy:
@@ -1695,6 +1729,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             accuracy:
@@ -1778,6 +1814,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             accuracy:
@@ -1840,6 +1878,8 @@ components:
               $ref: '#/components/schemas/longitude'
             altitude:
               $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
             missionId:
               $ref: '#/components/schemas/missionId'
             accuracy:
@@ -1923,6 +1963,13 @@ components:
       format: float
       description: The altitude in meters above MSL representing where this survey record was recorded.
       example: 13.3
+
+    speed:
+      type: number
+      format: float
+      minimum: 0
+      description: The speed at the time of this record capture in meters per second. This field was added in version 0.11.0. From the Network Survey Android app, this field is only present if it is detected that the device is in motion.
+      example: 9.3
 
     missionId:
       type: string

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.12.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.12.0) - 2023-09-18
+* Adds frameType and frameSubtype to the wifi ota message.
+* Upgrades the protobuf version to 3.24.3 and the gRPC version to 1.58.0.
+
 ## [0.11.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.11.0) - 2023-06-29
 * Added the speed field to all the message schemas.
 

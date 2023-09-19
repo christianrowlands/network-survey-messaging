@@ -39,4 +39,6 @@ message WifiOtaRecordData {
     float speed = 55;
 
     bytes pcapRecord = 10;
+    optional int32 frameType = 11;
+    optional int32 frameSubtype = 12;
 }

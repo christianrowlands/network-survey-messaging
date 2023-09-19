@@ -853,10 +853,10 @@ public class JsonConversionTest
     @Test
     public void testWifiOtaToJson()
     {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+        final String expectedJson = "{\"version\":\"0.12.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"frameType\":0,\"frameSubtype\":4,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiOtaRecord.Builder recordBuilder = WifiOtaRecord.newBuilder();
-        recordBuilder.setVersion("0.7.0");
+        recordBuilder.setVersion("0.12.0");
         recordBuilder.setMessageType("WifiOtaRecord");
 
         final WifiOtaRecordData.Builder dataBuilder = WifiOtaRecordData.newBuilder();
@@ -875,6 +875,8 @@ public class JsonConversionTest
         dataBuilder.setFieldOfView(FIELD_OF_VIEW);
         dataBuilder.setReceiverSensitivity(RECEIVED_SENSITIVITY);
         dataBuilder.setPcapRecord(getSampleByteString());
+        dataBuilder.setFrameType(0);
+        dataBuilder.setFrameSubtype(4);
 
         recordBuilder.setData(dataBuilder);
 
@@ -893,7 +895,7 @@ public class JsonConversionTest
     @Test
     public void testWifiOtaFromJson()
     {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+        final String inputJson = "{\"version\":\"0.12.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"frameType\":0,\"frameSubtype\":4,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiOtaRecord.Builder builder = WifiOtaRecord.newBuilder();
         try
@@ -906,7 +908,7 @@ public class JsonConversionTest
 
         final WifiOtaRecord convertedRecord = builder.build();
 
-        assertEquals("0.7.0", convertedRecord.getVersion());
+        assertEquals("0.12.0", convertedRecord.getVersion());
         assertEquals("WifiOtaRecord", convertedRecord.getMessageType());
 
         final WifiOtaRecordData data = convertedRecord.getData();
@@ -925,6 +927,8 @@ public class JsonConversionTest
         assertEquals(FIELD_OF_VIEW, data.getFieldOfView());
         assertEquals(RECEIVED_SENSITIVITY, data.getReceiverSensitivity());
         assertArrayEquals(getBase64RawMessage(), data.getPcapRecord().toByteArray());
+        assertEquals(0, data.getFrameType());
+        assertEquals(4, data.getFrameSubtype());
     }
 
     @Test

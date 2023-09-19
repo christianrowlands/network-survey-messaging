@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.11.1'
+  version: '0.12.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -1071,8 +1071,17 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
 
+            frameType:
+              $ref: '#/components/schemas/frameType'
+            frameSubtype:
+              $ref: '#/components/schemas/frameSubtype'
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
+              description: The raw 802.11 frame bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA)
+                802.11 radio frame with the appropriate PCAP headers as the prefix. In other words, the bytes are the same bytes that would show up in a pcap file
+                for an 802.11 message. The general structure consists of a PCAP record header, PPI header, Radiotap header, 
+                followed by the 802.11 frame. Using this structure means that Wireshark, tshark or any other tool that can read 802.11 pcap records
+                can easily parse out the contents of this message.
 
     bluetoothRecordPayload:
       type: object
@@ -1924,7 +1933,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.11.1"
+      example: "0.12.0"
 
     messageType:
       type: string
@@ -2886,6 +2895,24 @@ components:
         followed by the cellular OTA message. Using this structure means that Wireshark, tshark or any other tool that can read GSMTAP pcap records
         can easily parse out the contents of this message. For more details see the [Network Survey+ Android App Source Code](https://github.com/christianrowlands/android-network-survey-rooted).
       example: "FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA=="
+
+    frameType:
+      type: integer
+      format: int32
+      description: The frame type of the 802.11 message. The frame type represents the type of 802.11 frame that the pcapRecord field contains. For example, a
+        frame type of 0 represents a management frame, 1 represents a control frame, and 2 represents a data frame, and 3 represents an extension.
+      example: 0
+      minimum: 0
+      maximum: 3
+
+    frameSubtype:
+      type: integer
+      format: int32
+      description: The subtype of the 802.11 message that corresponds to the frame type. The frame subtype represents the 
+        subtype of the 802.11 frame that the pcapRecord field contains. For example, if the frame type is 0 (aka Management) 
+        a frame subtype of 0 represents an association request, 1 represents an association response, 2 represents a reassociation request, etc.
+      example: 4
+      minimum: 0
 
     channelType:
       type: string

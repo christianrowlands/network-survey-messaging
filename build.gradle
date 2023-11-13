@@ -20,7 +20,7 @@ plugins {
 }
 
 group 'com.craxiom'
-version '0.13.0'
+version '0.14.0-SNAP'
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {

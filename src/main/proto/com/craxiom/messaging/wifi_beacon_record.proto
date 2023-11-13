@@ -58,6 +58,7 @@ message WifiBeaconRecordData {
     repeated com.craxiom.messaging.wifi.akmsuite.AkmSuite akmSuites = 19;
     com.craxiom.messaging.wifi.encryptiontype.EncryptionType encryptionType = 20;
     google.protobuf.BoolValue wps = 21;
+    google.protobuf.BoolValue passpoint = 28;
 
     google.protobuf.Int32Value channel = 22;
     google.protobuf.Int32Value frequencyMhz = 23;

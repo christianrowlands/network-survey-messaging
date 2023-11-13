@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.13.0) - 2023-11-13
+* Adds the passpoint boolean field to the WifiBeaconRecord.
+
 ## [0.12.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.12.0) - 2023-09-18
 * Adds frameType and frameSubtype to the wifi ota message.
 * Upgrades the protobuf version to 3.24.3 and the gRPC version to 1.58.0.

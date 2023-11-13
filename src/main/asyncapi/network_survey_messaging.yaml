@@ -1,7 +1,7 @@
 asyncapi: '2.0.0'
 info:
   title: Network Survey Messaging API
-  version: '0.12.0'
+  version: '0.13.0'
   description: |
     The Network Survey Messaging API defines a set of messages that can be used to describe
     wireless survey related events. The messages range from cellular surveys such as GSM, CDMA,
@@ -817,6 +817,8 @@ components:
               $ref: '#/components/schemas/encryptionType'
             wps:
               $ref: '#/components/schemas/wps'
+            passpoint:
+              $ref: '#/components/schemas/passpoint'
 
             channel: # Defining it directly so it does not conflict with the channel field from other messages
               type: integer
@@ -1933,7 +1935,7 @@ components:
     version:
       type: string
       description: The version number of the Network Survey Messaging API that this message is based off of.
-      example: "0.12.0"
+      example: "0.13.0"
 
     messageType:
       type: string
@@ -2458,7 +2460,11 @@ components:
 
     wps:
       type: boolean
-      description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record. If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
+      description: Boolean indicating if this Access Point supports Wi-Fi Protected Setup as defined by the Wi-Fi Alliance.
+
+    passpoint:
+      type: boolean
+      description: Boolean indicating if this is a Passpoint Enabled Network Access Point. Passpoint is a standard defined by the Wi-Fi Alliance, not IEEE. This field was added in version 0.13.0.
 
     nodeType:
       type: string

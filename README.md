@@ -91,7 +91,7 @@ Additional AsyncAPI generators can be found here:  https://github.com/asyncapi/g
 There is also an option to use a docker container for running the AsyncAPI commands instead of running locally. More information 
 can be found [here](https://www.npmjs.com/package/@asyncapi/generator#cli-usage-with-docker).
 
-An example command: `docker run --rm -it -v ${PWD}/src/main/asyncapi/network_survey_messaging.yaml:/app/network_survey_messaging.yaml -v ${PWD}/docs:/app/output asyncapi/generator:1.9.12 /app/network_survey_messaging.yaml @asyncapi/html-template -o /app/output --force-write`
+An example command: `docker run --rm -it -v ${PWD}/src/main/asyncapi/network_survey_messaging.yaml:/app/network_survey_messaging.yaml -v ${PWD}/docs:/app/output asyncapi/generator:1.14.1 /app/network_survey_messaging.yaml @asyncapi/html-template@1.0.0 -o /app/output --force-write`
 
 #### Building the HTML content from the AsyncAPI file
  - Execute `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o build/network-survey-messaging-html`

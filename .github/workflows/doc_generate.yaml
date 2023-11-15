@@ -14,29 +14,29 @@ jobs:
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ steps.get_tag_name.outputs.VERSION }}
 
       #Using another action for AsyncAPI for validation
       - name: Validating AsyncAPI document
-        uses: WaleedAshraf/asyncapi-github-action@v0.0.9
+        uses: WaleedAshraf/asyncapi-github-action@v0.0.10
         with:
           filepath: src/main/asyncapi/network_survey_messaging.yaml
 
       #In case you do not want to use defaults, you for example want to use different template
       - name: Generating HTML from my AsyncAPI document
-        uses: docker://asyncapi/github-action-for-generator:2.1.7
+        uses: docker://asyncapi/github-action-for-generator:2.1.13
         with:
-          template: '@asyncapi/html-template@0.28.1'  #In case of template from npm, because of @ it must be in quotes
+          template: '@asyncapi/html-template@1.0.0'  #In case of template from npm, because of @ it must be in quotes
           filepath: src/main/asyncapi/network_survey_messaging.yaml
           #parameters: baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
           output: generated-html
 
       #Using another action that takes generated HTML and pushes it to GH Pages
       - name: Deploy GH page
-        uses: JamesIves/github-pages-deploy-action@3.4.2
+        uses: JamesIves/github-pages-deploy-action@4.4.3
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: generated-html
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: generated-html

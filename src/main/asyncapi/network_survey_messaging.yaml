@@ -2457,6 +2457,7 @@ components:
         - "WPA_WPA2"
         - "WPA2"
         - "WPA3"
+        - "WPA2_WPA3"
 
     wps:
       type: boolean

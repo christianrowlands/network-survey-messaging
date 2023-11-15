@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.13.1) - 2023-11-15
+* Adds WPA2_WPA3 as an option for the Wi-Fi EncryptionType.
+
 ## [0.13.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.13.0) - 2023-11-13
 * Adds the passpoint boolean field to the WifiBeaconRecord.
 

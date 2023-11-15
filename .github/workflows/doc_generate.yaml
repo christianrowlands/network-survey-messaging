@@ -1,4 +1,4 @@
-name: AsyncAPI documents processing
+name: NS Messaging library Release and AsyncAPI documents processing
 
 on:
   push:
@@ -6,13 +6,67 @@ on:
       - 'v*'
 
 jobs:
-  generate:
+  setVersion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: develop
+
+      - name: Extract version from tag
+        uses: damienaicheh/extract-version-from-tag-action@v1.1.0
+
+      - name: Extract existing version code
+        run: |
+          # Set new version name from tag
+          if [[ -z "${{ env.PATCH }}" ]]; then
+           version_name=${{ env.MAJOR }}.${{ env.MINOR }}
+          else
+           version_name=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
+          fi
+
+          # Set environment variable for later use
+          echo "VERSION_NAME=$version_name" >> $GITHUB_ENV
+
+      - name: Set version in build.gradle
+        run: |
+          # Update build.gradle with new version
+          echo "${{ env.VERSION_NAME }}"
+          sed -i "s/version \"[^\"]*\"/version \"${{ env.VERSION_NAME }}\"/g" build.gradle
+
+      - name: Install yq
+        uses: mikefarah/yq@v4.35.1
+
+      - name: Set openapi spec version to tag version using yq
+        run: |
+          echo "${{ env.VERSION_NAME }}"
+          yq e ".info.version = ${{ env.VERSION_NAME }}" -i src/main/asyncapi/network_survey_messaging.yaml
+
+      - name: Set version example to tag version using yq
+        run: |
+          echo "${{ env.VERSION_NAME }}"
+          yq e ".components.schemas.version.example = ${{ env.VERSION_NAME }}" -i src/main/asyncapi/network_survey_messaging.yaml
+
+      - name: Commit and push changes
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "Github Actions"
+          git add .
+          git commit -am "Bump version to ${{ env.VERSION_NAME }}"
+          git push origin develop
+
+
+  generateDocs:
+    needs: setVersion
     runs-on: ubuntu-latest
     steps:
       #Check out repo at the created tag
       - name: Get tag name
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
@@ -40,3 +94,49 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: generated-html
+
+
+  buildRelease:
+    needs: setVersion
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: 8
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Save GPG Keys
+        env:
+          $GPG_FILE: ${{ secrets.GPG_FILE }}
+        run: echo $GPG_FILE | base64 -d > sonatype-secret-keys.gpg
+
+      - name: Build Release Artifacts
+        env:
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+          GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        run: ./gradlew clean build publish
+          -Dsigning.keyId=$GPG_KEY_ID
+          -Dsigning.secretKeyRingFile=$(pwd)/sonatype-secret-keys.gpg
+          -Dsigning.password=$GPG_KEY_PASSWORD
+          -DsonatypeUsername=$SONATYPE_USERNAME
+          -DsonatypePassword=$SONATYPE_PASSWORD
+
+      - name: Create a Release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/libs/*.jar"
+          token: ${{ secrets.GH_TOKEN }}
+          tag: ${{ steps.version.outputs.content }}
+          commit: ${{ github.sha }}
+          generateReleaseNotes: true
+          draft: true

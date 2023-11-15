@@ -35,7 +35,7 @@ jobs:
 
       #Using another action that takes generated HTML and pushes it to GH Pages
       - name: Deploy GH page
-        uses: JamesIves/github-pages-deploy-action@4.4.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages

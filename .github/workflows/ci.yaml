@@ -12,18 +12,18 @@ jobs:
     steps:
       #"standard step" where repo needs to be checked-out first
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       #Using another action for AsyncAPI for validation
       - name: Validating AsyncAPI document
-        uses: WaleedAshraf/asyncapi-github-action@v0.0.9
+        uses: WaleedAshraf/asyncapi-github-action@v0.0.10
         with:
           filepath: src/main/asyncapi/network_survey_messaging.yaml
 
       #In case you do not want to use defaults, you for example want to use different template
       - name: Generating HTML from my AsyncAPI document
-        uses: docker://asyncapi/github-action-for-generator:2.1.7
+        uses: docker://asyncapi/github-action-for-generator:2.1.13
         with:
-          template: '@asyncapi/html-template@0.28.1'  #In case of template from npm, because of @ it must be in quotes
+          template: '@asyncapi/html-template@1.0.0'  #In case of template from npm, because of @ it must be in quotes
           filepath: src/main/asyncapi/network_survey_messaging.yaml
           output: generated-html

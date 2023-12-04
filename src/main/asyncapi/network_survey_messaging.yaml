@@ -632,6 +632,8 @@ components:
               example: 27
             signalStrength:
               $ref: '#/components/schemas/signalStrength'
+            cqi:
+              $ref: '#/components/schemas/cqi'
             servingCell:
               $ref: '#/components/schemas/servingCell'
             lteBandwidth:
@@ -2262,6 +2264,14 @@ components:
       maximum: -3
       description: Reference Signal Received Quality in dB, valid range -3 to -19.5, corresponding to RSRQ_34 to RSRQ_00 respectively.
       example: -11.0
+
+    cqi:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 15
+      description: Channel Quality Indicator, used by the UE to notify the serving cell (eNodeB) about the quality of the downlink channel, valid range 0-15. This field was added in version 0.14.0.
+      example: 7
 
     lteBandwidth:
       type: string

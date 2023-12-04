@@ -54,6 +54,10 @@ jobs:
           git config user.email "github-actions@github.com"
           git config user.name "Github Actions"
           git add .
+          git diff --staged --quiet || {
+            echo "No changes to commit"
+            exit 0
+          }
           git commit -am "Bump version to ${{ env.VERSION_NAME }}"
           git push origin develop
 

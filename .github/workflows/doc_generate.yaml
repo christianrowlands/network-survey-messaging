@@ -42,12 +42,12 @@ jobs:
       - name: Set openapi spec version to tag version using yq
         run: |
           echo "${{ env.VERSION_NAME }}"
-          yq e ".info.version = ${{ env.VERSION_NAME }}" -i src/main/asyncapi/network_survey_messaging.yaml
+          yq e '.info.version = "${{ env.VERSION_NAME }}"' -i src/main/asyncapi/network_survey_messaging.yaml
 
       - name: Set version example to tag version using yq
         run: |
           echo "${{ env.VERSION_NAME }}"
-          yq e ".components.schemas.version.example = ${{ env.VERSION_NAME }}" -i src/main/asyncapi/network_survey_messaging.yaml
+          yq e '.components.schemas.version.example = "${{ env.VERSION_NAME }}"' -i src/main/asyncapi/network_survey_messaging.yaml
 
       - name: Commit and push changes
         run: |

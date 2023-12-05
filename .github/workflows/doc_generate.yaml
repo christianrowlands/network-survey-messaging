@@ -120,7 +120,7 @@ jobs:
 
       - name: Save GPG Keys
         env:
-          $GPG_FILE: ${{ secrets.GPG_FILE }}
+          GPG_FILE: ${{ secrets.GPG_FILE }}
         run: echo $GPG_FILE | base64 -d > sonatype-secret-keys.gpg
 
       - name: Add Gradle Credentials
@@ -139,11 +139,6 @@ jobs:
         run: |
           echo "signing.keyId=$GPG_KEY_ID" >> gradle.properties
           echo "signing.secretKeyRingFile=$(pwd)/sonatype-secret-keys.gpg" >> gradle.properties
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          GPG_KEY_IDB: ${{ secrets.GPG_KEY_ID }}
 
       - name: Build Release Artifacts
         env:

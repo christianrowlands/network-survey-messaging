@@ -129,9 +129,9 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         run: |
-          gradle addCredentials --key sonatypeUsername --value '$SONATYPE_USERNAME'
-          gradle addCredentials --key sonatypePassword --value '$SONATYPE_PASSWORD'
-          gradle addCredentials --key sonatypeKeyPassword --value '$GPG_KEY_PASSWORD'
+          ./gradlew addCredentials --key sonatypeUsername --value $SONATYPE_USERNAME
+          ./gradlew addCredentials --key sonatypePassword --value $SONATYPE_PASSWORD
+          ./gradlew addCredentials --key sonatypeKeyPassword --value $GPG_KEY_PASSWORD
 
       - name: Create gradle.properties
         env:
@@ -143,7 +143,9 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         env:
-          GPG_KEY_IDB: ${{ secrets.GPG_KEY_ID }}
+          GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
 
       - name: Build Release Artifacts
         env:

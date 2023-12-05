@@ -140,14 +140,7 @@ jobs:
           echo "signing.keyId=$GPG_KEY_ID" >> gradle.properties
           echo "signing.secretKeyRingFile=$(pwd)/sonatype-secret-keys.gpg" >> gradle.properties
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }}
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-
-      - name: Build Release Artifacts
+      - name: Build and Publish Release Artifacts
         env:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }}
@@ -159,8 +152,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/libs/*.jar"
-          token: ${{ secrets.GH_TOKEN }}
           tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
           generateReleaseNotes: true
-          draft: true
+          draft: false

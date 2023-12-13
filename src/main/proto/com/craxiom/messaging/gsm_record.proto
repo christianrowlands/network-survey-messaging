@@ -47,4 +47,5 @@ message GsmRecordData {
     google.protobuf.Int32Value ta = 24;
     google.protobuf.BoolValue servingCell = 25;
     string provider = 27;
+    google.protobuf.Int32Value slot = 28;
 }

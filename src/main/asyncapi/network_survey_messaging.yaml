@@ -335,6 +335,8 @@ components:
             provider:
               $ref: '#/components/schemas/provider'
               example: "ATT"
+            slot:
+              $ref: '#/components/schemas/slot'
     cdmaRecordPayload:
       type: object
       required:
@@ -414,6 +416,8 @@ components:
               $ref: '#/components/schemas/servingCell'
             provider:
               $ref: '#/components/schemas/provider'
+            slot:
+              $ref: '#/components/schemas/slot'
     umtsRecordPayload:
       type: object
       required:
@@ -498,6 +502,8 @@ components:
             provider:
               $ref: '#/components/schemas/provider'
               example: "T-Mobile"
+            slot:
+              $ref: '#/components/schemas/slot'
     lteRecordPayload:
       type: object
       required:
@@ -590,6 +596,8 @@ components:
               $ref: '#/components/schemas/lteBandwidth'
             provider:
               $ref: '#/components/schemas/provider'
+            slot:
+              $ref: '#/components/schemas/slot'
     nrRecordPayload:
       type: object
       required:
@@ -684,6 +692,8 @@ components:
               $ref: '#/components/schemas/servingCell'
             provider:
               $ref: '#/components/schemas/provider'
+            slot:
+              $ref: '#/components/schemas/slot'
     wifiBeaconRecordPayload:
       type: object
       required:
@@ -1951,6 +1961,10 @@ components:
     servingCell:
       type: boolean
       description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
+    slot:
+      type: integer
+      description: The slot number of the SIM card or radio slot that this record was captured from. This enables support for multiple SIM cards in a single device or multiple radios in a single device. This field is optional, and if it is not present that is an indication that the device only has a single SIM card or radio (but the presence of this field does not indicate multiple SIM cards or radios). Added in version 0.15.0.
+      example: 2
     # GSM specific fields
     lac:
       type: integer

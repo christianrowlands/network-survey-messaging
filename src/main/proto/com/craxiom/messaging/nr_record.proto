@@ -55,4 +55,5 @@ message NrRecordData {
     google.protobuf.Int32Value ta = 28;
     google.protobuf.BoolValue servingCell = 29;
     string provider = 30;
+    google.protobuf.Int32Value slot = 31;
 }

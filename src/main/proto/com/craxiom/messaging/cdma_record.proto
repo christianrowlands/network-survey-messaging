@@ -47,4 +47,5 @@ message CdmaRecordData {
     google.protobuf.FloatValue ecio = 23;
     google.protobuf.BoolValue servingCell = 25;
     string provider = 27;
+    google.protobuf.Int32Value slot = 28;
 }

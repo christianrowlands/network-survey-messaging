@@ -52,4 +52,5 @@ message LteRecordData {
     string provider = 27;
     google.protobuf.FloatValue signalStrength = 28;
     google.protobuf.Int32Value cqi = 29;
+    google.protobuf.Int32Value slot = 30;
 }

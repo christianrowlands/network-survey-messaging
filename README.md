@@ -1,6 +1,3 @@
-# network-survey-messaging
-Defines a set of radio frequency (RF) related message schemas in JSON format.
-
 Network Survey Messaging
 ===============
 

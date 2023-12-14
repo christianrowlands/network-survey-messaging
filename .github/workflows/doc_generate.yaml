@@ -67,15 +67,10 @@ jobs:
     needs: setVersion
     runs-on: ubuntu-latest
     steps:
-      #Check out repo at the created tag
-      - name: Get tag name
-        id: get_tag_name
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.get_tag_name.outputs.VERSION }}
+          ref: develop
 
       #Using another action for AsyncAPI for validation
       - name: Validating AsyncAPI document

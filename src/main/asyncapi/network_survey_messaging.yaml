@@ -1963,7 +1963,7 @@ components:
       description: Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
     slot:
       type: integer
-      description: The slot number of the SIM card or radio slot that this record was captured from. This enables support for multiple SIM cards in a single device or multiple radios in a single device. This field is optional, and if it is not present that is an indication that the device only has a single SIM card or radio (but the presence of this field does not indicate multiple SIM cards or radios). Added in version 0.15.0.
+      description: The slot number of the SIM card or radio slot that this record was captured from. This enables support for multiple SIM cards in a single device or multiple radios in a single device. Numbering does not start at 0 or 1, and can be any arbitrary number. Therefore, the number does not reveal anything about the number of SIM cards or radio slots in the device. This field is optional, and if it is not present that is an indication that the device only has a single SIM card or radio (but the presence of this field does not indicate multiple SIM cards or radios). Added in version 0.15.0.
       example: 2
     # GSM specific fields
     lac:

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.15.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.15.0) - 2023-12-14
+* Adds the slot field to the cellular records (GSM, CDMA, UMTS, LTE, and NR). See the docs for more information on the slot field.
+
+## [0.14.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.14.0) - 2023-12-05
+* Adds CQI to the LTE record.
+
 ## [0.13.1](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.13.1) - 2023-11-15
 * Adds WPA2_WPA3 as an option for the Wi-Fi EncryptionType.
 

@@ -36,6 +36,11 @@ jobs:
           echo "${{ env.VERSION_NAME }}"
           sed -i "s/version \"[^\"]*\"/version \"${{ env.VERSION_NAME }}\"/g" build.gradle
 
+      - name: Set version in README example
+        run: |
+          echo "${{ github.event.inputs.version }}"
+          sed -i "s/implementation 'com.craxiom:network-survey-messaging:[^\"]*\'/implementation 'com.craxiom:network-survey-messaging:${{ env.VERSION_NAME }}\'/g" README.md
+
       - name: Install yq
         uses: mikefarah/yq@v4.35.1
 

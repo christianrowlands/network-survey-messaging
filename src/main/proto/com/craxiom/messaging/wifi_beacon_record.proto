@@ -15,6 +15,7 @@ import "com/craxiom/messaging/wifi/akmsuite/akm_suite.proto";
 import "com/craxiom/messaging/wifi/encryptiontype/encryption_type.proto";
 import "com/craxiom/messaging/wifi/nodetype/node_type.proto";
 import "com/craxiom/messaging/wifi/standard/standard.proto";
+import "com/craxiom/messaging/wifi/bandwidth/wifi_bandwidth.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
@@ -59,6 +60,7 @@ message WifiBeaconRecordData {
     com.craxiom.messaging.wifi.encryptiontype.EncryptionType encryptionType = 20;
     google.protobuf.BoolValue wps = 21;
     google.protobuf.BoolValue passpoint = 28;
+    com.craxiom.messaging.wifi.bandwidth.WifiBandwidth bandwidth = 29;
 
     google.protobuf.Int32Value channel = 22;
     google.protobuf.Int32Value frequencyMhz = 23;

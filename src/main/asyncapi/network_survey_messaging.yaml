@@ -779,13 +779,25 @@ components:
               format: int32
               minimum: 0
               description: The channel on which this 802.11 frame was recorded.
-              example: 2
+              example: 6
             frequencyMhz: # Defining it directly so it does not conflict with the frequency field from other messages
               type: integer
               format: int32
               minimum: 0
               description: The frequency in MHz on which this 802.11 frame was recorded.
               example: 2417
+            bandwidth:
+              type: string
+              description: "The Wi-Fi bandwidth in MHz (one of 20, 40, 80, 80 Plus, 160, 320)."
+              example: "MHZ_40"
+              enum:
+                - "UNKNOWN"
+                - "MHZ_20"
+                - "MHZ_40"
+                - "MHZ_80"
+                - "MHZ_80_PLUS"
+                - "MHZ_160"
+                - "MHZ_320"
             signalStrength:
               $ref: '#/components/schemas/signalStrength'
             snr:

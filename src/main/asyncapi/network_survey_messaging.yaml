@@ -1,57 +1,37 @@
 asyncapi: 3.0.0
 info:
   title: Network Survey Messaging API
-  version: 0.15.0
+  version: 1.0.0
   description: >
-    The Network Survey Messaging API defines a set of messages that can be used
-    to describe wireless survey related events. The messages range from 
-    cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy 
-    detection events.
+    The Network Survey Messaging API defines a set of messages that can be used to describe wireless survey related events. The messages range from  cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy  detection events.
 
 
-    **NOTE:** Despite the name "Network Survey Messaging API", this message
-    specification is not exclusive to the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey).
-    Instead, the Network Survey Android App is just one app that leverages
-    Network Survey Messaging. Therefore, there are messages in this 
-    specification that do not apply to the Network Survey Android App 
-    (e.g. EnergyDetection).
+    **NOTE:** Despite the name "Network Survey Messaging API", this message specification is not exclusive to the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey). Instead, the Network Survey Android App is just one app that leverages Network Survey Messaging. Therefore, there are messages in this  specification that do not apply to the Network Survey Android App  (e.g. EnergyDetection).
 
 
-    While the most common use of these messages would be to send to an MQTT
-    broker, this API specification
+    While the most common use of these messages would be to send to an MQTT broker, this API specification
 
-    simply defines the message schema. The transport or storage technology
-    employed is purposefully left
+    simply defines the message schema. The transport or storage technology employed is purposefully left
 
-    open to allow for these messages to flow over a variety of transports such
-    as MQTT, gRPC, AMQP, etc.
+    open to allow for these messages to flow over a variety of transports such as MQTT, gRPC, AMQP, etc.
 
-    In addition, these messages can be written to disk by writing the JSON
-    strings directly to a file to
+    In addition, these messages can be written to disk by writing the JSON strings directly to a file to
 
-    support unstructured data storage, or in a more structured approach such as
-    a PostgreSQL or SQLite database.
+    support unstructured data storage, or in a more structured approach such as a PostgreSQL or SQLite database.
 
 
-    Officially, the message schema support for the Network Survey Messaging API
-    are the JSON defined messages from this
+    Officially, the message schema support for the Network Survey Messaging API are the JSON defined messages from this
 
-    document. However, protobuf definitions of these messages have been created
-    as a convenience for a couple of reasons.
+    document. However, protobuf definitions of these messages have been created as a convenience for a couple of reasons.
 
-    First, it can make generating the JSON compliant messages easier and also
-    converting the JSON messages to language
+    First, it can make generating the JSON compliant messages easier and also converting the JSON messages to language
 
-    specific objects. Secondly, it can allow for sending the messages in
-    protocol buffer format instead of JSON if a
+    specific objects. Secondly, it can allow for sending the messages in protocol buffer format instead of JSON if a
 
-    compressed binary format is needed. It also has the side effect of
-    supporting sending these messages over gRPC if
+    compressed binary format is needed. It also has the side effect of supporting sending these messages over gRPC if
 
-    Remote Procedure Call support is of interest. Check out the [Network Survey
-    Messaging Github
-    README](https://github.com/christianrowlands/network-survey-messaging) for
-    more details.
+    Remote Procedure Call support is of interest. Check out the [Network Survey Messaging Github README](https://github.com/christianrowlands/network-survey-messaging) for more details.
+
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -63,133 +43,91 @@ channels:
       publish.message:
         $ref: '#/components/messages/gsmRecord'
     description: >-
-      The gsm_message topic/channel is where GSM survey records can be
-      published. For MQTT, set the MQTT topic as "gsm_message" and then publish
-      a JSON message representing a GSM survey record in the format defined
-      below.
+      The gsm_message topic/channel is where GSM survey records can be published. For MQTT, set the MQTT topic as "gsm_message" and then publish a JSON message representing a GSM survey record in the format defined below.
   cdma_message:
     address: cdma_message
     messages:
       publish.message:
         $ref: '#/components/messages/cdmaRecord'
     description: >-
-      The cdma_message topic/channel is where CDMA survey records can be
-      published. For MQTT, set the MQTT topic as "cdma_message" and then publish
-      a JSON message representing a CDMA survey record in the format defined
-      below.
+      The cdma_message topic/channel is where CDMA survey records can be published. For MQTT, set the MQTT topic as "cdma_message" and then publish a JSON message representing a CDMA survey record in the format defined below.
   umts_message:
     address: umts_message
     messages:
       publish.message:
         $ref: '#/components/messages/umtsRecord'
     description: >-
-      The umts_message topic/channel is where UMTS survey records can be
-      published. For MQTT, set the MQTT topic as "umts_message" and then publish
-      a JSON message representing a UMTS survey record in the format defined
-      below.
+      The umts_message topic/channel is where UMTS survey records can be published. For MQTT, set the MQTT topic as "umts_message" and then publish a JSON message representing a UMTS survey record in the format defined below.
   lte_message:
     address: lte_message
     messages:
       publish.message:
         $ref: '#/components/messages/lteRecord'
     description: >-
-      The lte_message topic/channel is where LTE survey records can be
-      published. For MQTT, set the MQTT topic as "lte_message" and then publish
-      a JSON message representing an LTE survey record in the format defined
-      below.
+      The lte_message topic/channel is where LTE survey records can be published. For MQTT, set the MQTT topic as "lte_message" and then publish a JSON message representing an LTE survey record in the format defined below.
   nr_message:
     address: nr_message
     messages:
       publish.message:
         $ref: '#/components/messages/nrRecord'
     description: >-
-      The nr_message topic/channel is where 5G NR survey records can be
-      published. For MQTT, set the MQTT topic as "nr_message" and then publish a
-      JSON message representing a 5G NR survey record in the format defined
-      below.
+      The nr_message topic/channel is where 5G NR survey records can be published. For MQTT, set the MQTT topic as "nr_message" and then publish a JSON message representing a 5G NR survey record in the format defined below.
   80211_beacon_message:
     address: 80211_beacon_message
     messages:
       publish.message:
         $ref: '#/components/messages/wifiBeaconRecord'
     description: >-
-      The 80211_beacon_message topic/channel is where 802.11 beacon survey
-      records can be published. For MQTT, set the MQTT topic as
-      "80211_beacon_message" and then publish a JSON message representing an
-      802.11 Access Point survey record in the format defined below.
+      The 80211_beacon_message topic/channel is where 802.11 beacon survey records can be published. For MQTT, set the MQTT topic as "80211_beacon_message" and then publish a JSON message representing an 802.11 Access Point survey record in the format defined below.
   80211_probe_request_message:
     address: 80211_probe_request_message
     messages:
       publish.message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
     description: >-
-      The 80211_probe_request_message topic/channel is where 802.11 probe
-      request survey records can be published. For MQTT, set the MQTT topic as
-      "80211_probe_request_message" and then publish a JSON message representing
-      an 802.11 Probe Request record in the format defined below. Added in 0.9.0
+      The 80211_probe_request_message topic/channel is where 802.11 probe request survey records can be published. For MQTT, set the MQTT topic as "80211_probe_request_message" and then publish a JSON message representing an 802.11 Probe Request record in the format defined below. Added in 0.9.0
   80211_deauthentication_message:
     address: 80211_deauthentication_message
     messages:
       publish.message:
         $ref: '#/components/messages/wifiDeauthenticationRecord'
     description: >-
-      The 80211_deauthentication_message topic/channel is where 802.11 (Wi-Fi)
-      Deauthentication Management Frames can be published. For MQTT, set the
-      MQTT topic as "wifi_deauthentication_message". When a station wants to
-      disassociate from another station, it invokes the deauthentication
-      service. Deauthentication is a notification and cannot be refused. A
-      station performs deauthentication by sending an authentication management
-      frame (or group of frames to multiple stations) to advise of the
-      termination of authentication.
+      The 80211_deauthentication_message topic/channel is where 802.11 (Wi-Fi) Deauthentication Management Frames can be published. For MQTT, set the MQTT topic as "wifi_deauthentication_message". When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
   80211_ota_message:
     address: 80211_ota_message
     messages:
       publish.message:
         $ref: '#/components/messages/wifiOtaRecord'
     description: >-
-      The 80211_ota_message topic/channel is where Over The Air (OTA) 802.11
-      (Wi-Fi) messages can be published. For MQTT, set the MQTT topic as
-      "wifi_ota_message" and then publish a JSON message representing an OTA
-      WiFi message.
+      The 80211_ota_message topic/channel is where Over The Air (OTA) 802.11 (Wi-Fi) messages can be published. For MQTT, set the MQTT topic as "wifi_ota_message" and then publish a JSON message representing an OTA WiFi message.
   bluetooth_message:
     address: bluetooth_message
     messages:
       publish.message:
         $ref: '#/components/messages/bluetoothRecord'
     description: >-
-      The bluetooth_message topic/channel is where Bluetooth survey records can
-      be published. For MQTT, set the MQTT topic as "bluetooth_message" and then
-      publish a JSON message representing a Bluetooth survey record in the
-      format defined below.
+      The bluetooth_message topic/channel is where Bluetooth survey records can be published. For MQTT, set the MQTT topic as "bluetooth_message" and then publish a JSON message representing a Bluetooth survey record in the format defined below.
   gnss_message:
     address: gnss_message
     messages:
       publish.message:
         $ref: '#/components/messages/gnssRecord'
     description: >-
-      The gnss_message topic/channel is where GNSS positioning records can be
-      published. For MQTT, set the MQTT topic as "gnss_message" and then publish
-      a JSON message in the format defined below.
+      The gnss_message topic/channel is where GNSS positioning records can be published. For MQTT, set the MQTT topic as "gnss_message" and then publish a JSON message in the format defined below.
   energy_detection_message:
     address: energy_detection_message
     messages:
       publish.message:
         $ref: '#/components/messages/energyDetection'
     description: >-
-      The energy_detection_message topic/channel is where RF energy detection
-      records can be published. For MQTT, set the MQTT topic as
-      "energy_detection_message" and then publish a JSON message in the format
-      defined below.
+      The energy_detection_message topic/channel is where RF energy detection records can be published. For MQTT, set the MQTT topic as "energy_detection_message" and then publish a JSON message in the format defined below.
   signal_detection_message:
     address: signal_detection_message
     messages:
       publish.message:
         $ref: '#/components/messages/signalDetection'
     description: >-
-      The signal_detection_message topic/channel is where signal detection
-      records can be published. For MQTT, set the MQTT topic as
-      "signal_detection_message" and then publish a JSON message in the format
-      defined below.
+      The signal_detection_message topic/channel is where signal detection records can be published. For MQTT, set the MQTT topic as "signal_detection_message" and then publish a JSON message in the format defined below.
   device_status_message:
     address: device_status_message
     messages:
@@ -198,10 +136,7 @@ channels:
       publish.message.1:
         $ref: '#/components/messages/phoneState'
     description: >-
-      The device_status_message topic/channel is where device status records can
-      be published. This includes both `DeviceStatus` and `PhoneState` messages.
-      For MQTT, set the MQTT topic as "device_status_message" and then publish a
-      JSON message in one of the formats defined below.
+      The device_status_message topic/channel is where device status records can be published. This includes both `DeviceStatus` and `PhoneState` messages. For MQTT, set the MQTT topic as "device_status_message" and then publish a JSON message in one of the formats defined below.
   cellular_ota_message:
     address: cellular_ota_message
     messages:
@@ -216,10 +151,7 @@ channels:
       publish.message.4:
         $ref: '#/components/messages/lteNas'
     description: >-
-      The cellular_ota_message topic/channel is where Over The Air (OTA)
-      cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the
-      MQTT topic as "cellular_ota_message" and then publish a JSON message
-      representing an OTA Cellular message.
+      The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "cellular_ota_message" and then publish a JSON message representing an OTA Cellular message.
 operations:
   gsm_message:
     action: receive
@@ -322,8 +254,7 @@ components:
       name: GsmRecord
       title: GSM Record
       summary: >-
-        Represents information recorded about a GSM tower at a particular time
-        and geographic location.
+        Represents information recorded about a GSM tower at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gsmRecordPayload'
@@ -331,8 +262,7 @@ components:
       name: CdmaRecord
       title: CDMA Record
       summary: >-
-        Represents information recorded about a CDMA tower at a particular time
-        and geographic location.
+        Represents information recorded about a CDMA tower at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/cdmaRecordPayload'
@@ -340,8 +270,7 @@ components:
       name: UmtsRecord
       title: UMTS Record
       summary: >-
-        Represents information recorded about a UMTS NodeB at a particular time
-        and geographic location.
+        Represents information recorded about a UMTS NodeB at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/umtsRecordPayload'
@@ -349,8 +278,7 @@ components:
       name: LteRecord
       title: LTE Record
       summary: >-
-        Represents information recorded about an LTE eNodeB at a particular time
-        and geographic location.
+        Represents information recorded about an LTE eNodeB at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRecordPayload'
@@ -358,8 +286,7 @@ components:
       name: NrRecord
       title: 5G NR Record
       summary: >-
-        Represents information recorded about a 5G NR gNodeB at a particular
-        time and geographic location.
+        Represents information recorded about a 5G NR gNodeB at a particular time and geographic location.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/nrRecordPayload'
@@ -367,11 +294,7 @@ components:
       name: WifiBeaconRecord
       title: Wi-Fi Beacon Record
       summary: >-
-        Represents information recorded about an 802.11 Access Point at a
-        particular time and geographic location. 802.11 Beacon frames are sent
-        by Access Points to advertise their existence and to provide all the
-        necessary connection information. This message represents a capture of a
-        single 802.11 Beacon message.
+        Represents information recorded about an 802.11 Access Point at a particular time and geographic location. 802.11 Beacon frames are sent by Access Points to advertise their existence and to provide all the necessary connection information. This message represents a capture of a single 802.11 Beacon message.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiBeaconRecordPayload'
@@ -379,11 +302,7 @@ components:
       name: WifiProbeRequestRecord
       title: Wi-Fi Probe Request Record
       summary: >-
-        Represents information recorded about an 802.11 Probe Request at a
-        particular time and geographic location. 802.11 Probe Request frames are
-        sent by clients looking to discover information about an Access Point
-        with a specific SSID. This message represents a capture of a single
-        802.11 Probe Request message.
+        Represents information recorded about an 802.11 Probe Request at a particular time and geographic location. 802.11 Probe Request frames are sent by clients looking to discover information about an Access Point with a specific SSID. This message represents a capture of a single 802.11 Probe Request message.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
@@ -391,12 +310,7 @@ components:
       name: WifiDeauthenticationRecord
       title: Wi-Fi Deauthentication Record
       summary: >-
-        Represents an 802.11 deauthentication management frame. When a station
-        wants to disassociate from another station, it invokes the
-        deauthentication service. Deauthentication is a notification and cannot
-        be refused. A station performs deauthentication by sending an
-        authentication management frame (or group of frames to multiple
-        stations) to advise of the termination of authentication.
+        Represents an 802.11 deauthentication management frame. When a station wants to disassociate from another station, it invokes the deauthentication service. Deauthentication is a notification and cannot be refused. A station performs deauthentication by sending an authentication management frame (or group of frames to multiple stations) to advise of the termination of authentication.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiDeauthenticationRecordPayload'
@@ -404,9 +318,7 @@ components:
       name: WifiOtaRecord
       title: Wi-Fi Over The Air (OTA) Record
       summary: >-
-        Represents information recorded about an 802.11 packet recorded at a
-        particular time and geographic location. This message represents a
-        capture of a 802.11 packet in PCAP format.
+        Represents information recorded about an 802.11 packet recorded at a particular time and geographic location. This message represents a capture of a 802.11 packet in PCAP format.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiOtaRecordPayload'
@@ -414,9 +326,7 @@ components:
       name: BluetoothRecord
       title: Bluetooth Record
       summary: >-
-        Represents information recorded about a Bluetooth device at a particular
-        time and geographic location. This message represents a capture of a
-        signal Bluetooth frame.
+        Represents information recorded about a Bluetooth device at a particular time and geographic location. This message represents a capture of a signal Bluetooth frame.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/bluetoothRecordPayload'
@@ -424,10 +334,7 @@ components:
       name: GnssRecord
       title: GNSS Record
       summary: >-
-        Represents information recorded about a Global Navigation Satellite
-        System (GNSS) at a particular time and geographic location. Each record
-        represents a single navigation message from a single satellite. These
-        individual records are tied together using the group number field.
+        Represents information recorded about a Global Navigation Satellite System (GNSS) at a particular time and geographic location. Each record represents a single navigation message from a single satellite. These individual records are tied together using the group number field.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gnssRecordPayload'
@@ -435,9 +342,7 @@ components:
       name: EnergyDetection
       title: Energy Detection
       summary: >-
-        Represents a General Purpose Radio (GPR) Energy Detection event. This
-        survey record represents a general RF/PTT energy detection (i.e. RF
-        energy was detected above a pre-defined threshold).
+        Represents a General Purpose Radio (GPR) Energy Detection event. This survey record represents a general RF/PTT energy detection (i.e. RF energy was detected above a pre-defined threshold).
       contentType: application/json
       payload:
         $ref: '#/components/schemas/energyDetectionPayload'
@@ -445,10 +350,7 @@ components:
       name: SignalDetection
       title: Signal Detection
       summary: >-
-        Represents a General Purpose Radio (GPR) Signal Detection event. This
-        survey record represents RF detections where the modulation and/or
-        signal type could be determined. If both the modulation and signal type
-        are unknown, then use the `energy_detection_message` instead.
+        Represents a General Purpose Radio (GPR) Signal Detection event. This survey record represents RF detections where the modulation and/or signal type could be determined. If both the modulation and signal type are unknown, then use the `energy_detection_message` instead.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/signalDetectionPayload'
@@ -456,9 +358,7 @@ components:
       name: DeviceStatus
       title: Device Status
       summary: >-
-        Represents a status message sent from the device to report its current
-        state or to act as a heartbeat. The interval of this message can vary
-        depending on use case.
+        Represents a status message sent from the device to report its current state or to act as a heartbeat. The interval of this message can vary depending on use case.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/deviceStatusPayload'
@@ -466,11 +366,7 @@ components:
       name: PhoneState
       title: Phone State
       summary: >-
-        Represents the current state of the phone to include information about
-        the currently registered networks. The interval of this message can
-        vary depending on use case, but is typically sent when a change in the
-        phone's state occurs, such as registering to a new network or being
-        rejected from a network.
+        Represents the current state of the phone to include information about the currently registered networks. The interval of this message can vary depending on use case, but is typically sent when a change in the phone's state occurs, such as registering to a new network or being rejected from a network.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/phoneStatePayload'
@@ -478,8 +374,7 @@ components:
       name: LteRrc
       title: LTE RRC OTA Message
       summary: >-
-        Represents a raw LTE RRC message sent Over The Air (OTA) between an LTE
-        eNodeB and an LTE UE.
+        Represents a raw LTE RRC message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteRrcPayload'
@@ -487,8 +382,7 @@ components:
       name: LteNas
       title: LTE NAS Message
       summary: >-
-        Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE
-        eNodeB and an LTE UE.
+        Represents a raw LTE NAS message sent Over The Air (OTA) between an LTE eNodeB and an LTE UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/lteNasPayload'
@@ -496,8 +390,7 @@ components:
       name: UmtsNas
       title: UMTS NAS Message
       summary: >-
-        Represents a raw UMTS NAS message sent Over The Air (OTA) between a UMTS
-        NodeB and a UMTS UE.
+        Represents a raw UMTS NAS message sent Over The Air (OTA) between a UMTS NodeB and a UMTS UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/umtsNasPayload'
@@ -505,8 +398,7 @@ components:
       name: WcdmaRrc
       title: WCDMA RRC OTA Message
       summary: >-
-        Represents a raw WCDMA RRC message sent Over The Air (OTA) between a
-        UMTS NodeB and a UMTS UE.
+        Represents a raw WCDMA RRC message sent Over The Air (OTA) between a UMTS NodeB and a UMTS UE.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wcdmaRrcPayload'
@@ -514,8 +406,7 @@ components:
       name: GsmSignaling
       title: GSM RR Signaling OTA Message
       summary: >-
-        Represents a raw GSM RR Signaling message sent Over The Air (OTA)
-        between a GSM BTS and a GSM ME.
+        Represents a raw GSM RR Signaling message sent Over The Air (OTA) between a GSM BTS and a GSM ME.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gsmSignalingPayload'
@@ -590,8 +481,7 @@ components:
               format: int32
               minimum: 0
               description: >-
-                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a
-                carrier, 2 to 3 digits.
+                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
               example: 410
             lac:
               $ref: '#/components/schemas/lac'
@@ -609,8 +499,7 @@ components:
               minimum: 0
               maximum: 63
               description: >-
-                Timing Advance, corresponding to the timing offset a mobile phone needs
-                to use when transmitting a signal to the tower.
+                Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower.
               example: 4
             servingCell:
               $ref: '#/components/schemas/servingCell'
@@ -771,8 +660,7 @@ components:
               format: int32
               minimum: 0
               description: >-
-                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a
-                carrier, 2 to 3 digits.
+                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
               example: 260
             lac:
               $ref: '#/components/schemas/lac'
@@ -877,9 +765,7 @@ components:
               minimum: 0
               maximum: 1282
               description: >-
-                LTE Timing Advance, corresponding to the timing offset a mobile
-                phone needs to use when transmitting a signal to the tower.
-                Valid range 0-1282.
+                LTE Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-1282.
               example: 27
             signalStrength:
               $ref: '#/components/schemas/signalStrength'
@@ -982,9 +868,7 @@ components:
               minimum: 0
               maximum: 3846
               description: >-
-                NR Timing Advance, corresponding to the timing offset a mobile
-                phone needs to use when transmitting a signal to the tower.
-                Valid range 0-3846.
+                NR Timing Advance, corresponding to the timing offset a mobile phone needs to use when transmitting a signal to the tower. Valid range 0-3846.
               example: 14
             servingCell:
               $ref: '#/components/schemas/servingCell'
@@ -1087,8 +971,7 @@ components:
             bandwidth:
               type: string
               description: >-
-                The Wi-Fi bandwidth in MHz (one of 20, 40, 80, 80 Plus, 160,
-                320).
+                The Wi-Fi bandwidth in MHz (one of 20, 40, 80, 80 Plus, 160, 320).
               example: MHZ_40
               enum:
                 - UNKNOWN
@@ -1335,15 +1218,7 @@ components:
               type: string
               format: byte
               description: >-
-                The raw 802.11 frame bytes encoded in base64. The bytes in this
-                field are the raw message bytes captured from the Over The Air
-                (OTA) 802.11 radio frame with the appropriate PCAP headers as
-                the prefix. In other words, the bytes are the same bytes that
-                would show up in a pcap file for an 802.11 message. The general
-                structure consists of a PCAP record header, PPI header, Radiotap
-                header, followed by the 802.11 frame. Using this structure means
-                that Wireshark, tshark or any other tool that can read 802.11
-                pcap records can easily parse out the contents of this message.
+                The raw 802.11 frame bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) 802.11 radio frame with the appropriate PCAP headers as the prefix. In other words, the bytes are the same bytes that would show up in a pcap file for an 802.11 message. The general structure consists of a PCAP record header, PPI header, Radiotap header, followed by the 802.11 frame. Using this structure means that Wireshark, tshark or any other tool that can read 802.11 pcap records can easily parse out the contents of this message.
               example: aVwDZYj5DgBJAAAASQAAAAAAMABvCABAOsN7FAAAAAASDGwJwACroAAAAAN/ABAAAAAAAAAAAAAAAAAAAAAAAFQAZABszdbclR85lO2uZIceAQAgCAk4KYc=
     bluetoothRecordPayload:
       type: object
@@ -1420,9 +1295,7 @@ components:
               minimum: 0
               maximum: 78
               description: >-
-                The channel on which this frame was recorded. See the BLUETOOTH
-                SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325)
-                for more details.
+                The channel on which this frame was recorded. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325) for more details.
               example: 2
     gnssRecordPayload:
       type: object
@@ -1471,9 +1344,7 @@ components:
               format: int32
               minimum: 1
               description: >-
-                Starts at 1 and each subsequent scan should have its number
-                incremented by 1. Records with the same group number indicate
-                they were all seen in the same "scan" for GNSS space vehicles.
+                Starts at 1 and each subsequent scan should have its number incremented by 1. Records with the same group number indicate they were all seen in the same "scan" for GNSS space vehicles.
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
             accuracy:
@@ -1827,9 +1698,7 @@ components:
             channelType:
               type: string
               description: >-
-                The channel type that this message was sent on. The channel type
-                represents the logical channel that the raw cellular message was sent
-                over.
+                The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
               example: BCCH_BCH
               enum:
                 - UNKNOWN
@@ -2005,9 +1874,7 @@ components:
             channelType:
               type: string
               description: >-
-                The channel type that this message was sent on. The channel type
-                represents the logical channel that the raw cellular message was sent
-                over.
+                The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
               example: BCCH_BCH
               enum:
                 - UNKNOWN
@@ -2091,9 +1958,7 @@ components:
             channelType:
               type: string
               description: >-
-                The channel type that this message was sent on. The channel type
-                represents the logical channel that the raw cellular message was sent
-                over.
+                The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
               example: PLAIN
               enum:
                 - UNKNOWN
@@ -2156,9 +2021,7 @@ components:
             channelType:
               type: string
               description: >-
-                The channel type that this message was sent on. The channel type
-                represents the logical channel that the raw cellular message was sent
-                over.
+                The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
               example: BCCH
               enum:
                 - UNKNOWN
@@ -2184,30 +2047,23 @@ components:
     version:
       type: string
       description: >-
-        The version number of the Network Survey Messaging API that this message
-        is based off of.
-      example: 0.15.0
+        The version number of the Network Survey Messaging API that this message is based off of.
+      example: 1.0.0
     deviceSerialNumber:
       type: string
       description: >-
-        The unique identifier for the device that captured this record. This
-        should be consistent and should never change.
+        The unique identifier for the device that captured this record. This should be consistent and should never change.
       example: '1234'
     deviceName:
       type: string
       description: >-
-        A human readable name assigned to the device that captured this record.
-        This value can change and is typically used as a human friendly display
-        name.
+        A human readable name assigned to the device that captured this record. This value can change and is typically used as a human friendly display name.
       example: Craxiom Pixel
     deviceTime:
       type: string
       format: date-time
       description: >-
-        The timestamp of when this message was created in milliseconds formatted
-        as an [RFC3339
-        date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-        For example, `'1996-12-19T16:39:57-08:00'`.
+        The timestamp of when this message was created in milliseconds formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
       example: '1996-12-19T16:39:57-08:00'
     latitude:
       type: number
@@ -2223,43 +2079,32 @@ components:
       type: number
       format: float
       description: >-
-        The altitude in meters above MSL representing where this survey record
-        was recorded.
+        The altitude in meters above MSL representing where this survey record was recorded.
       example: 13.3
     speed:
       type: number
       format: float
       minimum: 0
       description: >-
-        The speed at the time of this record capture in meters per second. This
-        field was added in version 0.11.0. From the Network Survey Android app,
-        this field is only present if it is detected that the device is in
-        motion.
+        The speed at the time of this record capture in meters per second. This field was added in version 0.11.0. From the Network Survey Android app, this field is only present if it is detected that the device is in motion.
       example: 9.3
     missionId:
       type: string
       description: >-
-        A unique name for this particular run of a survey. The timestamp of when
-        the survey was started is typically included, or the mission ID might
-        contain a user entered value to enable them to uniquely identify the
-        purpose of this survey.
+        A unique name for this particular run of a survey. The timestamp of when the survey was started is typically included, or the mission ID might contain a user entered value to enable them to uniquely identify the purpose of this survey.
       example: Survey1 20200724-154325
     recordNumber:
       type: integer
       format: int32
       minimum: 1
       description: >-
-        Starts at 1 and each subsequent record should have its number
-        incremented by 1.
+        Starts at 1 and each subsequent record should have its number incremented by 1.
     groupNumber:
       type: integer
       format: int32
       minimum: 1
       description: >-
-        Starts at 1 and each subsequent scan should have its number incremented
-        by 1. For simple frequency sweeps, all detections in the same sweep
-        should have the same group number. For cellular surveys, each scan of
-        the serving cell and neighbor cells should have the same group number.
+        Starts at 1 and each subsequent scan should have its number incremented by 1. For simple frequency sweeps, all detections in the same sweep should have the same group number. For cellular surveys, each scan of the serving cell and neighbor cells should have the same group number.
     signalStrength:
       type: number
       format: float
@@ -2276,12 +2121,7 @@ components:
       format: int32
       minimum: 0
       description: >-
-        The estimated horizontal accuracy of the provided location, radial, in
-        meters. We define horizontal accuracy as the radius of 68% confidence.
-        In other words, if you draw a circle centered at this location's
-        latitude and longitude, and with a radius equal to the accuracy, then
-        there is a 68% probability that the true location is inside the circle.
-        A value of 0 indicates there was no available horizontal accuracy.
+        The estimated horizontal accuracy of the provided location, radial, in meters. We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle. A value of 0 indicates there was no available horizontal accuracy.
       example: 40
     heading:
       type: number
@@ -2289,10 +2129,7 @@ components:
       minimum: -180
       maximum: 180
       description: >-
-        Heading of the sensor/antenna, in degrees from true north. One can use
-        sensor orientation (heading, pitch, roll) and sensor characteristics
-        (fieldofView, receiverSensitivity) to form more accurate estimates of
-        the transmitter's position.
+        Heading of the sensor/antenna, in degrees from true north. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
       example: 32.7
     pitch:
       type: number
@@ -2300,10 +2137,7 @@ components:
       minimum: -180
       maximum: 180
       description: >-
-        Pitch of the sensor/antenna, in degrees from the ground plane. One can
-        use sensor orientation (heading, pitch, roll) and sensor characteristics
-        (fieldofView, receiverSensitivity) to form more accurate estimates of
-        the transmitter's position.
+        Pitch of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
       example: -0.1
     roll:
       type: number
@@ -2311,10 +2145,7 @@ components:
       minimum: -180
       maximum: 180
       description: >-
-        Roll of the sensor/antenna, in degrees from the ground plane. One can
-        use sensor orientation (heading, pitch, roll) and sensor characteristics
-        (fieldofView, receiverSensitivity) to form more accurate estimates of
-        the transmitter's position.
+        Roll of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
       example: 0.15
     fieldOfView:
       type: number
@@ -2322,22 +2153,14 @@ components:
       minimum: 0
       maximum: 360
       description: >-
-        The horizontal field of view of the sensor/antenna in degrees.  If
-        absent, then this assumes that the sensor has a 360 degree field of view
-        (i.e. omnidirectional antenna). One can use sensor orientation (heading,
-        pitch, roll) and sensor characteristics (fieldofView,
-        receiverSensitivity) to form more accurate estimates of the
-        transmitter's position.
+        The horizontal field of view of the sensor/antenna in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna). One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
       example: 40
     receiverSensitivity:
       type: number
       format: float
       minimum: 0
       description: >-
-        The minimum signal strength that a receiver can detect, in units of dBm.
-        One can use sensor orientation (heading, pitch, roll) and sensor
-        characteristics (fieldOfView, receiverSensitivity) to form more accurate
-        estimates of the transmitter's position or distance from the sensor.
+        The minimum signal strength that a receiver can detect, in units of dBm. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldOfView, receiverSensitivity) to form more accurate estimates of the transmitter's position or distance from the sensor.
       example: -50
     provider:
       type: string
@@ -2354,29 +2177,16 @@ components:
       format: int32
       minimum: 0
       description: >-
-        Mobile Network Code, used in conjunction with MCC (PLMN) to identify a
-        carrier, 2 to 3 digits.
+        Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
       example: 480
     servingCell:
       type: boolean
       description: >-
-        Boolean indicating if this record represents a serving cell record, or a
-        neighbor cell record.  If the field is unset then it is unknown if this
-        record is for the serving cell or a neighbor cell. A value of true
-        indicates that the record represents a serving cell, a value of false
-        indicates a neighbor record.
+        Boolean indicating if this record represents a serving cell record, or a neighbor cell record.  If the field is unset then it is unknown if this record is for the serving cell or a neighbor cell. A value of true indicates that the record represents a serving cell, a value of false indicates a neighbor record.
     slot:
       type: integer
       description: >-
-        The slot number of the SIM card or radio slot that this record was
-        captured from. This enables support for multiple SIM cards in a single
-        device or multiple radios in a single device. Numbering does not start
-        at 0 or 1, and can be any arbitrary number. Therefore, the number does
-        not reveal anything about the number of SIM cards or radio slots in the
-        device. This field is optional, and if it is not present that is an
-        indication that the device only has a single SIM card or radio (but the
-        presence of this field does not indicate multiple SIM cards or radios).
-        Added in version 0.15.0.
+        The slot number of the SIM card or radio slot that this record was captured from. This enables support for multiple SIM cards in a single device or multiple radios in a single device. Numbering does not start at 0 or 1, and can be any arbitrary number. Therefore, the number does not reveal anything about the number of SIM cards or radio slots in the device. This field is optional, and if it is not present that is an indication that the device only has a single SIM card or radio (but the presence of this field does not indicate multiple SIM cards or radios). Added in version 0.15.0.
       example: 2
     lac:
       type: integer
@@ -2397,8 +2207,7 @@ components:
       format: int32
       minimum: 0
       description: >-
-        Absolute Radio Frequency Channel Number, valid values defined in 3GPP TS
-        45.005 Release 10 Section 2.
+        Absolute Radio Frequency Channel Number, valid values defined in 3GPP TS 45.005 Release 10 Section 2.
       example: 557
     bsic:
       type: integer
@@ -2406,8 +2215,7 @@ components:
       minimum: 0
       maximum: 63
       description: >-
-        Base Station Identity Code, consists of NCC and BCC, valid range 0-63
-        (in octal). For example, a BSIC of 38 maps to an NCC of 4 and BCC of 6.
+        Base Station Identity Code, consists of NCC and BCC, valid range 0-63 (in octal). For example, a BSIC of 38 maps to an NCC of 4 and BCC of 6.
       example: 25
     sid:
       type: integer
@@ -2415,8 +2223,7 @@ components:
       minimum: 0
       maximum: 32767
       description: >-
-        System Identification Number, 15 bit number that represents the service
-        provider(s) a base station provides service to.
+        System Identification Number, 15 bit number that represents the service provider(s) a base station provides service to.
       example: 139
     nid:
       type: integer
@@ -2424,17 +2231,14 @@ components:
       minimum: 0
       maximum: 65535
       description: >-
-        Network Identification Number, 16 bit number that represents the network
-        within a SID.
+        Network Identification Number, 16 bit number that represents the network within a SID.
       example: 4
     zone:
       type: integer
       format: int32
       minimum: 0
       description: >-
-        A collection of one or more base stations treated as a unit when
-        determining whether a mobile station should perform zone-based
-        registration.
+        A collection of one or more base stations treated as a unit when determining whether a mobile station should perform zone-based registration.
       example: 232
     bsid:
       type: integer
@@ -2442,8 +2246,7 @@ components:
       minimum: 0
       maximum: 65535
       description: >-
-        Base Station Identifier.  Exclusively identifies a base station under a
-        SID/NID.
+        Base Station Identifier.  Exclusively identifies a base station under a SID/NID.
       example: 12731
     channel:
       type: integer
@@ -2457,16 +2260,13 @@ components:
       minimum: 0
       maximum: 511
       description: >-
-        Pseudo Random Noise, 0-511, used to differentiate sectors on base
-        stations.
+        Pseudo Random Noise, 0-511, used to differentiate sectors on base stations.
       example: 136
     ecio:
       type: number
       format: float
       description: >-
-        Measure of the quality / cleanliness of the signal from the tower to the
-        modem (signal to noise). Energy per chip to Interference power ratio
-        measured in dB.
+        Measure of the quality / cleanliness of the signal from the tower to the modem (signal to noise). Energy per chip to Interference power ratio measured in dB.
       example: -11.4
     cid:
       type: integer
@@ -2474,9 +2274,7 @@ components:
       minimum: 0
       maximum: 268435455
       description: >-
-        The Cell Identity of the measured cell, 28 bits, the RNC-ID is the first
-        12 bits, and the C-ID is the last 16 bits, valid range 0-268435455.
-        Defined in 3GPP TS 25.331.
+        The Cell Identity of the measured cell, 28 bits, the RNC-ID is the first 12 bits, and the C-ID is the last 16 bits, valid range 0-268435455. Defined in 3GPP TS 25.331.
       example: 61381
     uarfcn:
       type: integer
@@ -2484,8 +2282,7 @@ components:
       minimum: 0
       maximum: 13096
       description: >-
-        UTRA Absolute Radio Frequency Channel Number (Downlink), valid range
-        0-13096, defined in 3GPP TS 25.101 and 3GPP TS 25.102.
+        UTRA Absolute Radio Frequency Channel Number (Downlink), valid range 0-13096, defined in 3GPP TS 25.101 and 3GPP TS 25.102.
       example: 9800
     psc:
       type: integer
@@ -2503,9 +2300,7 @@ components:
       type: number
       format: float
       description: >-
-        Received energy per chip divided by the power density in the band in dB.
-        The value is negative as the RSCP is smaller than the total received
-        power. Added in version 0.8.0.
+        Received energy per chip divided by the power density in the band in dB. The value is negative as the RSCP is smaller than the total received power. Added in version 0.8.0.
       example: -11.4
     tac:
       type: integer
@@ -2518,9 +2313,7 @@ components:
       minimum: 0
       maximum: 268435455
       description: >-
-        ECI, the Cell Identity of the measured cell, 28 bits. The Macro eNB ID
-        is the first 20 bits of the Cell Identity and the last 8 bits represent
-        the sector. Valid range 0-268435455.
+        ECI, the Cell Identity of the measured cell, 28 bits. The Macro eNB ID is the first 20 bits of the Cell Identity and the last 8 bits represent the sector. Valid range 0-268435455.
       example: 52824577
     earfcn:
       type: integer
@@ -2528,8 +2321,7 @@ components:
       minimum: 0
       maximum: 262143
       description: >-
-        Downlink E-UTRA Absolute Radio Frequency Channel Number, valid range
-        0-262143, defined in 3GPP TS 36.331 version 14.2.2 Release 14 page 567.
+        Downlink E-UTRA Absolute Radio Frequency Channel Number, valid range 0-262143, defined in 3GPP TS 36.331 version 14.2.2 Release 14 page 567.
       example: 5230
     pci:
       type: integer
@@ -2544,8 +2336,7 @@ components:
       minimum: -140
       maximum: -44
       description: >-
-        Reference Signal Received Power in dBm, valid range -44 to -140,
-        corresponding to RSRP_97 to RSRP_00 respectively.
+        Reference Signal Received Power in dBm, valid range -44 to -140, corresponding to RSRP_97 to RSRP_00 respectively.
       example: -107
     rsrq:
       type: number
@@ -2553,8 +2344,7 @@ components:
       minimum: -19.5
       maximum: -3
       description: >-
-        Reference Signal Received Quality in dB, valid range -3 to -19.5,
-        corresponding to RSRQ_34 to RSRQ_00 respectively.
+        Reference Signal Received Quality in dB, valid range -3 to -19.5, corresponding to RSRQ_34 to RSRQ_00 respectively.
       example: -11
     cqi:
       type: integer
@@ -2562,9 +2352,7 @@ components:
       minimum: 0
       maximum: 15
       description: >-
-        Channel Quality Indicator, used by the UE to notify the serving cell
-        (eNodeB) about the quality of the downlink channel, valid range 0-15.
-        This field was added in version 0.14.0.
+        Channel Quality Indicator, used by the UE to notify the serving cell (eNodeB) about the quality of the downlink channel, valid range 0-15. This field was added in version 0.14.0.
       example: 7
     lteBandwidth:
       type: string
@@ -2583,9 +2371,7 @@ components:
       minimum: 0
       maximum: 16777215
       description: >-
-        NR Tracking Area Code, location code inside a PLMN, valid range 0 -
-        16,777,215 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page
-        643.
+        NR Tracking Area Code, location code inside a PLMN, valid range 0 - 16,777,215 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 643.
       example: 52803
     nci:
       type: string
@@ -2593,10 +2379,7 @@ components:
       minimum: 0
       maximum: 68719476735
       description: >-
-        NCI, the Cell Identity of the measured cell, 36 bits. The gNB ID is the
-        first 22-32 bits of the NCI and the remaining bits represent the sector.
-        Valid range 0 - 68,719,476,735 as defined in 3GPP TS 38.331 version
-        16.2.0 Release 16 page 370.
+        NCI, the Cell Identity of the measured cell, 36 bits. The gNB ID is the first 22-32 bits of the NCI and the remaining bits represent the sector. Valid range 0 - 68,719,476,735 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 370.
       example: '52824577'
     narfcn:
       type: integer
@@ -2604,8 +2387,7 @@ components:
       minimum: 0
       maximum: 3279165
       description: >-
-        Downlink NR Absolute Radio Frequency Channel Number, valid range 0 -
-        3,279,165, defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 784.
+        Downlink NR Absolute Radio Frequency Channel Number, valid range 0 - 3,279,165, defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 784.
       example: 5230
     nrPci:
       type: integer
@@ -2613,8 +2395,7 @@ components:
       minimum: 0
       maximum: 1007
       description: >-
-        NR Physical Cell Identity, valid range 0-1007 as defined in 3GPP TS
-        38.331 version 16.2.0 Release 16 page 503.
+        NR Physical Cell Identity, valid range 0-1007 as defined in 3GPP TS 38.331 version 16.2.0 Release 16 page 503.
       example: 234
     ssRsrp:
       type: number
@@ -2622,10 +2403,7 @@ components:
       minimum: -156
       maximum: -31
       description: >-
-        Secondary Synchronization signal Reference Signal Received Power in dBm,
-        valid range -156 to -31, corresponding to RSRP_1 to RSRP_126
-        respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16
-        Table 10.1.6.1-1.
+        Secondary Synchronization signal Reference Signal Received Power in dBm, valid range -156 to -31, corresponding to RSRP_1 to RSRP_126 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
       example: -107.1
     ssRsrq:
       type: number
@@ -2633,10 +2411,7 @@ components:
       minimum: -43
       maximum: 20
       description: >-
-        Secondary Synchronization signal Reference Signal Received Quality in
-        dB, valid range -43 to 20, corresponding to SS-RSRQ_1 to SS-RSRQ_127
-        respectively (increments of 0.5) as defined in 3GPP TS 38.133 version
-        16.5.0 Release 16 Table 10.1.11.1-1.
+        Secondary Synchronization signal Reference Signal Received Quality in dB, valid range -43 to 20, corresponding to SS-RSRQ_1 to SS-RSRQ_127 respectively (increments of 0.5) as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.11.1-1.
       example: -11.5
     ssSinr:
       type: number
@@ -2644,11 +2419,7 @@ components:
       minimum: -23
       maximum: 40
       description: >-
-        Secondary Synchronization signal signal-to-noise and interference ratio
-        in dB. The reporting range of SS-SINR is defined from -23 dB to 40 dB
-        with 0.5 dB resolution, corresponding to SINR_1 to SINR_127 respectively
-        as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table
-        10.1.16.1-1.
+        Secondary Synchronization signal signal-to-noise and interference ratio in dB. The reporting range of SS-SINR is defined from -23 dB to 40 dB with 0.5 dB resolution, corresponding to SINR_1 to SINR_127 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.16.1-1.
       example: 14.5
     csiRsrp:
       type: number
@@ -2656,10 +2427,7 @@ components:
       minimum: -140
       maximum: -44
       description: >-
-        Channel State Information (CSI) Reference Signal Received Power in dBm,
-        valid range -140 to -44, corresponding to RSRP_17 to RSRP_113
-        respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16
-        Table 10.1.6.1-1.
+        Channel State Information (CSI) Reference Signal Received Power in dBm, valid range -140 to -44, corresponding to RSRP_17 to RSRP_113 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.6.1-1.
       example: -107.1
     csiRsrq:
       type: number
@@ -2672,10 +2440,7 @@ components:
       minimum: -23
       maximum: 40
       description: >-
-        CSI signal-to-noise and interference ratio in dB. The reporting range of
-        CSI-SINR is defined from -23 dB to 40 dB with 0.5 dB resolution,
-        corresponding to SINR_1 to SINR_127 respectively as defined in 3GPP TS
-        38.133 version 16.5.0 Release 16 Table 10.1.16.1-1.
+        CSI signal-to-noise and interference ratio in dB. The reporting range of CSI-SINR is defined from -23 dB to 40 dB with 0.5 dB resolution, corresponding to SINR_1 to SINR_127 respectively as defined in 3GPP TS 38.133 version 16.5.0 Release 16 Table 10.1.16.1-1.
       example: 14.5
     sourceAddress:
       type: string
@@ -2694,8 +2459,7 @@ components:
       format: int32
       minimum: 0
       description: >-
-        Beacon Interval, in milliseconds. The rate at which beacon frames are
-        sent from an Access Point advertising the existence of the AP.
+        Beacon Interval, in milliseconds. The rate at which beacon frames are sent from an Access Point advertising the existence of the AP.
       example: 100
     serviceSetType:
       type: string
@@ -2719,14 +2483,12 @@ components:
     extendedSupportedRates:
       type: string
       description: >-
-        An extended list of data rates supported by this device separated by
-        semicolons.
+        An extended list of data rates supported by this device separated by semicolons.
       example: 6; 9; 12; 48
     cipherSuites:
       type: array
       description: >-
-        A list of the supported cipher suites. See IEEE Std 802.11-2012 Section
-        8.4.2.27.2 for more details on the 802.11 Cipher Suites.
+        A list of the supported cipher suites. See IEEE Std 802.11-2012 Section 8.4.2.27.2 for more details on the 802.11 Cipher Suites.
       example:
         - TKIP
         - CCMP
@@ -2749,9 +2511,7 @@ components:
     akmSuites:
       type: array
       description: >-
-        A list of the supported Authentication and Key Management (AKM) suites.
-        See IEEE Std 802.11-2012 Section 8.4.2.27.3 for more details on the
-        802.11 AKM Suites.
+        A list of the supported Authentication and Key Management (AKM) suites. See IEEE Std 802.11-2012 Section 8.4.2.27.3 for more details on the 802.11 AKM Suites.
       example:
         - OPEN
       items:
@@ -2771,8 +2531,7 @@ components:
     encryptionType:
       type: string
       description: >-
-        The encryption type used by the Access Point. This field should be kept
-        in sync with the cipherSuites field as it is directly related.
+        The encryption type used by the Access Point. This field should be kept in sync with the cipherSuites field as it is directly related.
       example: WPA_WPA2
       enum:
         - UNKNOWN
@@ -2786,14 +2545,11 @@ components:
     wps:
       type: boolean
       description: >-
-        Boolean indicating if this Access Point supports Wi-Fi Protected Setup
-        as defined by the Wi-Fi Alliance.
+        Boolean indicating if this Access Point supports Wi-Fi Protected Setup as defined by the Wi-Fi Alliance.
     passpoint:
       type: boolean
       description: >-
-        Boolean indicating if this is a Passpoint Enabled Network Access Point.
-        Passpoint is a standard defined by the Wi-Fi Alliance, not IEEE. This
-        field was added in version 0.13.0.
+        Boolean indicating if this is a Passpoint Enabled Network Access Point. Passpoint is a standard defined by the Wi-Fi Alliance, not IEEE. This field was added in version 0.13.0.
     nodeType:
       type: string
       description: The type of station that sent this frame.
@@ -2824,10 +2580,7 @@ components:
       minimum: 0
       maximum: 65535
       description: >-
-        Clients may disassociate prior to powering off.  APs may disassociate
-        clients for various reasons including failure to properly authenticate,
-        for load balancing or timeout reasons, entering a state of maintenance,
-        etc. The 802.11-2016 standard includes a list of disassociation reasons.
+        Clients may disassociate prior to powering off.  APs may disassociate clients for various reasons including failure to properly authenticate, for load balancing or timeout reasons, entering a state of maintenance, etc. The 802.11-2016 standard includes a list of disassociation reasons.
       example: 2
     txPower:
       type: number
@@ -2839,9 +2592,7 @@ components:
     technology:
       type: string
       description: >-
-        The Bluetooth wireless technology system that is used in this frame. See
-        the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page
-        166) for more details.
+        The Bluetooth wireless technology system that is used in this frame. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.
       example: LE
       enum:
         - UNKNOWN
@@ -2850,9 +2601,7 @@ components:
     supportedTechnologies:
       type: string
       description: >-
-        The Bluetooth wireless technology systems that are supported be the
-        transmitting device. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol
-        1, Part A Section 1 (page 166) for more details.
+        The Bluetooth wireless technology systems that are supported be the transmitting device. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 1, Part A Section 1 (page 166) for more details.
       example: DUAL
       enum:
         - UNKNOWN
@@ -2862,9 +2611,7 @@ components:
     otaDeviceName:
       type: string
       description: >-
-        The Bluetooth device name is the user-friendly name that a Bluetooth
-        device exposes to remote devices. See the BLUETOOTH SPECIFICATION
-        Version 5.0 | Vol 3, Part C Section 3.2.2 (page 1988) for more details.
+        The Bluetooth device name is the user-friendly name that a Bluetooth device exposes to remote devices. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 3, Part C Section 3.2.2 (page 1988) for more details.
       example: Apple Pencil
     constellation:
       type: string
@@ -2895,66 +2642,40 @@ components:
       type: number
       format: double
       description: >-
-        The clock offset calculated by the receiver based on the space-vehicle
-        time contained in a received navigation message, i.e. the time it took
-        for a given navigation message to be sent from a space vehicle to the
-        receiver's antenna, as calculated by the receiver itself.
+        The clock offset calculated by the receiver based on the space-vehicle time contained in a received navigation message, i.e. the time it took for a given navigation message to be sent from a space vehicle to the receiver's antenna, as calculated by the receiver itself.
       example: 0.001
     usedInSolution:
       type: boolean
       description: >-
-        Indicates whether this particular satellite data was used as part of the
-        solution. A value of true indicates that the record was used in the
-        solution, a value of false indicates that the record was not used in
-        the solution.
+        Indicates whether this particular satellite data was used as part of the solution. A value of true indicates that the record was used in the solution, a value of false indicates that the record was not used in the solution.
     undulationM:
       type: number
       format: float
       minimum: -150
       maximum: 150
       description: >-
-        The height in meters of the geoid at a given point, relative to a given
-        reference ellipsoid, i.e. the difference in height between the 'real'
-        surface (ignoring topographical features) and a 'modeled' surface given
-        by a reference ellipsoid such as the one defined by WGS84. Valid range,
-        -150.0 to 150.0.
+        The height in meters of the geoid at a given point, relative to a given reference ellipsoid, i.e. the difference in height between the 'real' surface (ignoring topographical features) and a 'modeled' surface given by a reference ellipsoid such as the one defined by WGS84. Valid range, -150.0 to 150.0.
       example: 125.1
     latitudeStdDevM:
       type: number
       format: float
       minimum: 0
       description: >-
-        The standard deviation of the latitude measurement in meters, where a
-        higher value indicates a less precise position lock. For example, a 5m
-        deviation indicates that, with 68% confidence, the latitude is within 5m
-        of the reported position; with 95% confidence, the latitude is within
-        10m of the reported position, etc. This relates to the Horizontal
-        Dilution of Precision (HDOP).
+        The standard deviation of the latitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the latitude is within 5m of the reported position; with 95% confidence, the latitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP).
       example: 5.2
     longitudeStdDevM:
       type: number
       format: float
       minimum: 0
       description: >-
-        The standard deviation of the longitude measurement in meters, where a
-        higher value indicates a less precise position lock. For example, a 5m
-        deviation indicates that, with 68% confidence, the longitude is within
-        5m of the reported position; with 95% confidence, the longitude is
-        within 10m of the reported position, etc. This relates to the Horizontal
-        Dilution of Precision (HDOP).
+        The standard deviation of the longitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the longitude is within 5m of the reported position; with 95% confidence, the longitude is within 10m of the reported position, etc. This relates to the Horizontal Dilution of Precision (HDOP).
       example: 4.1
     altitudeStdDevM:
       type: number
       format: float
       minimum: 0
       description: >-
-        The standard deviation of the altitude measurement in meters, where a
-        higher value indicates a less precise position lock. For example, a 5m
-        deviation indicates that, with 68% confidence, the altitude is within 5m
-        of the reported position; with 95% confidence, the altitude is within
-        10m of the reported position, etc. This relates to the Vertical
-        Dilution of Position (VDOP), and tends to be higher than the Lat/Lon
-        standard deviations due to GNSS satellites being above GNSS receivers.
+        The standard deviation of the altitude measurement in meters, where a higher value indicates a less precise position lock. For example, a 5m deviation indicates that, with 68% confidence, the altitude is within 5m of the reported position; with 95% confidence, the altitude is within 10m of the reported position, etc. This relates to the Vertical Dilution of Position (VDOP), and tends to be higher than the Lat/Lon standard deviations due to GNSS satellites being above GNSS receivers.
       example: -122.1
     agcDb:
       type: number
@@ -2969,10 +2690,7 @@ components:
       minimum: -100
       maximum: 100
       description: >-
-        The Carrier-to-noise density in dB-Hz, which represents the measured
-        C/N0 for the signal at the antenna inputCarrier to noise density ratio,
-        measured in dB-Hz. Typical range: 10-50 dB-Hz. The range of possible
-        C/N0 values is 0-63 dB-Hz to handle some edge cases.
+        The Carrier-to-noise density in dB-Hz, which represents the measured C/N0 for the signal at the antenna inputCarrier to noise density ratio, measured in dB-Hz. Typical range: 10-50 dB-Hz. The range of possible C/N0 values is 0-63 dB-Hz to handle some edge cases.
       example: 1.1
     hdop:
       type: number
@@ -3004,44 +2722,30 @@ components:
       type: number
       format: float
       description: >-
-        The Signal to Noise Ratio of the received signal to the noise power
-        measured in dB. A ratio higher than 1:1 (greater than 0 dB) indicates
-        more signal than noise.
+        The Signal to Noise Ratio of the received signal to the noise power measured in dB. A ratio higher than 1:1 (greater than 0 dB) indicates more signal than noise.
       example: 19.2
     timeUp:
       type: string
       format: date-time
       description: >-
-        The date & time the energy/signal was detected as active. This is
-        formatted as an [RFC3339
-        date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-        For example, `'1996-12-19T16:39:57-08:00'`.
+        The date & time the energy/signal was detected as active. This is formatted as an [RFC3339 date-time](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14). For example, `'1996-12-19T16:39:57-08:00'`.
       example: 1996-12-20T00:39:57.000Z
     durationSec:
       type: number
       format: float
       exclusiveMinimum: 0
       description: >-
-        The duration of time, in seconds, that the signal was detected as
-        active.
+        The duration of time, in seconds, that the signal was detected as active.
       example: 4.2
     modulation:
       type: string
       description: >-
-        The modulation type found on the received signal. It is appropriate to
-        leave this blank if the modulation of the signal is unknown, but either
-        the `modulation` or `signalName` field should be filled out. If neither
-        of them are known then the `energyDetection` message should be used
-        instead.
+        The modulation type found on the received signal. It is appropriate to leave this blank if the modulation of the signal is unknown, but either the `modulation` or `signalName` field should be filled out. If neither of them are known then the `energyDetection` message should be used instead.
       example: 4FSK
     signalName:
       type: string
       description: >-
-        The modulation type found on the received signal. It is appropriate to
-        leave this blank if the modulation of the signal is unknown, but either
-        the `modulation` or `signalName` field should be filled out. If neither
-        of them are known then the `energyDetection` message should be used
-        instead.
+        The modulation type found on the received signal. It is appropriate to leave this blank if the modulation of the signal is unknown, but either the `modulation` or `signalName` field should be filled out. If neither of them are known then the `energyDetection` message should be used instead.
       example: DMR
     batteryLevelPercent:
       type: integer
@@ -3063,17 +2767,11 @@ components:
     mdmOverride:
       type: boolean
       description: >-
-        Indicates if the device currently has the Mobile Device Management (MDM)
-        Override option turned on. If true, the user has forced the MDM options
-        off, if false, the user has left the MDM control in place. Added in
-        version 0.9.0.
+        Indicates if the device currently has the Mobile Device Management (MDM) Override option turned on. If true, the user has forced the MDM options off, if false, the user has left the MDM control in place. Added in version 0.9.0.
     simState:
       type: string
       description: >-
-        The current state of the SIM card. The values are taken directly from
-        android.telephony.TelephonyManager#SimState and should be kept in sync
-        with those values. Even the order lines up exactly, which makes
-        conversion easier.
+        The current state of the SIM card. The values are taken directly from android.telephony.TelephonyManager#SimState and should be kept in sync with those values. Even the order lines up exactly, which makes conversion easier.
       example: READY
       enum:
         - UNKNOWN
@@ -3091,10 +2789,7 @@ components:
     simOperator:
       type: string
       description: >-
-        The PLMN portion of the SIM's IMSI. This indicates the provider that
-        issued the SIM card. The format is the MCC and MNC concatenated as one
-        string. Can be 5 or 6 digits in length where the MCC is always 3 digits
-        and the MNC is either 2 or 3.
+        The PLMN portion of the SIM's IMSI. This indicates the provider that issued the SIM card. The format is the MCC and MNC concatenated as one string. Can be 5 or 6 digits in length where the MCC is always 3 digits and the MNC is either 2 or 3.
       example: '311480'
     networkRegistrationInfo:
       type: object
@@ -3103,8 +2798,7 @@ components:
         domain:
           type: string
           description: >-
-            The type of network, either Packet Switched (PS) or Circuit Switched
-            (CS).
+            The type of network, either Packet Switched (PS) or Circuit Switched (CS).
           example: PS
           enum:
             - UNKNOWN
@@ -3113,9 +2807,7 @@ components:
         accessNetworkTechnology:
           type: string
           description: >-
-            The technology type for this network, for example, UMTS or LTE.
-            These values mirror the Android TelephonyManager Network Type
-            constants.
+            The technology type for this network, for example, UMTS or LTE. These values mirror the Android TelephonyManager Network Type constants.
           example: LTE
           enum:
             - UNKNOWN
@@ -3148,17 +2840,10 @@ components:
           format: int32
           minimum: 0
           description: >-
-            If the UE tried to register with this network and was denied, this
-            value indicates the rejection reason. The values are defined in 3GPP
-            TS 24.008 version 16.7.0 page 536 (Reject cause), and 3GPP TS 24.301
-            version 16.8.0 page 418 (EMM cause).
+            If the UE tried to register with this network and was denied, this value indicates the rejection reason. The values are defined in 3GPP TS 24.008 version 16.7.0 page 536 (Reject cause), and 3GPP TS 24.301 version 16.8.0 page 418 (EMM cause).
         cellIdentityXXX:
           description: >-
-            The properties defining the cell. The properties are different for
-            each technology so the object type will be different depending on
-            the accessNetworkTechnology. The name of this field will be
-            different for each object. For example, it will be `cellIdentityLte`
-            for LTE and `cellIdentityNr` for NR.
+            The properties defining the cell. The properties are different for each technology so the object type will be different depending on the accessNetworkTechnology. The name of this field will be different for each object. For example, it will be `cellIdentityLte` for LTE and `cellIdentityNr` for NR.
           oneOf:
             - $ref: '#/components/schemas/cellIdentityGsm'
             - $ref: '#/components/schemas/cellIdentityCdma'
@@ -3271,26 +2956,13 @@ components:
       type: string
       format: byte
       description: >-
-        The raw cellular message bytes encoded in base64. The bytes in this
-        field are the raw message bytes captured from the Over The Air (OTA)
-        cellular radio frame with the appropriate PCAP headers as the prefix. In
-        other words, the bytes are the same bytes that would show up in a pcap
-        file for a cellular message. The general structure consists of a PCAP
-        record header, PPI header, layer 3 header, layer 4 header, a GSMTAP
-        header, followed by the cellular OTA message. Using this structure means
-        that Wireshark, tshark or any other tool that can read GSMTAP pcap
-        records can easily parse out the contents of this message. For more
-        details see the [Network Survey+ Android App Source
-        Code](https://github.com/christianrowlands/android-network-survey-rooted).
+        The raw cellular message bytes encoded in base64. The bytes in this field are the raw message bytes captured from the Over The Air (OTA) cellular radio frame with the appropriate PCAP headers as the prefix. In other words, the bytes are the same bytes that would show up in a pcap file for a cellular message. The general structure consists of a PCAP record header, PPI header, layer 3 header, layer 4 header, a GSMTAP header, followed by the cellular OTA message. Using this structure means that Wireshark, tshark or any other tool that can read GSMTAP pcap records can easily parse out the contents of this message. For more details see the [Network Survey+ Android App Source Code](https://github.com/christianrowlands/android-network-survey-rooted).
       example: FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==
     frameType:
       type: integer
       format: int32
       description: >-
-        The frame type of the 802.11 message. The frame type represents the type
-        of 802.11 frame that the pcapRecord field contains. For example, a frame
-        type of 0 represents a management frame, 1 represents a control frame,
-        and 2 represents a data frame, and 3 represents an extension.
+        The frame type of the 802.11 message. The frame type represents the type of 802.11 frame that the pcapRecord field contains. For example, a frame type of 0 represents a management frame, 1 represents a control frame, and 2 represents a data frame, and 3 represents an extension.
       example: 0
       minimum: 0
       maximum: 3
@@ -3298,17 +2970,10 @@ components:
       type: integer
       format: int32
       description: >-
-        The subtype of the 802.11 message that corresponds to the frame type.
-        The frame subtype represents the subtype of the 802.11 frame that the
-        pcapRecord field contains. For example, if the frame type is 0 (aka
-        Management) a frame subtype of 0 represents an association request, 1
-        represents an association response, 2 represents a reassociation
-        request, etc.
+        The subtype of the 802.11 message that corresponds to the frame type. The frame subtype represents the subtype of the 802.11 frame that the pcapRecord field contains. For example, if the frame type is 0 (aka Management) a frame subtype of 0 represents an association request, 1 represents an association response, 2 represents a reassociation request, etc.
       example: 4
       minimum: 0
     channelType:
       type: string
       description: >-
-        The channel type that this message was sent on. The channel type
-        represents the logical channel that the raw cellular message was sent
-        over.
+        The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.

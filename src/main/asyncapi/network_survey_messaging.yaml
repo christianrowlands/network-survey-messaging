@@ -4,12 +4,17 @@ info:
   version: 0.15.0
   description: >
     The Network Survey Messaging API defines a set of messages that can be used
-    to describe
+    to describe wireless survey related events. The messages range from 
+    cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy 
+    detection events.
 
-    wireless survey related events. The messages range from cellular surveys
-    such as GSM, CDMA,
 
-    UMTS, and LTE, to simple RF energy detection events.
+    **NOTE:** Despite the name "Network Survey Messaging API", this message
+    specification is not exclusive to the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey).
+    Instead, the Network Survey Android App is just one app that leverages
+    Network Survey Messaging. Therefore, there are messages in this 
+    specification that do not apply to the Network Survey Android App 
+    (e.g. EnergyDetection).
 
 
     While the most common use of these messages would be to send to an MQTT
@@ -29,10 +34,10 @@ info:
 
 
     Officially, the message schema support for the Network Survey Messaging API
-    are the JSON defined messags from this
+    are the JSON defined messages from this
 
     document. However, protobuf definitions of these messages have been created
-    as a convinence for a couple of reasons.
+    as a convenience for a couple of reasons.
 
     First, it can make generating the JSON compliant messages easier and also
     converting the JSON messages to language
@@ -51,10 +56,6 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 defaultContentType: application/json
-servers:
-  mosquitto:
-    host: test.mosquitto.org
-    protocol: mqtt
 channels:
   gsm_message:
     address: gsm_message
@@ -122,7 +123,7 @@ channels:
       publish.message:
         $ref: '#/components/messages/wifiProbeRequestRecord'
     description: >-
-      The 80211_probe_request_message topic/channel is where 802.11 proble
+      The 80211_probe_request_message topic/channel is where 802.11 probe
       request survey records can be published. For MQTT, set the MQTT topic as
       "80211_probe_request_message" and then publish a JSON message representing
       an 802.11 Probe Request record in the format defined below. Added in 0.9.0
@@ -220,92 +221,92 @@ channels:
       MQTT topic as "cellular_ota_message" and then publish a JSON message
       representing an OTA Cellular message.
 operations:
-  gsm_message.publish:
+  gsm_message:
     action: receive
     channel:
       $ref: '#/channels/gsm_message'
     messages:
       - $ref: '#/channels/gsm_message/messages/publish.message'
-  cdma_message.publish:
+  cdma_message:
     action: receive
     channel:
       $ref: '#/channels/cdma_message'
     messages:
       - $ref: '#/channels/cdma_message/messages/publish.message'
-  umts_message.publish:
+  umts_message:
     action: receive
     channel:
       $ref: '#/channels/umts_message'
     messages:
       - $ref: '#/channels/umts_message/messages/publish.message'
-  lte_message.publish:
+  lte_message:
     action: receive
     channel:
       $ref: '#/channels/lte_message'
     messages:
       - $ref: '#/channels/lte_message/messages/publish.message'
-  nr_message.publish:
+  nr_message:
     action: receive
     channel:
       $ref: '#/channels/nr_message'
     messages:
       - $ref: '#/channels/nr_message/messages/publish.message'
-  80211_beacon_message.publish:
+  80211_beacon_message:
     action: receive
     channel:
       $ref: '#/channels/80211_beacon_message'
     messages:
       - $ref: '#/channels/80211_beacon_message/messages/publish.message'
-  80211_probe_request_message.publish:
+  80211_probe_request_message:
     action: receive
     channel:
       $ref: '#/channels/80211_probe_request_message'
     messages:
       - $ref: '#/channels/80211_probe_request_message/messages/publish.message'
-  80211_deauthentication_message.publish:
+  80211_deauthentication_message:
     action: receive
     channel:
       $ref: '#/channels/80211_deauthentication_message'
     messages:
       - $ref: '#/channels/80211_deauthentication_message/messages/publish.message'
-  80211_ota_message.publish:
+  80211_ota_message:
     action: receive
     channel:
       $ref: '#/channels/80211_ota_message'
     messages:
       - $ref: '#/channels/80211_ota_message/messages/publish.message'
-  bluetooth_message.publish:
+  bluetooth_message:
     action: receive
     channel:
       $ref: '#/channels/bluetooth_message'
     messages:
       - $ref: '#/channels/bluetooth_message/messages/publish.message'
-  gnss_message.publish:
+  gnss_message:
     action: receive
     channel:
       $ref: '#/channels/gnss_message'
     messages:
       - $ref: '#/channels/gnss_message/messages/publish.message'
-  energy_detection_message.publish:
+  energy_detection_message:
     action: receive
     channel:
       $ref: '#/channels/energy_detection_message'
     messages:
       - $ref: '#/channels/energy_detection_message/messages/publish.message'
-  signal_detection_message.publish:
+  signal_detection_message:
     action: receive
     channel:
       $ref: '#/channels/signal_detection_message'
     messages:
       - $ref: '#/channels/signal_detection_message/messages/publish.message'
-  device_status_message.publish:
+  device_status_message:
     action: receive
     channel:
       $ref: '#/channels/device_status_message'
     messages:
       - $ref: '#/channels/device_status_message/messages/publish.message.0'
       - $ref: '#/channels/device_status_message/messages/publish.message.1'
-  cellular_ota_message.publish:
+  cellular_ota_message:
     action: receive
     channel:
       $ref: '#/channels/cellular_ota_message'
@@ -423,7 +424,7 @@ components:
       name: GnssRecord
       title: GNSS Record
       summary: >-
-        Represents information recorded about a Global Navigation Sattelite
+        Represents information recorded about a Global Navigation Satellite
         System (GNSS) at a particular time and geographic location. Each record
         represents a single navigation message from a single satellite. These
         individual records are tied together using the group number field.
@@ -466,10 +467,10 @@ components:
       title: Phone State
       summary: >-
         Represents the current state of the phone to include information about
-        the currrently registered networks. The interval of this message can
+        the currently registered networks. The interval of this message can
         vary depending on use case, but is typically sent when a change in the
-        phone's state orrurs, such as registering to a new network or being
-        rejected from a netowrk.
+        phone's state occurs, such as registering to a new network or being
+        rejected from a network.
       contentType: application/json
       payload:
         $ref: '#/components/schemas/phoneStatePayload'
@@ -2249,7 +2250,7 @@ components:
       maximum: 180
       description: >-
         Heading of the sensor/antenna, in degrees from true north. One can use
-        sensor orientation (heading, pitch, roll) and sensor characterisics
+        sensor orientation (heading, pitch, roll) and sensor characteristics
         (fieldofView, receiverSensitivity) to form more accurate estimates of
         the transmitter's position.
       example: 32.7
@@ -2260,7 +2261,7 @@ components:
       maximum: 180
       description: >-
         Pitch of the sensor/antenna, in degrees from the ground plane. One can
-        use sensor orientation (heading, pitch, roll) and sensor characterisics
+        use sensor orientation (heading, pitch, roll) and sensor characteristics
         (fieldofView, receiverSensitivity) to form more accurate estimates of
         the transmitter's position.
       example: -0.1
@@ -2271,7 +2272,7 @@ components:
       maximum: 180
       description: >-
         Roll of the sensor/antenna, in degrees from the ground plane. One can
-        use sensor orientation (heading, pitch, roll) and sensor characterisics
+        use sensor orientation (heading, pitch, roll) and sensor characteristics
         (fieldofView, receiverSensitivity) to form more accurate estimates of
         the transmitter's position.
       example: 0.15
@@ -2284,7 +2285,7 @@ components:
         The horizontal field of view of the sensor/antenna in degrees.  If
         absent, then this assumes that the sensor has a 360 degree field of view
         (i.e. omnidirectional antenna). One can use sensor orientation (heading,
-        pitch, roll) and sensor characterisics (fieldofView,
+        pitch, roll) and sensor characteristics (fieldofView,
         receiverSensitivity) to form more accurate estimates of the
         transmitter's position.
       example: 40
@@ -2295,7 +2296,7 @@ components:
       description: >-
         The minimum signal strength that a receiver can detect, in units of dBm.
         One can use sensor orientation (heading, pitch, roll) and sensor
-        characterisics (fieldOfView, receiverSensitivity) to form more accurate
+        characteristics (fieldOfView, receiverSensitivity) to form more accurate
         estimates of the transmitter's position or distance from the sensor.
       example: -50
     provider:
@@ -2856,7 +2857,7 @@ components:
     carrierFreqHz:
       type: integer
       format: int64
-      minumum: 1
+      minimum: 1
       description: 'The carrier frequency utilized by the SV, in Hz.'
       example: 120000000
     clockOffset:
@@ -2873,7 +2874,7 @@ components:
       description: >-
         Indicates whether this particular satellite data was used as part of the
         solution. A value of true indicates that the record was used in the
-        solution, a value of false indiicates that the record was not used in
+        solution, a value of false indicates that the record was not used in
         the solution.
     undulationM:
       type: number
@@ -2893,8 +2894,8 @@ components:
       minimum: 0
       description: >-
         The standard deviation of the latitude measurement in meters, where a
-        higher value indicates a less precise postion lock. For example, a 5m
-        deviaton indicates that, with 68% confidence, the latitude is within 5m
+        higher value indicates a less precise position lock. For example, a 5m
+        deviation indicates that, with 68% confidence, the latitude is within 5m
         of the reported position; with 95% confidence, the latitude is within
         10m of the reported position, etc. This relates to the Horizontal
         Dilution of Precision (HDOP).
@@ -2916,12 +2917,12 @@ components:
       format: float
       minimum: 0
       description: >-
-        The standatd deviation of the altitude measurement in meters, where a
+        The standard deviation of the altitude measurement in meters, where a
         higher value indicates a less precise position lock. For example, a 5m
         deviation indicates that, with 68% confidence, the altitude is within 5m
         of the reported position; with 95% confidence, the altitude is within
-        10m of the reported position, etc. This releates to the Vertical
-        Dilution of Poistion (VDOP), and tends to be higher than the Lat/Lon
+        10m of the reported position, etc. This relates to the Vertical
+        Dilution of Position (VDOP), and tends to be higher than the Lat/Lon
         standard deviations due to GNSS satellites being above GNSS receivers.
       example: -122.1
     agcDb:
@@ -3031,7 +3032,7 @@ components:
     mdmOverride:
       type: boolean
       description: >-
-        Indicates if the device currently has the Mobile Device Mangement (MDM)
+        Indicates if the device currently has the Mobile Device Management (MDM)
         Override option turned on. If true, the user has forced the MDM options
         off, if false, the user has left the MDM control in place. Added in
         version 0.9.0.
@@ -3117,7 +3118,7 @@ components:
           minimum: 0
           description: >-
             If the UE tried to register with this network and was denied, this
-            vlaue indicates the rejection reason. The values are defined in 3GPP
+            value indicates the rejection reason. The values are defined in 3GPP
             TS 24.008 version 16.7.0 page 536 (Reject cause), and 3GPP TS 24.301
             version 16.8.0 page 418 (EMM cause).
         cellIdentityXXX:

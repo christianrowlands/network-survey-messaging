@@ -117,3 +117,4 @@ gradle.properties
 *~
 
 .java-version
+/builddocs

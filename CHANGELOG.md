@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.0.0) - 2024-01-26
+* Adds 802.11be (Wi-Fi 7) to the list of 802.11 standards.
+* Adds the bandwidth field to the Wi-Fi Beacon record.
+
 ## [0.15.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v0.15.0) - 2023-12-14
 * Adds the slot field to the cellular records (GSM, CDMA, UMTS, LTE, and NR). See the docs for more information on the slot field.
 

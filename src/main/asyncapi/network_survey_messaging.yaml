@@ -2317,7 +2317,7 @@ components:
     standard:
       type: string
       description: The 802.11 standard being employed by the device.
-      example: "IEEE80211N"
+      example: "IEEE80211AX"
       enum:
         - "UNKNOWN"
         - "IEEE80211"
@@ -2328,6 +2328,7 @@ components:
         - "IEEE80211N"
         - "IEEE80211AC"
         - "IEEE80211AX"
+        - "IEEE80211BE"
     reason:
       type: integer
       format: int32

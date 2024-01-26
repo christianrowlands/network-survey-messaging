@@ -25,4 +25,5 @@ enum Standard {
     IEEE80211N = 6;
     IEEE80211AC = 7;
     IEEE80211AX = 8;
+    IEEE80211BE = 9;
 }

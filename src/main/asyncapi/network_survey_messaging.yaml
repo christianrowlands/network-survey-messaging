@@ -530,7 +530,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be GsmRecord.'
           example: GsmRecord
         data:
@@ -580,10 +580,18 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             mcc:
-              $ref: '#/components/schemas/mcc'
+              type: integer
+              format: int32
+              minimum: 0
+              description: 'Mobile Country Code, 3 digits.'
               example: 310
             mnc:
-              $ref: '#/components/schemas/mnc'
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a
+                carrier, 2 to 3 digits.
               example: 410
             lac:
               $ref: '#/components/schemas/lac'
@@ -596,11 +604,19 @@ components:
             signalStrength:
               $ref: '#/components/schemas/signalStrength'
             ta:
-              $ref: '#/components/schemas/ta'
+              type: integer
+              format: int32
+              minimum: 0
+              maximum: 63
+              description: >-
+                Timing Advance, corresponding to the timing offset a mobile phone needs
+                to use when transmitting a signal to the tower.
+              example: 4
             servingCell:
               $ref: '#/components/schemas/servingCell'
             provider:
-              $ref: '#/components/schemas/provider'
+              type: string
+              description: The company providing the cellular service.
               example: ATT
             slot:
               $ref: '#/components/schemas/slot'
@@ -614,7 +630,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be CdmaRecord.'
           example: CdmaRecord
         data:
@@ -695,7 +711,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be UmtsRecord.'
           example: UmtsRecord
         data:
@@ -745,10 +761,18 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             mcc:
-              $ref: '#/components/schemas/mcc'
+              type: integer
+              format: int32
+              minimum: 0
+              description: 'Mobile Country Code, 3 digits.'
               example: 310
             mnc:
-              $ref: '#/components/schemas/mnc'
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a
+                carrier, 2 to 3 digits.
               example: 260
             lac:
               $ref: '#/components/schemas/lac'
@@ -767,7 +791,8 @@ components:
             servingCell:
               $ref: '#/components/schemas/servingCell'
             provider:
-              $ref: '#/components/schemas/provider'
+              type: string
+              description: The company providing the cellular service.
               example: T-Mobile
             slot:
               $ref: '#/components/schemas/slot'
@@ -781,7 +806,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be LteRecord.'
           example: LteRecord
         data:
@@ -878,7 +903,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be NrRecord.'
           example: NrRecord
         data:
@@ -977,7 +1002,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be WifiBeaconRecord.'
           example: WifiBeaconRecord
         data:
@@ -1091,7 +1116,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be WifiProbeRequestRecord.'
           example: WifiProbeRequestRecord
         data:
@@ -1173,7 +1198,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be WifiDeauthenticationRecord.'
           example: WifiDeauthenticationRecord
         data:
@@ -1258,7 +1283,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be WifiOtaRecord.'
           example: WifiOtaRecord
         data:
@@ -1307,7 +1332,8 @@ components:
             frameSubtype:
               $ref: '#/components/schemas/frameSubtype'
             pcapRecord:
-              $ref: '#/components/schemas/pcapRecord'
+              type: string
+              format: byte
               description: >-
                 The raw 802.11 frame bytes encoded in base64. The bytes in this
                 field are the raw message bytes captured from the Over The Air
@@ -1318,6 +1344,7 @@ components:
                 header, followed by the 802.11 frame. Using this structure means
                 that Wireshark, tshark or any other tool that can read 802.11
                 pcap records can easily parse out the contents of this message.
+              example: aVwDZYj5DgBJAAAASQAAAAAAMABvCABAOsN7FAAAAAASDGwJwACroAAAAAN/ABAAAAAAAAAAAAAAAAAAAAAAAFQAZABszdbclR85lO2uZIceAQAgCAk4KYc=
     bluetoothRecordPayload:
       type: object
       required:
@@ -1328,7 +1355,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be BluetoothRecord.'
           example: BluetoothRecord
         data:
@@ -1407,7 +1434,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be GnssRecord.'
           example: GnssRecord
         data:
@@ -1440,7 +1467,9 @@ components:
             recordNumber:
               $ref: '#/components/schemas/recordNumber'
             groupNumber:
-              $ref: '#/components/schemas/groupNumber'
+              type: integer
+              format: int32
+              minimum: 1
               description: >-
                 Starts at 1 and each subsequent scan should have its number
                 incremented by 1. Records with the same group number indicate
@@ -1495,7 +1524,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be EnergyDetection.'
           example: EnergyDetection
         data:
@@ -1565,7 +1594,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be SignalDetection.'
           example: SignalDetection
         data:
@@ -1639,7 +1668,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be DeviceStatus.'
           example: DeviceStatus
         data:
@@ -1694,7 +1723,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be PhoneState.'
           example: PhoneState
         data:
@@ -1753,7 +1782,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be WcdmaRrc.'
           example: WcdmaRrc
         data:
@@ -1796,7 +1825,11 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             channelType:
-              $ref: '#/components/schemas/channelType'
+              type: string
+              description: >-
+                The channel type that this message was sent on. The channel type
+                represents the logical channel that the raw cellular message was sent
+                over.
               example: BCCH_BCH
               enum:
                 - UNKNOWN
@@ -1874,7 +1907,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be UmtsNas.'
           example: UmtsNas
         data:
@@ -1927,7 +1960,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be LteRrc.'
           example: LteRrc
         data:
@@ -1970,7 +2003,11 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             channelType:
-              $ref: '#/components/schemas/channelType'
+              type: string
+              description: >-
+                The channel type that this message was sent on. The channel type
+                represents the logical channel that the raw cellular message was sent
+                over.
               example: BCCH_BCH
               enum:
                 - UNKNOWN
@@ -2009,7 +2046,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be LteNas.'
           example: LteNas
         data:
@@ -2052,7 +2089,11 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             channelType:
-              $ref: '#/components/schemas/channelType'
+              type: string
+              description: >-
+                The channel type that this message was sent on. The channel type
+                represents the logical channel that the raw cellular message was sent
+                over.
               example: PLAIN
               enum:
                 - UNKNOWN
@@ -2070,7 +2111,7 @@ components:
         version:
           $ref: '#/components/schemas/version'
         messageType:
-          $ref: '#/components/schemas/messageType'
+          type: string
           description: 'The type of message, must be GsmSignaling.'
           example: GsmSignaling
         data:
@@ -2113,7 +2154,11 @@ components:
             receiverSensitivity:
               $ref: '#/components/schemas/receiverSensitivity'
             channelType:
-              $ref: '#/components/schemas/channelType'
+              type: string
+              description: >-
+                The channel type that this message was sent on. The channel type
+                represents the logical channel that the raw cellular message was sent
+                over.
               example: BCCH
               enum:
                 - UNKNOWN
@@ -2142,11 +2187,6 @@ components:
         The version number of the Network Survey Messaging API that this message
         is based off of.
       example: 0.15.0
-    messageType:
-      type: string
-      description: >-
-        The type of this message. This value must match the message name or the
-        message will not be interpreted correctly.
     deviceSerialNumber:
       type: string
       description: >-
@@ -2369,15 +2409,6 @@ components:
         Base Station Identity Code, consists of NCC and BCC, valid range 0-63
         (in octal). For example, a BSIC of 38 maps to an NCC of 4 and BCC of 6.
       example: 25
-    ta:
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 63
-      description: >-
-        Timing Advance, corresponding to the timing offset a mobile phone needs
-        to use when transmitting a signal to the tower.
-      example: 4
     sid:
       type: integer
       format: int32

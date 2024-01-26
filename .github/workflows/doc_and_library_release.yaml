@@ -77,10 +77,10 @@ jobs:
         with:
           ref: develop
 
-      #Using another action for AsyncAPI for validation
       - name: Validating AsyncAPI document
-        uses: WaleedAshraf/asyncapi-github-action@v0.0.10
+        uses: asyncapi/github-action-for-cli@v3.1.1
         with:
+          command: validate
           filepath: src/main/asyncapi/network_survey_messaging.yaml
 
       - name: Generating HTML from my AsyncAPI document

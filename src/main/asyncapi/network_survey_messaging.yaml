@@ -1584,6 +1584,53 @@ components:
               $ref: '#/components/schemas/error'
             mdmOverride:
               $ref: '#/components/schemas/mdmOverride'
+            gnssLatitude:
+              type: number
+              format: double
+              description: The latitude as obtained from the GNSS location provider. This is an additional value to the regular latitude and is only provided for comparison and analysis purposes.
+              example: 51.470334
+            gnssLongitude:
+              type: number
+              format: double
+              description: The longitude as obtained from the GNSS location provider. This is an additional value to the regular longitude and is only provided for comparison and analysis purposes.
+              example: -0.486594
+            gnssAltitude:
+              type: number
+              format: float
+              description: >-
+                The altitude in meters above MSL as obtained from the GNSS location provider. This is an additional value to the regular altitude and is only provided for comparison and analysis purposes.
+              example: 13.3
+            gnssAccuracy:
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                The estimated horizontal accuracy of the provided location in meters as obtained from the GNSS location provider. This is an additional value to the regular accuracy and is only provided for comparison and analysis purposes.
+              example: 40
+            networkLatitude:
+              type: number
+              format: double
+              description: The latitude as obtained from the Network based location provider (e.g. Cellular and/or Wi-Fi). This is an additional value to the regular latitude and is only provided for comparison and analysis purposes.
+              example: 51.470334
+            networkLongitude:
+              type: number
+              format: double
+              description: The longitude as obtained from the Network based location provider (e.g. Cellular and/or Wi-Fi). This is an additional value to the regular longitude and is only provided for comparison and analysis purposes.
+              example: -0.486594
+            networkAltitude:
+              type: number
+              format: float
+              description: >-
+                The altitude in meters above MSL as obtained from the Network based location provider (e.g. Cellular and/or Wi-Fi). This is an additional value to the regular altitude and is only provided for comparison and analysis purposes.
+              example: 13.3
+            networkAccuracy:
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                The estimated horizontal accuracy of the provided location in meters as obtained from the Network based location provider (e.g. Cellular and/or Wi-Fi). This is an additional value to the regular accuracy and is only provided for comparison and analysis purposes.
+              example: 40
+
     phoneStatePayload:
       type: object
       required:

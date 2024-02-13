@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.1.0) - 2024-02-13
+* Adds two more sets of optional location fields to the device status message, one for GNSS and one for Network based locations.
+
 ## [1.0.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.0.0) - 2024-01-26
 * Adds 802.11be (Wi-Fi 7) to the list of 802.11 standards.
 * Adds the bandwidth field to the Wi-Fi Beacon record.

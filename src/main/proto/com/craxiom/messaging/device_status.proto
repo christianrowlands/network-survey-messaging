@@ -38,6 +38,15 @@ message DeviceStatusData {
     google.protobuf.Int32Value batteryLevelPercent = 7;
     Error error = 10;
     google.protobuf.BoolValue mdmOverride = 11;
+
+    double gnssLatitude = 15;
+    double gnssLongitude = 16;
+    float gnssAltitude = 17;
+    int32 gnssAccuracy = 18;
+    double networkLatitude = 19;
+    double networkLongitude = 20;
+    float networkAltitude = 21;
+    int32 networkAccuracy = 22;
 }
 
 // Used to report an error with the device

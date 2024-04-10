@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.2.0) - 2024-04-10
+* Adds SNR for the reference signal to the LTE message.
+
 ## [1.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.1.0) - 2024-02-13
 * Adds two more sets of optional location fields to the device status message, one for GNSS and one for Network based locations.
 

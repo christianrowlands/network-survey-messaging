@@ -759,6 +759,12 @@ components:
               $ref: '#/components/schemas/rsrp'
             rsrq:
               $ref: '#/components/schemas/rsrq'
+            snr:
+              type: number
+              format: float
+              description: >-
+                The Reference Signal Signal-to-Noise Ratio measured in dB. Range: -20 dB to +30 dB.
+              example: 19
             ta:
               type: integer
               format: int32
@@ -779,12 +785,6 @@ components:
               $ref: '#/components/schemas/provider'
             slot:
               $ref: '#/components/schemas/slot'
-            snr:
-              type: number
-              format: float
-              description: >-
-                The Reference Signal Signal-to-Noise Ratio measured in dB. Range: -20 dB to +30 dB.
-              example: 19
     nrRecordPayload:
       type: object
       required:

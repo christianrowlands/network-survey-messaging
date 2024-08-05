@@ -1572,6 +1572,8 @@ components:
               $ref: '#/components/schemas/speed'
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
+            appVersion:
+              $ref: '#/components/schemas/appVersion'
             accuracy:
               $ref: '#/components/schemas/accuracy'
             heading:
@@ -2168,6 +2170,10 @@ components:
       type: string
       description: The model number of the device that this message originated from.
       example: Pixel 5
+    appVersion:
+      type: string
+      description: The version of the software application that this message originated from (most likely the Network Survey Android app, but could be any other app). Added in version 1.3.0.
+      example: 1.28
     accuracy:
       type: integer
       format: int32

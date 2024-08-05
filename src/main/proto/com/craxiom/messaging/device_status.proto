@@ -38,6 +38,7 @@ message DeviceStatusData {
     google.protobuf.Int32Value batteryLevelPercent = 7;
     Error error = 10;
     google.protobuf.BoolValue mdmOverride = 11;
+    string appVersion = 12;
 
     double gnssLatitude = 15;
     double gnssLongitude = 16;

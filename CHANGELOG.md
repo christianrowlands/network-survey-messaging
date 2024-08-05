@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.3.0) - 2024-08-05
+* Adds the appVersion field to the device status message.
+
 ## [1.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.2.0) - 2024-04-10
 * Adds SNR for the reference signal to the LTE message.
 

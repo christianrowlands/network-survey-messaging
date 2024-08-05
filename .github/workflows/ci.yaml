@@ -15,14 +15,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validating AsyncAPI document
-        uses: asyncapi/github-action-for-cli@v3.1.1
+        uses: asyncapi/github-action-for-cli@v3.1.2
         with:
           command: validate
           filepath: src/main/asyncapi/network_survey_messaging.yaml
 
       - name: Generating HTML from my AsyncAPI document
-        uses: asyncapi/github-action-for-cli@v3.1.1
+        uses: asyncapi/github-action-for-cli@v3.1.2
         with:
-          template: '@asyncapi/html-template@2.1.1'  #In case of template from npm, because of @ it must be in quotes
+          template: '@asyncapi/html-template@2.3.9'  #In case of template from npm, because of @ it must be in quotes
           filepath: src/main/asyncapi/network_survey_messaging.yaml
           output: generated-html

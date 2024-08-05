@@ -16,7 +16,7 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'com.google.protobuf' version '0.9.4'
-    id 'nu.studer.credentials' version '1.0.7'
+    id 'nu.studer.credentials' version '3.0'
 }
 
 group 'com.craxiom'
@@ -175,5 +175,5 @@ signing {
  * @return The credential value if located.
  */
 private String findCredentialValue(String value) {
-    return project.credentials."sonatype$value"
+    return project.credentials.forKey("sonatype$value")
 }

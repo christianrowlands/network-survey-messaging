@@ -47,7 +47,7 @@ In other words, the protobuf files and gRPC SDKs are provided as convenience lib
 of the Network Survey Messaging API. The API is instead only the JSON message schema and channel/topic names for the messages.
 
 As a result, if a gRPC setup is of interest to a user of these messages, then the generated library can be employed to
-send the protobuf messages over gRPC.  The build produces Java and Python libraries with all of the messages for use by the client
+send the protobuf messages over gRPC.  The build produces a Java library with all the messages for use by the client
 and server software respectively.
 
 More information about protobuf is available [here](https://developers.google.com/protocol-buffers/).

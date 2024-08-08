@@ -1693,6 +1693,8 @@ components:
               $ref: '#/components/schemas/simState'
             simOperator:
               $ref: '#/components/schemas/simOperator'
+            slot:
+              $ref: '#/components/schemas/slot'
             networkRegistrationInfo:
               type: array
               items:

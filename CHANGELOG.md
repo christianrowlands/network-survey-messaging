@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.4.0) - 2024-08-08
+* Adds the slot field to the phone state record. See the docs for more information on the slot field.
+* Upgrade to the latest protobuf (4.27.3) and gRPC (1.65.1) library versions.
+
 ## [1.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.3.0) - 2024-08-05
 * Adds the appVersion field to the device status message.
 

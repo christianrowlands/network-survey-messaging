@@ -45,6 +45,7 @@ message PhoneStateData {
     string simOperator = 10;
     repeated NetworkRegistrationInfo networkRegistrationInfo = 11;
     int32 accuracy = 12;
+    google.protobuf.Int32Value slot = 13;
 }
 
 // Used to report the details of a registered network

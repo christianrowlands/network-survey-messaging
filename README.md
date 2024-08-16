@@ -7,6 +7,7 @@ Network Survey Messaging
 - [Some Details](#some-details)
 - [Why are there protobuf files?](#why-are-there-protobuf-files?)
 - [Build and development instructions](#build-and-development-instructions)
+- [Generating Go Code](#generating-go-code)
 - [Change log](#change-log)
 - [Contact](#contact)
 
@@ -109,6 +110,26 @@ Java 11 if needed.
 Generated code is here:
  - Java: build/generated/source/proto/main/java/com/craxiom/messaging
  - Python: build/generated/source/proto/main/python/com/craxiom/messaging
+
+#### Generating Go code
+The Go code is generated using the `protoc` compiler. The `protoc` compiler can be installed using the following command:
+ - `brew install protobuf`
+
+The Go code is generated using the following command:
+    - `protoc --go_out=go/ --go_opt=paths=source_relative --go-grpc_out=go/ --go-grpc_opt=paths=source_relative src/main/proto/*.proto`
+
+More specifically, I used the following commands:
+```shell
+cd src/main
+mkdir output
+find ./proto -name "*.proto" | xargs protoc -I=./proto --go_out=./output --go-grpc_out=./output
+```
+
+#### Example gRPC Server written in Go
+
+If you want to see how to use the generated Go code to create a gRPC server, check out the code at https://github.com/christianrowlands/ns-messaging-go-grpc-server
+
+The server does not do anything useful, but serves as an example of how one might be created in GoLang.
 
 ## Change log
 

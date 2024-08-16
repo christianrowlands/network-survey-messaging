@@ -14,6 +14,7 @@ package com.craxiom.messaging.wifi.serviceset;
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.wifi";
+option go_package = "craxiom.com/messaging";
 
 enum ServiceSetType {
     UNKNOWN = 0;

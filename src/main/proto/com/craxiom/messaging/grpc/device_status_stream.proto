@@ -9,6 +9,7 @@ import "com/craxiom/messaging/device_status.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.grpc";
+option go_package = "craxiom.com/messaging";
 
 service DeviceStatus {
     rpc StatusUpdate (stream com.craxiom.messaging.DeviceStatus) returns (StatusUpdateReply) {}

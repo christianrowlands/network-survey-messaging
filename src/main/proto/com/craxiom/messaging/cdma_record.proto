@@ -12,6 +12,7 @@ import "google/protobuf/wrappers.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
 
 message CdmaRecord {
     string version = 1;

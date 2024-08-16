@@ -26,6 +26,7 @@ import "com/craxiom/messaging/signal_detection.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.grpc";
+option go_package = "craxiom.com/messaging";
 
 service WirelessSurvey {
     rpc StreamGsmSurvey (stream GsmRecord) returns (GsmSurveyResponse) {

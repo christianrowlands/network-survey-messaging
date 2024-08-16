@@ -7,6 +7,7 @@ package com.craxiom.messaging.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.grpc";
+option go_package = "craxiom.com/messaging";
 
 service ConnectionHandshake {
     rpc StartConnection (ConnectionRequest) returns (ConnectionReply) {

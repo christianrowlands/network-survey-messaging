@@ -13,6 +13,7 @@ import "com/craxiom/messaging/gnss/constellation.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
 
 message GnssRecord {
     string version = 1;

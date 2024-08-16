@@ -14,6 +14,7 @@ package com.craxiom.messaging.gnss.constellation;
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging.gnss";
+option go_package = "craxiom.com/messaging";
 
 enum Constellation {
     UNKNOWN = 0;

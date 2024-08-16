@@ -14,6 +14,7 @@ package com.craxiom.messaging.wcdmarrcchanneltype;
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
 
 enum WcdmaRrcChannelType {
     UNKNOWN = 0;

@@ -12,6 +12,7 @@ import "com/craxiom/messaging/gsmsignalingchanneltype/gsm_signaling_channel_type
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
 
 message GsmSignaling {
     string version = 1;

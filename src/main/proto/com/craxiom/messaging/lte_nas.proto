@@ -12,6 +12,7 @@ import "com/craxiom/messaging/ltenaschanneltype/lte_nas_channel_type.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
 
 message LteNas {
     string version = 1;

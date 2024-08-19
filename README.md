@@ -121,6 +121,7 @@ More specifically, I used the following commands:
 ```shell
 cd src/main
 mkdir output
+rm -r proto/craxiom
 find ./proto -name "*.proto" | xargs protoc -I=./proto --go_out=./output --go-grpc_out=./output
 ```
 

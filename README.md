@@ -70,7 +70,7 @@ The Network Survey Messaging protobuf library is available via [mavenCentral](ht
 
 ```groovy
 dependencies {
-    implementation 'com.craxiom:network-survey-messaging:1.4.0'
+    implementation 'com.craxiom:network-survey-messaging:1.5.0'
 }
 ```
 

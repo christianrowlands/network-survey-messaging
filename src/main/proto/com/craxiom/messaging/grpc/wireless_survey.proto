@@ -15,11 +15,13 @@ import "com/craxiom/messaging/cdma_record.proto";
 import "com/craxiom/messaging/umts_record.proto";
 import "com/craxiom/messaging/lte_record.proto";
 import "com/craxiom/messaging/nr_record.proto";
+import "com/craxiom/messaging/phone_state.proto";
 import "com/craxiom/messaging/lte_rrc.proto";
 import "com/craxiom/messaging/lte_nas.proto";
 import "com/craxiom/messaging/wifi_beacon_record.proto";
 import "com/craxiom/messaging/wifi_probe_request_record.proto";
 import "com/craxiom/messaging/wifi_ota_record.proto";
+import "com/craxiom/messaging/bluetooth_record.proto";
 import "com/craxiom/messaging/gnss_record.proto";
 import "com/craxiom/messaging/energy_detection.proto";
 import "com/craxiom/messaging/signal_detection.proto";
@@ -39,11 +41,15 @@ service WirelessSurvey {
     }
     rpc StreamNrSurvey (stream NrRecord) returns (NrSurveyResponse) {
     }
+    rpc StreamPhoneState (stream PhoneState) returns (PhoneStateResponse) {
+    }
     rpc StreamWifiBeaconSurvey (stream WifiBeaconRecord) returns (WifiBeaconSurveyResponse) {
     }
     rpc StreamWifiProbeRequestSurvey (stream WifiProbeRequestRecord) returns (WifiProbeRequestSurveyResponse) {
     }
     rpc StreamWifiOtaSurvey (stream WifiOtaRecord) returns (WifiOtaSurveyResponse) {
+    }
+    rpc StreamBluetoothSurvey (stream BluetoothRecord) returns (BluetoothSurveyResponse) {
     }
     rpc StreamGnssSurvey (stream GnssRecord) returns (GnssSurveyResponse) {
     }
@@ -77,6 +83,10 @@ message NrSurveyResponse {
 
 }
 
+message PhoneStateResponse {
+
+}
+
 message WifiBeaconSurveyResponse {
 
 }
@@ -86,6 +96,10 @@ message WifiProbeRequestSurveyResponse {
 }
 
 message WifiOtaSurveyResponse {
+
+}
+
+message BluetoothSurveyResponse {
 
 }
 

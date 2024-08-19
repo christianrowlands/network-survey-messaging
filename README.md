@@ -100,7 +100,7 @@ To publish a new version of the Network Survey Messaging API HTML page, use the 
 
 This will overwrite the current HTML content from the docs directory with the last API definition from the yaml file.
 
-#### Building the protobuf Java and Python libraries
+#### Building the protobuf Java library
 The Java library is built and published with Java 8 to support older Android versions, however it can be built with 
 Java 11 if needed.
 
@@ -111,9 +111,8 @@ Generated code is here:
  - Java: build/generated/source/proto/main/java/com/craxiom/messaging
  - Python: build/generated/source/proto/main/python/com/craxiom/messaging
 
-#### Generating Go code
-The Go code is generated using the `protoc` compiler. The `protoc` compiler can be installed using the following command:
- - `brew install protobuf`
+## Generating Go code
+The Go code is generated using the `protoc` compiler.
 
 The Go code is generated using the following command:
     - `protoc --go_out=go/ --go_opt=paths=source_relative --go-grpc_out=go/ --go-grpc_opt=paths=source_relative src/main/proto/*.proto`

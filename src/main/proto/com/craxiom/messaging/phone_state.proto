@@ -47,6 +47,7 @@ message PhoneStateData {
     repeated NetworkRegistrationInfo networkRegistrationInfo = 11;
     int32 accuracy = 12;
     google.protobuf.Int32Value slot = 13;
+    google.protobuf.BoolValue nonTerrestrialNetwork = 14;
 }
 
 // Used to report the details of a registered network

@@ -1699,6 +1699,10 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/networkRegistrationInfo'
+            nonTerrestrialNetwork:
+              type: boolean
+              description: >-
+                Indicates if the device is currently using a non-terrestrial network (e.g. satellite). Added in version 1.6.0.
     wcdmaRrcPayload:
       type: object
       required:
@@ -2900,7 +2904,7 @@ components:
           format: int32
           minimum: 0
           description: >-
-            If the UE tried to register with this network and was denied, this value indicates the rejection reason. The values are defined in 3GPP TS 24.008 version 16.7.0 page 536 (Reject cause), and 3GPP TS 24.301 version 16.8.0 page 418 (EMM cause).
+            If the UE tried to register with this network and was denied, this value indicates the rejection reason. The values are defined in 3GPP TS 24.008 version 16.7.0 page 536 (Reject cause) for UMTS, 3GPP TS 24.301 version 16.8.0 page 418 (EMM cause) for LTE, and 3GPP 24.501 Annex A for NR/5GS.
         cellIdentityXXX:
           description: >-
             The properties defining the cell. The properties are different for each technology so the object type will be different depending on the accessNetworkTechnology. The name of this field will be different for each object. For example, it will be `cellIdentityLte` for LTE and `cellIdentityNr` for NR.

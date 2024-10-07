@@ -7,17 +7,7 @@ import com.craxiom.messaging.phonestate.Domain;
 import com.craxiom.messaging.phonestate.NetworkType;
 import com.craxiom.messaging.phonestate.SimState;
 import com.craxiom.messaging.wifi.*;
-import com.google.protobuf.BoolValue;
-import com.google.protobuf.ByteString;
-import com.google.protobuf.DoubleValue;
-import com.google.protobuf.FloatValue;
-import com.google.protobuf.Int32Value;
-import com.google.protobuf.Int64Value;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
-import com.google.protobuf.MessageOrBuilder;
-import com.google.protobuf.UInt32Value;
-import com.google.protobuf.UInt64Value;
+import com.google.protobuf.*;
 import com.google.protobuf.util.JsonFormat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,17 +16,13 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for converting the protobuf objects to JSON strings. The resulting JSON strings must match the schema outlined
  * in the Network Survey Messaging API. See the asyncapi yaml file and the HTML definition (https://messaging.networksurvey.app/)
  */
-public class JsonConversionTest
-{
+public class JsonConversionTest {
     // the following constants are from network_survey_messaging.yaml
     private static final String DEVICE_SERIAL = "1234";
     private static final String DEVICE_NAME = "Craxiom Pixel";
@@ -58,8 +44,7 @@ public class JsonConversionTest
     private final JsonFormat.Parser jsonParser = JsonFormat.parser();
 
     @Test
-    public void testGsmToJson()
-    {
+    public void testGsmToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final GsmRecord.Builder recordBuilder = GsmRecord.newBuilder();
@@ -97,27 +82,22 @@ public class JsonConversionTest
 
         final GsmRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testGsmFromJson()
-    {
+    public void testGsmFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey2 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final GsmRecord.Builder builder = GsmRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -155,8 +135,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testCdmaToJson()
-    {
+    public void testCdmaToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final CdmaRecord.Builder recordBuilder = CdmaRecord.newBuilder();
@@ -194,27 +173,22 @@ public class JsonConversionTest
 
         final CdmaRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testCdmaFromJson()
-    {
+    public void testCdmaFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"CdmaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"My Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"How much wood can a woodchuck chuck\",\"recordNumber\":509,\"groupNumber\":155,\"accuracy\":40,\"sid\":139,\"nid\":4,\"zone\":232,\"bsid\":12731,\"channel\":384,\"pnOffset\":136,\"signalStrength\":-73.0,\"ecio\":-11.4,\"servingCell\":false,\"provider\":\"Verizon\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final CdmaRecord.Builder builder = CdmaRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -252,8 +226,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testUmtsToJson()
-    {
+    public void testUmtsToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"ecno\":-9.6,\"servingCell\":true,\"provider\":\"T-Mobile\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final UmtsRecord.Builder recordBuilder = UmtsRecord.newBuilder();
@@ -292,27 +265,22 @@ public class JsonConversionTest
 
         final UmtsRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testUmtsFromJson()
-    {
+    public void testUmtsFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final UmtsRecord.Builder builder = UmtsRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -350,8 +318,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testLteToJson()
-    {
+    public void testLteToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"signalStrength\":-88.5,\"cqi\":9,\"snr\":19.0,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final LteRecord.Builder recordBuilder = LteRecord.newBuilder();
@@ -394,27 +361,22 @@ public class JsonConversionTest
 
         final LteRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testLteFromJson()
-    {
+    public void testLteFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"cqi\":3,\"snr\":-8,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final LteRecord.Builder builder = LteRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -456,8 +418,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testNrToJson()
-    {
+    public void testNrToJson() {
         final String expectedJson = getNrJson();
 
         final NrRecord.Builder recordBuilder = NrRecord.newBuilder();
@@ -505,8 +466,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testNrRecordFromJson()
-    {
+    public void testNrRecordFromJson() {
         final String inputJson = getNrJson();
 
         final NrRecord.Builder builder = NrRecord.newBuilder();
@@ -549,8 +509,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWifiBeaconToJson()
-    {
+    public void testWifiBeaconToJson() {
         final String expectedJson = "{\"version\":\"0.13.0\",\"messageType\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\",\"passpoint\":true,\"bandwidth\":\"MHZ_160\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiBeaconRecord.Builder recordBuilder = WifiBeaconRecord.newBuilder();
@@ -597,27 +556,22 @@ public class JsonConversionTest
 
         final WifiBeaconRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testWifiBeaconFromJson()
-    {
+    public void testWifiBeaconFromJson() {
         final String inputJson = "{\"version\":\"0.13.0\",\"messageType\":\"WifiBeaconRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"WiFi Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"68:7F:74:B0:14:22\",\"bssid\":\"68:7F:74:B0:14:98\",\"beaconInterval\":100,\"serviceSetType\":\"BSS\",\"ssid\":\"My Wi-Fi Network\",\"supportedRates\":\"1; 2; 5.5; 11; 18; 24; 36; 54\",\"extendedSupportedRates\":\"6; 9; 12; 48\",\"cipherSuites\":[\"TKIP\",\"CCMP\"],\"akmSuites\":[\"OPEN\"],\"encryptionType\":\"WPA_WPA2\",\"wps\":true,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"AP\",\"standard\":\"IEEE80211N\",\"passpoint\":true,\"bandwidth\":\"MHZ_160\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiBeaconRecord.Builder builder = WifiBeaconRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -664,8 +618,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWifiProbeRequestToJson()
-    {
+    public void testWifiProbeRequestToJson() {
         final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiProbeRequestRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"ssid\":\"My Wi-Fi Network\",\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiBeaconRecord.Builder recordBuilder = WifiBeaconRecord.newBuilder();
@@ -701,27 +654,22 @@ public class JsonConversionTest
 
         final WifiBeaconRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testWifiProbeRequestFromJson()
-    {
+    public void testWifiProbeRequestFromJson() {
         final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiProbeRequestRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"bssid\":\"68:7F:74:B0:14:98\",\"ssid\":\"My Wi-Fi Network\",\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiProbeRequestRecord.Builder builder = WifiProbeRequestRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -758,8 +706,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWifiDeauthenticationToJson()
-    {
+    public void testWifiDeauthenticationToJson() {
         final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiDeauthenticationRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"ssid\":\"My Wi-Fi Network\",\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"reason\":2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiDeauthenticationRecord.Builder recordBuilder = WifiDeauthenticationRecord.newBuilder();
@@ -796,27 +743,22 @@ public class JsonConversionTest
 
         final WifiDeauthenticationRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testWifiDeauthenticationFromJson()
-    {
+    public void testWifiDeauthenticationFromJson() {
         final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiDeauthenticationRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"bssid\":\"68:7F:74:B0:14:98\",\"ssid\":\"My Wi-Fi Network\",\"reason\":2,\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiDeauthenticationRecord.Builder builder = WifiDeauthenticationRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -854,8 +796,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWifiOtaToJson()
-    {
+    public void testWifiOtaToJson() {
         final String expectedJson = "{\"version\":\"0.12.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"frameType\":0,\"frameSubtype\":4,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiOtaRecord.Builder recordBuilder = WifiOtaRecord.newBuilder();
@@ -885,27 +826,22 @@ public class JsonConversionTest
 
         final WifiOtaRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testWifiOtaFromJson()
-    {
+    public void testWifiOtaFromJson() {
         final String inputJson = "{\"version\":\"0.12.0\",\"messageType\":\"WifiOtaRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"frameType\":0,\"frameSubtype\":4,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final WifiOtaRecord.Builder builder = WifiOtaRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -935,8 +871,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testBluetoothToJson()
-    {
+    public void testBluetoothToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final BluetoothRecord.Builder recordBuilder = BluetoothRecord.newBuilder();
@@ -971,27 +906,22 @@ public class JsonConversionTest
 
         final BluetoothRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testBluetoothFromJson()
-    {
+    public void testBluetoothFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final BluetoothRecord.Builder builder = BluetoothRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1026,8 +956,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testGnssToJson()
-    {
+    public void testGnssToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"deviceModel\":\"Pixel 5\",\"accuracy\":40,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final GnssRecord.Builder recordBuilder = GnssRecord.newBuilder();
@@ -1069,27 +998,22 @@ public class JsonConversionTest
 
         final GnssRecord record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testGnssFromJson()
-    {
+    public void testGnssFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"GnssRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Gnss Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":23,\"deviceModel\":\"Pixel 5\",\"accuracy\":40,\"constellation\":\"GLONASS\",\"spaceVehicleId\":4567,\"carrierFreqHz\":\"120000000\",\"clockOffset\":0.01,\"usedInSolution\":false,\"undulationM\":2.1,\"latitudeStdDevM\":3.1,\"longitudeStdDevM\":2.2,\"altitudeStdDevM\":1.3,\"agcDb\":0.4,\"cn0DbHz\":0.05,\"hdop\":1.1,\"vdop\":2.2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final GnssRecord.Builder builder = GnssRecord.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1131,8 +1055,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testEnergyDetectionToJson()
-    {
+    public void testEnergyDetectionToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final EnergyDetection.Builder recordBuilder = EnergyDetection.newBuilder();
@@ -1166,27 +1089,22 @@ public class JsonConversionTest
 
         final EnergyDetection record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testEnergyDetectionFromJson()
-    {
+    public void testEnergyDetectionFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"EnergyDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final EnergyDetection.Builder builder = EnergyDetection.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1220,8 +1138,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testSignalDetectionToJson()
-    {
+    public void testSignalDetectionToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final SignalDetection.Builder recordBuilder = SignalDetection.newBuilder();
@@ -1257,27 +1174,22 @@ public class JsonConversionTest
 
         final SignalDetection record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testSignalDetectionFromJson()
-    {
+    public void testSignalDetectionFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"SignalDetection\",\"data\":{\"deviceSerialNumber\":\"xyz\",\"deviceName\":\"My SDR\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"frequencyHz\":\"162000000\",\"bandwidthHz\":12500,\"signalStrength\":-73.0,\"snr\":19.2,\"timeUp\":\"1996-12-19T16:39:57-08:00\",\"durationSec\":4.2,\"modulation\":\"4FSK\",\"signalName\":\"DMR\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final SignalDetection.Builder builder = SignalDetection.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1313,8 +1225,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testDeviceStatusToJson()
-    {
+    public void testDeviceStatusToJson() {
         final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":true,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0}}";
 
         final DeviceStatus.Builder recordBuilder = DeviceStatus.newBuilder();
@@ -1342,27 +1253,22 @@ public class JsonConversionTest
 
         final DeviceStatus record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testDeviceStatusFromJson()
-    {
+    public void testDeviceStatusFromJson() {
         final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":false,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final DeviceStatus.Builder builder = DeviceStatus.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1391,8 +1297,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testPhoneStateToJson()
-    {
+    public void testPhoneStateToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
                 "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
                 "\"networkRegistrationInfo\":" +
@@ -1459,32 +1364,27 @@ public class JsonConversionTest
 
         final PhoneState record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testPhoneStateFromJson()
-    {
+    public void testPhoneStateFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
                 "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
                 "\"networkRegistrationInfo\":" +
                 "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}," +
                 "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}]," +
-                "\"accuracy\":40,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
+                "\"accuracy\":40,\"slot\":3,\"nonTerrestrialNetwork\":false,\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final PhoneState.Builder builder = PhoneState.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1529,6 +1429,8 @@ public class JsonConversionTest
         assertEquals(66586, cellIdentityLte1.getEarfcn().getValue());
         assertEquals(250, cellIdentityLte1.getPci().getValue());
 
+        assertEquals(3, data.getSlot().getValue());
+        assertFalse(data.getNonTerrestrialNetwork().getValue());
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(HEADING, data.getHeading());
         assertEquals(PITCH, data.getPitch());
@@ -1539,8 +1441,7 @@ public class JsonConversionTest
 
 
     @Test
-    public void testGsmSignalingToJson()
-    {
+    public void testGsmSignalingToJson() {
         final String expectedJson = getGsmSignalingJson();
 
         final GsmSignaling.Builder recordBuilder = GsmSignaling.newBuilder();
@@ -1571,8 +1472,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testGsmSignalingFromJson()
-    {
+    public void testGsmSignalingFromJson() {
         final String inputJson = getGsmSignalingJson();
 
         final GsmSignaling.Builder builder = GsmSignaling.newBuilder();
@@ -1600,8 +1500,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testUmtsNasToJson()
-    {
+    public void testUmtsNasToJson() {
         final String expectedJson = getUmtsNasJson();
 
         final UmtsNas.Builder recordBuilder = UmtsNas.newBuilder();
@@ -1632,8 +1531,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testUmtsNasFromJson()
-    {
+    public void testUmtsNasFromJson() {
         final String inputJson = getUmtsNasJson();
 
         final UmtsNas.Builder builder = UmtsNas.newBuilder();
@@ -1660,8 +1558,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWcdmaRrcToJson()
-    {
+    public void testWcdmaRrcToJson() {
         final String expectedJson = getWcdmaRrcJson();
 
         final WcdmaRrc.Builder recordBuilder = WcdmaRrc.newBuilder();
@@ -1692,8 +1589,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testWcdmaRrcFromJson()
-    {
+    public void testWcdmaRrcFromJson() {
         final String inputJson = getWcdmaRrcJson();
 
         final WcdmaRrc.Builder builder = WcdmaRrc.newBuilder();
@@ -1721,8 +1617,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testLteRrcToJson()
-    {
+    public void testLteRrcToJson() {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 5\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final LteRrc.Builder recordBuilder = LteRrc.newBuilder();
@@ -1750,27 +1645,22 @@ public class JsonConversionTest
 
         final LteRrc record = recordBuilder.build();
 
-        try
-        {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
 
     @Test
-    public void testLteRrcFromJson()
-    {
+    public void testLteRrcFromJson() {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRrc\",\"data\":{\"deviceSerialNumber\":\"Device 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"2020-12-17T16:21:42.982-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
 
         final LteRrc.Builder builder = LteRrc.newBuilder();
-        try
-        {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
 
@@ -1798,8 +1688,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testLteNasToJson()
-    {
+    public void testLteNasToJson() {
         final String expectedJson = getLteNasJson();
 
         final LteNas.Builder recordBuilder = LteNas.newBuilder();
@@ -1830,8 +1719,7 @@ public class JsonConversionTest
     }
 
     @Test
-    public void testLteNasFromJson()
-    {
+    public void testLteNasFromJson() {
         final String inputJson = getLteNasJson();
 
         final LteNas.Builder builder = LteNas.newBuilder();
@@ -1865,14 +1753,11 @@ public class JsonConversionTest
      * @param expectedJson The JSON string whose contents we expect to match the contents of the protobuf message
      * @param record       The protobuf message that will be stringified.
      */
-    private void assertJsonEquals(String expectedJson, MessageOrBuilder record)
-    {
-        try
-        {
+    private void assertJsonEquals(String expectedJson, MessageOrBuilder record) {
+        try {
             final String recordJson = jsonFormatter.print(record);
             assertEquals(expectedJson, recordJson);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
         }
     }
@@ -1884,60 +1769,48 @@ public class JsonConversionTest
      * @param inputJson The JSON string that will be parsed into a protobuf message
      * @param builder   The protobuf builder that will have its contents set by inputJson
      */
-    private void assertJsonMerge(String inputJson, Message.Builder builder)
-    {
-        try
-        {
+    private void assertJsonMerge(String inputJson, Message.Builder builder) {
+        try {
             jsonParser.merge(inputJson, builder);
-        } catch (InvalidProtocolBufferException e)
-        {
+        } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
     }
 
-    private ByteString getSampleByteString()
-    {
+    private ByteString getSampleByteString() {
         return (ByteString.copyFrom(new byte[]{(byte) 0x14, (byte) 0x0e, (byte) 0x30, (byte) 0x00, (byte) 0xed, (byte) 0x01, (byte) 0x6b, (byte) 0x03, (byte) 0x00, (byte) 0x00, (byte) 0x59, (byte) 0x39, (byte) 0x05, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x09, (byte) 0x00, (byte) 0x40, (byte) 0x01, (byte) 0x7c, (byte) 0x6b, (byte) 0x5f, (byte) 0x91, (byte) 0x20, (byte) 0x00, (byte) 0x00}));
     }
 
-    private byte[] getBase64RawMessage()
-    {
+    private byte[] getBase64RawMessage() {
         return Base64.getDecoder().decode(RAW_MESSAGE);
     }
 
     // the following json strings are from network_survey_messaging.yaml
-    private String getGsmSignalingJson()
-    {
+    private String getGsmSignalingJson() {
         return "{\"version\":\"0.7.0\",\"messageType\":\"GsmSignaling\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
     }
 
-    private String getNrJson()
-    {
+    private String getNrJson() {
         return "{\"version\":\"0.7.0\",\"messageType\":\"NrRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"nci\":\"52824577\",\"narfcn\":5230,\"pci\":234,\"ssRsrp\":-107.1,\"ssRsrq\":-11.5,\"ssSinr\":14.5,\"csiRsrp\":-107.1,\"csiRsrq\":-11.5,\"csiSinr\":14.5,\"ta\":14,\"servingCell\":true,\"provider\":\"Verizon\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
     }
 
-    private String getUmtsNasJson()
-    {
+    private String getUmtsNasJson() {
         return "{\"version\":\"0.7.0\",\"messageType\":\"UmtsNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
     }
 
-    private String getWcdmaRrcJson()
-    {
+    private String getWcdmaRrcJson() {
         return "{\"version\":\"0.7.0\",\"messageType\":\"WcdmaRrc\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"BCCH_BCH\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
     }
 
-    private String getLteNasJson()
-    {
+    private String getLteNasJson() {
         return "{\"version\":\"0.7.0\",\"messageType\":\"LteNas\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"accuracy\":40,\"channelType\":\"PLAIN\",\"pcapRecord\":\"FA4wAO0BawMAAFk5BQAAAAAJAEABfGtfkSAAAA==\",\"heading\":-32.7,\"pitch\":0.1,\"roll\":0.2,\"fieldOfView\":10.0,\"receiverSensitivity\":30.0}}";
     }
 
-    private Int32Value getInt32(int num)
-    {
+    private Int32Value getInt32(int num) {
         return Int32Value.newBuilder().setValue(num).build();
     }
 
-    private FloatValue getFloatValue(float num)
-    {
+    private FloatValue getFloatValue(float num) {
         return FloatValue.newBuilder().setValue(num).build();
     }
 }

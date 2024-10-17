@@ -33,8 +33,8 @@ repositories {
 }
 
 ext {
-    grpcVersion = '1.65.1'
-    protobufVersion = '4.27.3'
+    grpcVersion = '1.68.0'
+    protobufVersion = '4.28.2'
     protocVersion = protobufVersion
 
     sonatypeUsername = findCredentialValue('Username')

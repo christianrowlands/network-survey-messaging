@@ -1,4 +1,6 @@
 # Changelog
+## [1.6.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.6.0) - 2024-10-17
+* Adds the nonTerrestrialNetwork field to the PhoneState message (satellite usage).
 
 ## [1.5.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.5.0) - 2024-08-19
 * Support for streaming Bluetooth and Phone State messages over gRPC.

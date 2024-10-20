@@ -1693,16 +1693,16 @@ components:
               $ref: '#/components/schemas/simState'
             simOperator:
               $ref: '#/components/schemas/simOperator'
+            nonTerrestrialNetwork:
+              type: boolean
+              description: >-
+                Indicates if the device is currently using a non-terrestrial network (e.g. satellite). Added in version 1.6.0.
             slot:
               $ref: '#/components/schemas/slot'
             networkRegistrationInfo:
               type: array
               items:
                 $ref: '#/components/schemas/networkRegistrationInfo'
-            nonTerrestrialNetwork:
-              type: boolean
-              description: >-
-                Indicates if the device is currently using a non-terrestrial network (e.g. satellite). Added in version 1.6.0.
     wcdmaRrcPayload:
       type: object
       required:

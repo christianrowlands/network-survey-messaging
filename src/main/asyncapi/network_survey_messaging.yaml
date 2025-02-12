@@ -1,7 +1,7 @@
 asyncapi: 3.0.0
 info:
   title: Network Survey Messaging API
-  version: 1.6.0
+  version: 1.7.0
   description: >
     The Network Survey Messaging API defines a set of messages that can be used to describe wireless survey related events. The messages range from  cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy  detection events.
 
@@ -2148,7 +2148,7 @@ components:
       type: string
       description: >-
         The version number of the Network Survey Messaging API that this message is based off of.
-      example: 1.6.0
+      example: 1.7.0
     deviceSerialNumber:
       type: string
       description: >-
@@ -2232,7 +2232,7 @@ components:
       format: int32
       minimum: 0
       description: >-
-          The age of the location fix in milliseconds. This field is optional and if it is not present that is an indication that the age of the location fix is unknown. Added in version 1.7.0.
+        The age of the location fix in milliseconds. This field is optional and if it is not present that is an indication that the age of the location fix is unknown. Added in version 1.7.0.
       example: 1000
     heading:
       type: number

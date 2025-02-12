@@ -104,8 +104,8 @@ This will overwrite the current HTML content from the docs directory with the la
 The Java library is built and published with Java 8 to support older Android versions, however it can be built with 
 Java 11 if needed.
 
- - Execute `gradlew build` in the root directory to produce the Java library with the protobuf messages.
- - Execute `gradlew publishToMavenLocal` in the root directory to publish the artifacts to the local Maven cache.
+ - Execute `./gradlew build` in the root directory to produce the Java library with the protobuf messages.
+ - Execute `./gradlew publishToMavenLocal` in the root directory to publish the artifacts to the local Maven cache.
 
 Generated code is here:
  - Java: build/generated/source/proto/main/java/com/craxiom/messaging

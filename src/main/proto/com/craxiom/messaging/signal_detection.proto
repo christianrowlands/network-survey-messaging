@@ -31,6 +31,8 @@ message SignalDetectionData {
     int32 recordNumber = 8;
     int32 groupNumber = 9;
     int32 accuracy = 10;
+    uint32 locationAge = 11;
+    float speed = 55;
 
     // Orientation of sensor and sensor parameters. optional.
     float heading = 50;
@@ -38,8 +40,6 @@ message SignalDetectionData {
     float roll = 52;
     float fieldOfView = 53;
     float receiverSensitivity = 54;
-
-    float speed = 55;
 
     uint64 frequencyHz = 12;
     google.protobuf.Int32Value bandwidthHz = 13;

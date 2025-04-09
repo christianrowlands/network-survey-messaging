@@ -11,6 +11,7 @@ package com.craxiom.messaging;
 import "google/protobuf/wrappers.proto";
 import "com/craxiom/messaging/bluetooth/tech/technology.proto";
 import "com/craxiom/messaging/bluetooth/supportedtech/supported_technologies.proto";
+import "com/craxiom/messaging/bluetooth/addresstype/address_type.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
@@ -49,4 +50,8 @@ message BluetoothRecordData {
     com.craxiom.messaging.bluetooth.supportedtech.SupportedTechnologies supportedTechnologies = 15;
     string otaDeviceName = 16;
     google.protobuf.Int32Value channel = 17;
+    com.craxiom.messaging.bluetooth.addresstype.AddressType addressType = 18;
+    string deviceClass = 19;
+    repeated string serviceUuids = 20;
+    string companyId = 21;
 }

@@ -1,0 +1,24 @@
+/**
+ * Indicates the type of source address for the Bluetooth device.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.bluetooth.addresstype;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.bluetooth";
+option go_package = "craxiom.com/messaging";
+
+enum AddressType {
+    PUBLIC = 0; // Hardware MAC Address of the device
+    RANDOM = 1; // Address is either resolvable, non-resolvable or static.
+    ANONYMOUS = 2; // Address type used to indicate an anonymous advertisement.
+    UNKNOWN = 3; // Address type is unknown or unavailable
+}

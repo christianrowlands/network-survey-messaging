@@ -1323,6 +1323,34 @@ components:
               description: >-
                 The channel on which this frame was recorded. See the BLUETOOTH SPECIFICATION Version 5.0 | Vol 2, Part A Section 2 (page 325) for more details.
               example: 2
+            addressType:
+              type: string
+              description: >-
+                The address type of the source address. Added in version 1.8.0.
+              enum:
+                - PUBLIC
+                - RANDOM
+                - ANONYMOUS
+                - UNKNOWN
+            deviceClass:
+              type: string
+              description: >-
+                The major and minor Bluetooth device class. The format of this field is hexadecimal, 4 bytes, with leading zeros removed. The first 2 bytes are the major device class and the last 2 bytes are the minor device class. Added in version 1.8.0.
+              example: '41C'
+            serviceUuids:
+              type: array
+              description: >-
+                A list of service UUIDs within the advertisement that are used to identify the bluetooth GATT services. Added in version 1.8.0.
+              example:
+                - 0000fe07-0000-1000-8000-00805f9b34fb
+              items:
+                type: string
+                format: uuid
+            companyId:
+              type: string
+              description: >-
+                The company ID of the manufacturer of the device. The format is hexadecimal, 4 bytes, with leading zeros removed. Values are defined here: https://www.bluetooth.com/specifications/assigned-numbers/ . Added in version 1.8.0.
+              example: '4C'
     gnssRecordPayload:
       type: object
       required:

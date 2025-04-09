@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.8.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.8.0) - 2025-04-10
+* Adds the `addressType`, `deviceClass`, `serviceUuids`, and `companyId` fields to the Bluetooth message.
+
 ## [1.7.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.7.0) - 2025-02-12
 * Adds the 'locationAge' field to all the messages. This field is used to indicate how old the location information is.
 

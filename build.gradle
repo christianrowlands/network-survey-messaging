@@ -20,7 +20,7 @@ plugins {
 }
 
 group 'com.craxiom'
-version "1.8.0"
+version "1.9.0-SNAPSHOT"
 
 // Configure the wrapper and ALL distro so IJ has additional context
 wrapper {
@@ -59,13 +59,6 @@ test {
     useJUnitPlatform()
 }
 
-static def getPluginPath(name) {
-    def path = "which grpc_${name}_plugin".execute()
-    path.waitFor()
-    path = path.in.text.trim()
-    return path
-}
-
 protobuf {
     protoc {
         artifact = "com.google.protobuf:protoc:$protocVersion"
@@ -93,12 +86,13 @@ clean {
     delete protobuf.generatedFilesBaseDir
 }
 
-task sourceJar(type: Jar) {
+tasks.register('sourceJar', Jar) {
     archiveClassifier = 'sources'
     from sourceSets.main.allJava
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     archiveClassifier = 'javadoc'
     from javadoc
 }

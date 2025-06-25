@@ -3,7 +3,9 @@ info:
   title: Network Survey Messaging API
   version: 1.8.0
   description: >
-    The Network Survey Messaging API defines a set of messages that can be used to describe wireless survey related events. The messages range from  cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy  detection events.
+    The Network Survey Messaging API defines a set of messages that can be used to describe wireless survey related events. The messages range from cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy detection events.
+    
+    The java library for this API is available at [Network Survey Messaging Java](https://central.sonatype.com/artifact/com.craxiom/network-survey-messaging)
 
 
     **NOTE:** Despite the name "Network Survey Messaging API", this message specification is not exclusive to the [Network Survey Android App](https://github.com/christianrowlands/android-network-survey). Instead, the Network Survey Android App is just one app that leverages Network Survey Messaging. Therefore, there are messages in this  specification that do not apply to the Network Survey Android App  (e.g. EnergyDetection).

@@ -2783,7 +2783,7 @@ components:
       type: number
       format: double
       description: >-
-        The clock offset calculated by the receiver based on the space-vehicle time contained in a received navigation message, i.e. the time it took for a given navigation message to be sent from a space vehicle to the receiver's antenna, as calculated by the receiver itself.
+        The receiver clock bias representing the time difference between the GNSS receiver's internal clock and the true GNSS system time. This value indicates how much the receiver's clock is ahead (positive) or behind (negative) the satellite system time.
       example: 0.001
     usedInSolution:
       type: boolean

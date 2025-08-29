@@ -1353,6 +1353,11 @@ components:
               description: >-
                 The company ID of the manufacturer of the device. The format is hexadecimal, 4 bytes, with leading zeros removed. Values are defined here: https://www.bluetooth.com/specifications/assigned-numbers/ . Added in version 1.8.0.
               example: '4C'
+            mfgData:
+              type: string
+              description: >-
+                The raw manufacturer specific data (advertisement type 0xFF) as a hex string. This includes the full manufacturer specific data payload including the company ID prefix (first 2 bytes in little endian order). Added in version 1.9.0.
+              example: '4C0012020003'
     gnssRecordPayload:
       type: object
       required:

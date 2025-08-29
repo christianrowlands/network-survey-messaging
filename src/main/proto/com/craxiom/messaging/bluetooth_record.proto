@@ -54,4 +54,5 @@ message BluetoothRecordData {
     string deviceClass = 19;
     repeated string serviceUuids = 20;
     string companyId = 21;
+    string mfgData = 22;
 }

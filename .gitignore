@@ -119,3 +119,4 @@ gradle.properties
 .java-version
 /builddocs
 src/main/output/*
+CLAUDE.md

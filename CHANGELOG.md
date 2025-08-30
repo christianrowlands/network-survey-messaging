@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.9.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.9.0) - 2025-08-30
+* Adds the `mfgData` field to the Bluetooth message.
+
 ## [1.8.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.8.0) - 2025-04-10
 * Adds the `addressType`, `deviceClass`, `serviceUuids`, and `companyId` fields to the Bluetooth message.
 

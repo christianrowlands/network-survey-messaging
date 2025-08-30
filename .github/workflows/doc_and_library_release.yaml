@@ -146,6 +146,29 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         run: ./gradlew clean build publish
 
+      - name: Upload to Central Publisher Portal
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        run: |
+          # Create the Bearer token (base64 encode username:password)
+          TOKEN=$(echo -n "$SONATYPE_USERNAME:$SONATYPE_PASSWORD" | base64)
+          
+          # Upload the staging repository to Central Publisher Portal
+          # This ensures the deployment is visible at https://central.sonatype.com/publishing/deployments
+          echo "Uploading staging repository to Central Publisher Portal..."
+          curl -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/com.craxiom" \
+            -w "\nHTTP Status: %{http_code}\n"
+          
+          # Check if the upload was successful
+          if [ $? -eq 0 ]; then
+            echo "Successfully uploaded to Central Publisher Portal"
+          else
+            echo "Warning: Failed to upload to Central Publisher Portal. You may need to manually upload."
+          fi
+
       - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
         with:

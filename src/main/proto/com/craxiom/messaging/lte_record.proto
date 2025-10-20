@@ -35,12 +35,6 @@ message LteRecordData {
     uint32 locationAge = 11;
     float speed = 55;
 
-    float heading = 50;
-    float pitch = 51;
-    float roll = 52;
-    float fieldOfView = 53;
-    float receiverSensitivity = 54;
-
     google.protobuf.Int32Value mcc = 16;
     google.protobuf.Int32Value mnc = 17;
     google.protobuf.Int32Value tac = 18;

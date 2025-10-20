@@ -464,16 +464,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             mcc:
               type: integer
               format: int32
@@ -564,16 +554,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             sid:
               $ref: '#/components/schemas/sid'
             nid:
@@ -647,16 +627,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             mcc:
               type: integer
               format: int32
@@ -743,16 +713,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             mcc:
               $ref: '#/components/schemas/mcc'
             mnc:
@@ -846,16 +806,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             mcc:
               $ref: '#/components/schemas/mcc'
             mnc:
@@ -940,16 +890,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
             destinationAddress:
@@ -1055,16 +995,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
             destinationAddress:
@@ -1140,16 +1070,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
             destinationAddress:
@@ -1226,16 +1146,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             frameType:
               $ref: '#/components/schemas/frameType'
             frameSubtype:
@@ -1292,16 +1202,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             sourceAddress:
               $ref: '#/components/schemas/sourceAddress'
               example: '56:14:62:0D:98:01'
@@ -1412,16 +1312,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             constellation:
               $ref: '#/components/schemas/constellation'
             spaceVehicleId:
@@ -1498,16 +1388,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
             bandwidthHz:
@@ -1570,16 +1450,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             frequencyHz:
               $ref: '#/components/schemas/frequencyHz'
             bandwidthHz:
@@ -1639,16 +1509,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             batteryLevelPercent:
               $ref: '#/components/schemas/batteryLevelPercent'
             error:
@@ -1744,16 +1604,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             simState:
               $ref: '#/components/schemas/simState'
             simOperator:
@@ -1812,16 +1662,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             channelType:
               type: string
               description: >-
@@ -1936,16 +1776,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             pcapRecord:
               $ref: '#/components/schemas/pcapRecord'
     lteRrcPayload:
@@ -1992,16 +1822,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             channelType:
               type: string
               description: >-
@@ -2078,16 +1898,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             channelType:
               type: string
               description: >-
@@ -2143,16 +1953,6 @@ components:
               $ref: '#/components/schemas/accuracy'
             locationAge:
               $ref: '#/components/schemas/locationAge'
-            heading:
-              $ref: '#/components/schemas/heading'
-            pitch:
-              $ref: '#/components/schemas/pitch'
-            roll:
-              $ref: '#/components/schemas/roll'
-            fieldOfView:
-              $ref: '#/components/schemas/fieldOfView'
-            receiverSensitivity:
-              $ref: '#/components/schemas/receiverSensitivity'
             channelType:
               type: string
               description: >-
@@ -2269,45 +2069,6 @@ components:
       description: >-
         The age of the location fix in milliseconds. This field is optional and if it is not present that is an indication that the age of the location fix is unknown. Added in version 1.7.0.
       example: 1000
-    heading:
-      type: number
-      format: float
-      minimum: -180
-      maximum: 180
-      description: >-
-        Heading of the sensor/antenna, in degrees from true north. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
-      example: 32.7
-    pitch:
-      type: number
-      format: float
-      minimum: -180
-      maximum: 180
-      description: >-
-        Pitch of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
-      example: -0.1
-    roll:
-      type: number
-      format: float
-      minimum: -180
-      maximum: 180
-      description: >-
-        Roll of the sensor/antenna, in degrees from the ground plane. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
-      example: 0.15
-    fieldOfView:
-      type: number
-      format: float
-      minimum: 0
-      maximum: 360
-      description: >-
-        The horizontal field of view of the sensor/antenna in degrees.  If absent, then this assumes that the sensor has a 360 degree field of view (i.e. omnidirectional antenna). One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldofView, receiverSensitivity) to form more accurate estimates of the transmitter's position.
-      example: 40
-    receiverSensitivity:
-      type: number
-      format: float
-      minimum: 0
-      description: >-
-        The minimum signal strength that a receiver can detect, in units of dBm. One can use sensor orientation (heading, pitch, roll) and sensor characteristics (fieldOfView, receiverSensitivity) to form more accurate estimates of the transmitter's position or distance from the sensor.
-      example: -50
     provider:
       type: string
       description: The company providing the cellular service.

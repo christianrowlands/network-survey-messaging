@@ -36,13 +36,6 @@ message PhoneStateData {
     uint32 locationAge = 20;
     float speed = 55;
 
-    // Orientation of sensor and sensor parameters. optional.
-    float heading = 50;
-    float pitch = 51;
-    float roll = 52;
-    float fieldOfView = 53;
-    float receiverSensitivity = 54;
-
     com.craxiom.messaging.phonestate.simstate.SimState simState = 9;
     string simOperator = 10;
     repeated NetworkRegistrationInfo networkRegistrationInfo = 11;

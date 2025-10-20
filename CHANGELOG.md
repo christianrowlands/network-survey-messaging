@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.0.0) - 2025-10-20
+* Removes the unused fields `heading`, `pitch`, `roll`, `fieldOfView`, and `receiverSensitivity`.
+* Remove the deprecated gRPC connection handshake.
+
 ## [1.9.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v1.9.0) - 2025-08-30
 * Adds the `mfgData` field to the Bluetooth message.
 

@@ -36,12 +36,6 @@ message GnssRecordData {
     uint32 locationAge = 30;
     float speed = 55;
 
-    float heading = 50;
-    float pitch = 51;
-    float roll = 52;
-    float fieldOfView = 53;
-    float receiverSensitivity = 54;
-
     com.craxiom.messaging.gnss.constellation.Constellation constellation = 12;
     google.protobuf.UInt32Value spaceVehicleId = 13;
     google.protobuf.UInt64Value carrierFreqHz = 14;

@@ -2201,7 +2201,7 @@ components:
     rscp:
       type: number
       format: float
-      description: Reference Signal Code Power in dBm.
+      description: Received Signal Code Power in dBm.
       example: -73
     ecno:
       type: number

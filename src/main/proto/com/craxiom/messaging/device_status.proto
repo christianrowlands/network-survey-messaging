@@ -27,6 +27,8 @@ message DeviceStatusData {
     double latitude = 4;
     double longitude = 5;
     float altitude = 6;
+    string missionId = 13;
+    int32 recordNumber = 14;
     string deviceModel = 8;
     int32 accuracy = 9;
     uint32 locationAge = 30;

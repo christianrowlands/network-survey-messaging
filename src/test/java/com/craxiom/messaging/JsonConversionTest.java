@@ -1093,7 +1093,7 @@ public class JsonConversionTest {
 
     @Test
     public void testDeviceStatusToJson() {
-        final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":true}}";
+        final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"batteryLevelPercent\":38,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":true,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1}}";
 
         final DeviceStatus.Builder recordBuilder = DeviceStatus.newBuilder();
         recordBuilder.setVersion("0.9.0");
@@ -1106,6 +1106,8 @@ public class JsonConversionTest {
         dataBuilder.setLatitude(51.470334);
         dataBuilder.setLongitude(-0.486594);
         dataBuilder.setAltitude(13.3f);
+        dataBuilder.setMissionId("Survey1 20200724-154325");
+        dataBuilder.setRecordNumber(1);
         dataBuilder.setDeviceModel("SM-G981U1");
         dataBuilder.setAccuracy(ACCURACY);
         dataBuilder.setBatteryLevelPercent(Int32Value.newBuilder().setValue(38).build());
@@ -1126,7 +1128,7 @@ public class JsonConversionTest {
 
     @Test
     public void testDeviceStatusFromJson() {
-        final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":false}}";
+        final String inputJson = "{\"version\":\"0.9.0\",\"messageType\":\"DeviceStatus\",\"data\":{\"deviceSerialNumber\":\"IMEI: 1\",\"deviceName\":\"My Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"deviceModel\":\"SM-G981U1\",\"accuracy\":40,\"batteryLevelPercent\":38,\"error\":{\"errorMessage\":\"The scan stopped unexpectedly\"},\"mdmOverride\":false}}";
 
         final DeviceStatus.Builder builder = DeviceStatus.newBuilder();
         try {
@@ -1147,6 +1149,8 @@ public class JsonConversionTest {
         assertEquals(51.470334, data.getLatitude());
         assertEquals(-0.486594, data.getLongitude());
         assertEquals(13.3f, data.getAltitude());
+        assertEquals("Survey1 20200724-154325", data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
         assertEquals("SM-G981U1", data.getDeviceModel());
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(38, data.getBatteryLevelPercent().getValue());

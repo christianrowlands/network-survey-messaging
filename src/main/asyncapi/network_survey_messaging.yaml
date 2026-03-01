@@ -1486,6 +1486,8 @@ components:
             - deviceSerialNumber
             - deviceName
             - deviceTime
+            - missionId
+            - recordNumber
           properties:
             deviceSerialNumber:
               $ref: '#/components/schemas/deviceSerialNumber'
@@ -1501,6 +1503,10 @@ components:
               $ref: '#/components/schemas/altitude'
             speed:
               $ref: '#/components/schemas/speed'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
             deviceModel:
               $ref: '#/components/schemas/deviceModel'
             appVersion:

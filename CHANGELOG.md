@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.1.0) - 2026-03-02
+* Adds the `missionId` and `recordNumber` fields to the DeviceStatus message for consistency with all other record types.
+
 ## [2.0.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.0.0) - 2025-10-20
 * Removes the unused fields `heading`, `pitch`, `roll`, `fieldOfView`, and `receiverSensitivity`.
 * Remove the deprecated gRPC connection handshake.

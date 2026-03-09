@@ -1,5 +1,6 @@
 package com.craxiom.messaging;
 
+import com.craxiom.messaging.bluetooth.AddressType;
 import com.craxiom.messaging.bluetooth.SupportedTechnologies;
 import com.craxiom.messaging.bluetooth.Technology;
 import com.craxiom.messaging.gnss.Constellation;
@@ -777,7 +778,7 @@ public class JsonConversionTest {
 
     @Test
     public void testBluetoothToJson() {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"mfgData\":\"4C001005031C47A031\"}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"addressType\":\"PUBLIC\",\"mfgData\":\"4C001005031C47A031\"}}";
 
         final BluetoothRecord.Builder recordBuilder = BluetoothRecord.newBuilder();
         recordBuilder.setVersion("0.7.0");
@@ -801,6 +802,7 @@ public class JsonConversionTest {
         dataBuilder.setSupportedTechnologies(SupportedTechnologies.DUAL);
         dataBuilder.setOtaDeviceName("846B2162E22433AFE9");
         dataBuilder.setChannel(Int32Value.newBuilder().setValue(6).build());
+        dataBuilder.setAddressType(AddressType.PUBLIC);
         dataBuilder.setMfgData("4C001005031C47A031");
 
         recordBuilder.setData(dataBuilder);
@@ -817,7 +819,7 @@ public class JsonConversionTest {
 
     @Test
     public void testBluetoothFromJson() {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"mfgData\":\"4C001005031C47A031\"}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"BluetoothRecord\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"BT Pixel\",\"deviceTime\":\"2021-01-14T12:47:04.76-05:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":184.08124,\"missionId\":\"NS ee4d453e4c6f73fa 20210114-124535\",\"recordNumber\":1,\"accuracy\":40,\"sourceAddress\":\"E1:A1:19:A9:68:B0\",\"destinationAddress\":\"56:14:62:0D:98:01\",\"signalStrength\":-78.0,\"txPower\":8.0,\"technology\":\"LE\",\"supportedTechnologies\":\"DUAL\",\"otaDeviceName\":\"846B2162E22433AFE9\",\"channel\":6,\"addressType\":\"PUBLIC\",\"mfgData\":\"4C001005031C47A031\"}}";
 
         final BluetoothRecord.Builder builder = BluetoothRecord.newBuilder();
         try {
@@ -849,6 +851,7 @@ public class JsonConversionTest {
         assertEquals(SupportedTechnologies.DUAL, data.getSupportedTechnologies());
         assertEquals("846B2162E22433AFE9", data.getOtaDeviceName());
         assertEquals(6, data.getChannel().getValue());
+        assertEquals(AddressType.PUBLIC, data.getAddressType());
         assertEquals("4C001005031C47A031", data.getMfgData());
     }
 

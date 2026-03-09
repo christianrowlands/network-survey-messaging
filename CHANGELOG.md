@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.2.0) - 2026-03-09
+* **Breaking (protobuf binary only):** Reorder the Bluetooth `AddressType` enum so that `UNKNOWN = 0` is the default, matching the project convention. This ensures `PUBLIC` address types are serialized in JSON output instead of being omitted as the default value.
+
 ## [2.1.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.1.0) - 2026-03-02
 * Adds the `missionId` and `recordNumber` fields to the DeviceStatus message for consistency with all other record types.
 

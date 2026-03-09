@@ -17,8 +17,8 @@ option java_package = "com.craxiom.messaging.bluetooth";
 option go_package = "craxiom.com/messaging";
 
 enum AddressType {
-    PUBLIC = 0; // Hardware MAC Address of the device
-    RANDOM = 1; // Address is either resolvable, non-resolvable or static.
-    ANONYMOUS = 2; // Address type used to indicate an anonymous advertisement.
-    UNKNOWN = 3; // Address type is unknown or unavailable
+    UNKNOWN = 0; // Address type is unknown or unavailable
+    PUBLIC = 1; // Hardware MAC Address of the device
+    RANDOM = 2; // Address is either resolvable, non-resolvable or static.
+    ANONYMOUS = 3; // Address type used to indicate an anonymous advertisement.
 }

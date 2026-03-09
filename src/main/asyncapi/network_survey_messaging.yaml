@@ -1230,10 +1230,10 @@ components:
               description: >-
                 The address type of the source address. Added in version 1.8.0.
               enum:
+                - UNKNOWN
                 - PUBLIC
                 - RANDOM
                 - ANONYMOUS
-                - UNKNOWN
             deviceClass:
               type: string
               description: >-

@@ -7,7 +7,7 @@
 //
 // From there, execute `./gradlew clean build publish` to build, sign, and upload all the artifacts.
 // The artifacts are then uploaded to the Central Publisher Portal via the OSSRH Staging API.
-// The final step is to log in to https://central.sonatype.com/publishing/deployments to publish the validated deployment
+// The final step is to log in to https://central.sonatype.com/publishing to publish the validated deployment
 
 // To generate the python code, you must install the grpc protobuf compiler:
 // sudo apt install protobuf-compiler-grpc

@@ -468,15 +468,18 @@ components:
               type: integer
               format: int32
               minimum: 0
-              description: 'Mobile Country Code, 3 digits.'
+              description: 'Deprecated: Use plmn instead. Mobile Country Code, 3 digits.'
               example: 310
             mnc:
               type: integer
               format: int32
               minimum: 0
               description: >-
-                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
+                Deprecated: Use plmn instead. Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
               example: 410
+            plmn:
+              $ref: '#/components/schemas/plmn'
+              example: '310-410'
             lac:
               $ref: '#/components/schemas/lac'
             ci:
@@ -631,15 +634,18 @@ components:
               type: integer
               format: int32
               minimum: 0
-              description: 'Mobile Country Code, 3 digits.'
+              description: 'Deprecated: Use plmn instead. Mobile Country Code, 3 digits.'
               example: 310
             mnc:
               type: integer
               format: int32
               minimum: 0
               description: >-
-                Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
+                Deprecated: Use plmn instead. Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
               example: 260
+            plmn:
+              $ref: '#/components/schemas/plmn'
+              example: '310-260'
             lac:
               $ref: '#/components/schemas/lac'
             cid:
@@ -717,6 +723,8 @@ components:
               $ref: '#/components/schemas/mcc'
             mnc:
               $ref: '#/components/schemas/mnc'
+            plmn:
+              $ref: '#/components/schemas/plmn'
             tac:
               $ref: '#/components/schemas/tac'
             eci:
@@ -810,6 +818,8 @@ components:
               $ref: '#/components/schemas/mcc'
             mnc:
               $ref: '#/components/schemas/mnc'
+            plmn:
+              $ref: '#/components/schemas/plmn'
             tac:
               $ref: '#/components/schemas/nrTac'
             nci:
@@ -2083,15 +2093,20 @@ components:
       type: integer
       format: int32
       minimum: 0
-      description: 'Mobile Country Code, 3 digits.'
+      description: 'Deprecated: Use plmn instead. Mobile Country Code, 3 digits.'
       example: 311
     mnc:
       type: integer
       format: int32
       minimum: 0
       description: >-
-        Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits.
+        Deprecated: Use plmn instead. Mobile Network Code, used in conjunction with MCC (PLMN) to identify a carrier, 2 to 3 digits. Note: leading zeros are lost when represented as an integer.
       example: 480
+    plmn:
+      type: string
+      description: >-
+        PLMN identifier in "MCC-MNC" format. MCC is always 3 digits. MNC is 2 or 3 digits with leading zeros preserved (e.g., "310-01", "311-480"). Consumers should prefer this field over the separate integer mcc/mnc fields, which cannot preserve MNC leading zeros. Added in version 2.3.0.
+      example: '311-480'
     servingCell:
       type: boolean
       description: >-
@@ -2797,6 +2812,9 @@ components:
         mnc:
           $ref: '#/components/schemas/mnc'
           example: 410
+        plmn:
+          $ref: '#/components/schemas/plmn'
+          example: '310-410'
         lac:
           $ref: '#/components/schemas/lac'
         ci:
@@ -2825,6 +2843,9 @@ components:
         mnc:
           $ref: '#/components/schemas/mnc'
           example: 260
+        plmn:
+          $ref: '#/components/schemas/plmn'
+          example: '310-260'
         lac:
           $ref: '#/components/schemas/lac'
         cid:
@@ -2841,6 +2862,8 @@ components:
           $ref: '#/components/schemas/mcc'
         mnc:
           $ref: '#/components/schemas/mnc'
+        plmn:
+          $ref: '#/components/schemas/plmn'
         tac:
           $ref: '#/components/schemas/tac'
         eci:
@@ -2857,6 +2880,8 @@ components:
           $ref: '#/components/schemas/mcc'
         mnc:
           $ref: '#/components/schemas/mnc'
+        plmn:
+          $ref: '#/components/schemas/plmn'
         tac:
           $ref: '#/components/schemas/nrTac'
         nci:

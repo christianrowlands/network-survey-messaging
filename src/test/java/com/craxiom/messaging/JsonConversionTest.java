@@ -41,7 +41,7 @@ public class JsonConversionTest {
 
     @Test
     public void testGsmToJson() {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\",\"plmn\":\"310-410\"}}";
 
         final GsmRecord.Builder recordBuilder = GsmRecord.newBuilder();
         recordBuilder.setVersion("0.7.0");
@@ -60,6 +60,7 @@ public class JsonConversionTest {
         dataBuilder.setAccuracy(ACCURACY);
         dataBuilder.setMcc(Int32Value.newBuilder().setValue(310).build());
         dataBuilder.setMnc(Int32Value.newBuilder().setValue(410).build());
+        dataBuilder.setPlmn(StringValue.of("310-410"));
         dataBuilder.setLac(Int32Value.newBuilder().setValue(174).build());
         dataBuilder.setCi(Int32Value.newBuilder().setValue(47241).build());
         dataBuilder.setArfcn(Int32Value.newBuilder().setValue(557).build());
@@ -83,7 +84,7 @@ public class JsonConversionTest {
 
     @Test
     public void testGsmFromJson() {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey2 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\"}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey2 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":410,\"lac\":174,\"ci\":47241,\"arfcn\":557,\"bsic\":25,\"signalStrength\":-73.0,\"ta\":4,\"servingCell\":false,\"provider\":\"ATT\",\"plmn\":\"310-410\"}}";
 
         final GsmRecord.Builder builder = GsmRecord.newBuilder();
         try {
@@ -110,6 +111,7 @@ public class JsonConversionTest {
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(310, data.getMcc().getValue());
         assertEquals(410, data.getMnc().getValue());
+        assertEquals("310-410", data.getPlmn().getValue());
         assertEquals(174, data.getLac().getValue());
         assertEquals(47241, data.getCi().getValue());
         assertEquals(557, data.getArfcn().getValue());
@@ -118,6 +120,28 @@ public class JsonConversionTest {
         assertEquals(4, data.getTa().getValue());
         assertFalse(data.getServingCell().getValue());
         assertEquals("ATT", data.getProvider());
+    }
+
+    @Test
+    public void testPlmnWithLeadingZeroMnc() {
+        // Demonstrates the core value of the plmn field: MNC "01" is preserved as a string
+        // whereas the legacy int mnc field loses the leading zero (mnc=1).
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"GsmRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Test\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"mcc\":310,\"mnc\":1,\"plmn\":\"310-01\"}}";
+
+        final GsmRecord.Builder builder = GsmRecord.newBuilder();
+        try {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e) {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final GsmRecord convertedRecord = builder.build();
+        final GsmRecordData data = convertedRecord.getData();
+
+        // The int mnc field loses the leading zero
+        assertEquals(1, data.getMnc().getValue());
+        // The plmn field preserves it
+        assertEquals("310-01", data.getPlmn().getValue());
     }
 
     @Test
@@ -203,7 +227,7 @@ public class JsonConversionTest {
 
     @Test
     public void testUmtsToJson() {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"ecno\":-9.6,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"ecno\":-9.6,\"servingCell\":true,\"provider\":\"T-Mobile\",\"plmn\":\"310-260\"}}";
 
         final UmtsRecord.Builder recordBuilder = UmtsRecord.newBuilder();
         recordBuilder.setVersion("0.7.0");
@@ -222,6 +246,7 @@ public class JsonConversionTest {
         dataBuilder.setAccuracy(ACCURACY);
         dataBuilder.setMcc(Int32Value.newBuilder().setValue(310).build());
         dataBuilder.setMnc(Int32Value.newBuilder().setValue(260).build());
+        dataBuilder.setPlmn(StringValue.of("310-260"));
         dataBuilder.setLac(Int32Value.newBuilder().setValue(65535).build());
         dataBuilder.setCid(Int32Value.newBuilder().setValue(61381).build());
         dataBuilder.setUarfcn(Int32Value.newBuilder().setValue(9800).build());
@@ -246,7 +271,7 @@ public class JsonConversionTest {
 
     @Test
     public void testUmtsFromJson() {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\"}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"UmtsRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Big Phone\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"COW13 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":310,\"mnc\":260,\"lac\":65535,\"cid\":61381,\"uarfcn\":9800,\"psc\":141,\"rscp\":-73.0,\"signalStrength\":-73.0,\"servingCell\":true,\"provider\":\"T-Mobile\",\"plmn\":\"310-260\"}}";
 
         final UmtsRecord.Builder builder = UmtsRecord.newBuilder();
         try {
@@ -273,6 +298,7 @@ public class JsonConversionTest {
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(310, data.getMcc().getValue());
         assertEquals(260, data.getMnc().getValue());
+        assertEquals("310-260", data.getPlmn().getValue());
         assertEquals(65535, data.getLac().getValue());
         assertEquals(61381, data.getCid().getValue());
         assertEquals(9800, data.getUarfcn().getValue());
@@ -285,7 +311,7 @@ public class JsonConversionTest {
 
     @Test
     public void testLteToJson() {
-        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"signalStrength\":-88.5,\"cqi\":9,\"snr\":19.0}}";
+        final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"signalStrength\":-88.5,\"cqi\":9,\"snr\":19.0,\"plmn\":\"311-480\"}}";
 
         final LteRecord.Builder recordBuilder = LteRecord.newBuilder();
         recordBuilder.setVersion("0.7.0");
@@ -304,6 +330,7 @@ public class JsonConversionTest {
         dataBuilder.setAccuracy(ACCURACY);
         dataBuilder.setMcc(Int32Value.newBuilder().setValue(311).build());
         dataBuilder.setMnc(Int32Value.newBuilder().setValue(480).build());
+        dataBuilder.setPlmn(StringValue.of("311-480"));
         dataBuilder.setTac(Int32Value.newBuilder().setValue(52803).build());
         dataBuilder.setEci(Int32Value.newBuilder().setValue(52824577).build());
         dataBuilder.setEarfcn(Int32Value.newBuilder().setValue(5230).build());
@@ -332,7 +359,7 @@ public class JsonConversionTest {
 
     @Test
     public void testLteFromJson() {
-        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"cqi\":3,\"snr\":-8}}";
+        final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"LteRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"eci\":52824577,\"earfcn\":5230,\"pci\":234,\"rsrp\":-107.0,\"rsrq\":-11.0,\"ta\":27,\"servingCell\":true,\"lteBandwidth\":\"MHZ_10\",\"provider\":\"Verizon\",\"cqi\":3,\"snr\":-8,\"plmn\":\"311-480\"}}";
 
         final LteRecord.Builder builder = LteRecord.newBuilder();
         try {
@@ -359,6 +386,7 @@ public class JsonConversionTest {
         assertEquals(ACCURACY, data.getAccuracy());
         assertEquals(311, data.getMcc().getValue());
         assertEquals(480, data.getMnc().getValue());
+        assertEquals("311-480", data.getPlmn().getValue());
         assertEquals(52803, data.getTac().getValue());
         assertEquals(52824577, data.getEci().getValue());
         assertEquals(5230, data.getEarfcn().getValue());
@@ -395,6 +423,7 @@ public class JsonConversionTest {
 
         dataBuilder.setMcc(getInt32(311));
         dataBuilder.setMnc(getInt32(480));
+        dataBuilder.setPlmn(StringValue.of("311-480"));
         dataBuilder.setTac(getInt32(52803));
         dataBuilder.setNci(Int64Value.newBuilder().setValue(52824577).build());
         dataBuilder.setNarfcn(getInt32(5230));
@@ -440,6 +469,7 @@ public class JsonConversionTest {
 
         assertEquals(311, data.getMcc().getValue());
         assertEquals(480, data.getMnc().getValue());
+        assertEquals("311-480", data.getPlmn().getValue());
         assertEquals(52803, data.getTac().getValue());
         assertEquals(52824577, data.getNci().getValue());
         assertEquals(5230, data.getNarfcn().getValue());
@@ -1166,8 +1196,8 @@ public class JsonConversionTest {
         final String expectedJson = "{\"version\":\"0.7.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
                 "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
                 "\"networkRegistrationInfo\":" +
-                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}," +
-                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}]," +
+                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250,\"plmn\":\"311-480\"}}," +
+                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250,\"plmn\":\"311-480\"}}]," +
                 "\"accuracy\":40}}";
 
         final PhoneState.Builder recordBuilder = PhoneState.newBuilder();
@@ -1197,6 +1227,7 @@ public class JsonConversionTest {
         cellBuilder0.setEci(Int32Value.newBuilder().setValue(116995606).build());
         cellBuilder0.setEarfcn(Int32Value.newBuilder().setValue(66586).build());
         cellBuilder0.setPci(Int32Value.newBuilder().setValue(250).build());
+        cellBuilder0.setPlmn(StringValue.of("311-480"));
         infoBuilder0.setCellIdentityLte(cellBuilder0);
 
         dataBuilder.addNetworkRegistrationInfo(infoBuilder0);
@@ -1214,6 +1245,7 @@ public class JsonConversionTest {
         cellBuilder1.setEci(Int32Value.newBuilder().setValue(116995606).build());
         cellBuilder1.setEarfcn(Int32Value.newBuilder().setValue(66586).build());
         cellBuilder1.setPci(Int32Value.newBuilder().setValue(250).build());
+        cellBuilder1.setPlmn(StringValue.of("311-480"));
         infoBuilder1.setCellIdentityLte(cellBuilder1);
 
         dataBuilder.addNetworkRegistrationInfo(infoBuilder1);
@@ -1237,8 +1269,8 @@ public class JsonConversionTest {
         final String inputJson = "{\"version\":\"0.7.0\",\"messageType\":\"PhoneState\",\"data\":{\"deviceSerialNumber\":\"ee4d453e4c6f73fa\",\"deviceName\":\"pixel3a\"," +
                 "\"deviceTime\":\"2021-06-10T08:57:41.249-04:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"simState\":\"READY\",\"simOperator\":\"311480\"," +
                 "\"networkRegistrationInfo\":" +
-                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}," +
-                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250}}]," +
+                "[{\"domain\":\"CS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250,\"plmn\":\"311-480\"}}," +
+                "{\"domain\":\"PS\",\"accessNetworkTechnology\":\"LTE\",\"roaming\":false,\"rejectCause\":0,\"cellIdentityLte\":{\"mcc\":311,\"mnc\":480,\"tac\":40198,\"eci\":116995606,\"earfcn\":66586,\"pci\":250,\"plmn\":\"311-480\"}}]," +
                 "\"accuracy\":40,\"slot\":3,\"nonTerrestrialNetwork\":false}}";
 
         final PhoneState.Builder builder = PhoneState.newBuilder();
@@ -1271,6 +1303,7 @@ public class JsonConversionTest {
         final CellIdentityLte cellIdentityLte0 = info0.getCellIdentityLte();
         assertEquals(311, cellIdentityLte0.getMcc().getValue());
         assertEquals(480, cellIdentityLte0.getMnc().getValue());
+        assertEquals("311-480", cellIdentityLte0.getPlmn().getValue());
         assertEquals(40198, cellIdentityLte0.getTac().getValue());
         assertEquals(116995606, cellIdentityLte0.getEci().getValue());
         assertEquals(66586, cellIdentityLte0.getEarfcn().getValue());
@@ -1284,6 +1317,7 @@ public class JsonConversionTest {
         final CellIdentityLte cellIdentityLte1 = info1.getCellIdentityLte();
         assertEquals(311, cellIdentityLte1.getMcc().getValue());
         assertEquals(480, cellIdentityLte1.getMnc().getValue());
+        assertEquals("311-480", cellIdentityLte1.getPlmn().getValue());
         assertEquals(40198, cellIdentityLte1.getTac().getValue());
         assertEquals(116995606, cellIdentityLte1.getEci().getValue());
         assertEquals(66586, cellIdentityLte1.getEarfcn().getValue());
@@ -1596,7 +1630,7 @@ public class JsonConversionTest {
     }
 
     private String getNrJson() {
-        return "{\"version\":\"0.7.0\",\"messageType\":\"NrRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"nci\":\"52824577\",\"narfcn\":5230,\"pci\":234,\"ssRsrp\":-107.1,\"ssRsrq\":-11.5,\"ssSinr\":14.5,\"csiRsrp\":-107.1,\"csiRsrq\":-11.5,\"csiSinr\":14.5,\"ta\":14,\"servingCell\":true,\"provider\":\"Verizon\"}}";
+        return "{\"version\":\"0.7.0\",\"messageType\":\"NrRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"groupNumber\":1,\"accuracy\":40,\"mcc\":311,\"mnc\":480,\"tac\":52803,\"nci\":\"52824577\",\"narfcn\":5230,\"pci\":234,\"ssRsrp\":-107.1,\"ssRsrq\":-11.5,\"ssSinr\":14.5,\"csiRsrp\":-107.1,\"csiRsrq\":-11.5,\"csiSinr\":14.5,\"ta\":14,\"servingCell\":true,\"provider\":\"Verizon\",\"plmn\":\"311-480\"}}";
     }
 
     private String getUmtsNasJson() {

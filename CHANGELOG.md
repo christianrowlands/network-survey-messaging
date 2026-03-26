@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.3.0) - 2026-03-26
+* Adds the `plmn` string field (format "MCC-MNC", e.g., "310-01") to all cellular record messages (GSM, UMTS, LTE, NR) and CellIdentity messages in PhoneState. This field preserves MNC leading zeros that are lost when MNC is represented as an integer. Consumers should prefer the `plmn` field over the separate `mcc`/`mnc` integer fields.
+
 ## [2.2.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.2.0) - 2026-03-09
 * **Breaking (protobuf binary only):** Reorder the Bluetooth `AddressType` enum so that `UNKNOWN = 0` is the default, matching the project convention. This ensures `PUBLIC` address types are serialized in JSON output instead of being omitted as the default value.
 

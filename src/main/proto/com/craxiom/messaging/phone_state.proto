@@ -59,12 +59,16 @@ message NetworkRegistrationInfo {
 }
 
 message CellIdentityGsm {
+    // Deprecated: Use plmn instead. Mobile Country Code.
     google.protobuf.Int32Value mcc = 1;
+    // Deprecated: Use plmn instead. Mobile Network Code (leading zeros lost as int).
     google.protobuf.Int32Value mnc = 2;
     google.protobuf.Int32Value lac = 3;
     google.protobuf.Int32Value ci = 4;
     google.protobuf.Int32Value arfcn = 5;
     google.protobuf.Int32Value bsic = 6;
+    // PLMN identifier in "MCC-MNC" format (e.g., "310-01"). Preserves MNC leading zeros.
+    google.protobuf.StringValue plmn = 7;
 }
 
 message CellIdentityCdma {
@@ -74,28 +78,40 @@ message CellIdentityCdma {
 }
 
 message CellIdentityUmts {
+    // Deprecated: Use plmn instead. Mobile Country Code.
     google.protobuf.Int32Value mcc = 1;
+    // Deprecated: Use plmn instead. Mobile Network Code (leading zeros lost as int).
     google.protobuf.Int32Value mnc = 2;
     google.protobuf.Int32Value lac = 3;
     google.protobuf.Int32Value cid = 4;
     google.protobuf.Int32Value uarfcn = 5;
     google.protobuf.Int32Value psc = 6;
+    // PLMN identifier in "MCC-MNC" format (e.g., "310-01"). Preserves MNC leading zeros.
+    google.protobuf.StringValue plmn = 7;
 }
 
 message CellIdentityLte {
+    // Deprecated: Use plmn instead. Mobile Country Code.
     google.protobuf.Int32Value mcc = 1;
+    // Deprecated: Use plmn instead. Mobile Network Code (leading zeros lost as int).
     google.protobuf.Int32Value mnc = 2;
     google.protobuf.Int32Value tac = 3;
     google.protobuf.Int32Value eci = 4;
     google.protobuf.Int32Value earfcn = 5;
     google.protobuf.Int32Value pci = 6;
+    // PLMN identifier in "MCC-MNC" format (e.g., "310-01"). Preserves MNC leading zeros.
+    google.protobuf.StringValue plmn = 7;
 }
 
 message CellIdentityNr {
+    // Deprecated: Use plmn instead. Mobile Country Code.
     google.protobuf.Int32Value mcc = 1;
+    // Deprecated: Use plmn instead. Mobile Network Code (leading zeros lost as int).
     google.protobuf.Int32Value mnc = 2;
     google.protobuf.Int32Value tac = 3;
     google.protobuf.Int64Value nci = 4;
     google.protobuf.Int32Value narfcn = 5;
     google.protobuf.Int32Value pci = 6;
+    // PLMN identifier in "MCC-MNC" format (e.g., "310-01"). Preserves MNC leading zeros.
+    google.protobuf.StringValue plmn = 7;
 }

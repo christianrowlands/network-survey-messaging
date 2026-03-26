@@ -34,8 +34,14 @@ message GsmRecordData {
     uint32 locationAge = 11;
     float speed = 55;
 
+    // Deprecated: Use plmn instead. Mobile Country Code.
     google.protobuf.Int32Value mcc = 16;
+    // Deprecated: Use plmn instead. Mobile Network Code (leading zeros lost as int).
     google.protobuf.Int32Value mnc = 17;
+    // PLMN identifier in "MCC-MNC" format (e.g., "310-01"). MCC is always 3 digits.
+    // MNC is 2 or 3 digits with leading zeros preserved.
+    // Consumers should prefer this over the separate integer mcc/mnc fields.
+    google.protobuf.StringValue plmn = 60;
     google.protobuf.Int32Value lac = 18;
     google.protobuf.Int32Value ci = 19;
     google.protobuf.Int32Value arfcn = 20;

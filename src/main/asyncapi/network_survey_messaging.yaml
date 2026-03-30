@@ -2784,8 +2784,7 @@ components:
           roaming: false
           rejectCause: 0
           cellIdentityLte:
-            mcc: 311
-            mnc: 480
+            plmn: "311-480"
             tac: 52803
             eci: 52824577
             earfcn: 5230
@@ -2795,8 +2794,7 @@ components:
           roaming: false
           rejectCause: 0
           cellIdentityLte:
-            mcc: 311
-            mnc: 480
+            plmn: "311-480"
             tac: 52803
             eci: 52824577
             earfcn: 5230

@@ -1238,7 +1238,18 @@ components:
             addressType:
               type: string
               description: >-
-                The address type of the source address. Added in version 1.8.0.
+                The Bluetooth address type as reported by Android's
+                BluetoothDevice.getAddressType()
+                (https://developer.android.com/reference/android/bluetooth/BluetoothDevice#getAddressType()),
+                which was added in API level 35 (Android 15). On older Android
+                versions the value is UNKNOWN. PUBLIC is typically reported
+                for Bluetooth Classic (BR/EDR) devices and for LE devices
+                using an IEEE-assigned public address. Note that BR/EDR has
+                no public/random distinction at the protocol level, so a
+                PUBLIC value alone does not imply the address is trackable.
+                RANDOM (resolvable private, non-resolvable private, or random
+                static; the Android API does not expose the subtype) and
+                ANONYMOUS apply only to Bluetooth LE. Added in version 1.8.0.
               enum:
                 - UNKNOWN
                 - PUBLIC

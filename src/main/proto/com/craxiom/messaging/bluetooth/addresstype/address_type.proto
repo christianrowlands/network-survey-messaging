@@ -17,8 +17,24 @@ option java_package = "com.craxiom.messaging.bluetooth";
 option go_package = "craxiom.com/messaging";
 
 enum AddressType {
-    UNKNOWN = 0; // Address type is unknown or unavailable
-    PUBLIC = 1; // Hardware MAC Address of the device
-    RANDOM = 2; // Address is either resolvable, non-resolvable or static.
-    ANONYMOUS = 3; // Address type used to indicate an anonymous advertisement.
+    // Address type is unknown or unavailable. Reported when running on
+    // Android < API 35, since BluetoothDevice.getAddressType() was added
+    // in API 35 (Android 15).
+    UNKNOWN = 0;
+
+    // The IEEE-assigned hardware MAC address of the device. Typically
+    // reported for Bluetooth Classic (BR/EDR) devices, which have no
+    // public/random distinction at the protocol level, and for LE devices
+    // using a genuine public address. PUBLIC alone does not imply the
+    // device is trackable; Classic peripherals report PUBLIC by definition.
+    PUBLIC = 1;
+
+    // LE-only. The address is one of the LE random subtypes: resolvable
+    // private, non-resolvable private, or random static. Android's API
+    // does not distinguish between these subtypes.
+    RANDOM = 2;
+
+    // LE anonymous advertising. The device intentionally omits its address
+    // from advertising packets. Requires Android 15+ to observe.
+    ANONYMOUS = 3;
 }

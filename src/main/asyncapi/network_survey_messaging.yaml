@@ -1,7 +1,7 @@
 asyncapi: 3.0.0
 info:
   title: Network Survey Messaging API
-  version: 2.3.0
+  version: 2.4.0
   description: >
     The Network Survey Messaging API defines a set of messages that can be used to describe wireless survey related events. The messages range from cellular surveys such as GSM, CDMA, UMTS, LTE, and NR, to simple RF energy detection events.
 
@@ -1280,18 +1280,7 @@ components:
             addressType:
               type: string
               description: >-
-                The Bluetooth address type as reported by Android's
-                BluetoothDevice.getAddressType()
-                (https://developer.android.com/reference/android/bluetooth/BluetoothDevice#getAddressType()),
-                which was added in API level 35 (Android 15). On older Android
-                versions the value is UNKNOWN. PUBLIC is typically reported
-                for Bluetooth Classic (BR/EDR) devices and for LE devices
-                using an IEEE-assigned public address. Note that BR/EDR has
-                no public/random distinction at the protocol level, so a
-                PUBLIC value alone does not imply the address is trackable.
-                RANDOM (resolvable private, non-resolvable private, or random
-                static; the Android API does not expose the subtype) and
-                ANONYMOUS apply only to Bluetooth LE. Added in version 1.8.0.
+                The Bluetooth address type as reported by Android's BluetoothDevice.getAddressType() (https://developer.android.com/reference/android/bluetooth/BluetoothDevice#getAddressType()), which was added in API level 35 (Android 15). On older Android versions the value is UNKNOWN. PUBLIC is typically reported for Bluetooth Classic (BR/EDR) devices and for LE devices using an IEEE-assigned public address. Note that BR/EDR has no public/random distinction at the protocol level, so a PUBLIC value alone does not imply the address is trackable. RANDOM (resolvable private, non-resolvable private, or random static; the Android API does not expose the subtype) and ANONYMOUS apply only to Bluetooth LE. Added in version 1.8.0.
               enum:
                 - UNKNOWN
                 - PUBLIC
@@ -2052,7 +2041,7 @@ components:
       type: string
       description: >-
         The version number of the Network Survey Messaging API that this message is based off of.
-      example: 2.3.0
+      example: 2.4.0
     deviceSerialNumber:
       type: string
       description: >-
@@ -2690,8 +2679,7 @@ components:
     frequencyHz:
       type: string
       description: >-
-        The frequency, in Hz, that the radio signal was received on. Although this is a whole number, it is carried
-        as a JSON string because the protobuf JSON mapping serializes 64 bit integers as strings.
+        The frequency, in Hz, that the radio signal was received on. Although this is a whole number, it is carried as a JSON string because the protobuf JSON mapping serializes 64 bit integers as strings.
       example: '162000000'
     bandwidthHz:
       type: integer
@@ -3112,20 +3100,11 @@ components:
     messageSequence:
       type: string
       description: >-
-        A device-global, monotonically increasing sequence number stamped on every watchlist_entry_message from a
-        device. It gives all of a device's entry updates a single total order so a consumer can reconcile
-        at-least-once (duplicate or out-of-order) delivery. It is seeded from wall-clock epoch time in milliseconds
-        on first use and persisted, so it does not regress across app restarts or reinstalls (provided the device
-        clock has not moved backwards across a reinstall).
+        A device-global, monotonically increasing sequence number stamped on every watchlist_entry_message from a device. It gives all of a device's entry updates a single total order so a consumer can reconcile at-least-once (duplicate or out-of-order) delivery. It is seeded from wall-clock epoch time in milliseconds on first use and persisted, so it does not regress across app restarts or reinstalls (provided the device clock has not moved backwards across a reinstall).
 
-        Although this is a whole number, it is carried as a JSON string because the protobuf JSON mapping serializes
-        64 bit integers as strings. Consumers MUST parse it to a 64 bit integer before comparing values.
+        Although this is a whole number, it is carried as a JSON string because the protobuf JSON mapping serializes 64 bit integers as strings. Consumers MUST parse it to a 64 bit integer before comparing values.
 
-        Consumer rule: track the highest messageSequence seen per deviceSerialNumber. If a message's messageSequence
-        is greater than that value, replace the device's watchlist with the message's entries list (an absent entries
-        field means an empty list) and store the new messageSequence; otherwise ignore the message. A device that has
-        never had a watchlist entry publishes nothing, so a device with no messages MUST be treated as having an
-        empty watchlist.
+        Consumer rule: track the highest messageSequence seen per deviceSerialNumber. If a message's messageSequence is greater than that value, replace the device's watchlist with the message's entries list (an absent entries field means an empty list) and store the new messageSequence; otherwise ignore the message. A device that has never had a watchlist entry publishes nothing, so a device with no messages MUST be treated as having an empty watchlist.
       example: '1700000000000'
     watchlistLabel:
       type: string
@@ -3152,9 +3131,7 @@ components:
     watchlistChangeType:
       type: string
       description: >-
-        The kind of watchlist entry update. Every message published in this version of the API is a SNAPSHOT carrying
-        the device's full authoritative list of entries. Consumers MUST ignore messages with an unrecognized change
-        type so that incremental change types can be added in a future release without breaking existing consumers.
+        The kind of watchlist entry update. Every message published in this version of the API is a SNAPSHOT carrying the device's full authoritative list of entries. Consumers MUST ignore messages with an unrecognized change type so that incremental change types can be added in a future release without breaking existing consumers.
       example: SNAPSHOT
       enum:
         - UNKNOWN

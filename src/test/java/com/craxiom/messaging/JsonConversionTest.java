@@ -7,6 +7,7 @@ import com.craxiom.messaging.gnss.Constellation;
 import com.craxiom.messaging.phonestate.Domain;
 import com.craxiom.messaging.phonestate.NetworkType;
 import com.craxiom.messaging.phonestate.SimState;
+import com.craxiom.messaging.watchlist.*;
 import com.craxiom.messaging.wifi.*;
 import com.google.protobuf.*;
 import com.google.protobuf.util.JsonFormat;
@@ -1614,6 +1615,209 @@ public class JsonConversionTest {
         } catch (InvalidProtocolBufferException e) {
             Assertions.fail("Could not convert a JSON string to a protobuf object", e);
         }
+    }
+
+    @Test
+    public void testWatchlistMatchToJson() {
+        final String expectedJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistMatch\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"locationAge\":5000,\"speed\":1.5,\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"matchType\":\"EXACT\",\"matchedField\":\"BSSID\",\"ssid\":\"My Wi-Fi Network\",\"bssid\":\"68:7f:74:b0:14:98\",\"signalStrength\":-58.5}}";
+
+        final WatchlistMatch.Builder recordBuilder = WatchlistMatch.newBuilder();
+        recordBuilder.setVersion("2.4.0");
+        recordBuilder.setMessageType("WatchlistMatch");
+
+        final WatchlistMatchData.Builder dataBuilder = WatchlistMatchData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setLatitude(LATITUDE);
+        dataBuilder.setLongitude(LONGITUDE);
+        dataBuilder.setAltitude(ALTITUDE);
+        dataBuilder.setMissionId(MISSION_ID);
+        dataBuilder.setRecordNumber(1);
+        dataBuilder.setAccuracy(ACCURACY);
+        dataBuilder.setLocationAge(5000);
+        dataBuilder.setSpeed(1.5f);
+        dataBuilder.setEntryUuid("a1b2c3d4");
+        dataBuilder.setLabel("Rogue AP");
+        dataBuilder.setMatchType(WatchlistMatchType.EXACT);
+        dataBuilder.setMatchedField(WatchlistMatchField.BSSID);
+        dataBuilder.setSsid("My Wi-Fi Network");
+        dataBuilder.setBssid("68:7f:74:b0:14:98");
+        dataBuilder.setSignalStrength(getFloatValue(-58.5f));
+
+        recordBuilder.setData(dataBuilder);
+
+        assertJsonEquals(expectedJson, recordBuilder.build());
+    }
+
+    @Test
+    public void testWatchlistMatchFromJson() {
+        final String inputJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistMatch\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":40,\"locationAge\":5000,\"speed\":1.5,\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"matchType\":\"EXACT\",\"matchedField\":\"BSSID\",\"ssid\":\"My Wi-Fi Network\",\"bssid\":\"68:7f:74:b0:14:98\",\"signalStrength\":-58.5}}";
+
+        final WatchlistMatch.Builder builder = WatchlistMatch.newBuilder();
+        assertJsonMerge(inputJson, builder);
+
+        final WatchlistMatch convertedRecord = builder.build();
+        assertEquals("2.4.0", convertedRecord.getVersion());
+        assertEquals("WatchlistMatch", convertedRecord.getMessageType());
+
+        final WatchlistMatchData data = convertedRecord.getData();
+        assertEquals(DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(DEVICE_NAME, data.getDeviceName());
+        assertEquals(DEVICE_TIME, data.getDeviceTime());
+        assertEquals(LATITUDE, data.getLatitude());
+        assertEquals(LONGITUDE, data.getLongitude());
+        assertEquals(ALTITUDE, data.getAltitude());
+        assertEquals(MISSION_ID, data.getMissionId());
+        assertEquals(1, data.getRecordNumber());
+        assertEquals(ACCURACY, data.getAccuracy());
+        assertEquals(5000, data.getLocationAge());
+        assertEquals(1.5f, data.getSpeed());
+        assertEquals("a1b2c3d4", data.getEntryUuid());
+        assertEquals("Rogue AP", data.getLabel());
+        assertEquals(WatchlistMatchType.EXACT, data.getMatchType());
+        assertEquals(WatchlistMatchField.BSSID, data.getMatchedField());
+        assertEquals("My Wi-Fi Network", data.getSsid());
+        assertEquals("68:7f:74:b0:14:98", data.getBssid());
+        assertEquals(-58.5f, data.getSignalStrength().getValue());
+    }
+
+    @Test
+    public void testWatchlistEntryUpdateToJson() {
+        final String expectedJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistEntryUpdate\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"missionId\":\"Survey1 20200724-154325\",\"messageSequence\":\"42\",\"changeType\":\"SNAPSHOT\",\"entries\":[{\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"ssid\":\"My Wi-Fi Network\",\"bssid\":\"68:7f:74:b0:14:98\",\"matchType\":\"EXACT\",\"enabled\":true,\"cooldownSeconds\":900,\"createdAt\":\"1996-12-19T16:39:57-08:00\",\"updatedAt\":\"1996-12-19T16:39:57-08:00\"}]}}";
+
+        final WatchlistEntryUpdate.Builder recordBuilder = WatchlistEntryUpdate.newBuilder();
+        recordBuilder.setVersion("2.4.0");
+        recordBuilder.setMessageType("WatchlistEntryUpdate");
+
+        final WatchlistEntryUpdateData.Builder dataBuilder = WatchlistEntryUpdateData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setMissionId(MISSION_ID);
+        dataBuilder.setMessageSequence(42);
+        dataBuilder.setChangeType(WatchlistChangeType.SNAPSHOT);
+
+        final WatchlistEntry.Builder entryBuilder = WatchlistEntry.newBuilder();
+        entryBuilder.setEntryUuid("a1b2c3d4");
+        entryBuilder.setLabel("Rogue AP");
+        entryBuilder.setSsid(StringValue.of("My Wi-Fi Network"));
+        entryBuilder.setBssid(StringValue.of("68:7f:74:b0:14:98"));
+        entryBuilder.setMatchType(WatchlistMatchType.EXACT);
+        entryBuilder.setEnabled(BoolValue.of(true));
+        entryBuilder.setCooldownSeconds(900);
+        entryBuilder.setCreatedAt(DEVICE_TIME);
+        entryBuilder.setUpdatedAt(DEVICE_TIME);
+        dataBuilder.addEntries(entryBuilder);
+
+        recordBuilder.setData(dataBuilder);
+
+        assertJsonEquals(expectedJson, recordBuilder.build());
+    }
+
+    @Test
+    public void testWatchlistEntryUpdateFromJson() {
+        final String inputJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistEntryUpdate\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"missionId\":\"Survey1 20200724-154325\",\"messageSequence\":\"42\",\"changeType\":\"SNAPSHOT\",\"entries\":[{\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"ssid\":\"My Wi-Fi Network\",\"bssid\":\"68:7f:74:b0:14:98\",\"matchType\":\"EXACT\",\"enabled\":true,\"cooldownSeconds\":900,\"createdAt\":\"1996-12-19T16:39:57-08:00\",\"updatedAt\":\"1996-12-19T16:39:57-08:00\"}]}}";
+
+        final WatchlistEntryUpdate.Builder builder = WatchlistEntryUpdate.newBuilder();
+        assertJsonMerge(inputJson, builder);
+
+        final WatchlistEntryUpdate convertedRecord = builder.build();
+        assertEquals("2.4.0", convertedRecord.getVersion());
+        assertEquals("WatchlistEntryUpdate", convertedRecord.getMessageType());
+
+        final WatchlistEntryUpdateData data = convertedRecord.getData();
+        assertEquals(DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(DEVICE_NAME, data.getDeviceName());
+        assertEquals(DEVICE_TIME, data.getDeviceTime());
+        assertEquals(MISSION_ID, data.getMissionId());
+        assertEquals(42, data.getMessageSequence());
+        assertEquals(WatchlistChangeType.SNAPSHOT, data.getChangeType());
+        assertEquals(1, data.getEntriesCount());
+
+        final WatchlistEntry entry = data.getEntries(0);
+        assertEquals("a1b2c3d4", entry.getEntryUuid());
+        assertEquals("Rogue AP", entry.getLabel());
+        assertEquals("My Wi-Fi Network", entry.getSsid().getValue());
+        assertEquals("68:7f:74:b0:14:98", entry.getBssid().getValue());
+        assertEquals(WatchlistMatchType.EXACT, entry.getMatchType());
+        assertTrue(entry.getEnabled().getValue());
+        assertEquals(900, entry.getCooldownSeconds());
+        assertEquals(DEVICE_TIME, entry.getCreatedAt());
+        assertEquals(DEVICE_TIME, entry.getUpdatedAt());
+    }
+
+    @Test
+    public void testWatchlistEntryUpdateDisabledEntryToJson() {
+        // Pins the wire shape of a disabled, SSID-only entry: the BoolValue wrapper keeps "enabled":false on the
+        // wire, while the unset bssid and default-valued cooldownSeconds are omitted per the protobuf JSON mapping.
+        final String expectedJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistEntryUpdate\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"messageSequence\":\"43\",\"changeType\":\"SNAPSHOT\",\"entries\":[{\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"ssid\":\"My Wi-Fi Network\",\"matchType\":\"EXACT\",\"enabled\":false,\"createdAt\":\"1996-12-19T16:39:57-08:00\",\"updatedAt\":\"1996-12-19T16:39:57-08:00\"}]}}";
+
+        final WatchlistEntryUpdate.Builder recordBuilder = WatchlistEntryUpdate.newBuilder();
+        recordBuilder.setVersion("2.4.0");
+        recordBuilder.setMessageType("WatchlistEntryUpdate");
+
+        final WatchlistEntryUpdateData.Builder dataBuilder = WatchlistEntryUpdateData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setMessageSequence(43);
+        dataBuilder.setChangeType(WatchlistChangeType.SNAPSHOT);
+
+        final WatchlistEntry.Builder entryBuilder = WatchlistEntry.newBuilder();
+        entryBuilder.setEntryUuid("a1b2c3d4");
+        entryBuilder.setLabel("Rogue AP");
+        entryBuilder.setSsid(StringValue.of("My Wi-Fi Network"));
+        entryBuilder.setMatchType(WatchlistMatchType.EXACT);
+        entryBuilder.setEnabled(BoolValue.of(false));
+        entryBuilder.setCreatedAt(DEVICE_TIME);
+        entryBuilder.setUpdatedAt(DEVICE_TIME);
+        dataBuilder.addEntries(entryBuilder);
+
+        recordBuilder.setData(dataBuilder);
+
+        assertJsonEquals(expectedJson, recordBuilder.build());
+    }
+
+    @Test
+    public void testWatchlistEntryUpdateDisabledEntryFromJson() {
+        // A merge of the disabled, SSID-only entry shape: an absent bssid must stay unset rather than defaulting.
+        final String inputJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistEntryUpdate\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"messageSequence\":\"43\",\"changeType\":\"SNAPSHOT\",\"entries\":[{\"entryUuid\":\"a1b2c3d4\",\"label\":\"Rogue AP\",\"ssid\":\"My Wi-Fi Network\",\"matchType\":\"EXACT\",\"enabled\":false}]}}";
+
+        final WatchlistEntryUpdate.Builder builder = WatchlistEntryUpdate.newBuilder();
+        assertJsonMerge(inputJson, builder);
+
+        final WatchlistEntry entry = builder.getData().getEntries(0);
+        assertTrue(entry.hasSsid());
+        assertFalse(entry.hasBssid());
+        assertTrue(entry.hasEnabled());
+        assertFalse(entry.getEnabled().getValue());
+        assertEquals(0, entry.getCooldownSeconds());
+    }
+
+    @Test
+    public void testWatchlistEntryUpdateEmptySnapshot() {
+        // A cleared watchlist is a SNAPSHOT with no entries; the empty repeated field is omitted from the JSON
+        // entirely, so consumers must treat an absent entries field as an empty list.
+        final String expectedJson = "{\"version\":\"2.4.0\",\"messageType\":\"WatchlistEntryUpdate\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Craxiom Pixel\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"messageSequence\":\"44\",\"changeType\":\"SNAPSHOT\"}}";
+
+        final WatchlistEntryUpdate.Builder recordBuilder = WatchlistEntryUpdate.newBuilder();
+        recordBuilder.setVersion("2.4.0");
+        recordBuilder.setMessageType("WatchlistEntryUpdate");
+
+        final WatchlistEntryUpdateData.Builder dataBuilder = WatchlistEntryUpdateData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(DEVICE_SERIAL);
+        dataBuilder.setDeviceName(DEVICE_NAME);
+        dataBuilder.setDeviceTime(DEVICE_TIME);
+        dataBuilder.setMessageSequence(44);
+        dataBuilder.setChangeType(WatchlistChangeType.SNAPSHOT);
+        recordBuilder.setData(dataBuilder);
+
+        assertJsonEquals(expectedJson, recordBuilder.build());
+
+        final WatchlistEntryUpdate.Builder mergeBuilder = WatchlistEntryUpdate.newBuilder();
+        assertJsonMerge(expectedJson, mergeBuilder);
+        assertEquals(0, mergeBuilder.getData().getEntriesCount());
     }
 
     private ByteString getSampleByteString() {

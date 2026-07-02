@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.4.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.4.0) - 2026-07-02
+* Adds two new messages for the Wi-Fi Watchlist feature. `WatchlistMatch` (topic `watchlist_match_message`) is published when a device observes a watched SSID/BSSID; each message represents one cooldown-deduped presence appearance. `WatchlistEntryUpdate` (topic `watchlist_entry_message`) is published when a device connects to the broker and whenever the device's watchlist changes. Every entry update is a `SNAPSHOT` carrying the device's full authoritative list of entries; a cleared watchlist is a SNAPSHOT with an empty entries list (omitted from the JSON, so an absent entries field means empty). Each entry carries a device-minted `entryUuid`, and every `WatchlistEntryUpdate` carries a device-global monotonic `messageSequence` (a JSON string per the protobuf JSON mapping); a consumer keeps only the entries list from the highest `messageSequence` it has seen for a device. A device that has never had a watchlist entry publishes no entry update messages at all, so a device with no messages means an empty watchlist.
+
 ## [2.3.0](https://github.com/christianrowlands/network-survey-messaging/releases/tag/v2.3.0) - 2026-03-26
 * Adds the `plmn` string field (format "MCC-MNC", e.g., "310-01") to all cellular record messages (GSM, UMTS, LTE, NR) and CellIdentity messages in PhoneState. This field preserves MNC leading zeros that are lost when MNC is represented as an integer. Consumers should prefer the `plmn` field over the separate `mcc`/`mnc` integer fields.
 

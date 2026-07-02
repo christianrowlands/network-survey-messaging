@@ -1,0 +1,28 @@
+/**
+ * Defines the Matched Field values used in the Watchlist Match message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.watchlist.matchfield;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.watchlist";
+option go_package = "craxiom.com/messaging";
+
+/**
+ * Indicates which field of a watchlist entry caused a match. BOTH is reserved for a future release that reports a
+ * simultaneous SSID and BSSID match; current versions report SSID when an SSID criterion is present, otherwise BSSID.
+ */
+enum WatchlistMatchField {
+    UNKNOWN = 0;
+    SSID = 1;
+    BSSID = 2;
+    BOTH = 3;
+}

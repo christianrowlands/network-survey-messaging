@@ -154,6 +154,20 @@ channels:
         $ref: '#/components/messages/lteNas'
     description: >-
       The cellular_ota_message topic/channel is where Over The Air (OTA) cellular (LTE, UMTS/WCDMA) messages can be published. For MQTT, set the MQTT topic as "cellular_ota_message" and then publish a JSON message representing an OTA Cellular message.
+  watchlist_match_message:
+    address: watchlist_match_message
+    messages:
+      publish.message:
+        $ref: '#/components/messages/watchlistMatch'
+    description: >-
+      The watchlist_match_message topic/channel is where Wi-Fi Watchlist match records can be published. For MQTT, set the MQTT topic as "watchlist_match_message" and then publish a JSON message representing a watchlist match in the format defined below. A match is published when a device observes a network (SSID and/or BSSID) on the user's watchlist. Matches are de-duplicated on a presence-transition basis with a per-entry cooldown, so each message represents one appearance of a watched network rather than one per scan.
+  watchlist_entry_message:
+    address: watchlist_entry_message
+    messages:
+      publish.message:
+        $ref: '#/components/messages/watchlistEntryUpdate'
+    description: >-
+      The watchlist_entry_message topic/channel is where a device's Wi-Fi Watchlist state can be published. For MQTT, set the MQTT topic as "watchlist_entry_message" and then publish a JSON message representing a watchlist entry update in the format defined below. Every message is a SNAPSHOT carrying the device's full authoritative list of entries, published when the device connects to the broker and whenever the watchlist changes. A cleared watchlist is a SNAPSHOT with an empty entries list; note that an empty entries array is omitted from the JSON per the protobuf JSON mapping, so an absent entries field MUST be treated as an empty list. A device that has never had a watchlist entry publishes no watchlist_entry_message at all, so consumers MUST treat a device with no published messages as having an empty watchlist.
 operations:
   gsm_message:
     action: receive
@@ -250,6 +264,18 @@ operations:
       - $ref: '#/channels/cellular_ota_message/messages/publish.message.2'
       - $ref: '#/channels/cellular_ota_message/messages/publish.message.3'
       - $ref: '#/channels/cellular_ota_message/messages/publish.message.4'
+  watchlist_match_message:
+    action: receive
+    channel:
+      $ref: '#/channels/watchlist_match_message'
+    messages:
+      - $ref: '#/channels/watchlist_match_message/messages/publish.message'
+  watchlist_entry_message:
+    action: receive
+    channel:
+      $ref: '#/channels/watchlist_entry_message'
+    messages:
+      - $ref: '#/channels/watchlist_entry_message/messages/publish.message'
 components:
   messages:
     gsmRecord:
@@ -412,6 +438,22 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/gsmSignalingPayload'
+    watchlistMatch:
+      name: WatchlistMatch
+      title: Watchlist Match Record
+      summary: >-
+        Represents an observation of a network (SSID and/or BSSID) that the user has added to their Wi-Fi watchlist. Published when a watched network comes into range. Matches are de-duplicated on a presence-transition basis with a per-entry cooldown, so each message represents one appearance of a watched network. Match comparisons are case-insensitive, and SSID and BSSID values are published without case normalization. The recordNumber restarts if watchlist alerting is toggled off and back on, so it is not guaranteed to start at 1 within a mission.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/watchlistMatchPayload'
+    watchlistEntryUpdate:
+      name: WatchlistEntryUpdate
+      title: Watchlist Entry Update
+      summary: >-
+        Represents the full authoritative state of a device's Wi-Fi watchlist. Every message is a SNAPSHOT carrying the device's complete list of entries, published when the device connects to the broker and whenever the watchlist changes. Every entry carries a device-minted entryUuid, and every message carries a device-global monotonic messageSequence; a consumer keeps only the entries list from the highest messageSequence it has seen for a device. Note that per the protobuf JSON mapping, fields with default values are omitted from the JSON (for example, a cooldownSeconds of 0 or an empty entries list), so absent fields MUST be treated as their default values. The missionId is omitted when no survey is active on the device.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/watchlistEntryUpdatePayload'
   schemas:
     gsmRecordPayload:
       type: object
@@ -2646,11 +2688,11 @@ components:
       description: 'Vertical Dilution of Precision. Valid range, 0.0 to 50.0.'
       example: 1.3
     frequencyHz:
-      type: integer
-      format: int64
-      minimum: 1
-      description: 'The frequency, in Hz, that the radio signal was received on.'
-      example: 162000000
+      type: string
+      description: >-
+        The frequency, in Hz, that the radio signal was received on. Although this is a whole number, it is carried
+        as a JSON string because the protobuf JSON mapping serializes 64 bit integers as strings.
+      example: '162000000'
     bandwidthHz:
       type: integer
       format: int32
@@ -2924,3 +2966,196 @@ components:
       type: string
       description: >-
         The channel type that this message was sent on. The channel type represents the logical channel that the raw cellular message was sent over.
+    watchlistMatchPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          type: string
+          description: 'The type of message, must be WatchlistMatch.'
+          example: WatchlistMatch
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - entryUuid
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+            locationAge:
+              $ref: '#/components/schemas/locationAge'
+            speed:
+              $ref: '#/components/schemas/speed'
+            entryUuid:
+              $ref: '#/components/schemas/entryUuid'
+            label:
+              $ref: '#/components/schemas/watchlistLabel'
+            matchType:
+              $ref: '#/components/schemas/watchlistMatchType'
+            matchedField:
+              $ref: '#/components/schemas/watchlistMatchedField'
+            ssid:
+              $ref: '#/components/schemas/ssid'
+            bssid:
+              $ref: '#/components/schemas/bssid'
+            signalStrength:
+              $ref: '#/components/schemas/signalStrength'
+    watchlistEntryUpdatePayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          type: string
+          description: 'The type of message, must be WatchlistEntryUpdate.'
+          example: WatchlistEntryUpdate
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - messageSequence
+            - changeType
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            messageSequence:
+              $ref: '#/components/schemas/messageSequence'
+            changeType:
+              $ref: '#/components/schemas/watchlistChangeType'
+            entries:
+              type: array
+              description: >-
+                The full authoritative list of watchlist entries for the device. Absent or empty when the watchlist has been cleared (an empty list is omitted from the JSON per the protobuf JSON mapping). The order of the entries is not significant.
+              items:
+                $ref: '#/components/schemas/watchlistEntry'
+    watchlistEntry:
+      type: object
+      required:
+        - entryUuid
+        - label
+        - matchType
+        - enabled
+      properties:
+        entryUuid:
+          $ref: '#/components/schemas/entryUuid'
+        label:
+          $ref: '#/components/schemas/watchlistLabel'
+        ssid:
+          $ref: '#/components/schemas/ssid'
+        bssid:
+          $ref: '#/components/schemas/bssid'
+        matchType:
+          $ref: '#/components/schemas/watchlistMatchType'
+        enabled:
+          type: boolean
+          description: Whether the watchlist entry is currently active. Matching is only performed for enabled entries.
+          example: true
+        cooldownSeconds:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The minimum number of seconds between repeat match alerts for this entry.
+          example: 900
+        createdAt:
+          type: string
+          format: date-time
+          description: The RFC 3339 timestamp of when the entry was created on the device.
+          example: '1996-12-19T16:39:57-08:00'
+        updatedAt:
+          type: string
+          format: date-time
+          description: >-
+            The RFC 3339 timestamp of when the entry was last modified on the device. This reflects the device wall clock; messageSequence, not updatedAt, is the ordering authority.
+          example: '1996-12-19T16:39:57-08:00'
+    entryUuid:
+      type: string
+      description: >-
+        A device-minted identifier for a watchlist entry that is stable across edits to the entry. Consumers use (deviceSerialNumber, entryUuid) as the primary key for a device's watchlist entry. Treat this as an opaque string; it is not guaranteed to be an RFC 4122 UUID (some entries carry a 32 character hex string instead).
+      example: 550e8400-e29b-41d4-a716-446655440000
+    messageSequence:
+      type: string
+      description: >-
+        A device-global, monotonically increasing sequence number stamped on every watchlist_entry_message from a
+        device. It gives all of a device's entry updates a single total order so a consumer can reconcile
+        at-least-once (duplicate or out-of-order) delivery. It is seeded from wall-clock epoch time in milliseconds
+        on first use and persisted, so it does not regress across app restarts or reinstalls (provided the device
+        clock has not moved backwards across a reinstall).
+
+        Although this is a whole number, it is carried as a JSON string because the protobuf JSON mapping serializes
+        64 bit integers as strings. Consumers MUST parse it to a 64 bit integer before comparing values.
+
+        Consumer rule: track the highest messageSequence seen per deviceSerialNumber. If a message's messageSequence
+        is greater than that value, replace the device's watchlist with the message's entries list (an absent entries
+        field means an empty list) and store the new messageSequence; otherwise ignore the message. A device that has
+        never had a watchlist entry publishes nothing, so a device with no messages MUST be treated as having an
+        empty watchlist.
+      example: '1700000000000'
+    watchlistLabel:
+      type: string
+      description: The user-facing name of the watchlist entry.
+      example: Rogue AP
+    watchlistMatchType:
+      type: string
+      description: >-
+        How the entry's SSID/BSSID criteria are compared against observed networks. EXACT is a case-insensitive equality match and is the only type supported today. UNKNOWN is never published (a matchType of UNKNOWN would be omitted from the JSON per the protobuf JSON mapping).
+      example: EXACT
+      enum:
+        - UNKNOWN
+        - EXACT
+    watchlistMatchedField:
+      type: string
+      description: >-
+        Which field of the watchlist entry caused the match. BOTH is reserved for a future release; current versions report SSID when an SSID criterion is present, otherwise BSSID.
+      example: BSSID
+      enum:
+        - UNKNOWN
+        - SSID
+        - BSSID
+        - BOTH
+    watchlistChangeType:
+      type: string
+      description: >-
+        The kind of watchlist entry update. Every message published in this version of the API is a SNAPSHOT carrying
+        the device's full authoritative list of entries. Consumers MUST ignore messages with an unrecognized change
+        type so that incremental change types can be added in a future release without breaking existing consumers.
+      example: SNAPSHOT
+      enum:
+        - UNKNOWN
+        - SNAPSHOT

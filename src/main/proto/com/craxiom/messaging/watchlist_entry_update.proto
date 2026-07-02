@@ -1,0 +1,52 @@
+/**
+ * A protobuf definition of the Watchlist Entry Update message defined in the Network Survey Messaging API.
+ *
+ * A Watchlist Entry Update is published when a device connects to the broker and whenever the user's Wi-Fi watchlist
+ * changes. Every message is a SNAPSHOT that carries the full authoritative list of entries for the device; a cleared
+ * watchlist is a SNAPSHOT with an empty (absent) entries list. Each message carries a device-global monotonic
+ * messageSequence that gives every watchlist_entry_message from a device a total order; a consumer keeps only the
+ * entries list from the message with the highest messageSequence it has seen for a device. A device that has never
+ * had a watchlist entry publishes nothing, so a device with no messages must be treated as having an empty watchlist.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Watchlist
+ * Entry Update message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/watchlist/changetype/watchlist_change_type.proto";
+import "com/craxiom/messaging/watchlist/matchtype/watchlist_match_type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
+
+message WatchlistEntryUpdate {
+    string version = 1;
+    string messageType = 2;
+    WatchlistEntryUpdateData data = 3;
+}
+
+message WatchlistEntryUpdateData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    string missionId = 4;
+    uint64 messageSequence = 5;
+    com.craxiom.messaging.watchlist.changetype.WatchlistChangeType changeType = 6;
+    repeated WatchlistEntry entries = 7;
+}
+
+message WatchlistEntry {
+    string entryUuid = 1;
+    string label = 2;
+    google.protobuf.StringValue ssid = 3;
+    google.protobuf.StringValue bssid = 4;
+    com.craxiom.messaging.watchlist.matchtype.WatchlistMatchType matchType = 5;
+    google.protobuf.BoolValue enabled = 6;
+    int32 cooldownSeconds = 7;
+    string createdAt = 8;
+    string updatedAt = 9;
+}

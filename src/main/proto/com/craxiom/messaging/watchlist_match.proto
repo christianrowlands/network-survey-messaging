@@ -1,0 +1,49 @@
+/**
+ * A protobuf definition of the Watchlist Match message defined in the Network Survey Messaging API.
+ *
+ * A Watchlist Match is published when a device observes a network (SSID and/or BSSID) that the user has added to their
+ * Wi-Fi watchlist. Matches are de-duplicated on a presence-transition basis with a per-entry cooldown, so each message
+ * represents one appearance of a watched network rather than one per scan.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true Watchlist
+ * Match message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/watchlist/matchtype/watchlist_match_type.proto";
+import "com/craxiom/messaging/watchlist/matchfield/watchlist_match_field.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
+
+message WatchlistMatch {
+    string version = 1;
+    string messageType = 2;
+    WatchlistMatchData data = 3;
+}
+
+message WatchlistMatchData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 accuracy = 9;
+    uint32 locationAge = 10;
+    float speed = 11;
+
+    string entryUuid = 12;
+    string label = 13;
+    com.craxiom.messaging.watchlist.matchtype.WatchlistMatchType matchType = 14;
+    com.craxiom.messaging.watchlist.matchfield.WatchlistMatchField matchedField = 15;
+    string ssid = 16;
+    string bssid = 17;
+    google.protobuf.FloatValue signalStrength = 18;
+}

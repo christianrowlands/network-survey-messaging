@@ -45,4 +45,9 @@ message CdmaRecordData {
     google.protobuf.BoolValue servingCell = 25;
     string provider = 27;
     google.protobuf.Int32Value slot = 28;
+
+    // 61 and 62 are connectionStatus and cellBandwidthsKhz on the LTE and NR records. They are
+    // reserved here to keep the cross-message field number convention aligned in case a future
+    // radio technology change makes them meaningful for this record type.
+    reserved 61, 62;
 }

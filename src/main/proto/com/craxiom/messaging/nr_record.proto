@@ -1,7 +1,7 @@
 /**
- * A protobuf definition of the LTE survey record defined in the Network Survey Messaging API.
+ * A protobuf definition of the NR survey record defined in the Network Survey Messaging API.
  *
- * This protobuf definition is provided as a convenience only. See the official API documentation for the true LTE
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true NR
  * Record message schema.
  */
 syntax = "proto3";
@@ -9,6 +9,7 @@ syntax = "proto3";
 package com.craxiom.messaging;
 
 import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/connectionstatus/connection_status.proto";
 
 option java_multiple_files = true;
 option java_package = "com.craxiom.messaging";
@@ -56,4 +57,18 @@ message NrRecordData {
     google.protobuf.BoolValue servingCell = 29;
     string provider = 30;
     google.protobuf.Int32Value slot = 31;
+    // The device's connection to this cell as reported by the device (e.g. SECONDARY_SERVING for
+    // the 5G NSA data leg when the scan group's primary serving cell is LTE). See the
+    // ConnectionStatus enum and the official API documentation for details.
+    com.craxiom.messaging.connectionstatus.ConnectionStatus connectionStatus = 61;
+
+    // The per-carrier channel bandwidths, in kHz, of the device's cellular data connection at the
+    // time of the scan, from ServiceState#getCellBandwidths(). One entry per aggregated component
+    // carrier, so two or more entries means carrier aggregation was active. This is device-level
+    // connection state rather than a property of this individual cell; it is only populated on
+    // records for cells the device was actively using (servingCell true or SECONDARY_SERVING) and
+    // is omitted on neighbor records. The producer filters out the platform's 0 and unavailable
+    // sentinel values, so every entry is a valid bandwidth. An absent or empty list means the
+    // device did not report bandwidths, NOT that carrier aggregation was inactive.
+    repeated int32 cellBandwidthsKhz = 62;
 }

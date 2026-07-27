@@ -1,0 +1,42 @@
+/**
+ * Indicates the connection the device has to the cell that a cellular survey record represents,
+ * as reported by Android's CellInfo#getCellConnectionStatus().
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.connectionstatus;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
+
+// Note that the enum ordinals deliberately do NOT match Android's CellInfo CONNECTION_* constants
+// (NONE=0, PRIMARY_SERVING=1, SECONDARY_SERVING=2, UNKNOWN=Integer.MAX_VALUE). proto3 requires the
+// first enum value to be 0 and treats it as the unserialized default, so UNKNOWN must be 0 here;
+// mapping Android's NONE to 0 instead would make a measured neighbor indistinguishable from an
+// absent value on the wire. Producers must map the Android constants explicitly.
+enum ConnectionStatus {
+    // The device did not report a connection status for the cell. Also reported when running on
+    // Android < API 28, where CellInfo#getCellConnectionStatus() is not available.
+    UNKNOWN = 0;
+
+    // The cell the device is registered on (the anchor cell). For a 5G NSA (EN-DC) connection the
+    // LTE anchor cell is the primary serving cell.
+    PRIMARY_SERVING = 1;
+
+    // A cell the device is actively connected to as a secondary cell. On an NR record whose scan
+    // group has an LTE primary serving cell this is the 5G NSA (EN-DC) data leg; on an LTE record
+    // it is a carrier aggregation secondary component carrier (SCell); on an NR record whose scan
+    // group has an NR primary serving cell it is an NR carrier aggregation SCell.
+    SECONDARY_SERVING = 2;
+
+    // A neighbor cell: measured by the device but not connected to.
+    NEIGHBOR = 3;
+}

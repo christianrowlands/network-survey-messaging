@@ -9,6 +9,7 @@ syntax = "proto3";
 package com.craxiom.messaging;
 
 import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/connectionstatus/connection_status.proto";
 import "com/craxiom/messaging/ltebandwidth/lte_bandwidth.proto";
 
 option java_multiple_files = true;
@@ -57,4 +58,19 @@ message LteRecordData {
     google.protobuf.Int32Value cqi = 29;
     google.protobuf.Int32Value slot = 30;
     google.protobuf.FloatValue snr = 31;
+    // The device's connection to this cell as reported by the device. Note that shipping Android
+    // devices do not expose LTE carrier aggregation SCells as separate cells, so SECONDARY_SERVING
+    // is rare on an LTE record and must not be used as a carrier aggregation indicator; use
+    // cellBandwidthsKhz for that. See the ConnectionStatus enum and the official API documentation.
+    com.craxiom.messaging.connectionstatus.ConnectionStatus connectionStatus = 61;
+
+    // The per-carrier channel bandwidths, in kHz, of the device's cellular data connection at the
+    // time of the scan, from ServiceState#getCellBandwidths(). One entry per aggregated component
+    // carrier, so two or more entries means carrier aggregation was active. This is device-level
+    // connection state rather than a property of this individual cell; it is only populated on
+    // records for cells the device was actively using (servingCell true or SECONDARY_SERVING) and
+    // is omitted on neighbor records. The producer filters out the platform's 0 and unavailable
+    // sentinel values, so every entry is a valid bandwidth. An absent or empty list means the
+    // device did not report bandwidths, NOT that carrier aggregation was inactive.
+    repeated int32 cellBandwidthsKhz = 62;
 }

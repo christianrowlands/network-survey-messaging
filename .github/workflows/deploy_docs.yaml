@@ -1,0 +1,35 @@
+name: Deploy AsyncAPI docs to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generateDocs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Validating AsyncAPI document
+        uses: asyncapi/github-action-for-cli@v3.1.2
+        with:
+          command: validate
+          filepath: src/main/asyncapi/network_survey_messaging.yaml
+
+      - name: Generating HTML from my AsyncAPI document
+        uses: asyncapi/github-action-for-cli@v3.1.2
+        with:
+          template: '@asyncapi/html-template@2.3.9'  #In case of template from npm, because of @ it must be in quotes
+          filepath: src/main/asyncapi/network_survey_messaging.yaml
+          output: generated-html
+
+      #Using another action that takes generated HTML and pushes it to GH Pages
+      - name: Deploy GH page
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: generated-html

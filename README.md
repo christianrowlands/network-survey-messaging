@@ -95,10 +95,11 @@ An example command: `docker run --rm -it -v ${PWD}/src/main/asyncapi/network_sur
  - Execute `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o build/network-survey-messaging-html`
  - The HTML content will be located in the directory specified after the `-o` option.
 
-To publish a new version of the Network Survey Messaging API HTML page, use the following command
- - `ag src/main/asyncapi/network_survey_messaging.yaml @asyncapi/html-template -o docs`
-
-This will overwrite the current HTML content from the docs directory with the last API definition from the yaml file.
+#### Publishing the HTML documentation to GitHub Pages
+The documentation site (https://messaging.networksurvey.app/) is served from the `gh-pages` branch and is published
+automatically by the release workflow when a `v*` tag is pushed. To republish the docs without cutting a release,
+manually run the "Deploy AsyncAPI docs to GitHub Pages" workflow from the Actions tab, or via the GitHub CLI:
+ - `gh workflow run deploy_docs.yaml`
 
 #### Building the protobuf Java library
 The Java library is built and published with Java 8 to support older Android versions, however it can be built with 

@@ -2164,7 +2164,7 @@ components:
     connectionStatus:
       type: string
       description: >-
-        The connection the device has to the cell this record represents, as reported by Android's CellInfo.getCellConnectionStatus() (https://developer.android.com/reference/android/telephony/CellInfo#getCellConnectionStatus()), which was added in API level 28. PRIMARY_SERVING is the cell the device is registered on; for a 5G NSA (EN-DC) connection this is the LTE anchor cell. SECONDARY_SERVING is a cell the device is actively connected to as a secondary cell. NEIGHBOR is a cell that was measured but not connected to.
+        The connection the device has to the cell this record represents, as reported by Android's [CellInfo.getCellConnectionStatus()](https://developer.android.com/reference/android/telephony/CellInfo#getCellConnectionStatus()), which was added in API level 28. PRIMARY_SERVING is the cell the device is registered on; for a 5G NSA (EN-DC) connection this is the LTE anchor cell. SECONDARY_SERVING is a cell the device is actively connected to as a secondary cell. NEIGHBOR is a cell that was measured but not connected to.
 
 
         Presence: the underlying protobuf enum's zero value (UNKNOWN) is never serialized, so an absent field and an explicit UNKNOWN are indistinguishable on the wire. Consumers MUST treat absent, UNKNOWN, and an empty string as identical, all meaning the device did not report a status, and MUST NOT infer from a reported value on one cell that the device reports the status for all cells.
@@ -2192,7 +2192,7 @@ components:
         type: integer
         format: int32
       description: >-
-        The per-carrier channel bandwidths, in kHz, of the device's cellular data connection at the time of the scan, as reported by Android's ServiceState.getCellBandwidths() (https://developer.android.com/reference/android/telephony/ServiceState#getCellBandwidths()), which was added in API level 28. One entry per aggregated component carrier, so two or more entries means carrier aggregation was active and the sum of the entries is the aggregate downlink bandwidth.
+        The per-carrier channel bandwidths, in kHz, of the device's cellular data connection at the time of the scan, as reported by Android's [ServiceState.getCellBandwidths()](https://developer.android.com/reference/android/telephony/ServiceState#getCellBandwidths()), which was added in API level 28. One entry per aggregated component carrier, so two or more entries means carrier aggregation was active and the sum of the entries is the aggregate downlink bandwidth.
 
 
         This is a property of the device's connection at the time of the scan rather than of the individual cell this record represents. It is populated on the records for the cells the device was actively using in that scan (servingCell true, or connectionStatus SECONDARY_SERVING) and is omitted on neighbor records. The producer filters out the platform's 0 and unavailable sentinel values before publishing, so every entry is a valid bandwidth.

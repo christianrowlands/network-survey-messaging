@@ -47,6 +47,31 @@ message DeviceStatusData {
     double networkLongitude = 20;
     float networkAltitude = 21;
     int32 networkAccuracy = 22;
+
+    // The age, in milliseconds, of the GNSS provider location reported in gnssLatitude and
+    // gnssLongitude. Mirrors the semantics of locationAge, which describes the primary location
+    // only. A value of 0, or an absent field, means the age is unknown.
+    //
+    // The per provider ages exist so a consumer can tell a receiver that has stopped producing
+    // fixes, where the age grows while the coordinates stay the same, apart from a receiver that
+    // keeps reporting an identical but freshly computed fix, where the age stays small. Without an
+    // age the two look identical on the wire, and a stale position cannot be told from a live one.
+    uint32 gnssAge = 23;
+
+    // The age, in milliseconds, of the network provider location reported in networkLatitude and
+    // networkLongitude. A value of 0, or an absent field, means the age is unknown. See gnssAge
+    // for why the per provider ages are reported.
+    uint32 networkAge = 24;
+
+    // True when the primary location reported in latitude and longitude came from a mock location
+    // provider, as reported by Android's Location#isMock() on API 31 and above, or the deprecated
+    // Location#isFromMockProvider() below that.
+    //
+    // Only ever present as true. An absent field means the location did not come from a mock
+    // provider, or the producer did not check. Producers must not send an explicit false: mocking
+    // is the exceptional case, and stamping every ordinary record with a negative assertion costs
+    // wire bytes on every message to say nothing.
+    google.protobuf.BoolValue mockLocation = 25;
 }
 
 // Used to report an error with the device

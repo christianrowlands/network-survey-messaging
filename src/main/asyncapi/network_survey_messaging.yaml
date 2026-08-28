@@ -1627,6 +1627,31 @@ components:
               description: >-
                 The estimated horizontal accuracy of the provided location in meters as obtained from the Network based location provider (e.g. Cellular and/or Wi-Fi). This is an additional value to the regular accuracy and is only provided for comparison and analysis purposes.
               example: 40
+            gnssAge:
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                The age in milliseconds of the GNSS location provider fix reported in gnssLatitude and gnssLongitude. This is separate from locationAge, which describes the age of the primary location in latitude and longitude, and it is only meaningful when a GNSS location is present. A value of 0, or an absent field, means the age is unknown.
+
+
+                The per provider ages let a consumer tell a receiver that has stopped producing fixes, where the age grows while the coordinates stay the same, apart from a receiver that keeps reporting an identical but freshly computed fix, where the age stays small. Without an age the two are indistinguishable, so a stale position cannot be told from a live one. Added in version 2.6.0.
+              example: 1000
+            networkAge:
+              type: integer
+              format: int32
+              minimum: 0
+              description: >-
+                The age in milliseconds of the Network location provider fix (e.g. Cellular and/or Wi-Fi) reported in networkLatitude and networkLongitude. This is separate from locationAge, which describes the age of the primary location in latitude and longitude, and it is only meaningful when a network location is present. A value of 0, or an absent field, means the age is unknown. See gnssAge for why the per provider ages are reported. Added in version 2.6.0.
+              example: 1000
+            mockLocation:
+              type: boolean
+              description: >-
+                Indicates that the primary location reported in latitude and longitude came from a mock location provider, as reported by Android's Location.isMock() (https://developer.android.com/reference/android/location/Location#isMock()) on API level 31 and above, or the deprecated Location.isFromMockProvider() below that.
+
+
+                This field is only ever present as true. An absent field means the location did not come from a mock provider, or the producer did not check. Producers must not send an explicit false: mocking is the exceptional case, and stamping every ordinary record with a negative assertion spends wire bytes on every message to say nothing. Added in version 2.6.0.
+              example: true
     phoneStatePayload:
       type: object
       required:

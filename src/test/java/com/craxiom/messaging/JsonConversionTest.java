@@ -37,6 +37,19 @@ public class JsonConversionTest {
     private static final int ACCURACY = 40;
     private static final double FLOAT_TOLERANCE = 0.0001;
 
+    // Wi-Fi client record example values, from the 2.7.0 wifiClientRecord message examples
+    private static final String CLIENT_DEVICE_SERIAL = "8C2E1F7A";
+    private static final String CLIENT_DEVICE_NAME = "Survey Pixel";
+    private static final String CLIENT_DEVICE_TIME = "2026-11-05T19:03:07.25Z";
+    private static final double CLIENT_LATITUDE = 38.889484;
+    private static final double CLIENT_LONGITUDE = -77.035278;
+    private static final float CLIENT_ALTITUDE = 21.3f;
+    private static final String CLIENT_MISSION_ID = "NS 8C2E1F7A 20261105-190000";
+    private static final int CLIENT_ACCURACY = 5;
+    private static final String CLIENT_SOURCE_ADDRESS = "0a:11:22:33:44:55";
+    private static final String CLIENT_BSSID = "02:00:5e:00:53:02";
+    private static final String CLIENT_JSON = "{\"version\":\"2.7.0\",\"messageType\":\"WifiClientRecord\",\"data\":{\"deviceSerialNumber\":\"8C2E1F7A\",\"deviceName\":\"Survey Pixel\",\"deviceTime\":\"2026-11-05T19:03:07.25Z\",\"latitude\":38.889484,\"longitude\":-77.035278,\"altitude\":21.3,\"missionId\":\"NS 8C2E1F7A 20261105-190000\",\"recordNumber\":4,\"accuracy\":5,\"sourceAddress\":\"0a:11:22:33:44:55\",\"bssid\":\"02:00:5e:00:53:02\",\"channel\":36,\"frequencyMhz\":5180,\"signalStrength\":-55.0,\"snr\":37.0,\"frameTypes\":[\"DATA\",\"NULL_DATA\"],\"locationAge\":800,\"speed\":1.25}}";
+
     private final JsonFormat.Printer jsonFormatter = JsonFormat.printer().omittingInsignificantWhitespace();
     private final JsonFormat.Parser jsonParser = JsonFormat.parser();
 
@@ -588,11 +601,11 @@ public class JsonConversionTest {
     public void testWifiProbeRequestToJson() {
         final String expectedJson = "{\"version\":\"0.9.0\",\"messageType\":\"WifiProbeRequestRecord\",\"data\":{\"deviceSerialNumber\":\"1234\",\"deviceName\":\"Kismet Device\",\"deviceTime\":\"1996-12-19T16:39:57-08:00\",\"latitude\":51.470334,\"longitude\":-0.486594,\"altitude\":13.3,\"missionId\":\"Survey1 20200724-154325\",\"recordNumber\":1,\"accuracy\":10,\"sourceAddress\":\"68:7F:74:B0:14:98\",\"destinationAddress\":\"FF:FF:FF:FF:FF:FF\",\"ssid\":\"My Wi-Fi Network\",\"channel\":2,\"frequencyMhz\":2417,\"signalStrength\":-58.5,\"snr\":26.7,\"nodeType\":\"NON_AP_STA\",\"standard\":\"IEEE80211N\"}}";
 
-        final WifiBeaconRecord.Builder recordBuilder = WifiBeaconRecord.newBuilder();
+        final WifiProbeRequestRecord.Builder recordBuilder = WifiProbeRequestRecord.newBuilder();
         recordBuilder.setVersion("0.9.0");
         recordBuilder.setMessageType("WifiProbeRequestRecord");
 
-        final WifiBeaconRecordData.Builder dataBuilder = WifiBeaconRecordData.newBuilder();
+        final WifiProbeRequestRecordData.Builder dataBuilder = WifiProbeRequestRecordData.newBuilder();
         dataBuilder.setDeviceSerialNumber("1234");
         dataBuilder.setDeviceName("Kismet Device");
         dataBuilder.setDeviceTime("1996-12-19T16:39:57-08:00");
@@ -614,7 +627,7 @@ public class JsonConversionTest {
 
         recordBuilder.setData(dataBuilder);
 
-        final WifiBeaconRecord record = recordBuilder.build();
+        final WifiProbeRequestRecord record = recordBuilder.build();
 
         try {
             final String recordJson = jsonFormatter.print(record);
@@ -660,6 +673,104 @@ public class JsonConversionTest {
         assertEquals(26.7, data.getSnr().getValue(), FLOAT_TOLERANCE);
         assertEquals(NodeType.NON_AP_STA, data.getNodeType());
         assertEquals(Standard.IEEE80211N, data.getStandard());
+    }
+
+    @Test
+    public void testWifiClientToJson() {
+        final WifiClientRecord.Builder recordBuilder = WifiClientRecord.newBuilder();
+        recordBuilder.setVersion("2.7.0");
+        recordBuilder.setMessageType("WifiClientRecord");
+
+        final WifiClientRecordData.Builder dataBuilder = WifiClientRecordData.newBuilder();
+        dataBuilder.setDeviceSerialNumber(CLIENT_DEVICE_SERIAL);
+        dataBuilder.setDeviceName(CLIENT_DEVICE_NAME);
+        dataBuilder.setDeviceTime(CLIENT_DEVICE_TIME);
+        dataBuilder.setLatitude(CLIENT_LATITUDE);
+        dataBuilder.setLongitude(CLIENT_LONGITUDE);
+        dataBuilder.setAltitude(CLIENT_ALTITUDE);
+        dataBuilder.setMissionId(CLIENT_MISSION_ID);
+        dataBuilder.setRecordNumber(4);
+        dataBuilder.setAccuracy(CLIENT_ACCURACY);
+        dataBuilder.setSourceAddress(CLIENT_SOURCE_ADDRESS);
+        dataBuilder.setBssid(CLIENT_BSSID);
+        dataBuilder.setChannel(Int32Value.newBuilder().setValue(36).build());
+        dataBuilder.setFrequencyMhz(Int32Value.newBuilder().setValue(5180).build());
+        dataBuilder.setSignalStrength(FloatValue.newBuilder().setValue(-55f).build());
+        dataBuilder.setSnr(FloatValue.newBuilder().setValue(37f).build());
+        dataBuilder.addAllFrameTypes(Arrays.asList(ClientFrameType.DATA, ClientFrameType.NULL_DATA));
+        dataBuilder.setLocationAge(800);
+        dataBuilder.setSpeed(1.25f);
+
+        recordBuilder.setData(dataBuilder);
+
+        final WifiClientRecord record = recordBuilder.build();
+
+        try {
+            final String recordJson = jsonFormatter.print(record);
+            assertEquals(CLIENT_JSON, recordJson);
+        } catch (InvalidProtocolBufferException e) {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
+    }
+
+    @Test
+    public void testWifiClientFromJson() {
+        final WifiClientRecord.Builder builder = WifiClientRecord.newBuilder();
+        try {
+            jsonParser.merge(CLIENT_JSON, builder);
+        } catch (InvalidProtocolBufferException e) {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final WifiClientRecord convertedRecord = builder.build();
+
+        assertEquals("2.7.0", convertedRecord.getVersion());
+        assertEquals("WifiClientRecord", convertedRecord.getMessageType());
+
+        final WifiClientRecordData data = convertedRecord.getData();
+        assertEquals(CLIENT_DEVICE_SERIAL, data.getDeviceSerialNumber());
+        assertEquals(CLIENT_DEVICE_NAME, data.getDeviceName());
+        assertEquals(CLIENT_DEVICE_TIME, data.getDeviceTime());
+        assertEquals(CLIENT_LATITUDE, data.getLatitude());
+        assertEquals(CLIENT_LONGITUDE, data.getLongitude());
+        assertEquals(CLIENT_ALTITUDE, data.getAltitude());
+        assertEquals(CLIENT_MISSION_ID, data.getMissionId());
+        assertEquals(4, data.getRecordNumber());
+        assertEquals(CLIENT_ACCURACY, data.getAccuracy());
+        assertEquals(CLIENT_SOURCE_ADDRESS, data.getSourceAddress());
+        assertEquals(CLIENT_BSSID, data.getBssid());
+        assertEquals(36, data.getChannel().getValue());
+        assertEquals(5180, data.getFrequencyMhz().getValue());
+        assertEquals(-55.0, data.getSignalStrength().getValue());
+        assertEquals(37.0, data.getSnr().getValue(), FLOAT_TOLERANCE);
+        assertEquals(Arrays.asList(ClientFrameType.DATA, ClientFrameType.NULL_DATA), data.getFrameTypesList());
+        assertEquals(800, data.getLocationAge());
+        assertEquals(1.25f, data.getSpeed());
+    }
+
+    @Test
+    public void testWifiClientProbeOnlyFromJson() {
+        // A client that only sent probe requests during the window: no BSSID, no SNR
+        final String inputJson = "{\"version\":\"2.7.0\",\"messageType\":\"WifiClientRecord\",\"data\":{\"deviceSerialNumber\":\"8C2E1F7A\",\"deviceName\":\"Survey Pixel\",\"deviceTime\":\"2026-11-05T19:03:09.5Z\",\"missionId\":\"NS 8C2E1F7A 20261105-190000\",\"recordNumber\":5,\"sourceAddress\":\"0a:66:77:88:99:aa\",\"channel\":6,\"frequencyMhz\":2437,\"signalStrength\":-71.0,\"frameTypes\":[\"PROBE_REQUEST\"]}}";
+
+        final WifiClientRecord.Builder builder = WifiClientRecord.newBuilder();
+        try {
+            jsonParser.merge(inputJson, builder);
+        } catch (InvalidProtocolBufferException e) {
+            Assertions.fail("Could not convert a JSON string to a protobuf object", e);
+        }
+
+        final WifiClientRecordData data = builder.build().getData();
+        assertEquals("0a:66:77:88:99:aa", data.getSourceAddress());
+        assertEquals("", data.getBssid());
+        assertFalse(data.hasSnr());
+        assertEquals(Collections.singletonList(ClientFrameType.PROBE_REQUEST), data.getFrameTypesList());
+
+        try {
+            assertEquals(inputJson, jsonFormatter.print(builder.build()));
+        } catch (InvalidProtocolBufferException e) {
+            Assertions.fail("Could not convert a protobuf object to a JSON string.", e);
+        }
     }
 
     @Test

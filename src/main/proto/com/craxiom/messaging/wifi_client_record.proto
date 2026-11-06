@@ -1,0 +1,45 @@
+/**
+ * A protobuf definition of the 802.11 Client message defined in the Network Survey Messaging API.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true 802.11
+ * Client message schema.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging;
+
+import "google/protobuf/wrappers.proto";
+import "com/craxiom/messaging/wifi/clientframetype/client_frame_type.proto";
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging";
+option go_package = "craxiom.com/messaging";
+
+message WifiClientRecord {
+    string version = 1;
+    string messageType = 2;
+    WifiClientRecordData data = 3;
+}
+
+message WifiClientRecordData {
+    string deviceSerialNumber = 1;
+    string deviceName = 2;
+    string deviceTime = 3;
+    double latitude = 4;
+    double longitude = 5;
+    float altitude = 6;
+    string missionId = 7;
+    int32 recordNumber = 8;
+    int32 accuracy = 9;
+    uint32 locationAge = 30;
+    float speed = 55;
+
+    string sourceAddress = 10;
+    string bssid = 11;
+
+    google.protobuf.Int32Value channel = 12;
+    google.protobuf.Int32Value frequencyMhz = 13;
+    google.protobuf.FloatValue signalStrength = 14;
+    google.protobuf.FloatValue snr = 15;
+    repeated com.craxiom.messaging.wifi.clientframetype.ClientFrameType frameTypes = 16;
+}

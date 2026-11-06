@@ -1,0 +1,32 @@
+/**
+ * Defines the Client Frame Type values used in the 802.11 Client message.
+ *
+ * This protobuf definition is provided as a convenience only. See the official API documentation for the true field
+ * schema.
+ *
+ * It is necessary to define this enum in an individual file so that duplicate enum values can be used. This file
+ * specifies a different protobuf package than other enums so that the enum value scope is different than all other
+ * enums.
+ */
+syntax = "proto3";
+
+package com.craxiom.messaging.wifi.clientframetype;
+
+option java_multiple_files = true;
+option java_package = "com.craxiom.messaging.wifi";
+option go_package = "craxiom.com/messaging";
+
+/**
+ * The kinds of frames a Wi-Fi client was seen transmitting. DATA covers Data and QoS Data, NULL_DATA covers Null and
+ * QoS Null, and the rest are the management frames of the same name.
+ */
+enum ClientFrameType {
+    UNKNOWN = 0;
+    DATA = 1;
+    NULL_DATA = 2;
+    PROBE_REQUEST = 3;
+    ASSOCIATION_REQUEST = 4;
+    REASSOCIATION_REQUEST = 5;
+    AUTHENTICATION = 6;
+    ACTION = 7;
+}

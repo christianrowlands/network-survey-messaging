@@ -88,6 +88,13 @@ channels:
         $ref: '#/components/messages/wifiProbeRequestRecord'
     description: >-
       The 80211_probe_request_message topic/channel is where 802.11 probe request survey records can be published. For MQTT, set the MQTT topic as "80211_probe_request_message" and then publish a JSON message representing an 802.11 Probe Request record in the format defined below. Added in 0.9.0
+  80211_client_message:
+    address: 80211_client_message
+    messages:
+      publish.message:
+        $ref: '#/components/messages/wifiClientRecord'
+    description: >-
+      The 80211_client_message topic/channel is where 802.11 client survey records can be published. For MQTT, set the MQTT topic as "80211_client_message" and then publish a JSON message representing an 802.11 Client record in the format defined below. Added in 2.7.0
   80211_deauthentication_message:
     address: 80211_deauthentication_message
     messages:
@@ -211,6 +218,12 @@ operations:
       $ref: '#/channels/80211_probe_request_message'
     messages:
       - $ref: '#/channels/80211_probe_request_message/messages/publish.message'
+  80211_client_message:
+    action: receive
+    channel:
+      $ref: '#/channels/80211_client_message'
+    messages:
+      - $ref: '#/channels/80211_client_message/messages/publish.message'
   80211_deauthentication_message:
     action: receive
     channel:
@@ -334,6 +347,65 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/wifiProbeRequestRecordPayload'
+    wifiClientRecord:
+      name: WifiClientRecord
+      title: Wi-Fi Client Record
+      summary: >-
+        Represents information recorded about a Wi-Fi client at a particular time and geographic location. A Wi-Fi client is a device that connects to an Access Point, such as a phone, laptop, or IoT device, as opposed to the Access Point itself (802.11 calls these non-AP stations). Clients are observed passively from the frames they transmit. A busy client can send many frames per second, so unlike the Wi-Fi Beacon and Probe Request records, which each represent a single frame, this message summarizes everything one client transmitted during one observation window. A producer sends one record per client per observation window. Added in version 2.7.0.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/wifiClientRecordPayload'
+      examples:
+        - name: associatedClient
+          summary: A client sending data to the Access Point it is associated with.
+          payload:
+            version: 2.7.0
+            messageType: WifiClientRecord
+            data:
+              deviceSerialNumber: 8C2E1F7A
+              deviceName: Survey Pixel
+              deviceTime: '2026-11-05T19:03:07.25Z'
+              latitude: 38.889484
+              longitude: -77.035278
+              altitude: 21.3
+              missionId: NS 8C2E1F7A 20261105-190000
+              recordNumber: 4
+              accuracy: 5
+              sourceAddress: '0a:11:22:33:44:55'
+              bssid: '02:00:5e:00:53:02'
+              channel: 36
+              frequencyMhz: 5180
+              signalStrength: -55.0
+              snr: 37.0
+              frameTypes:
+                - DATA
+                - NULL_DATA
+              locationAge: 800
+              speed: 1.25
+        - name: probingClient
+          summary: A client that only sent probe requests during the window, so the Access Point is unknown and bssid is absent.
+          payload:
+            version: 2.7.0
+            messageType: WifiClientRecord
+            data:
+              deviceSerialNumber: 8C2E1F7A
+              deviceName: Survey Pixel
+              deviceTime: '2026-11-05T19:03:09.5Z'
+              latitude: 38.889484
+              longitude: -77.035278
+              altitude: 21.3
+              missionId: NS 8C2E1F7A 20261105-190000
+              recordNumber: 5
+              accuracy: 5
+              sourceAddress: '0a:66:77:88:99:aa'
+              channel: 6
+              frequencyMhz: 2437
+              signalStrength: -71.0
+              snr: 21.0
+              frameTypes:
+                - PROBE_REQUEST
+              locationAge: 800
+              speed: 1.25
     wifiDeauthenticationRecord:
       name: WifiDeauthenticationRecord
       title: Wi-Fi Deauthentication Record
@@ -1083,6 +1155,85 @@ components:
               $ref: '#/components/schemas/nodeType'
             standard:
               $ref: '#/components/schemas/standard'
+    wifiClientRecordPayload:
+      type: object
+      required:
+        - version
+        - messageType
+        - data
+      properties:
+        version:
+          $ref: '#/components/schemas/version'
+        messageType:
+          type: string
+          description: 'The type of message, must be WifiClientRecord.'
+          example: WifiClientRecord
+        data:
+          type: object
+          description: The payload of this message that contains all the message data.
+          required:
+            - deviceSerialNumber
+            - deviceName
+            - deviceTime
+            - missionId
+            - recordNumber
+            - sourceAddress
+          properties:
+            deviceSerialNumber:
+              $ref: '#/components/schemas/deviceSerialNumber'
+            deviceName:
+              $ref: '#/components/schemas/deviceName'
+            deviceTime:
+              $ref: '#/components/schemas/deviceTime'
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+            altitude:
+              $ref: '#/components/schemas/altitude'
+            speed:
+              $ref: '#/components/schemas/speed'
+            missionId:
+              $ref: '#/components/schemas/missionId'
+            recordNumber:
+              $ref: '#/components/schemas/recordNumber'
+            accuracy:
+              $ref: '#/components/schemas/accuracy'
+            locationAge:
+              $ref: '#/components/schemas/locationAge'
+            sourceAddress:
+              type: string
+              description: >-
+                The MAC address of the Wi-Fi client. Only frames the client transmitted are included in the record (frames whose transmitter address, address 2, is this MAC), so the signal values describe the client and not its Access Point.
+              example: '0a:11:22:33:44:55'
+            bssid:
+              type: string
+              description: >-
+                The BSSID (the MAC address of the Access Point) that the client is associated with or talking to. It comes from the To DS / From DS addressing of the client's data frames, or from the target of its association, reassociation, or authentication request. Absent when unknown, for example for a client that only sent probe requests during the observation window.
+              example: '02:00:5e:00:53:02'
+            channel:
+              type: integer
+              format: int32
+              minimum: 0
+              description: The channel on which the client's frames were received.
+              example: 36
+            frequencyMhz:
+              type: integer
+              format: int32
+              minimum: 0
+              description: The frequency in MHz on which the client's frames were received.
+              example: 5180
+            signalStrength:
+              type: number
+              format: float
+              minimum: -200
+              maximum: 200
+              description: The signal strength in dBm of the strongest frame received from the client during the observation window.
+              example: -55.0
+            snr:
+              $ref: '#/components/schemas/snr'
+            frameTypes:
+              $ref: '#/components/schemas/clientFrameTypes'
     wifiDeauthenticationRecordPayload:
       type: object
       required:
@@ -3022,6 +3173,24 @@ components:
         The subtype of the 802.11 message that corresponds to the frame type. The frame subtype represents the subtype of the 802.11 frame that the pcapRecord field contains. For example, if the frame type is 0 (aka Management) a frame subtype of 0 represents an association request, 1 represents an association response, 2 represents a reassociation request, etc.
       example: 4
       minimum: 0
+    clientFrameTypes:
+      type: array
+      description: >-
+        Every kind of frame received from the Wi-Fi client during the observation window. Each value appears at most once and the order is not significant. DATA covers Data and QoS Data frames, NULL_DATA covers Null and QoS Null frames, and the remaining values are the management frames of the same name. An empty list is omitted from the JSON, so an absent field means the producer did not report frame kinds. Values may be added in a later version, so consumers should ignore values they do not recognize. Added in version 2.7.0.
+      example:
+        - DATA
+        - NULL_DATA
+      items:
+        type: string
+        enum:
+          - UNKNOWN
+          - DATA
+          - NULL_DATA
+          - PROBE_REQUEST
+          - ASSOCIATION_REQUEST
+          - REASSOCIATION_REQUEST
+          - AUTHENTICATION
+          - ACTION
     channelType:
       type: string
       description: >-

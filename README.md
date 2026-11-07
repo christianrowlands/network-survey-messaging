@@ -112,6 +112,26 @@ Generated code is here:
  - Java: build/generated/source/proto/main/java/com/craxiom/messaging
  - Python: build/generated/source/proto/main/python/com/craxiom/messaging
 
+#### Releasing a new version
+Pushing a `v*` tag starts the release workflow. It sets the version in `build.gradle`, this README, and the AsyncAPI
+file from the tag, commits that to `develop`, publishes the docs, uploads the library to the Central Publisher Portal,
+and creates the GitHub release. There is no need to bump the version by hand.
+
+ 1. Add the new version to `CHANGELOG.md` and commit it on `develop`.
+ 2. Tag the commit, then push `develop` and the tag together:
+    ```shell
+    git tag -a vX.Y.Z -m "vX.Y.Z"
+    git push --atomic origin develop vX.Y.Z
+    ```
+ 3. When the workflow finishes, log in to https://central.sonatype.com/publishing/deployments and publish the
+    deployment. The version does not reach Maven Central until this is done.
+ 4. Copy the notes for the new version from `CHANGELOG.md` into the GitHub release.
+ 5. Run `git pull` to get the version bump commit that the workflow pushed to `develop`.
+
+The workflow builds from `develop`, so the tagged commit must already be there. If only the tag gets pushed, the
+"Verify the tag is on develop" step fails before anything is built or published. To recover, push `develop` and then
+rerun the workflow with `gh run rerun <run id>`.
+
 ## Generating Go code
 The Go code is generated using the `protoc` compiler.
 
